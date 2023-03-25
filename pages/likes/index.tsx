@@ -17,9 +17,8 @@ const LikesPage: NextPage<ILikesPageProps> = (props) => {
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const session = await getServerSession(context.req, context.res, authOptions);
-  const userEmail = session?.user?.email;
 
-  if (!session || !userEmail) {
+  if (!session) {
     return {
       props: {},
       redirect: {
@@ -29,6 +28,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     };
   }
 
+  const userEmail = session.user.email;
   let page = 1;
 
   if (context.query.page)

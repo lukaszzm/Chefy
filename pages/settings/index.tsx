@@ -20,10 +20,8 @@ const SettingsPage: NextPage<ISettingsPageProps> = (props) => {
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const session = await getServerSession(context.req, context.res, authOptions);
-  const userEmail = session?.user?.email;
-  const userName = session?.user?.name;
 
-  if (!session || !userEmail || !userName) {
+  if (!session) {
     return {
       redirect: {
         destination: "/",
@@ -33,6 +31,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     };
   }
 
+  const userEmail = session.user.email;
   const allCategories = await prisma.category.findMany();
   const allAreas = await prisma.area.findMany();
 
@@ -58,7 +57,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   return {
     props: {
-      name: userName,
+      name: session.user.name,
       allAreas,
       allCategories,
       defaultCategories,

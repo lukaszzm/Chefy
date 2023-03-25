@@ -1,22 +1,20 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import prisma from "@/lib/prisma";
-import { getServerSession } from "next-auth/next";
-import { authOptions } from "../auth/[...nextauth]";
+import { withAuth, withMethods, withValidation } from "@/api-helpers";
+import { z } from "zod";
+
+const schema = z.object({
+  email: z.string().email(),
+});
+
+type RequestBody = z.infer<typeof schema>;
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  if (req.method !== "GET")
-    return res.status(405).json({ message: "Method not allowed" });
-
-  const session = await getServerSession(req, res, authOptions);
-  const userEmail = session?.user?.email;
-
-  if (!userEmail) {
-    return res.status(401).end();
-  }
+  const { email }: RequestBody = req.body;
 
   try {
     const userPreferences = await prisma.user.findUnique({
-      where: { email: userEmail },
+      where: { email },
       select: {
         prefferedAreas: {
           select: { id: true },
@@ -43,7 +41,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
             NOT: {
               likers: {
                 some: {
-                  email: userEmail,
+                  email,
                 },
               },
             },
@@ -52,7 +50,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
             NOT: {
               dislikers: {
                 some: {
-                  email: userEmail,
+                  email,
                 },
               },
             },
@@ -71,4 +69,4 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 };
 
-export default handler;
+export default withMethods(["GET"], withAuth(withValidation(schema, handler)));

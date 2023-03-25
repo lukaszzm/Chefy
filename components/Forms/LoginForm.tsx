@@ -1,6 +1,6 @@
 import { LoginSchema } from "@/schemas/LoginSchema";
 import { useForm } from "react-hook-form";
-import { yupResolver } from "@corex/hook-form-yup-resolver";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { signIn } from "next-auth/react";
 import { Alert } from "@/ui/Alert";
@@ -25,7 +25,7 @@ export const LoginForm: React.FC<ILoginFormProps> = (props) => {
     handleSubmit,
     formState: { errors, isValid, isDirty, isSubmitting },
   } = useForm<IFormInputs>({
-    resolver: yupResolver(LoginSchema),
+    resolver: zodResolver(LoginSchema),
     mode: "onChange",
   });
   const [apiResponse, setApiResponse] = useState<IApiResponse | null>(null);

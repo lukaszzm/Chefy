@@ -1,7 +1,7 @@
-import { yupResolver } from "@corex/hook-form-yup-resolver";
 import { useForm } from "react-hook-form";
 import { RegisterSchema } from "@/schemas/RegisterSchema";
 import { useState } from "react";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { IApiResponse } from "@/interfaces/ApiResponse.interface";
 import { Alert } from "@/ui/Alert";
 import { Button } from "@/ui/Button";
@@ -25,7 +25,7 @@ export const RegisterForm: React.FC<IRegisterFormProps> = (props) => {
     handleSubmit,
     formState: { errors, isValid, isDirty, isSubmitting },
   } = useForm<IFormInputs>({
-    resolver: yupResolver(RegisterSchema),
+    resolver: zodResolver(RegisterSchema),
     mode: "onChange",
   });
   const [apiResponse, setApiResponse] = useState<IApiResponse | null>(null);

@@ -5,6 +5,11 @@ import { Button } from "@/ui/Button";
 import { Alert } from "@/ui/Alert";
 import { Input } from "@/ui/Input";
 
+interface FormValues {
+  currentPassword: string;
+  newPassword: string;
+}
+
 export const Password: React.FC = () => {
   const {
     register,
@@ -12,7 +17,7 @@ export const Password: React.FC = () => {
     formState: { errors, isValid, isDirty, isSubmitting },
     apiResponse,
     onSubmit,
-  } = useSettingsForm({
+  } = useSettingsForm<FormValues>({
     schema: PasswordSchema,
   });
 

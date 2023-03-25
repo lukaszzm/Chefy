@@ -1,29 +1,28 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import prisma from "@/lib/prisma";
-import { getServerSession } from "next-auth/next";
-import { authOptions } from "../auth/[...nextauth]";
+import { withMethods, withAuth, withValidation } from "@/api-helpers";
+import { z } from "zod";
+
+const schema = z.object({
+  id: z.string(),
+  email: z.string().email(),
+});
+
+type RequestBody = z.infer<typeof schema>;
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  if (req.method !== "POST" && req.method !== "DELETE")
-    return res.status(405).json({ message: "Method not allowed" });
-
-  const session = await getServerSession(req, res, authOptions);
-  const userEmail = session?.user?.email;
-
-  if (!userEmail) {
-    return res.status(401).end();
-  }
+  const { id, email }: RequestBody = req.body;
 
   if (req.method === "POST")
     try {
       await prisma.user.update({
         where: {
-          email: userEmail,
+          email,
         },
         data: {
           likedRecipes: {
             connect: {
-              id: req.body.id,
+              id,
             },
           },
         },
@@ -37,12 +36,12 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     try {
       await prisma.user.update({
         where: {
-          email: userEmail,
+          email: email,
         },
         data: {
           likedRecipes: {
             disconnect: {
-              id: req.body.id,
+              id: id,
             },
           },
         },
@@ -53,4 +52,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     }
 };
 
-export default handler;
+export default withMethods(
+  ["POST", "DELETE"],
+  withAuth(withValidation(schema, handler))
+);

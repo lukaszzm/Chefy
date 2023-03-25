@@ -1,37 +1,29 @@
 import { useState } from "react";
-import { yupResolver } from "@corex/hook-form-yup-resolver";
-import { useForm } from "react-hook-form";
-import * as Yup from "yup";
+import { FieldValues, useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { IApiResponse } from "@/interfaces/ApiResponse.interface";
 
 interface InitialProps {
-  schema?: Yup.AnyObjectSchema;
+  schema?: z.AnyZodObject;
   defaultValues?: any;
 }
 
-interface FormValues {
-  name: string;
-  currentPassword: string;
-  newPassword: string;
-  prefferedCategories: string[];
-  prefferedAreas: string[];
-}
-
-export const useSettingsForm = (props: InitialProps) => {
+export const useSettingsForm = <T extends FieldValues>(props: InitialProps) => {
   const { schema, defaultValues } = props;
 
   const {
     register,
     handleSubmit,
     formState: { errors, isValid, isDirty, isSubmitting },
-  } = useForm<FormValues>({
-    resolver: schema ? yupResolver(schema) : undefined,
+  } = useForm<T>({
+    resolver: schema ? zodResolver(schema) : undefined,
     mode: "onChange",
     defaultValues: defaultValues,
   });
   const [apiResponse, setApiResponse] = useState<IApiResponse | null>(null);
 
-  const onSubmit = async (values: FormValues) => {
+  const onSubmit = async (values: T) => {
     setApiResponse(null);
     const response = await fetch("/api/users/me", {
       method: "PATCH",

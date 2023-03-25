@@ -9,6 +9,8 @@ interface IAccountProps {
   name: string;
 }
 
+interface FormValues extends IAccountProps {}
+
 export const Account: React.FC<IAccountProps> = (props) => {
   const { name } = props;
   const {
@@ -17,7 +19,7 @@ export const Account: React.FC<IAccountProps> = (props) => {
     formState: { errors, isValid, isDirty, isSubmitting },
     apiResponse,
     onSubmit,
-  } = useSettingsForm({
+  } = useSettingsForm<FormValues>({
     schema: UserSettingsSchema,
     defaultValues: { name: name },
   });

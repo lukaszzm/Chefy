@@ -1,9 +1,7 @@
-import * as Yup from "yup";
+import { z } from "zod";
 
-export const RegisterSchema = Yup.object().shape({
-  email: Yup.string().email("Invalid email").required("Required"),
-  password: Yup.string()
-    .min(8, "Your password must have at least 8 characters")
-    .required("Required"),
-  name: Yup.string().required("Required"),
+export const RegisterSchema = z.object({
+  email: z.string().email("Invalid email"),
+  password: z.string().min(8, "Your password must have at least 8 characters"),
+  name: z.string().min(1, "Name is required"),
 });

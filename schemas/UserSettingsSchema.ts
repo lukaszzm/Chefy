@@ -1,5 +1,5 @@
-import * as Yup from "yup";
+import { z } from "zod";
 
-export const UserSettingsSchema = Yup.object().shape({
-  name: Yup.string().required("Required"),
+export const UserSettingsSchema = z.object({
+  name: z.string().min(1, "Name is required"),
 });
