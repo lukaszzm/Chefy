@@ -2,6 +2,12 @@ import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import { NextApiHandler, NextApiRequest, NextApiResponse } from "next";
 import { getServerSession } from "next-auth";
 
+export interface ExtendedNextApiRequest extends NextApiRequest {
+  headers: {
+    email: string;
+  };
+}
+
 export const withAuth = (handler: NextApiHandler) => {
   return async (request: NextApiRequest, response: NextApiResponse) => {
     const session = await getServerSession(request, response, authOptions);
@@ -10,7 +16,8 @@ export const withAuth = (handler: NextApiHandler) => {
       return response.status(401).json({ message: "Unauthorized." });
     }
 
-    request.body = { ...request.body, email: session.user.email };
+    request.headers = { ...request.headers, email: session.user.email };
+
     return handler(request, response);
   };
 };

@@ -7,9 +7,7 @@ interface ICheckBoxProps {
 }
 
 export const Checkbox = React.forwardRef<HTMLInputElement, ICheckBoxProps>(
-  (props, ref) => {
-    const { id, text, isCheckedByDefault, ...rest } = props;
-
+  ({ id, text, isCheckedByDefault, ...rest }, ref) => {
     return (
       <li className="m-1">
         <input

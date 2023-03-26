@@ -1,17 +1,11 @@
 interface ILabelProps {
   htmlFor: string;
   children: React.ReactNode;
-  className?: string;
 }
 
-export const Label: React.FC<ILabelProps> = (props) => {
-  const { children, className, htmlFor } = props;
-
+export const Label: React.FC<ILabelProps> = ({ children, htmlFor }) => {
   return (
-    <label
-      htmlFor={htmlFor}
-      className={`p-2 font-medium text-gray-700 ${className}`}
-    >
+    <label htmlFor={htmlFor} className="p-2 font-medium text-gray-700">
       {children}
     </label>
   );

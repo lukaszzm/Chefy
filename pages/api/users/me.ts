@@ -1,12 +1,11 @@
-import { NextApiRequest, NextApiResponse } from "next";
-import prisma from "@/lib/prisma";
+import type { NextApiRequest, NextApiResponse } from "next";
+import { prisma } from "@/lib/prisma";
 import bcrypt from "bcrypt";
 import { withAuth, withMethods, withValidation } from "@/api-helpers";
 import { z } from "zod";
 
 const schema = z
   .object({
-    email: z.string().email(),
     name: z.string().min(1),
     prefferedCategories: z.array(z.string()),
     prefferedAreas: z.array(z.string()),
@@ -19,13 +18,13 @@ type RequestBody = z.infer<typeof schema>;
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const {
-    email,
     name,
     prefferedCategories,
     prefferedAreas,
     currentPassword,
     newPassword,
   }: RequestBody = req.body;
+  const email = req.headers.email as string;
 
   try {
     if (name) {

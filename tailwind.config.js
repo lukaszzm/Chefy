@@ -12,6 +12,9 @@ module.exports = {
         secondary: "#E8F4EA",
         "secondary-hover": "#d5e3d7",
       },
+      fontFamily: {
+        primary: ["var(--font-roboto"],
+      },
     },
   },
   plugins: [],

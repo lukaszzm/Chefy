@@ -12,9 +12,10 @@ interface IPaginationProps {
   pageCount: number;
 }
 
-export const Pagination: React.FC<IPaginationProps> = (props) => {
-  const { currentPage, pageCount } = props;
-
+export const Pagination: React.FC<IPaginationProps> = ({
+  currentPage,
+  pageCount,
+}) => {
   const isFirstPage = currentPage === 1;
   const isLastPage = currentPage === pageCount;
 

@@ -1,5 +1,5 @@
-import { NextApiRequest, NextApiResponse } from "next";
-import prisma from "@/lib/prisma";
+import type { NextApiRequest, NextApiResponse } from "next";
+import { prisma } from "@/lib/prisma";
 import bcrypt from "bcrypt";
 import { withMethods, withValidation } from "@/api-helpers";
 import { z } from "zod";

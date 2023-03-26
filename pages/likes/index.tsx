@@ -1,18 +1,50 @@
 import { GetServerSideProps, NextPage } from "next";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]";
-import prisma from "@/lib/prisma";
-import { IRecipe } from "@/interfaces/Recipe.interface";
-import { Likes } from "@/components/Likes";
+import { prisma } from "@/lib/prisma";
+import type { Recipe } from "@/interfaces";
+import { Pagination } from "@/components/Likes/Pagination";
+import { LikedRecipe } from "@/components/Likes/LikedRecipe";
+import { Title } from "@/components/UI/Title";
 
 interface ILikesPageProps {
-  recipes: IRecipe[];
+  recipes: Recipe[];
   currentPage: number;
   pageCount: number;
 }
 
-const LikesPage: NextPage<ILikesPageProps> = (props) => {
-  return <Likes {...props} />;
+const LikesPage: NextPage<ILikesPageProps> = ({
+  recipes,
+  currentPage,
+  pageCount,
+}) => {
+  return (
+    <>
+      <Title>Your liked recipes</Title>
+      {recipes.length > 0 ? (
+        <>
+          {recipes.map(
+            ({ id, title, area, category, ingredients, instructions }) => (
+              <LikedRecipe
+                key={id}
+                id={id}
+                title={title}
+                area={area.name}
+                category={category.name}
+                ingredients={ingredients}
+                instructions={instructions}
+              />
+            )
+          )}
+          <Pagination currentPage={currentPage} pageCount={pageCount} />
+        </>
+      ) : (
+        <p className="font-medium text-gray-500 my-auto">
+          You don&apos;t have any recipes yet.
+        </p>
+      )}
+    </>
+  );
 };
 
 export const getServerSideProps: GetServerSideProps = async (context) => {

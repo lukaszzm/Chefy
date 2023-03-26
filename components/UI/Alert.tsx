@@ -3,15 +3,12 @@ import { motion } from "framer-motion";
 
 interface IAlertProps {
   children: React.ReactNode;
-  className?: string;
   isError?: boolean;
 }
 
-export const Alert: React.FC<IAlertProps> = (props) => {
-  const { className, children, isError } = props;
-
+export const Alert: React.FC<IAlertProps> = ({ children, isError }) => {
   const styles = classNames(
-    `w-11/12 m-auto text-white p-3 rounded text-sm ${className}`,
+    "w-11/12 m-auto text-white p-3 mt-2 mb-1 rounded text-sm",
     {
       "bg-red-400": isError,
       "bg-green-400": !isError,

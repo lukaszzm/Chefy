@@ -6,9 +6,9 @@ interface IDashboardLayoutProps {
   children: React.ReactNode;
 }
 
-export const DashboardLayout: NextPage<IDashboardLayoutProps> = (props) => {
-  const { children } = props;
-
+export const DashboardLayout: NextPage<IDashboardLayoutProps> = ({
+  children,
+}) => {
   return (
     <div className="w-full h-full overflow-auto flex">
       <Navbar />

@@ -1,16 +1,9 @@
-import { NextApiRequest, NextApiResponse } from "next";
-import prisma from "@/lib/prisma";
-import { withAuth, withMethods, withValidation } from "@/api-helpers";
-import { z } from "zod";
-
-const schema = z.object({
-  email: z.string().email(),
-});
-
-type RequestBody = z.infer<typeof schema>;
+import type { NextApiRequest, NextApiResponse } from "next";
+import { prisma } from "@/lib/prisma";
+import { withAuth, withMethods } from "@/api-helpers";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  const { email }: RequestBody = req.body;
+  const email = req.headers.email as string;
 
   try {
     const userPreferences = await prisma.user.findUnique({
@@ -69,4 +62,4 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 };
 
-export default withMethods(["GET"], withAuth(withValidation(schema, handler)));
+export default withMethods(["GET"], withAuth(handler));

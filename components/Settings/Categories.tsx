@@ -1,4 +1,4 @@
-import { ICategory } from "@/interfaces/Category.interface";
+import type { Category } from "@/interfaces";
 import { useSettingsForm } from "@/hooks/useSettingsForm";
 import { isItemChosen } from "@/utils/isItemChosen";
 import { Checkbox } from "@/ui/Checkbox";
@@ -7,12 +7,14 @@ import { Button } from "@/ui/Button";
 import { Label } from "@/ui/Label";
 
 interface ICategoriesProps {
-  allCategories: ICategory[];
-  checkedByDefaultCategories: ICategory[];
+  allCategories: Category[];
+  checkedByDefaultCategories: Category[];
 }
 
-export const Categories: React.FC<ICategoriesProps> = (props) => {
-  const { allCategories, checkedByDefaultCategories } = props;
+export const Categories: React.FC<ICategoriesProps> = ({
+  allCategories,
+  checkedByDefaultCategories,
+}) => {
   const {
     register,
     handleSubmit,
@@ -27,7 +29,7 @@ export const Categories: React.FC<ICategoriesProps> = (props) => {
       className="text-left m-2 pb-2 border-b border-b-gray-200"
     >
       <Label htmlFor="Category">Categories</Label>
-      <ul className="flex flex-wrap">
+      <ul role="list" className="flex flex-wrap">
         {allCategories.map((el) => (
           <Checkbox
             {...register("prefferedCategories")}
@@ -39,16 +41,9 @@ export const Categories: React.FC<ICategoriesProps> = (props) => {
         ))}
       </ul>
       {apiResponse && isDirty && (
-        <Alert isError={apiResponse.isError} className="mt-2">
-          {apiResponse.text}
-        </Alert>
+        <Alert isError={apiResponse.isError}>{apiResponse.text}</Alert>
       )}
-      <Button
-        type="primary"
-        className="p-4 w-24"
-        disabled={!isDirty}
-        isLoading={isSubmitting}
-      >
+      <Button variant="primary" disabled={!isDirty} isLoading={isSubmitting}>
         Save
       </Button>
     </form>

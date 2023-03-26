@@ -1,18 +1,20 @@
-import { IArea } from "@/interfaces/Area.interface";
-import { ICategory } from "@/interfaces/Category.interface";
+import type { Area, Category } from "@/interfaces";
 import { Areas } from "./Areas";
 import { Categories } from "./Categories";
 
 interface IPreferencesProps {
-  allCategories: ICategory[];
-  allAreas: IArea[];
-  defaultCategories: ICategory[];
-  defaultAreas: IArea[];
+  allCategories: Category[];
+  allAreas: Area[];
+  defaultCategories: Category[];
+  defaultAreas: Area[];
 }
 
-export const Preferences: React.FC<IPreferencesProps> = (props) => {
-  const { allCategories, allAreas, defaultAreas, defaultCategories } = props;
-
+export const Preferences: React.FC<IPreferencesProps> = ({
+  allCategories,
+  allAreas,
+  defaultCategories,
+  defaultAreas,
+}) => {
   return (
     <>
       <Categories

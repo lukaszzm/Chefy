@@ -7,8 +7,10 @@ import NextProgress from "next-progress";
 import { Roboto } from "next/font/google";
 
 const roboto = Roboto({
+  variable: "--font-roboto",
   weight: ["400", "500", "700", "900"],
   subsets: ["latin"],
+  display: "swap",
 });
 
 const protectedRoutes = ["/explore", "/likes", "/settings"];
@@ -16,7 +18,7 @@ const protectedRoutes = ["/explore", "/likes", "/settings"];
 const App = ({ Component, pageProps, router }: AppProps) => {
   return (
     <SessionProvider session={pageProps.session}>
-      <main className={roboto.className}>
+      <main className={roboto.variable}>
         <Head>
           <title>Chefy</title>
           <meta name="description" content="Chefy - Because we love cooking" />

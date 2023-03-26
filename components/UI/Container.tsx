@@ -5,8 +5,7 @@ interface IContainerProps {
   children: React.ReactNode;
 }
 
-export const Container: React.FC<IContainerProps> = (props) => {
-  const { children } = props;
+export const Container: React.FC<IContainerProps> = ({ children }) => {
   const router = useRouter();
 
   const innerContainerStyles = classNames(

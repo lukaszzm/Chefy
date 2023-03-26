@@ -1,5 +1,4 @@
 import classNames from "classnames";
-import { Button } from "@/ui/Button";
 import Link from "next/link";
 
 interface IPaginationButtonProps {
@@ -9,11 +8,14 @@ interface IPaginationButtonProps {
   disabled?: boolean;
 }
 
-export const PaginationButton: React.FC<IPaginationButtonProps> = (props) => {
-  const { children, toPage, active, disabled } = props;
-
+export const PaginationButton: React.FC<IPaginationButtonProps> = ({
+  children,
+  toPage,
+  active,
+  disabled,
+}) => {
   const styles = classNames(
-    "w-10 h-10 m-1 flex justify-center items-center rounded-lg shadow-sm hover:shadow-md",
+    "w-10 h-10 m-1 flex justify-center items-center rounded-lg shadow-sm hover:shadow-md font-medium disabled:pointer-events-none rounded focus:outline-none focus:ring-0 transition duration-150 ease-in-out",
     {
       "bg-gray-100 text-gray-900 hover:bg-gray-200": !active,
       "bg-primary text-white hover:bg-primary-hover": active,
@@ -28,9 +30,9 @@ export const PaginationButton: React.FC<IPaginationButtonProps> = (props) => {
         query: { page: toPage },
       }}
     >
-      <Button type="none" disabled={disabled} className={styles}>
+      <button disabled={disabled} className={styles}>
         {children}
-      </Button>
+      </button>
     </Link>
   );
 };

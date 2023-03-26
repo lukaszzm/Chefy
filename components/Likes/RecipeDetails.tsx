@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { IApiResponse } from "@/interfaces/ApiResponse.interface";
+import type { ApiResponse } from "@/interfaces";
 import { Alert } from "@/ui/Alert";
 import { Subtitle } from "@/ui/Subtitle";
 import { Button } from "@/ui/Button";
@@ -14,22 +14,25 @@ interface IRecipeDetailsProps {
   instructions: string;
 }
 
-export const RecipeDetails: React.FC<IRecipeDetailsProps> = (props) => {
-  const { ingredients, instructions, id, title } = props;
+export const RecipeDetails: React.FC<IRecipeDetailsProps> = ({
+  ingredients,
+  instructions,
+  id,
+  title,
+}) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [apiResponse, setApiResponse] = useState<IApiResponse | null>();
+  const [apiResponse, setApiResponse] = useState<ApiResponse | null>();
   const router = useRouter();
   const { asPath } = router;
 
   const deleteHandler = async (id: string) => {
     setApiResponse(null);
     setIsSubmitting(true);
-    const response = await fetch("/api/recipes/likes", {
+    const response = await fetch(`/api/recipes/likes/${id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ id }),
     });
 
     if (!response.ok) {
@@ -44,26 +47,25 @@ export const RecipeDetails: React.FC<IRecipeDetailsProps> = (props) => {
 
   return (
     <>
-      <div className="overflow-auto h-96 px-2">
+      <div className="overflow-auto h-96 px-2 mb-3">
         <div>
-          <Subtitle className="mb-1">Ingredients</Subtitle>
-          <div className="flex flex-row flex-wrap max-w-full">
+          <Subtitle>Ingredients</Subtitle>
+          <div className="flex flex-wrap max-w-full">
             {ingredients.map((el, index) => (
               <Tag key={index}>{el}</Tag>
             ))}
           </div>
         </div>
         <div className="text-left py-2 border-b-2">
-          <Subtitle className="mb-1">Instructions</Subtitle>
-          <div className="flex flex-row flex-wrap max-w-full">
+          <Subtitle>Instructions</Subtitle>
+          <div className="flex flex-wrap max-w-full">
             <p className="text-sm p-1">{instructions}</p>
           </div>
         </div>
       </div>
       <Button
-        type="primary"
+        variant="primary"
         fullWidth
-        className="mt-6"
         onClick={() => generatePDF({ title, ingredients, instructions })}
       >
         Generate PDF
@@ -74,7 +76,7 @@ export const RecipeDetails: React.FC<IRecipeDetailsProps> = (props) => {
       <Button
         isLoading={isSubmitting}
         onClick={() => deleteHandler(id)}
-        type="outline-danger"
+        variant="outline-danger"
         fullWidth
       >
         Delete from likes

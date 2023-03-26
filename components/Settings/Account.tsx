@@ -11,8 +11,7 @@ interface IAccountProps {
 
 interface FormValues extends IAccountProps {}
 
-export const Account: React.FC<IAccountProps> = (props) => {
-  const { name } = props;
+export const Account: React.FC<IAccountProps> = ({ name }) => {
   const {
     register,
     handleSubmit,
@@ -34,13 +33,10 @@ export const Account: React.FC<IAccountProps> = (props) => {
         error={errors.name}
       />
       {apiResponse && (
-        <Alert isError={apiResponse.isError} className="mt-2">
-          {apiResponse.text}
-        </Alert>
+        <Alert isError={apiResponse.isError}>{apiResponse.text}</Alert>
       )}
       <Button
-        type="primary"
-        className="p-4 w-24"
+        variant="primary"
         disabled={!isValid || !isDirty}
         isLoading={isSubmitting}
       >

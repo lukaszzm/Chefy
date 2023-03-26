@@ -1,54 +1,35 @@
-import { useState } from "react";
-import { Ingredients } from "./Ingredients";
-import { Instruction } from "./Instruction";
-import { Buttons } from "./Buttons";
-import { Category } from "./Category";
-import { IApiResponse } from "@/interfaces/ApiResponse.interface";
-import { IRecipe } from "@/interfaces/Recipe.interface";
-import { Title } from "@/ui/Title";
-import { Button } from "@/ui/Button";
+import { useRecipe } from "@/hooks/useRecipe";
+import type { Recipe as IRecipe } from "@/interfaces";
 import { Alert } from "@/ui/Alert";
 import { ResponsiveImage } from "@/ui/ResponsiveImage";
+import { Title } from "@/ui/Title";
+import { Buttons } from "./Buttons";
+import { Category } from "./Category";
+import { Ingredients } from "./Ingredients";
+import { Instruction } from "./Instruction";
 
 interface IRecipeProps extends IRecipe {
   refetchRecipe: () => void;
 }
 
-export const Recipe: React.FC<IRecipeProps> = (props) => {
+export const Recipe: React.FC<IRecipeProps> = ({
+  id,
+  title,
+  imageSrc,
+  category,
+  area,
+  ingredients,
+  instructions,
+  refetchRecipe,
+}) => {
   const {
-    id,
-    title,
-    imageSrc,
-    category,
-    area,
-    ingredients,
-    instructions,
-    refetchRecipe,
-  } = props;
-  const [isShortVersion, setIsShortVersion] = useState(true);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [apiResponse, setApiResponse] = useState<IApiResponse | null>(null);
-
-  const likeHandler = async () => await sendRequest("/api/recipes/likes");
-
-  const dislikeHandler = async () => await sendRequest("/api/recipes/dislikes");
-
-  const sendRequest = async (url: string) => {
-    setIsSubmitting(true);
-    const response = await fetch(url, {
-      method: "POST",
-      body: JSON.stringify({ id }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    setIsSubmitting(false);
-
-    if (!response.ok)
-      return setApiResponse({ isError: true, text: "Something went wrong." });
-
-    refetchRecipe();
-  };
+    isShortVersion,
+    setIsShortVersion,
+    isSubmitting,
+    apiResponse,
+    likeHandler,
+    dislikeHandler,
+  } = useRecipe(id, refetchRecipe);
 
   return (
     <>
@@ -66,13 +47,12 @@ export const Recipe: React.FC<IRecipeProps> = (props) => {
             <Instruction instruction={instructions} />
           </>
         )}
-        <Button
-          type="none"
+        <button
           onClick={() => setIsShortVersion(!isShortVersion)}
-          className="font-medium text-sm p-3 m-1 text-gray-700 bg-gray-100 rounded-3xl shadow-sm hover:bg-gray-200 hover:shadow-sm"
+          className="font-medium text-sm p-3 m-1 text-gray-700 bg-gray-100 rounded-3xl shadow-sm hover:bg-gray-200 hover:shadow-sm  disabled:pointer-events-none focus:outline-none focus:ring-0 transition duration-150 ease-in-out"
         >
           {isShortVersion ? "Read More" : "Read less"}
-        </Button>
+        </button>
       </div>
       {apiResponse && <Alert isError={true}>{apiResponse.text}</Alert>}
       <Buttons

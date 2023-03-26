@@ -2,13 +2,10 @@ import classNames from "classnames";
 
 interface ITagProps {
   children: React.ReactNode;
-  className?: string;
   color?: "blue" | "orange";
 }
 
-export const Tag: React.FC<ITagProps> = (props) => {
-  const { children, className, color } = props;
-
+export const Tag: React.FC<ITagProps> = ({ children, color }) => {
   const style = classNames(
     "font-medium text-sm p-1 h-8 m-1 border-2  rounded-lg text-center",
     {
@@ -18,5 +15,5 @@ export const Tag: React.FC<ITagProps> = (props) => {
     }
   );
 
-  return <p className={`${style} ${className}`}>{children}</p>;
+  return <p className={style}>{children}</p>;
 };

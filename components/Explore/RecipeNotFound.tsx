@@ -5,17 +5,19 @@ import { Subtitle } from "@/ui/Subtitle";
 interface IRecipeErrorProps {
   title: string;
   text: string;
-  bgColor: "red" | "gray";
+  isError?: boolean;
 }
 
-export const RecipeError: React.FC<IRecipeErrorProps> = (props) => {
-  const { title, text, bgColor } = props;
-
+export const RecipeNotFound: React.FC<IRecipeErrorProps> = ({
+  title,
+  text,
+  isError,
+}) => {
   const styles = classNames(
     "flex justify-center items-center w-full h-full sm:min-h-[32rem] rounded-md font-medium text-gray-800 mb-6",
     {
-      "bg-red-100": bgColor === "red",
-      "bg-gray-200": bgColor === "gray",
+      "bg-red-100": isError,
+      "bg-gray-200": !isError,
     }
   );
 
@@ -23,7 +25,7 @@ export const RecipeError: React.FC<IRecipeErrorProps> = (props) => {
     <>
       <div className={styles}>
         <div>
-          <Subtitle className="text-center">{title} </Subtitle>
+          <Subtitle>{title} </Subtitle>
           <p className="text-center">{text}</p>
         </div>
       </div>

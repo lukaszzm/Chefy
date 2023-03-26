@@ -1,9 +1,8 @@
-import { ICategory } from "@/interfaces/Category.interface";
-import { IArea } from "@/interfaces/Area.interface";
+import type { Category, Area } from "@/interfaces";
 
 export const isItemChosen = (
-  el: ICategory | IArea,
-  list: ICategory[] | IArea[]
+  el: Category | Area,
+  list: Category[] | Area[]
 ) => {
   for (let category of list) {
     if (category.id === el.id) return true;

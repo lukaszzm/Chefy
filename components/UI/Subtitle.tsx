@@ -1,15 +1,10 @@
 interface ISubtitleProps {
   children: React.ReactNode;
-  className?: string;
 }
 
-export const Subtitle: React.FC<ISubtitleProps> = (props) => {
-  const { children, className } = props;
-
+export const Subtitle: React.FC<ISubtitleProps> = ({ children }) => {
   return (
-    <h2
-      className={`${className} text-left font-medium border-b-gray-400  text-lg`}
-    >
+    <h2 className="text-left font-medium border-b-gray-400  text-lg">
       {children}
     </h2>
   );

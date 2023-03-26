@@ -9,9 +9,12 @@ interface IModalProps {
   isModalOpen: boolean;
 }
 
-export const Modal: React.FC<IModalProps> = (props) => {
-  const { children, title, closeModal, isModalOpen } = props;
-
+export const Modal: React.FC<IModalProps> = ({
+  children,
+  title,
+  closeModal,
+  isModalOpen,
+}) => {
   return (
     <Portal selector="#modal">
       <AnimatePresence>
@@ -32,7 +35,7 @@ export const Modal: React.FC<IModalProps> = (props) => {
               transition={{ duration: 0.2 }}
               className="fixed z-50 top-1/2 left-1/2 w-11/12 p-6 py-8 border md:w-2/3 md:py-8 md:px-10 max-w-md shadow-lg rounded-md bg-white"
             >
-              <Title className="text-center text-3xl">{title}</Title>
+              <Title>{title}</Title>
               {children}
             </motion.div>
           </>

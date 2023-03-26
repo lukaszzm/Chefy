@@ -5,9 +5,10 @@ interface IResonsiveImageProps {
   alt: string;
 }
 
-export const ResponsiveImage: React.FC<IResonsiveImageProps> = (props) => {
-  const { src, alt } = props;
-
+export const ResponsiveImage: React.FC<IResonsiveImageProps> = ({
+  src,
+  alt,
+}) => {
   return (
     <Image
       alt={alt}

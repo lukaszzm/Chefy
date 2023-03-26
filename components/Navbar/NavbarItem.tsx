@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { Button } from "@/ui/Button";
 import classNames from "classnames";
 
 interface IMenuItemProps {
@@ -10,8 +9,12 @@ interface IMenuItemProps {
   onClick?: () => void;
 }
 
-export const NavbarItem: React.FC<IMenuItemProps> = (props) => {
-  const { icon, text, type, onClick } = props;
+export const NavbarItem: React.FC<IMenuItemProps> = ({
+  icon,
+  text,
+  type,
+  onClick,
+}) => {
   const router = useRouter();
 
   const style = classNames(
@@ -26,10 +29,10 @@ export const NavbarItem: React.FC<IMenuItemProps> = (props) => {
 
   if (type === "button")
     return (
-      <Button type="none" className={style} onClick={onClick}>
+      <button className={style} onClick={onClick}>
         {icon}
         <p className="hidden md:block capitalize">{text}</p>
-      </Button>
+      </button>
     );
 
   return (

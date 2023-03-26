@@ -38,13 +38,10 @@ export const Password: React.FC = () => {
         error={errors.newPassword}
       />
       {apiResponse && (
-        <Alert isError={apiResponse.isError} className="mt-2">
-          {apiResponse.text}
-        </Alert>
+        <Alert isError={apiResponse.isError}>{apiResponse.text}</Alert>
       )}
       <Button
-        type="primary"
-        className="p-4 w-24"
+        variant="primary"
         disabled={!isValid || !isDirty}
         isLoading={isSubmitting}
       >

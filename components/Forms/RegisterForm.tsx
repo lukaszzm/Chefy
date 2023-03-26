@@ -1,70 +1,36 @@
-import { useForm } from "react-hook-form";
-import { RegisterSchema } from "@/schemas/RegisterSchema";
-import { useState } from "react";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { IApiResponse } from "@/interfaces/ApiResponse.interface";
 import { Alert } from "@/ui/Alert";
 import { Button } from "@/ui/Button";
 import { Label } from "@/ui/Label";
 import { Input } from "@/ui/Input";
+import { useRegister } from "@/hooks/useRegister";
 
 interface IRegisterFormProps {
   switchModal: () => void;
 }
 
-interface IFormInputs {
-  email: string;
-  name: string;
-  password: string;
-}
-
-export const RegisterForm: React.FC<IRegisterFormProps> = (props) => {
-  const { switchModal } = props;
+export const RegisterForm: React.FC<IRegisterFormProps> = ({ switchModal }) => {
   const {
     register,
     handleSubmit,
-    formState: { errors, isValid, isDirty, isSubmitting },
-  } = useForm<IFormInputs>({
-    resolver: zodResolver(RegisterSchema),
-    mode: "onChange",
-  });
-  const [apiResponse, setApiResponse] = useState<IApiResponse | null>(null);
-
-  const onSubmit = async (values: IFormInputs) => {
-    setApiResponse(null);
-    const response = await fetch("/api/auth/sign-up", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(values),
-    });
-    const data = await response.json();
-
-    if (!response.ok)
-      return setApiResponse({ isError: true, text: data.message });
-
-    setApiResponse({
-      isError: false,
-      text: data.message,
-    });
-  };
+    errors,
+    isValid,
+    isDirty,
+    isSubmitting,
+    onSubmit,
+    apiResponse,
+  } = useRegister();
 
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <Label htmlFor="name" className="p-1 font-medium">
-          Name
-        </Label>
+        <Label htmlFor="name">Name</Label>
         <Input
           {...register("name")}
           type="text"
           placeholder="John"
           error={errors.name}
         />
-        <Label htmlFor="email" className="p-1 font-medium">
-          Email
-        </Label>
+        <Label htmlFor="email">Email</Label>
         <Input
           {...register("email")}
           type="email"
@@ -79,12 +45,10 @@ export const RegisterForm: React.FC<IRegisterFormProps> = (props) => {
           error={errors.password}
         />
         {apiResponse && (
-          <Alert isError={apiResponse.isError} className="mt-2">
-            {apiResponse.text}
-          </Alert>
+          <Alert isError={apiResponse.isError}>{apiResponse.text}</Alert>
         )}
         <Button
-          type="primary"
+          variant="primary"
           fullWidth
           disabled={!isDirty || !isValid}
           isLoading={isSubmitting}

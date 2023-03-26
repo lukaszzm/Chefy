@@ -2,7 +2,7 @@ import { useState } from "react";
 import { FieldValues, useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { IApiResponse } from "@/interfaces/ApiResponse.interface";
+import type { ApiResponse } from "@/interfaces";
 
 interface InitialProps {
   schema?: z.AnyZodObject;
@@ -21,7 +21,7 @@ export const useSettingsForm = <T extends FieldValues>(props: InitialProps) => {
     mode: "onChange",
     defaultValues: defaultValues,
   });
-  const [apiResponse, setApiResponse] = useState<IApiResponse | null>(null);
+  const [apiResponse, setApiResponse] = useState<ApiResponse | null>(null);
 
   const onSubmit = async (values: T) => {
     setApiResponse(null);
