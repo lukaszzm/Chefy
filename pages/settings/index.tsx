@@ -8,6 +8,7 @@ import { Subtitle } from "@/components/UI/Subtitle";
 import { Account } from "@/components/Settings/Account";
 import { Password } from "@/components/Settings/Password";
 import { Preferences } from "@/components/Settings/Preferences";
+import { ContentWrapper } from "@/components/UI/ContentWrapper";
 
 interface ISettingsPageProps {
   name: string;
@@ -25,7 +26,7 @@ const SettingsPage: NextPage<ISettingsPageProps> = ({
   defaultCategories,
 }) => {
   return (
-    <>
+    <ContentWrapper fullWidth fullHeight>
       <Title>Settings</Title>
       <div className="flex flex-col xl:flex-row max-w-5xl">
         <div className="w-full">
@@ -50,7 +51,7 @@ const SettingsPage: NextPage<ISettingsPageProps> = ({
           </div>
         </div>
       </div>
-    </>
+    </ContentWrapper>
   );
 };
 
