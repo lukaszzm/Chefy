@@ -5,7 +5,6 @@ import { RecipeLoading } from "@/components/Explore/RecipeLoading";
 import { RecipeNotFound } from "@/components/Explore/RecipeNotFound";
 import { Recipe } from "@/components/Explore/Recipe";
 import { useRandomRecipe } from "@/hooks/useRandomRecipe";
-import { ContentWrapper } from "@/components/UI/ContentWrapper";
 
 const ExplorePage: NextPage = () => {
   const { data, error, isValidating, refetchData } = useRandomRecipe();
@@ -23,18 +22,16 @@ const ExplorePage: NextPage = () => {
 
   if (data)
     return (
-      <ContentWrapper>
-        <Recipe
-          id={data.id}
-          title={data.title}
-          imageSrc={data.imageSrc}
-          category={data.category}
-          area={data.area}
-          ingredients={data.ingredients}
-          instructions={data.instructions}
-          refetchRecipe={() => refetchData()}
-        />
-      </ContentWrapper>
+      <Recipe
+        id={data.id}
+        title={data.title}
+        imageSrc={data.imageSrc}
+        category={data.category}
+        area={data.area}
+        ingredients={data.ingredients}
+        instructions={data.instructions}
+        refetchRecipe={() => refetchData()}
+      />
     );
 
   return (
