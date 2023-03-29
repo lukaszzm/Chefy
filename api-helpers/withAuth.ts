@@ -2,12 +2,6 @@ import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import { NextApiHandler, NextApiRequest, NextApiResponse } from "next";
 import { getServerSession } from "next-auth";
 
-export interface ExtendedNextApiRequest extends NextApiRequest {
-  headers: {
-    email: string;
-  };
-}
-
 export const withAuth = (handler: NextApiHandler) => {
   return async (request: NextApiRequest, response: NextApiResponse) => {
     const session = await getServerSession(request, response, authOptions);
