@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useModal } from "./useModal";
 
-export const useLoginModal = () => {
+export const useHomeModal = () => {
   const { isModalOpen, openModal, closeModal } = useModal();
   const [modalType, setModalType] = useState<"login" | "register">("login");
 

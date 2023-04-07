@@ -17,15 +17,17 @@ export const Categories: React.FC<ICategoriesProps> = ({
 }) => {
   const {
     register,
-    handleSubmit,
-    formState: { isDirty, isSubmitting },
+    formState: { isDirty },
+    isLoading,
     apiResponse,
-    onSubmit,
-  } = useSettingsForm({});
+    submitFn,
+  } = useSettingsForm({
+    refetchRecipes: true,
+  });
 
   return (
     <form
-      onSubmit={handleSubmit(onSubmit)}
+      onSubmit={submitFn}
       className="text-left m-2 pb-2 border-b border-b-gray-200"
     >
       <Label htmlFor="Category">Categories</Label>
@@ -43,7 +45,7 @@ export const Categories: React.FC<ICategoriesProps> = ({
       {apiResponse && isDirty && (
         <Alert isError={apiResponse.isError}>{apiResponse.text}</Alert>
       )}
-      <Button variant="primary" disabled={!isDirty} isLoading={isSubmitting}>
+      <Button variant="primary" disabled={!isDirty} isLoading={isLoading}>
         Save
       </Button>
     </form>

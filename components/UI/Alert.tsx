@@ -14,10 +14,11 @@ export const Alert: React.FC<IAlertProps> = ({ children, isError }) => {
       "bg-green-400": !isError,
     }
   );
+
   return (
     <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
+      initial={{ opacity: 0, scale: 0 }}
+      animate={{ opacity: 1, scale: 1 }}
       className={styles}
     >
       <p>{children}</p>

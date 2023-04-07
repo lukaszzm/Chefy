@@ -25,7 +25,7 @@ export const LikedRecipe: React.FC<ILikedRecipe> = ({
 
   return (
     <>
-      <div className="flex justify-between items-center bg-gray-100 p-2 px-4 mb-4 rounded-md shadow-sm border border-gray-200">
+      <div className="flex justify-between items-center bg-gray-100 p-2 px-4 m-2 rounded-md shadow-sm border border-gray-200">
         <div>
           <p className="text-left p-1 font-medium text-md">{title}</p>
           <Category hideLabel={true} category={category} area={area} />

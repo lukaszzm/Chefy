@@ -13,16 +13,16 @@ interface FormValues {
 export const Password: React.FC = () => {
   const {
     register,
-    handleSubmit,
-    formState: { errors, isValid, isDirty, isSubmitting },
+    formState: { errors, isValid, isDirty },
+    isLoading,
     apiResponse,
-    onSubmit,
+    submitFn,
   } = useSettingsForm<FormValues>({
     schema: PasswordSchema,
   });
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="text-left m-2">
+    <form onSubmit={submitFn} className="text-left m-2">
       <Label htmlFor="currentPassword">Current Password</Label>
       <Input
         {...register("currentPassword")}
@@ -43,7 +43,7 @@ export const Password: React.FC = () => {
       <Button
         variant="primary"
         disabled={!isValid || !isDirty}
-        isLoading={isSubmitting}
+        isLoading={isLoading}
       >
         Save
       </Button>
