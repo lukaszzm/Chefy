@@ -14,17 +14,17 @@ interface FormValues extends IAccountProps {}
 export const Account: React.FC<IAccountProps> = ({ name }) => {
   const {
     register,
-    handleSubmit,
-    formState: { errors, isValid, isDirty, isSubmitting },
+    formState: { errors, isValid, isDirty },
+    isLoading,
     apiResponse,
-    onSubmit,
+    submitFn,
   } = useSettingsForm<FormValues>({
     schema: UserSettingsSchema,
     defaultValues: { name: name },
   });
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="text-left m-2">
+    <form onSubmit={submitFn} className="text-left m-2">
       <Label htmlFor="name">Name</Label>
       <Input
         {...register("name")}
@@ -38,7 +38,7 @@ export const Account: React.FC<IAccountProps> = ({ name }) => {
       <Button
         variant="primary"
         disabled={!isValid || !isDirty}
-        isLoading={isSubmitting}
+        isLoading={isLoading}
       >
         Save
       </Button>

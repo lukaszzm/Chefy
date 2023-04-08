@@ -6,6 +6,8 @@ import { Button } from "@/ui/Button";
 import { Tag } from "@/ui/Tag";
 import { generatePDF } from "@/utils/generatePDF";
 import { useRouter } from "next/router";
+import { useMutation } from "@tanstack/react-query";
+import { deleteLike } from "@/queries/deleteLike";
 
 interface IRecipeDetailsProps {
   id: string;
@@ -20,30 +22,22 @@ export const RecipeDetails: React.FC<IRecipeDetailsProps> = ({
   id,
   title,
 }) => {
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const [apiResponse, setApiResponse] = useState<ApiResponse | null>();
   const router = useRouter();
   const { asPath } = router;
-
-  const deleteHandler = async (id: string) => {
-    setApiResponse(null);
-    setIsSubmitting(true);
-    const response = await fetch(`/api/recipes/likes/${id}`, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-
-    if (!response.ok) {
+  const { mutate, isLoading, isSuccess } = useMutation({
+    mutationFn: (id: string) => deleteLike(id),
+    onSuccess: () => {
+      setApiResponse({
+        isError: false,
+        text: "Recipe deleted. Redirecting...",
+      });
+      router.replace(asPath);
+    },
+    onError: () => {
       setApiResponse({ isError: true, text: "Something went wrong." });
-      setIsSubmitting(false);
-      return;
-    }
-
-    setIsSubmitting(false);
-    router.replace(asPath);
-  };
+    },
+  });
 
   return (
     <>
@@ -74,8 +68,9 @@ export const RecipeDetails: React.FC<IRecipeDetailsProps> = ({
         <Alert isError={apiResponse.isError}>{apiResponse.text}</Alert>
       )}
       <Button
-        isLoading={isSubmitting}
-        onClick={() => deleteHandler(id)}
+        isLoading={isLoading}
+        disabled={isSuccess}
+        onClick={() => mutate(id)}
         variant="outline-danger"
         fullWidth
       >

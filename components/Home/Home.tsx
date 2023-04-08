@@ -1,7 +1,7 @@
-import { useLoginModal } from "@/hooks/useLoginModal";
+import { useHomeModal } from "@/hooks/useLoginModal";
 import { LoginForm } from "../Forms/LoginForm";
 import { RegisterForm } from "../Forms/RegisterForm";
-import { Modal } from "../Modal/Modal";
+import { Modal } from "../UI/Modal";
 import { NavBar } from "./HomeNavbar";
 import { Welcome } from "./Welcome";
 
@@ -13,7 +13,7 @@ export const Home: React.FC = () => {
     openLoginModal,
     openRegisterModal,
     closeModal,
-  } = useLoginModal();
+  } = useHomeModal();
 
   return (
     <>

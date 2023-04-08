@@ -1,15 +1,14 @@
-import { Buttons } from "./Buttons";
+import { LoadingSpinner } from "../UI/LoadingSpinner";
 
 export const RecipeLoading: React.FC = () => {
   return (
-    <>
-      <div className="h-full">
-        <div className="w-full h-[25rem] bg-gray-200 animate-pulse rounded-md"></div>
-        <div className="my-2 mx-auto w-60 h-10 bg-gray-200 animate-pulse rounded-md"></div>
-        <div className="my-1 w-24 h-8 bg-gray-200 animate-pulse rounded-md"></div>
-        <div className="my-2 m-auto w-24 h-8 bg-gray-200 animate-pulse rounded-md"></div>
+    <div className="flex flex-col w-full h-[calc(100svh-4rem)] justify-center items-center">
+      <div>
+        <LoadingSpinner size="md" color="gray" />
+        <p className="font-medium text-gray-400 pt-2">
+          Searching recipes for you..{" "}
+        </p>
       </div>
-      <Buttons disabled />
-    </>
+    </div>
   );
 };

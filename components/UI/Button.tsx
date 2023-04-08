@@ -41,7 +41,11 @@ export const Button: React.FC<IButtonProps> = ({
       className={style}
       onClick={onClick}
     >
-      {isLoading ? <LoadingSpinner color={loadingSpinnerColor} /> : children}
+      {isLoading ? (
+        <LoadingSpinner size="sm" color={loadingSpinnerColor} />
+      ) : (
+        children
+      )}
     </button>
   );
 };

@@ -4,14 +4,24 @@ import { getServerSession } from "next-auth";
 import { RecipeLoading } from "@/components/Explore/RecipeLoading";
 import { RecipeNotFound } from "@/components/Explore/RecipeNotFound";
 import { Recipe } from "@/components/Explore/Recipe";
-import { useRandomRecipe } from "@/hooks/useRandomRecipe";
+import React from "react";
+import { AnimatePresence } from "framer-motion";
+import { fetchRecipes } from "@/queries/fetchRecipes";
+import { useQuery } from "@tanstack/react-query";
+import { Recipe as IRecipe } from "@/interfaces";
 
 const ExplorePage: NextPage = () => {
-  const { data, error, isValidating, refetchData } = useRandomRecipe();
+  const { data, isLoading, isError, isFetching } = useQuery<IRecipe[]>({
+    queryKey: ["recipes"],
+    queryFn: fetchRecipes,
+    staleTime: 0,
+    keepPreviousData: true,
+    select: (data) => [...data].reverse(),
+  });
 
-  if (isValidating) return <RecipeLoading />;
+  if (isLoading) return <RecipeLoading />;
 
-  if (error)
+  if (isError)
     return (
       <RecipeNotFound
         title="Something went wrong."
@@ -20,25 +30,30 @@ const ExplorePage: NextPage = () => {
       />
     );
 
-  if (data)
-    return (
-      <Recipe
-        id={data.id}
-        title={data.title}
-        imageSrc={data.imageSrc}
-        category={data.category}
-        area={data.area}
-        ingredients={data.ingredients}
-        instructions={data.instructions}
-        refetchRecipe={() => refetchData()}
-      />
-    );
-
   return (
-    <RecipeNotFound
-      title="No more recipes found."
-      text="Change preferences to discover more recipes!"
-    />
+    <AnimatePresence>
+      {data.length > 0 ? (
+        data.map((recipe) => (
+          <Recipe
+            key={recipe.id}
+            id={recipe.id}
+            title={recipe.title}
+            imageSrc={recipe.imageSrc}
+            category={recipe.category}
+            area={recipe.area}
+            ingredients={recipe.ingredients}
+            instructions={recipe.instructions}
+          />
+        ))
+      ) : isFetching ? (
+        <RecipeLoading />
+      ) : (
+        <RecipeNotFound
+          title="No recipes found."
+          text="Change preferences to discover new recipes."
+        />
+      )}
+    </AnimatePresence>
   );
 };
 

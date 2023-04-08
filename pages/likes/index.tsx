@@ -6,6 +6,7 @@ import type { Recipe } from "@/interfaces";
 import { Pagination } from "@/components/Likes/Pagination";
 import { LikedRecipe } from "@/components/Likes/LikedRecipe";
 import { Title } from "@/components/UI/Title";
+import { ContentWrapper } from "@/components/UI/ContentWrapper";
 
 interface ILikesPageProps {
   recipes: Recipe[];
@@ -19,7 +20,7 @@ const LikesPage: NextPage<ILikesPageProps> = ({
   pageCount,
 }) => {
   return (
-    <>
+    <ContentWrapper>
       <Title>Your liked recipes</Title>
       {recipes.length > 0 ? (
         <>
@@ -43,7 +44,7 @@ const LikesPage: NextPage<ILikesPageProps> = ({
           You don&apos;t have any recipes yet.
         </p>
       )}
-    </>
+    </ContentWrapper>
   );
 };
 

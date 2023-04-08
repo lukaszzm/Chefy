@@ -25,7 +25,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       (el) => el.id
     );
 
-    const recipe = await prisma.recipe.findFirst({
+    const recipes = await prisma.recipe.findMany({
+      take: 10,
       where: {
         areaId: { in: prefferedAreasIds },
         categoryId: { in: prefferedCategoriesIds },
@@ -56,7 +57,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       },
     });
 
-    return res.status(200).json(recipe);
+    return res.status(200).json(recipes);
   } catch (err) {
     return res.status(500).json({ message: "Something went wrong." });
   }

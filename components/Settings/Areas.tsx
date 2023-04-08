@@ -17,14 +17,16 @@ export const Areas: React.FC<IAreasProps> = ({
 }) => {
   const {
     register,
-    handleSubmit,
-    formState: { isDirty, isSubmitting },
+    formState: { isDirty },
+    isLoading,
     apiResponse,
-    onSubmit,
-  } = useSettingsForm({});
+    submitFn,
+  } = useSettingsForm({
+    refetchRecipes: true,
+  });
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="text-left m-2">
+    <form onSubmit={submitFn} className="text-left m-2">
       <Label htmlFor="Category">Areas</Label>
       <ul role="list" className="flex flex-wrap">
         {allAreas.map((el) => (
@@ -40,7 +42,7 @@ export const Areas: React.FC<IAreasProps> = ({
       {apiResponse && isDirty && (
         <Alert isError={apiResponse.isError}>{apiResponse.text}</Alert>
       )}
-      <Button variant="primary" disabled={!isDirty} isLoading={isSubmitting}>
+      <Button variant="primary" disabled={!isDirty} isLoading={isLoading}>
         Save
       </Button>
     </form>

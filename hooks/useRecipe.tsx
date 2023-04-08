@@ -1,42 +1,48 @@
-import type { ApiResponse } from "@/interfaces";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { useState } from "react";
+import { sendDislike } from "@/queries/sendDislike";
+import { sendLike } from "@/queries/sendLike";
+import { queryClient } from "@/lib/queryClient";
+import { Recipe } from "@/interfaces";
 
-export const useRecipe = (recipeId: string, refetchFn: () => void) => {
+export const useRecipe = (recipeId: string) => {
   const [isShortVersion, setIsShortVersion] = useState(true);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [apiResponse, setApiResponse] = useState<ApiResponse | null>(null);
+  const [isLike, setIsLike] = useState(true);
+  const [isError, setIsError] = useState(false);
+  const mutation = useMutation({
+    mutationFn: isLike ? sendLike : sendDislike,
+    onMutate: async () => {
+      queryClient.cancelQueries(["recipes"]);
+      const snapshot = queryClient.getQueryData<Recipe[]>(["recipes"]);
+      const newData = snapshot?.filter(({ id }) => id !== recipeId);
+      queryClient.setQueryData<Recipe[]>(["recipes"], newData);
+      if (newData && newData.length === 0)
+        queryClient.invalidateQueries(["recipes"]);
+      return { snapshot };
+    },
+    onError: (error, variables, context) => {
+      queryClient.setQueryData(["recipes"], context?.snapshot);
+      setIsError(true);
+    },
+  });
 
-  const likeHandler = async () =>
-    await sendRequest(`/api/recipes/likes/${recipeId}`);
+  const likeHandler = () => {
+    setIsLike(true);
+    mutation.mutate(recipeId);
+  };
 
-  const dislikeHandler = async () =>
-    await sendRequest(`/api/recipes/dislikes/${recipeId}`);
-
-  const sendRequest = async (url: string) => {
-    setIsSubmitting(true);
-    const response = await fetch(url, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    setIsSubmitting(false);
-
-    if (!response.ok) {
-      console.log(recipeId);
-      console.log(await response.json());
-      return setApiResponse({ isError: true, text: "Something went wrong." });
-    }
-
-    refetchFn();
+  const dislikeHandler = () => {
+    setIsLike(false);
+    mutation.mutate(recipeId);
   };
 
   return {
     isShortVersion,
     setIsShortVersion,
-    isSubmitting,
-    apiResponse,
     likeHandler,
     dislikeHandler,
+    isLike,
+    setIsLike,
+    isError,
   };
 };

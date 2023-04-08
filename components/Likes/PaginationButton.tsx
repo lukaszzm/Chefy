@@ -15,7 +15,7 @@ export const PaginationButton: React.FC<IPaginationButtonProps> = ({
   disabled,
 }) => {
   const styles = classNames(
-    "w-10 h-10 m-1 flex justify-center items-center rounded-lg shadow-sm hover:shadow-md font-medium disabled:pointer-events-none rounded focus:outline-none focus:ring-0 transition duration-150 ease-in-out",
+    "w-10 h-10 flex justify-center items-center rounded-lg shadow-sm hover:shadow-md font-medium disabled:pointer-events-none rounded focus:outline-none focus:ring-0 transition duration-150 ease-in-out",
     {
       "bg-gray-100 text-gray-900 hover:bg-gray-200": !active,
       "bg-primary text-white hover:bg-primary-hover": active,
@@ -24,7 +24,7 @@ export const PaginationButton: React.FC<IPaginationButtonProps> = ({
 
   return (
     <Link
-      className={classNames({ "pointer-events-none": disabled })}
+      className={classNames("mx-1", { "pointer-events-none": disabled })}
       href={{
         pathname: "/likes",
         query: { page: toPage },
