@@ -60,9 +60,9 @@ export const SwipeCard: React.FC<ISwipeCardProps> = ({
       exit={{ opacity: 0, transition: { duration: 0.4 } }}
     >
       <motion.div
-        drag
+        drag="x"
         dragConstraints={{ top: 0, left: 0, right: 0, bottom: 0 }}
-        dragElastic={0.1}
+        dragElastic={0.2}
         onDragEnd={dragEndHandler}
         onDrag={dragHandler}
         animate={{ scale: 1, opacity: 1 }}
