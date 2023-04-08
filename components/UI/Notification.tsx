@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Portal } from "../Modal/Portal";
+import { Portal } from "./Portal";
 
 interface INotificationProps {
   children: React.ReactNode;
