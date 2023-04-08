@@ -24,6 +24,7 @@ export const SwipeCard: React.FC<ISwipeCardProps> = ({
   isLike,
   setIsLike,
 }) => {
+  const dragConstraintsRef = useRef<HTMLDivElement>(null);
   const x = useMotionValue(0);
   const rotate = useTransform(x, [-DRAG_LIMIT, DRAG_LIMIT], [-22.5, 22.5]);
   const background = useTransform(
@@ -54,8 +55,6 @@ export const SwipeCard: React.FC<ISwipeCardProps> = ({
       setIsLike(false);
     }
   };
-
-  const dragConstraintsRef = useRef<HTMLDivElement>(null);
 
   return (
     <motion.div
