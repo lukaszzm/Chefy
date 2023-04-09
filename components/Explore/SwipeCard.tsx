@@ -37,7 +37,6 @@ export const SwipeCard: React.FC<ISwipeCardProps> = ({
     event: MouseEvent | TouchEvent | PointerEvent,
     info: PanInfo
   ) => {
-    console.log(info.offset.x);
     if (info.offset.x > 0.3 * DRAG_LIMIT) {
       onSwipeRight();
     } else if (info.offset.x < 0.3 * -DRAG_LIMIT) {
