@@ -11,18 +11,17 @@ interface IRegisterFormProps {
 export const RegisterForm: React.FC<IRegisterFormProps> = ({ switchModal }) => {
   const {
     register,
-    handleSubmit,
     errors,
     isValid,
     isDirty,
-    isSubmitting,
-    onSubmit,
+    isLoading,
+    submitFn,
     apiResponse,
   } = useRegister();
 
   return (
     <>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={submitFn}>
         <Label htmlFor="name">Name</Label>
         <Input
           {...register("name")}
@@ -51,7 +50,7 @@ export const RegisterForm: React.FC<IRegisterFormProps> = ({ switchModal }) => {
           variant="primary"
           fullWidth
           disabled={!isDirty || !isValid}
-          isLoading={isSubmitting}
+          isLoading={isLoading}
         >
           Submit
         </Button>
