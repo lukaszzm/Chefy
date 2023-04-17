@@ -20,5 +20,5 @@ export const LoadingSpinner: React.FC<ILoadingSpinnerProps> = ({
     }
   );
 
-  return <div className={style}></div>;
+  return <div className={style} role="status"></div>;
 };

@@ -6,10 +6,12 @@ interface IInputProps {
   type: string;
   placeholder: string;
   error: FieldError | undefined;
+  name: string;
+  id: string;
 }
 
 export const Input = React.forwardRef<HTMLInputElement, IInputProps>(
-  ({ type, placeholder, error, ...rest }, ref) => {
+  ({ type, placeholder, error, name, id, ...rest }, ref) => {
     const inputStyles = classNames(
       "w-full p-2 bg-gray-100 rounded border focus:outline-none",
       {
@@ -25,6 +27,8 @@ export const Input = React.forwardRef<HTMLInputElement, IInputProps>(
           type={type}
           placeholder={placeholder}
           className={inputStyles}
+          name={name}
+          id={id}
           {...rest}
         />
         {error && <p className="text-red-500 px-1 text-xs">{error.message}</p>}

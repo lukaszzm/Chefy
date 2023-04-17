@@ -1,7 +1,7 @@
-import { Alert } from "@/ui/Alert";
-import { Button } from "@/ui/Button";
-import { Label } from "@/ui/Label";
-import { Input } from "@/ui/Input";
+import { Alert } from "@/components/ui/Alert";
+import { Button } from "@/components/ui/Button";
+import { Label } from "@/components/ui/Label";
+import { Input } from "@/components/ui/Input";
 import { useRegister } from "@/hooks/useRegister";
 
 interface IRegisterFormProps {

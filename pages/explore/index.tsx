@@ -1,9 +1,9 @@
 import { GetServerSideProps, NextPage } from "next";
 import { authOptions } from "../api/auth/[...nextauth]";
 import { getServerSession } from "next-auth";
-import { RecipeLoading } from "@/components/Explore/RecipeLoading";
-import { RecipeNotFound } from "@/components/Explore/RecipeNotFound";
-import { Recipe } from "@/components/Explore/Recipe";
+import { RecipeLoading } from "@/components/Explore/RecipeLoading/RecipeLoading";
+import { RecipeNotFound } from "@/components/Explore/RecipeNotFound/RecipeNotFound";
+import { Recipe } from "@/components/Explore/Recipe/Recipe";
 import React from "react";
 import { AnimatePresence } from "framer-motion";
 import { fetchRecipes } from "@/queries/fetchRecipes";

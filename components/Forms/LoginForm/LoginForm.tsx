@@ -1,7 +1,7 @@
-import { Alert } from "@/ui/Alert";
-import { Button } from "@/ui/Button";
-import { Label } from "@/ui/Label";
-import { Input } from "@/ui/Input";
+import { Alert } from "@/components/ui/Alert";
+import { Button } from "@/components/ui/Button";
+import { Label } from "@/components/ui/Label";
+import { Input } from "@/components/ui/Input";
 import { useLogin } from "@/hooks/useLogin";
 
 interface ILoginFormProps {
@@ -29,6 +29,8 @@ export const LoginForm: React.FC<ILoginFormProps> = ({ switchModal }) => {
           type="email"
           placeholder="example@example.com"
           error={errors.email}
+          id="email"
+          name="email"
         />
         <Label htmlFor="password">Password</Label>
         <Input
@@ -36,6 +38,8 @@ export const LoginForm: React.FC<ILoginFormProps> = ({ switchModal }) => {
           type="password"
           placeholder="********"
           error={errors.password}
+          id="password"
+          name="password"
         />
         {apiResponse && <Alert isError>{apiResponse.text}</Alert>}
         <Button

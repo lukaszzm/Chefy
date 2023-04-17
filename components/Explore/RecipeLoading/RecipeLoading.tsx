@@ -1,4 +1,4 @@
-import { LoadingSpinner } from "../UI/LoadingSpinner";
+import { LoadingSpinner } from "@/components/ui/LoadingSpinner";
 
 export const RecipeLoading: React.FC = () => {
   return (
@@ -6,7 +6,7 @@ export const RecipeLoading: React.FC = () => {
       <div>
         <LoadingSpinner size="md" color="gray" />
         <p className="font-medium text-gray-400 pt-2">
-          Searching recipes for you..{" "}
+          Searching recipes for you..
         </p>
       </div>
     </div>

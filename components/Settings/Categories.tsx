@@ -1,10 +1,10 @@
 import type { Category } from "@/interfaces";
 import { useSettingsForm } from "@/hooks/useSettingsForm";
 import { isItemChosen } from "@/utils/isItemChosen";
-import { Checkbox } from "@/ui/Checkbox";
-import { Alert } from "@/ui/Alert";
-import { Button } from "@/ui/Button";
-import { Label } from "@/ui/Label";
+import { Checkbox } from "@/components/ui/Checkbox";
+import { Alert } from "@/components/ui/Alert";
+import { Button } from "@/components/ui/Button";
+import { Label } from "@/components/ui/Label";
 
 interface ICategoriesProps {
   allCategories: Category[];

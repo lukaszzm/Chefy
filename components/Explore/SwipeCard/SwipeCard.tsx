@@ -73,6 +73,7 @@ export const SwipeCard: React.FC<ISwipeCardProps> = ({
         }}
         style={{ x, rotate }}
         className="w-full sm:w-auto"
+        data-testid="swipe-card"
       >
         {children}
       </motion.div>

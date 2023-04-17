@@ -1,9 +1,9 @@
 import { PasswordSchema } from "@/schemas/PasswordSchema";
 import { useSettingsForm } from "@/hooks/useSettingsForm";
-import { Label } from "@/ui/Label";
-import { Button } from "@/ui/Button";
-import { Alert } from "@/ui/Alert";
-import { Input } from "@/ui/Input";
+import { Label } from "@/components/ui/Label";
+import { Button } from "@/components/ui/Button";
+import { Alert } from "@/components/ui/Alert";
+import { Input } from "@/components/ui/Input";
 
 interface FormValues {
   currentPassword: string;

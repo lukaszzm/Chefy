@@ -1,4 +1,4 @@
-import { Tag } from "@/ui/Tag";
+import { Tag } from "@/components/ui/Tag";
 
 interface ICategoryProps {
   category: string;

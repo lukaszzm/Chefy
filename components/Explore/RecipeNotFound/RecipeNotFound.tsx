@@ -19,7 +19,7 @@ export const RecipeNotFound: React.FC<IRecipeErrorProps> = ({
         {isError ? (
           <Image
             src={errorSvg}
-            alt={"Error occured"}
+            alt="Error occured"
             width={300}
             height={300}
             className="m-auto"
@@ -27,7 +27,7 @@ export const RecipeNotFound: React.FC<IRecipeErrorProps> = ({
         ) : (
           <Image
             src={noDataSvg}
-            alt={"Recipe not found"}
+            alt="Recipe not found"
             width={200}
             height={200}
             className="m-auto"
