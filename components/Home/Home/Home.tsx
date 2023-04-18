@@ -1,9 +1,9 @@
 import { useHomeModal } from "@/hooks/useLoginModal";
-import { LoginForm } from "../Forms/LoginForm/LoginForm";
-import { RegisterForm } from "../Forms/RegisterForm/RegisterForm";
-import { Modal } from "../ui/Modal";
-import { NavBar } from "./HomeNavbar";
-import { Welcome } from "./Welcome";
+import { LoginForm } from "../../Forms/LoginForm/LoginForm";
+import { RegisterForm } from "../../Forms/RegisterForm/RegisterForm";
+import { Modal } from "../../ui/Modal";
+import { HomeNavbar } from "../HomeNavbar/HomeNavbar";
+import { Welcome } from "../Welcome/Welcome";
 
 export const Home: React.FC = () => {
   const {
@@ -29,7 +29,7 @@ export const Home: React.FC = () => {
         )}
       </Modal>
       <div className="flex flex-col min-h-screen justify-center overflow-auto">
-        <NavBar openLoginModal={openLoginModal} />
+        <HomeNavbar openLoginModal={openLoginModal} />
         <Welcome openModal={openRegisterModal} />
       </div>
     </>

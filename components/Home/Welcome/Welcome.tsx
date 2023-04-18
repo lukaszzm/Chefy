@@ -1,4 +1,4 @@
-import { FoodIcons } from "./FoodIcons";
+import { FoodIcons } from "../FoodIcons/FoodIcons";
 
 interface IWelcomeProps {
   openModal: () => void;

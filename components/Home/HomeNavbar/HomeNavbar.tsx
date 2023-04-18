@@ -5,7 +5,7 @@ interface IHomeNavbarProps {
   openLoginModal: () => void;
 }
 
-export const NavBar: React.FC<IHomeNavbarProps> = ({ openLoginModal }) => {
+export const HomeNavbar: React.FC<IHomeNavbarProps> = ({ openLoginModal }) => {
   return (
     <nav className="w-full mx-auto justify-self-start px-6 max-w-5xl flex items-center justify-between font-medium text-xl">
       <Logo />

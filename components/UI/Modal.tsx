@@ -29,6 +29,8 @@ export const Modal: React.FC<IModalProps> = ({
               className="fixed z-40 inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full"
             />
             <motion.div
+              role="dialog"
+              aria-modal="true"
               initial={{ y: "-75%", x: "-50%", opacity: 0 }}
               animate={{ y: "-50%", x: "-50%", opacity: 1 }}
               exit={{ y: "-75%", x: "-50%", opacity: 0 }}
