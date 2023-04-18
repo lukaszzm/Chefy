@@ -30,7 +30,6 @@ export const LoginForm: React.FC<ILoginFormProps> = ({ switchModal }) => {
           placeholder="example@example.com"
           error={errors.email}
           id="email"
-          name="email"
         />
         <Label htmlFor="password">Password</Label>
         <Input
@@ -39,7 +38,6 @@ export const LoginForm: React.FC<ILoginFormProps> = ({ switchModal }) => {
           placeholder="********"
           error={errors.password}
           id="password"
-          name="password"
         />
         {apiResponse && <Alert isError>{apiResponse.text}</Alert>}
         <Button

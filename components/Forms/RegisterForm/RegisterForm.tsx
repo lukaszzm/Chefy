@@ -28,6 +28,7 @@ export const RegisterForm: React.FC<IRegisterFormProps> = ({ switchModal }) => {
           type="text"
           placeholder="John"
           error={errors.name}
+          id="name"
         />
         <Label htmlFor="email">Email</Label>
         <Input
@@ -35,6 +36,7 @@ export const RegisterForm: React.FC<IRegisterFormProps> = ({ switchModal }) => {
           type="email"
           placeholder="example@example.com"
           error={errors.email}
+          id="email"
         />
         <Label htmlFor="password">Password</Label>
         <Input
@@ -42,6 +44,7 @@ export const RegisterForm: React.FC<IRegisterFormProps> = ({ switchModal }) => {
           type="password"
           placeholder="password must be at least 8 characters"
           error={errors.password}
+          id="password"
         />
         {apiResponse && (
           <Alert isError={apiResponse.isError}>{apiResponse.text}</Alert>

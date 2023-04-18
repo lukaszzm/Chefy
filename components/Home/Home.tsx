@@ -1,6 +1,6 @@
 import { useHomeModal } from "@/hooks/useLoginModal";
 import { LoginForm } from "../Forms/LoginForm/LoginForm";
-import { RegisterForm } from "../Forms/RegisterForm";
+import { RegisterForm } from "../Forms/RegisterForm/RegisterForm";
 import { Modal } from "../ui/Modal";
 import { NavBar } from "./HomeNavbar";
 import { Welcome } from "./Welcome";
