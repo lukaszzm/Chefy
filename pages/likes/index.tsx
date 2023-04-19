@@ -3,8 +3,8 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]";
 import { prisma } from "@/lib/prisma";
 import type { Recipe } from "@/interfaces";
-import { Pagination } from "@/components/Likes/Pagination";
-import { LikedRecipe } from "@/components/Likes/LikedRecipe";
+import { Pagination } from "@/components/Likes/Pagination/Pagination";
+import { LikedRecipe } from "@/components/Likes/LikedRecipe/LikedRecipe";
 import { Title } from "@/components/ui/Title";
 import { ContentWrapper } from "@/components/ui/ContentWrapper";
 

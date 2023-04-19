@@ -1,8 +1,8 @@
-import { Category } from "../Explore/Category/Category";
+import { Category } from "../../Explore/Category/Category";
 import { BiInfoCircle } from "react-icons/bi";
-import { Modal } from "../ui/Modal";
+import { Modal } from "../../ui/Modal";
 import { useModal } from "@/hooks/useModal";
-import { RecipeDetails } from "./RecipeDetails";
+import { RecipeDetails } from "../RecipeDetails";
 
 interface ILikedRecipe {
   id: string;
@@ -31,6 +31,7 @@ export const LikedRecipe: React.FC<ILikedRecipe> = ({
           <Category hideLabel={true} category={category} area={area} />
         </div>
         <button
+          aria-label="info"
           onClick={openModal}
           className="rounded-full border-none bg-none shadow-none hover:shadow-none focus:shadow-none active:shadow-none active:text-gray-600 focus:text-gray-600  text-gray-400 hover:text-gray-600 hover:scale-110 transition duration-150  ease-in-out"
         >
