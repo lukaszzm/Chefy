@@ -3,13 +3,13 @@ import { Pagination } from "./Pagination";
 import "jest-canvas-mock";
 
 describe("Pagination", () => {
-  it("should render correctly when is one page", () => {
+  it("should render correctly when is only one page", () => {
     render(<Pagination currentPage={1} pageCount={1} />);
 
-    const numberElement = screen.getByRole("button", {
+    const currentPageButton = screen.getByRole("button", {
       name: /1/i,
     });
 
-    expect(numberElement).toBeInTheDocument();
+    expect(currentPageButton).toBeInTheDocument();
   });
 });

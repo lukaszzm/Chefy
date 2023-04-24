@@ -43,17 +43,24 @@ export const RecipeDetails: React.FC<IRecipeDetailsProps> = ({
     <>
       <div className="overflow-auto h-96 px-2 mb-3">
         <div>
-          <Subtitle>Ingredients</Subtitle>
-          <div className="flex flex-wrap max-w-full">
+          <Subtitle id="ingredients-heading">Ingredients</Subtitle>
+          <ul
+            className="flex flex-wrap max-w-full"
+            aria-labelledby="ingredients-heading"
+          >
             {ingredients.map((el, index) => (
-              <Tag key={index}>{el}</Tag>
+              <li key={index}>
+                <Tag>{el}</Tag>
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
         <div className="text-left py-2 border-b-2">
-          <Subtitle>Instructions</Subtitle>
+          <Subtitle id="instructions-heading">Instructions</Subtitle>
           <div className="flex flex-wrap max-w-full">
-            <p className="text-sm p-1">{instructions}</p>
+            <p className="text-sm p-1" aria-labelledby="instructions-heading">
+              {instructions}
+            </p>
           </div>
         </div>
       </div>

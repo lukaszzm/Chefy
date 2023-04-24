@@ -5,7 +5,7 @@ import {
   FiChevronsRight,
   FiMoreHorizontal,
 } from "react-icons/fi";
-import { PaginationButton } from "../PaginationButton";
+import { PaginationButton } from "../PaginationButton/PaginationButton";
 
 interface IPaginationProps {
   currentPage: number;
@@ -21,10 +21,18 @@ export const Pagination: React.FC<IPaginationProps> = ({
 
   return (
     <div className="p-1 w-full flex justify-center items-center mt-auto">
-      <PaginationButton toPage={1} disabled={isFirstPage}>
+      <PaginationButton
+        toPage={1}
+        disabled={isFirstPage}
+        aria-label="first-page"
+      >
         <FiChevronsLeft />
       </PaginationButton>
-      <PaginationButton toPage={currentPage - 1} disabled={isFirstPage}>
+      <PaginationButton
+        toPage={currentPage - 1}
+        disabled={isFirstPage}
+        aria-label="previous-page"
+      >
         <FiChevronLeft />
       </PaginationButton>
       {currentPage - 1 > 1 && (
@@ -50,10 +58,18 @@ export const Pagination: React.FC<IPaginationProps> = ({
           <FiMoreHorizontal />
         </div>
       )}
-      <PaginationButton toPage={currentPage + 1} disabled={isLastPage}>
+      <PaginationButton
+        toPage={currentPage + 1}
+        disabled={isLastPage}
+        aria-label="next-page"
+      >
         <FiChevronRight />
       </PaginationButton>
-      <PaginationButton toPage={pageCount} disabled={isLastPage}>
+      <PaginationButton
+        toPage={pageCount}
+        disabled={isLastPage}
+        aria-label="last-page"
+      >
         <FiChevronsRight />
       </PaginationButton>
     </div>
