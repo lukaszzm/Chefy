@@ -1,8 +1,8 @@
 import { useState } from "react";
 import type { ApiResponse } from "@/interfaces";
-import { Alert } from "@/components/ui/Alert";
+import { Alert } from "@/components/ui/Alert/Alert";
 import { Subtitle } from "@/components/ui/Subtitle";
-import { Button } from "@/components/ui/Button";
+import { Button } from "@/components/ui/Button/Button";
 import { Tag } from "@/components/ui/Tag";
 import { generatePDF } from "@/utils/generatePDF";
 import { useRouter } from "next/router";

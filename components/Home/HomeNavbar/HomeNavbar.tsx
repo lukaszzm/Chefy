@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/Button";
+import { Button } from "@/components/ui/Button/Button";
 import { Logo } from "@/components/ui/Logo";
 
 interface IHomeNavbarProps {
