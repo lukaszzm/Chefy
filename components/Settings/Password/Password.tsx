@@ -1,5 +1,5 @@
 import { PasswordSchema } from "@/schemas/PasswordSchema";
-import { useSettingsForm } from "@/hooks/useSettingsForm";
+import { useSettingsForm } from "@/hooks/useSettingsForm/useSettingsForm";
 import { Label } from "@/components/ui/Label";
 import { Button } from "@/components/ui/Button";
 import { Alert } from "@/components/ui/Alert";
@@ -29,6 +29,7 @@ export const Password: React.FC = () => {
         type="password"
         placeholder="********"
         error={errors.currentPassword}
+        id="currentPassword"
       />
       <Label htmlFor="newPassword">New Password</Label>
       <Input
@@ -36,6 +37,7 @@ export const Password: React.FC = () => {
         type="password"
         placeholder="********"
         error={errors.newPassword}
+        id="newPassword"
       />
       {apiResponse && (
         <Alert isError={apiResponse.isError}>{apiResponse.text}</Alert>

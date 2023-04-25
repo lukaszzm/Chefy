@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
 import { sendDislike } from "@/queries/sendDislike";
 import { sendLike } from "@/queries/sendLike";

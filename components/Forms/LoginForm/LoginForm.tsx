@@ -2,7 +2,7 @@ import { Alert } from "@/components/ui/Alert";
 import { Button } from "@/components/ui/Button";
 import { Label } from "@/components/ui/Label";
 import { Input } from "@/components/ui/Input";
-import { useLogin } from "@/hooks/useLogin";
+import { useLogin } from "@/hooks/useLogin/useLogin";
 
 interface ILoginFormProps {
   switchModal: () => void;

@@ -1,19 +1,19 @@
-import type { Area } from "@/interfaces";
+import type { Category } from "@/interfaces";
+import { useSettingsForm } from "@/hooks/useSettingsForm/useSettingsForm";
 import { isItemChosen } from "@/utils/isItemChosen";
-import { useSettingsForm } from "@/hooks/useSettingsForm";
 import { Checkbox } from "@/components/ui/Checkbox";
 import { Alert } from "@/components/ui/Alert";
 import { Button } from "@/components/ui/Button";
 import { Label } from "@/components/ui/Label";
 
-interface IAreasProps {
-  allAreas: Area[];
-  checkedByDefaultAreas: Area[];
+interface ICategoriesProps {
+  allCategories: Category[];
+  checkedByDefaultCategories: Category[];
 }
 
-export const Areas: React.FC<IAreasProps> = ({
-  allAreas,
-  checkedByDefaultAreas,
+export const Categories: React.FC<ICategoriesProps> = ({
+  allCategories,
+  checkedByDefaultCategories,
 }) => {
   const {
     register,
@@ -26,16 +26,19 @@ export const Areas: React.FC<IAreasProps> = ({
   });
 
   return (
-    <form onSubmit={submitFn} className="text-left m-2">
-      <Label htmlFor="Category">Areas</Label>
+    <form
+      onSubmit={submitFn}
+      className="text-left m-2 pb-2 border-b border-b-gray-200"
+    >
+      <Label htmlFor="Category">Categories</Label>
       <ul role="list" className="flex flex-wrap">
-        {allAreas.map((el) => (
+        {allCategories.map((el) => (
           <Checkbox
-            {...register("prefferedAreas")}
+            {...register("prefferedCategories")}
             key={el.id}
             id={el.id}
             text={el.name}
-            isCheckedByDefault={isItemChosen(el, checkedByDefaultAreas)}
+            isCheckedByDefault={isItemChosen(el, checkedByDefaultCategories)}
           />
         ))}
       </ul>

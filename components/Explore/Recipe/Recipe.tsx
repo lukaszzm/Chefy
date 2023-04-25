@@ -1,4 +1,4 @@
-import { useRecipe } from "@/hooks/useRecipe";
+import { useRecipe } from "@/hooks/useRecipe/useRecipe";
 import type { Recipe as IRecipe } from "@/interfaces";
 import { ResponsiveImage } from "@/components/ui/ResponsiveImage";
 import { Title } from "@/components/ui/Title";

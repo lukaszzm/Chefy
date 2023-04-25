@@ -1,4 +1,4 @@
-import { useHomeModal } from "@/hooks/useLoginModal";
+import { useHomeModal } from "@/hooks/useHomeModal/useHomeModal";
 import { LoginForm } from "../../Forms/LoginForm/LoginForm";
 import { RegisterForm } from "../../Forms/RegisterForm/RegisterForm";
 import { Modal } from "../../ui/Modal";

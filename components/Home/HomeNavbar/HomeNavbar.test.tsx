@@ -1,4 +1,5 @@
 import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { HomeNavbar } from "./HomeNavbar";
 
 const mockOpenLoginModal = jest.fn();
@@ -19,9 +20,11 @@ describe("HomeNavbar", () => {
   });
 
   it("should open login modal", async () => {
+    const user = userEvent.setup();
     render(<HomeNavbar openLoginModal={mockOpenLoginModal} />);
 
-    screen.getByRole("button", { name: /login/i }).click();
+    const button = screen.getByRole("button", { name: /login/i });
+    await user.click(button);
 
     expect(mockOpenLoginModal).toHaveBeenCalled();
   });

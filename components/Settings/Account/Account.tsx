@@ -1,5 +1,5 @@
 import { UserSettingsSchema } from "@/schemas/UserSettingsSchema";
-import { useSettingsForm } from "@/hooks/useSettingsForm";
+import { useSettingsForm } from "@/hooks/useSettingsForm/useSettingsForm";
 import { Alert } from "@/components/ui/Alert";
 import { Button } from "@/components/ui/Button";
 import { Label } from "@/components/ui/Label";
@@ -31,6 +31,7 @@ export const Account: React.FC<IAccountProps> = ({ name }) => {
         type="text"
         placeholder="Your name"
         error={errors.name}
+        id="name"
       />
       {apiResponse && (
         <Alert isError={apiResponse.isError}>{apiResponse.text}</Alert>

@@ -1,4 +1,5 @@
-import { fireEvent, render, waitFor, screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { LoginForm } from "./LoginForm";
 
 const mockSwitchModal = jest.fn();
@@ -32,46 +33,51 @@ describe("LoginForm", () => {
     expect(submitElement).toBeDisabled();
   });
 
-  it("should switch modal", () => {
+  it("should switch modal", async () => {
+    const user = userEvent.setup();
     render(<LoginForm switchModal={mockSwitchModal} />);
 
-    screen.getByText(/sign up here!/i).click();
+    const switchElement = screen.getByText(/sign up here!/i);
+    await user.click(switchElement);
 
     expect(mockSwitchModal).toHaveBeenCalled();
   });
 
   it("should display error message when email is invalid", async () => {
+    const user = userEvent.setup();
     render(<LoginForm switchModal={mockSwitchModal} />);
 
     const emailElement = screen.getByRole("textbox", {
       name: /email/i,
     });
-    fireEvent.input(emailElement, { target: { value: "testmail" } });
-    const errorMessage = await screen.findByText(/invalid email/i);
+    await user.type(emailElement, "testmail");
+    const errorMessage = screen.queryByText(/invalid email/i);
 
     expect(errorMessage).toBeInTheDocument();
   });
 
   it("should display error message when password is too short", async () => {
+    const user = userEvent.setup();
     render(<LoginForm switchModal={mockSwitchModal} />);
 
     const passwordElement = screen.getByLabelText(/password/i);
-    fireEvent.input(passwordElement, { target: { value: "123" } });
-    const errorMessage = await screen.findByText(
+    await user.type(passwordElement, "123");
+    const errorMessage = screen.queryByText(
       /your password must have at least 8 characters/i
     );
 
     expect(errorMessage).toBeInTheDocument();
   });
 
-  it("should have disabled submit button when email is invalid", () => {
+  it("should have disabled submit button when email is invalid", async () => {
+    const user = userEvent.setup();
     render(<LoginForm switchModal={mockSwitchModal} />);
 
     const emailElement = screen.getByRole("textbox", {
       name: /email/i,
     });
-    fireEvent.input(emailElement, { target: { value: "testmail" } });
-    const submitElement = screen.getByRole("button", {
+    await user.type(emailElement, "testmail");
+    const submitElement = screen.queryByRole("button", {
       name: /submit/i,
     });
 
@@ -79,11 +85,12 @@ describe("LoginForm", () => {
   });
 
   it("should have disabled submit button when password is too short", async () => {
+    const user = userEvent.setup();
     render(<LoginForm switchModal={mockSwitchModal} />);
 
     const passwordElement = screen.getByLabelText(/password/i);
-    fireEvent.input(passwordElement, { target: { value: "123" } });
-    const submitElement = screen.getByRole("button", {
+    await user.type(passwordElement, "123");
+    const submitElement = screen.queryByRole("button", {
       name: /submit/i,
     });
 
@@ -91,6 +98,7 @@ describe("LoginForm", () => {
   });
 
   it("should have enabled submit button when email and password are valid", async () => {
+    const user = userEvent.setup();
     render(<LoginForm switchModal={mockSwitchModal} />);
 
     const emailElement = screen.getByRole("textbox", {
@@ -98,10 +106,9 @@ describe("LoginForm", () => {
     });
     const passwordElement = screen.getByLabelText(/password/i);
 
-    fireEvent.input(emailElement, { target: { value: "test@test.com" } });
-    fireEvent.input(passwordElement, { target: { value: "12345678" } });
-
-    const submitElement = await screen.findByRole("button", {
+    await user.type(emailElement, "test@test.com");
+    await user.type(passwordElement, "12345678");
+    const submitElement = screen.queryByRole("button", {
       name: /submit/i,
     });
 

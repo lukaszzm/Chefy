@@ -1,4 +1,5 @@
 import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { Welcome } from "./Welcome";
 
 const mockOpenModal = jest.fn();
@@ -22,13 +23,14 @@ describe("Welcome", () => {
     expect(getStartedButton).toBeInTheDocument();
   });
 
-  it("should open modal", () => {
+  it("should open modal", async () => {
+    const user = userEvent.setup();
     render(<Welcome openModal={mockOpenModal} />);
 
     const getStartedButton = screen.getByRole("button", {
       name: /get started/i,
     });
-    getStartedButton.click();
+    await user.click(getStartedButton);
 
     expect(mockOpenModal).toHaveBeenCalled();
   });

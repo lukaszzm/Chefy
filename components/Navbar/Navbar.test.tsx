@@ -1,4 +1,4 @@
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import { Navbar } from "./Navbar";
 
 jest.mock("next/router", () => ({
@@ -32,6 +32,7 @@ describe("Navbar", () => {
     const logoutButton = screen.getByRole("button", {
       name: /log out/i,
     });
+
     expect(logo).toBeInTheDocument();
     expect(exploreLink).toBeInTheDocument();
     expect(likesLink).toBeInTheDocument();
