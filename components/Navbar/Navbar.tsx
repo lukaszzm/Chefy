@@ -2,7 +2,7 @@ import { BiHeart, BiGlobe, BiLogOut, BiSlider } from "react-icons/bi";
 import { NavbarItem } from "./NavbarItem/NavbarItem";
 import { useModal } from "@/hooks/useModal/useModal";
 import { LogoutModal } from "./LogoutModal";
-import { Logo } from "@/components/ui/Logo";
+import { Logo } from "@/components/ui/Logo/Logo";
 
 export const Navbar: React.FC = () => {
   const { isModalOpen, openModal, closeModal } = useModal();

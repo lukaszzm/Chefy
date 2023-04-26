@@ -21,7 +21,7 @@ export const Logo: React.FC<ILogoProps> = ({ hideInMobile }) => {
         width={12}
         className="w-10 h-auto mx-1"
       />
-      <p className="hidden font-medium text-4xl md:block">Chefy</p>
+      <p className="invisible hidden font-medium text-4xl ">Chefy</p>
     </div>
   );
 };

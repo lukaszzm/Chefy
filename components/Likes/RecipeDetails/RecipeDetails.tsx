@@ -1,9 +1,9 @@
 import { useState } from "react";
 import type { ApiResponse } from "@/interfaces";
 import { Alert } from "@/components/ui/Alert/Alert";
-import { Subtitle } from "@/components/ui/Subtitle";
+import { Subtitle } from "@/components/ui/Subtitle/Subtitle";
 import { Button } from "@/components/ui/Button/Button";
-import { Tag } from "@/components/ui/Tag";
+import { Tag } from "@/components/ui/Tag/Tag";
 import { generatePDF } from "@/utils/generatePDF";
 import { useRouter } from "next/router";
 import { useMutation } from "@tanstack/react-query";

@@ -1,20 +1,8 @@
 import { render, screen, within } from "@testing-library/react";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { RecipeDetails } from "./RecipeDetails";
+import { createWrapper } from "@/utils/createWrapper";
 
 jest.mock("next/router", () => require("next-router-mock"));
-
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      retry: false,
-    },
-  },
-});
-
-const wrapper = ({ children }: { children: React.ReactNode }) => (
-  <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
-);
 
 const mockRecipe = {
   id: "1",
@@ -25,7 +13,7 @@ const mockRecipe = {
 
 describe("RecipeDetails", () => {
   it("should render correctly", () => {
-    render(<RecipeDetails {...mockRecipe} />, { wrapper });
+    render(<RecipeDetails {...mockRecipe} />, { wrapper: createWrapper() });
 
     const ingredientsSubtitle = screen.getByRole("heading", {
       name: /ingredients/i,

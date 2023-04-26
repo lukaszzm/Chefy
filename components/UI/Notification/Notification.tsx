@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Portal } from "./Portal";
+import { Portal } from "../Portal/Portal";
 
 interface INotificationProps {
   children: React.ReactNode;
@@ -9,6 +9,7 @@ export const Notification: React.FC<INotificationProps> = ({ children }) => {
   return (
     <Portal selector="#notification">
       <motion.div
+        role="alert"
         initial={{ opacity: 0, scale: 0 }}
         animate={{ opacity: 1, scale: 1 }}
         exit={{ opacity: 0, scale: 0 }}

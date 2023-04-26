@@ -1,23 +1,11 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { Password } from "./Password";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      retry: false,
-    },
-  },
-});
-
-const wrapper = ({ children }: { children: React.ReactNode }) => (
-  <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
-);
+import { createWrapper } from "@/utils/createWrapper";
 
 describe("Password", () => {
   it("should render correctly", () => {
-    render(<Password />, { wrapper });
+    render(<Password />, { wrapper: createWrapper() });
 
     const currentPasswordInput = screen.getByLabelText(/current password/i);
     const newPasswordInput = screen.getByLabelText(/new password/i);
@@ -29,7 +17,7 @@ describe("Password", () => {
   });
 
   it("should initially disable the save button", () => {
-    render(<Password />, { wrapper });
+    render(<Password />, { wrapper: createWrapper() });
 
     const submitButton = screen.getByRole("button", { name: /save/i });
 
@@ -38,7 +26,7 @@ describe("Password", () => {
 
   it("should display error messages when both passwords are too short", async () => {
     const user = userEvent.setup();
-    render(<Password />, { wrapper });
+    render(<Password />, { wrapper: createWrapper() });
 
     const currentPasswordInput = screen.getByLabelText(/current password/i);
     const newPasswordInput = screen.getByLabelText(/new password/i);
@@ -55,7 +43,7 @@ describe("Password", () => {
 
   it("should disable button when current password is too short", async () => {
     const user = userEvent.setup();
-    render(<Password />, { wrapper });
+    render(<Password />, { wrapper: createWrapper() });
 
     const currentPasswordInput = screen.getByLabelText(/current password/i);
     await user.type(currentPasswordInput, "123");
@@ -66,7 +54,7 @@ describe("Password", () => {
 
   it("should disable button when new password is too short", async () => {
     const user = userEvent.setup();
-    render(<Password />, { wrapper });
+    render(<Password />, { wrapper: createWrapper() });
 
     const newPasswordInput = screen.getByLabelText(/new password/i);
     await user.type(newPasswordInput, "123");
@@ -77,7 +65,7 @@ describe("Password", () => {
 
   it("should enable button when both passwords are long enough", async () => {
     const user = userEvent.setup();
-    render(<Password />, { wrapper });
+    render(<Password />, { wrapper: createWrapper() });
 
     const currentPasswordInput = screen.getByLabelText(/current password/i);
     const newPasswordInput = screen.getByLabelText(/new password/i);

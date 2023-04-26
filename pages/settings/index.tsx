@@ -3,12 +3,12 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]";
 import { prisma } from "@/lib/prisma";
 import type { Area, Category } from "@/interfaces";
-import { Title } from "@/components/ui/Title";
-import { Subtitle } from "@/components/ui/Subtitle";
+import { Title } from "@/components/ui/Title/Title";
+import { Subtitle } from "@/components/ui/Subtitle/Subtitle";
 import { Account } from "@/components/Settings/Account/Account";
 import { Password } from "@/components/Settings/Password/Password";
 import { Preferences } from "@/components/Settings/Preferences/Preferences";
-import { ContentWrapper } from "@/components/ui/ContentWrapper";
+import { ContentWrapper } from "@/components/ui/ContentWrapper/ContentWrapper";
 
 interface ISettingsPageProps {
   name: string;

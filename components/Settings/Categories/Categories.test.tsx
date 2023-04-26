@@ -1,19 +1,7 @@
 import { act, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { Categories } from "./Categories";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      retry: false,
-    },
-  },
-});
-
-const wrapper = ({ children }: { children: React.ReactNode }) => (
-  <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
-);
+import { createWrapper } from "@/utils/createWrapper";
 
 const mockAllCategories = [
   { id: "1", name: "Category 1" },
@@ -30,7 +18,7 @@ describe("Categories", () => {
           allCategories={mockAllCategories}
           checkedByDefaultCategories={mockCheckedByDefault}
         />,
-        { wrapper }
+        { wrapper: createWrapper() }
       )
     );
 
@@ -48,7 +36,7 @@ describe("Categories", () => {
           allCategories={mockAllCategories}
           checkedByDefaultCategories={mockCheckedByDefault}
         />,
-        { wrapper }
+        { wrapper: createWrapper() }
       )
     );
 
@@ -64,7 +52,7 @@ describe("Categories", () => {
         allCategories={mockAllCategories}
         checkedByDefaultCategories={mockCheckedByDefault}
       />,
-      { wrapper }
+      { wrapper: createWrapper() }
     );
 
     const category2 = screen.getByRole("checkbox", { name: /category 2/i });

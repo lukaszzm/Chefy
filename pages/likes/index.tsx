@@ -5,8 +5,8 @@ import { prisma } from "@/lib/prisma";
 import type { Recipe } from "@/interfaces";
 import { Pagination } from "@/components/Likes/Pagination/Pagination";
 import { LikedRecipe } from "@/components/Likes/LikedRecipe/LikedRecipe";
-import { Title } from "@/components/ui/Title";
-import { ContentWrapper } from "@/components/ui/ContentWrapper";
+import { Title } from "@/components/ui/Title/Title";
+import { ContentWrapper } from "@/components/ui/ContentWrapper/ContentWrapper";
 
 interface ILikesPageProps {
   recipes: Recipe[];

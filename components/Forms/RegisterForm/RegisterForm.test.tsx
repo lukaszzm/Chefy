@@ -1,24 +1,15 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { RegisterForm } from "./RegisterForm";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { createWrapper } from "@/utils/createWrapper";
 
 const mockSwitchModal = jest.fn();
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      retry: false,
-    },
-  },
-});
-
-const wrapper = ({ children }: { children: React.ReactNode }) => (
-  <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
-);
 
 describe("RegisterForm", () => {
   it("should render correctly", () => {
-    render(<RegisterForm switchModal={mockSwitchModal} />, { wrapper });
+    render(<RegisterForm switchModal={mockSwitchModal} />, {
+      wrapper: createWrapper(),
+    });
 
     const nameElement = screen.getByRole("textbox", {
       name: /name/i,
@@ -39,7 +30,9 @@ describe("RegisterForm", () => {
   });
 
   it("should initially have disabled submit button", () => {
-    render(<RegisterForm switchModal={mockSwitchModal} />, { wrapper });
+    render(<RegisterForm switchModal={mockSwitchModal} />, {
+      wrapper: createWrapper(),
+    });
 
     const submitElement = screen.getByRole("button", {
       name: /submit/i,
@@ -49,7 +42,9 @@ describe("RegisterForm", () => {
   });
 
   it("should switch modal", () => {
-    render(<RegisterForm switchModal={mockSwitchModal} />, { wrapper });
+    render(<RegisterForm switchModal={mockSwitchModal} />, {
+      wrapper: createWrapper(),
+    });
 
     screen.getByText(/sign in here!/i).click();
 
@@ -58,7 +53,9 @@ describe("RegisterForm", () => {
 
   it("should display error message when name is empty", async () => {
     const user = userEvent.setup();
-    render(<RegisterForm switchModal={mockSwitchModal} />, { wrapper });
+    render(<RegisterForm switchModal={mockSwitchModal} />, {
+      wrapper: createWrapper(),
+    });
 
     const nameElement = screen.getByRole("textbox", {
       name: /name/i,
@@ -74,7 +71,9 @@ describe("RegisterForm", () => {
 
   it("should display error message when email is invalid", async () => {
     const user = userEvent.setup();
-    render(<RegisterForm switchModal={mockSwitchModal} />, { wrapper });
+    render(<RegisterForm switchModal={mockSwitchModal} />, {
+      wrapper: createWrapper(),
+    });
 
     const emailElement = screen.getByRole("textbox", {
       name: /email/i,
@@ -89,7 +88,9 @@ describe("RegisterForm", () => {
 
   it("should display error message when password is too short", async () => {
     const user = userEvent.setup();
-    render(<RegisterForm switchModal={mockSwitchModal} />, { wrapper });
+    render(<RegisterForm switchModal={mockSwitchModal} />, {
+      wrapper: createWrapper(),
+    });
 
     const passwordElement = screen.getByLabelText(/password/i);
 
@@ -103,7 +104,9 @@ describe("RegisterForm", () => {
 
   it("should have disabled submit button when name is empty", async () => {
     const user = userEvent.setup();
-    render(<RegisterForm switchModal={mockSwitchModal} />, { wrapper });
+    render(<RegisterForm switchModal={mockSwitchModal} />, {
+      wrapper: createWrapper(),
+    });
 
     const nameElement = screen.getByRole("textbox", {
       name: /name/i,
@@ -121,7 +124,9 @@ describe("RegisterForm", () => {
 
   it("should have disabled submit button when email is invalid", async () => {
     const user = userEvent.setup();
-    render(<RegisterForm switchModal={mockSwitchModal} />, { wrapper });
+    render(<RegisterForm switchModal={mockSwitchModal} />, {
+      wrapper: createWrapper(),
+    });
 
     const emailElement = screen.getByRole("textbox", {
       name: /email/i,
@@ -136,7 +141,9 @@ describe("RegisterForm", () => {
 
   it("should have disabled submit button when password is too short", async () => {
     const user = userEvent.setup();
-    render(<RegisterForm switchModal={mockSwitchModal} />, { wrapper });
+    render(<RegisterForm switchModal={mockSwitchModal} />, {
+      wrapper: createWrapper(),
+    });
 
     const passwordElement = screen.getByLabelText(/password/i);
     await user.type(passwordElement, "123");
@@ -149,7 +156,9 @@ describe("RegisterForm", () => {
 
   it("should have enabled submit button when all inputs are valid", async () => {
     const user = userEvent.setup();
-    render(<RegisterForm switchModal={mockSwitchModal} />, { wrapper });
+    render(<RegisterForm switchModal={mockSwitchModal} />, {
+      wrapper: createWrapper(),
+    });
 
     const nameElement = screen.getByRole("textbox", {
       name: /name/i,

@@ -1,5 +1,5 @@
 import { Navbar } from "@/components/Navbar";
-import { Container } from "@/components/ui/Container";
+import { Container } from "@/components/ui/Container/Container";
 import { NextPage } from "next";
 
 interface IDashboardLayoutProps {

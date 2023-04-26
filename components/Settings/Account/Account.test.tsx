@@ -1,23 +1,13 @@
 import { act, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { Account } from "./Account";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      retry: false,
-    },
-  },
-});
-
-const wrapper = ({ children }: { children: React.ReactNode }) => (
-  <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
-);
+import { createWrapper } from "@/utils/createWrapper";
 
 describe("Account", () => {
   it("should render with name prop as default value", async () => {
-    await act(async () => render(<Account name="John Doe" />, { wrapper }));
+    await act(async () =>
+      render(<Account name="John Doe" />, { wrapper: createWrapper() })
+    );
 
     const textbox = screen.getByRole("textbox", { name: /name/i });
 
@@ -25,7 +15,9 @@ describe("Account", () => {
   });
 
   it("should initially disable the save button", async () => {
-    await act(async () => render(<Account name="John Doe" />, { wrapper }));
+    await act(async () =>
+      render(<Account name="John Doe" />, { wrapper: createWrapper() })
+    );
 
     const button = screen.getByRole("button", { name: /save/i });
 
@@ -34,7 +26,7 @@ describe("Account", () => {
 
   it("should enable the save button when the name is changed", async () => {
     const user = userEvent.setup();
-    render(<Account name="John Doe" />, { wrapper });
+    render(<Account name="John Doe" />, { wrapper: createWrapper() });
 
     const textbox = screen.getByRole("textbox", { name: /name/i });
     await user.type(textbox, "New name");
@@ -45,7 +37,7 @@ describe("Account", () => {
 
   it("should display an error when the name is empty", async () => {
     const user = userEvent.setup();
-    render(<Account name="John Doe" />, { wrapper });
+    render(<Account name="John Doe" />, { wrapper: createWrapper() });
 
     const textbox = screen.getByRole("textbox", { name: /name/i });
     await user.clear(textbox);
@@ -56,7 +48,7 @@ describe("Account", () => {
 
   it("should disable the save button when the name is empty", async () => {
     const user = userEvent.setup();
-    render(<Account name="John Doe" />, { wrapper });
+    render(<Account name="John Doe" />, { wrapper: createWrapper() });
 
     const textbox = screen.getByRole("textbox", { name: /name/i });
     await user.clear(textbox);

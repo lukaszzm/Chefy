@@ -1,5 +1,5 @@
 import { signOut } from "next-auth/react";
-import { Modal } from "@/components/ui/Modal";
+import { Modal } from "@/components/ui/Modal/Modal";
 import { Button } from "@/components/ui/Button/Button";
 
 interface ILogoutModalProps {

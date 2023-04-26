@@ -5,7 +5,7 @@ import type { FieldError } from "react-hook-form";
 interface IInputProps {
   type: string;
   placeholder: string;
-  error: FieldError | undefined;
+  error?: FieldError;
   name: string;
   id: string;
 }

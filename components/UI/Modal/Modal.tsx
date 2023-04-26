@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { Title } from "./Title";
-import { Portal } from "./Portal";
+import { Title } from "../Title/Title";
+import { Portal } from "../Portal/Portal";
 
 interface IModalProps {
   title: string;
@@ -21,6 +21,7 @@ export const Modal: React.FC<IModalProps> = ({
         {isModalOpen && (
           <>
             <motion.div
+              data-testid="modal-backdrop"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}

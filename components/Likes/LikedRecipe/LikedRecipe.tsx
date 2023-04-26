@@ -1,6 +1,6 @@
 import { Category } from "../../Explore/Category/Category";
 import { BiInfoCircle } from "react-icons/bi";
-import { Modal } from "../../ui/Modal";
+import { Modal } from "../../ui/Modal/Modal";
 import { useModal } from "@/hooks/useModal/useModal";
 import { RecipeDetails } from "../RecipeDetails/RecipeDetails";
 

@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/Button/Button";
-import { Logo } from "@/components/ui/Logo";
+import { Logo } from "@/components/ui/Logo/Logo";
 
 interface IHomeNavbarProps {
   openLoginModal: () => void;
