@@ -6,6 +6,7 @@ interface IPaginationButtonProps {
   toPage: number;
   active?: boolean;
   disabled?: boolean;
+  ariaLabel?: string;
 }
 
 export const PaginationButton: React.FC<IPaginationButtonProps> = ({
@@ -13,6 +14,7 @@ export const PaginationButton: React.FC<IPaginationButtonProps> = ({
   toPage,
   active,
   disabled,
+  ariaLabel,
 }) => {
   const styles = classNames(
     "w-10 h-10 flex justify-center items-center rounded-lg shadow-sm hover:shadow-md font-medium disabled:pointer-events-none rounded focus:outline-none focus:ring-0 transition duration-150 ease-in-out",
@@ -30,7 +32,7 @@ export const PaginationButton: React.FC<IPaginationButtonProps> = ({
         query: { page: toPage },
       }}
     >
-      <button disabled={disabled} className={styles}>
+      <button aria-label={ariaLabel} disabled={disabled} className={styles}>
         {children}
       </button>
     </Link>

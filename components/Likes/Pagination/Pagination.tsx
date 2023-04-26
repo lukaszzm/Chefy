@@ -24,14 +24,14 @@ export const Pagination: React.FC<IPaginationProps> = ({
       <PaginationButton
         toPage={1}
         disabled={isFirstPage}
-        aria-label="first-page"
+        ariaLabel="first page"
       >
         <FiChevronsLeft />
       </PaginationButton>
       <PaginationButton
         toPage={currentPage - 1}
         disabled={isFirstPage}
-        aria-label="previous-page"
+        ariaLabel="previous page"
       >
         <FiChevronLeft />
       </PaginationButton>
@@ -61,14 +61,14 @@ export const Pagination: React.FC<IPaginationProps> = ({
       <PaginationButton
         toPage={currentPage + 1}
         disabled={isLastPage}
-        aria-label="next-page"
+        ariaLabel="next page"
       >
         <FiChevronRight />
       </PaginationButton>
       <PaginationButton
         toPage={pageCount}
         disabled={isLastPage}
-        aria-label="last-page"
+        ariaLabel="last page"
       >
         <FiChevronsRight />
       </PaginationButton>
