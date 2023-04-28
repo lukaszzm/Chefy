@@ -1,4 +1,4 @@
-import { LoadingSpinner } from "../LoadingSpinner/LoadingSpinner";
+import { LoadingSpinner } from "../LoadingSpinner";
 
 export const LoadingScreen: React.FC = () => {
   return (

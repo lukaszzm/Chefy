@@ -1,4 +1,4 @@
-import { LoadingSpinner } from "@/components/ui/LoadingSpinner/LoadingSpinner";
+import { LoadingSpinner } from "@/components/ui/LoadingSpinner";
 
 export const RecipeLoading: React.FC = () => {
   return (

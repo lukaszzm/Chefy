@@ -1,8 +1,8 @@
-import { Category } from "../../Explore/Category/Category";
+import { Category } from "../../Explore/Category";
 import { BiInfoCircle } from "react-icons/bi";
-import { Modal } from "../../ui/Modal/Modal";
-import { useModal } from "@/hooks/useModal/useModal";
-import { RecipeDetails } from "../RecipeDetails/RecipeDetails";
+import { Modal } from "../../ui/Modal";
+import { useModal } from "@/hooks/useModal";
+import { RecipeDetails } from "../RecipeDetails";
 
 interface ILikedRecipe {
   id: string;

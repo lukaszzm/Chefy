@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { LoadingSpinner } from "../LoadingSpinner/LoadingSpinner";
+import { LoadingSpinner } from "../LoadingSpinner";
 
 interface IButtonProps {
   children: React.ReactNode;

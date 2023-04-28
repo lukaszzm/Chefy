@@ -1,9 +1,9 @@
 import { UserSettingsSchema } from "@/schemas/UserSettingsSchema";
-import { useSettingsForm } from "@/hooks/useSettingsForm/useSettingsForm";
-import { Alert } from "@/components/ui/Alert/Alert";
-import { Button } from "@/components/ui/Button/Button";
-import { Label } from "@/components/ui/Label/Label";
-import { Input } from "@/components/ui/Input/Input";
+import { useSettingsForm } from "@/hooks/useSettingsForm";
+import { Alert } from "@/components/ui/Alert";
+import { Button } from "@/components/ui/Button";
+import { Label } from "@/components/ui/Label";
+import { Input } from "@/components/ui/Input";
 
 interface IAccountProps {
   name: string;

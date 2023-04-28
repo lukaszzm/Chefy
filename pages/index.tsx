@@ -1,6 +1,6 @@
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
-import { LoadingScreen } from "@/components/ui/LoadingScreen/LoadingScreen";
+import { LoadingScreen } from "@/components/ui/LoadingScreen";
 import { getServerSession } from "next-auth";
 import { authOptions } from "./api/auth/[...nextauth]";
 import { Home } from "@/components/Home";

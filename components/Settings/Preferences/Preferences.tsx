@@ -1,6 +1,6 @@
 import type { Area, Category } from "@/interfaces";
-import { Areas } from "../Areas/Areas";
-import { Categories } from "../Categories/Categories";
+import { Areas } from "../Areas";
+import { Categories } from "../Categories";
 
 interface IPreferencesProps {
   allCategories: Category[];

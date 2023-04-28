@@ -1,13 +1,9 @@
-import { useState } from "react";
-import type { ApiResponse } from "@/interfaces";
-import { Alert } from "@/components/ui/Alert/Alert";
-import { Subtitle } from "@/components/ui/Subtitle/Subtitle";
-import { Button } from "@/components/ui/Button/Button";
-import { Tag } from "@/components/ui/Tag/Tag";
+import { Alert } from "@/components/ui/Alert";
+import { Subtitle } from "@/components/ui/Subtitle";
+import { Button } from "@/components/ui/Button";
+import { Tag } from "@/components/ui/Tag";
 import { generatePDF } from "@/utils/generatePDF";
-import { useRouter } from "next/router";
-import { useMutation } from "@tanstack/react-query";
-import { deleteLike } from "@/queries/deleteLike";
+import { useDeleteLike } from "@/hooks/useDeleteLike";
 
 interface IRecipeDetailsProps {
   id: string;
@@ -22,22 +18,7 @@ export const RecipeDetails: React.FC<IRecipeDetailsProps> = ({
   id,
   title,
 }) => {
-  const [apiResponse, setApiResponse] = useState<ApiResponse | null>();
-  const router = useRouter();
-  const { asPath } = router;
-  const { mutate, isLoading, isSuccess } = useMutation({
-    mutationFn: (id: string) => deleteLike(id),
-    onSuccess: () => {
-      setApiResponse({
-        isError: false,
-        text: "Recipe deleted. Redirecting...",
-      });
-      router.replace(asPath);
-    },
-    onError: () => {
-      setApiResponse({ isError: true, text: "Something went wrong." });
-    },
-  });
+  const { apiResponse, isLoading, isSuccess, mutate } = useDeleteLike();
 
   return (
     <>

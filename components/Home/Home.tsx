@@ -1,9 +1,9 @@
-import { useHomeModal } from "@/hooks/useHomeModal/useHomeModal";
-import { LoginForm } from "../../Forms/LoginForm/LoginForm";
-import { RegisterForm } from "../../Forms/RegisterForm/RegisterForm";
-import { Modal } from "../../ui/Modal/Modal";
-import { HomeNavbar } from "../HomeNavbar/HomeNavbar";
-import { Welcome } from "../Welcome/Welcome";
+import { useHomeModal } from "@/hooks/useHomeModal";
+import { LoginForm } from "../Forms/LoginForm";
+import { RegisterForm } from "../Forms/RegisterForm";
+import { Modal } from "../ui/Modal";
+import { HomeNavbar } from "./HomeNavbar";
+import { Welcome } from "./Welcome";
 
 export const Home: React.FC = () => {
   const {

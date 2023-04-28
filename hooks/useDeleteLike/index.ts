@@ -1,0 +1,1 @@
+export { useDeleteLike } from "./useDeleteLike";

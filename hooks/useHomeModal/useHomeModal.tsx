@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useModal } from "../useModal/useModal";
+import { useModal } from "../useModal";
 
 export const useHomeModal = () => {
   const { isModalOpen, openModal, closeModal } = useModal();
