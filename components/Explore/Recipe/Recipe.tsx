@@ -1,14 +1,14 @@
 import { useRecipe } from "@/hooks/useRecipe";
 import type { Recipe as IRecipe } from "@/interfaces";
-import { ResponsiveImage } from "@/components/ui/ResponsiveImage";
-import { Title } from "@/components/ui/Title";
+import { ResponsiveImage } from "@/components/UI/ResponsiveImage";
+import { Title } from "@/components/UI/Title";
 import { Buttons } from "../Buttons";
 import { Category } from "../Category";
 import { Ingredients } from "../Ingredients";
 import { Instruction } from "../Instruction";
-import { ContentWrapper } from "../../ui/ContentWrapper";
+import { ContentWrapper } from "../../UI/ContentWrapper";
 import { SwipeCard } from "../SwipeCard";
-import { Notification } from "../../ui/Notification";
+import { Notification } from "../../UI/Notification";
 
 export const Recipe: React.FC<IRecipe> = ({
   id,
