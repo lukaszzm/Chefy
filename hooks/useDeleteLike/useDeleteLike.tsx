@@ -1,5 +1,5 @@
 import { ApiResponse } from "@/interfaces";
-import { deleteLike } from "@/queries/deleteLike";
+import { deleteLike } from "@/queries/api/deleteLike";
 import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/router";
 import { useState } from "react";

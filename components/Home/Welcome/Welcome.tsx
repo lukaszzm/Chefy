@@ -1,10 +1,10 @@
 import { FoodIcons } from "../FoodIcons";
 
-interface IWelcomeProps {
+interface WelcomeProps {
   openModal: () => void;
 }
 
-export const Welcome: React.FC<IWelcomeProps> = ({ openModal }) => {
+export const Welcome = ({ openModal }: WelcomeProps) => {
   return (
     <div className="w-full h-full m-auto flex items-center justify-center text-center">
       <div className="max-w-4xl p-6">

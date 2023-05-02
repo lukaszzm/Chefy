@@ -2,15 +2,12 @@ import { signOut } from "next-auth/react";
 import { Modal } from "@/components/UI/Modal";
 import { Button } from "@/components/UI/Button";
 
-interface ILogoutModalProps {
+interface LogoutModalProps {
   isModalOpen: boolean;
   closeModal: () => void;
 }
 
-export const LogoutModal: React.FC<ILogoutModalProps> = ({
-  isModalOpen,
-  closeModal,
-}) => {
+export const LogoutModal = ({ isModalOpen, closeModal }: LogoutModalProps) => {
   return (
     <Modal isModalOpen={isModalOpen} closeModal={closeModal} title="Log out">
       <p className="text-center font-medium text-gray-500">

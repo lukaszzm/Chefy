@@ -5,20 +5,18 @@ import { Button } from "@/components/UI/Button";
 import { Label } from "@/components/UI/Label";
 import { Input } from "@/components/UI/Input";
 
-interface IAccountProps {
+interface AccountProps {
   name: string;
 }
 
-interface FormValues extends IAccountProps {}
-
-export const Account: React.FC<IAccountProps> = ({ name }) => {
+export const Account = ({ name }: AccountProps) => {
   const {
     register,
     formState: { errors, isValid, isDirty },
     isLoading,
     apiResponse,
     submitFn,
-  } = useSettingsForm<FormValues>({
+  } = useSettingsForm<AccountProps>({
     schema: UserSettingsSchema,
     defaultValues: { name: name },
   });

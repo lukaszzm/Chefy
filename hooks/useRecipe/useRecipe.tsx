@@ -1,7 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
-import { sendDislike } from "@/queries/sendDislike";
-import { sendLike } from "@/queries/sendLike";
+import { sendDislike } from "@/queries/api/sendDislike";
+import { sendLike } from "@/queries/api/sendLike";
 import { queryClient } from "@/lib/queryClient";
 import { Recipe } from "@/interfaces";
 

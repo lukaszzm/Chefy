@@ -1,24 +1,20 @@
-import { GetServerSideProps, NextPage } from "next";
+import { GetServerSideProps } from "next";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]";
-import { prisma } from "@/lib/prisma";
 import type { Recipe } from "@/interfaces";
 import { Pagination } from "@/components/Likes/Pagination";
 import { LikedRecipe } from "@/components/Likes/LikedRecipe";
 import { Title } from "@/components/UI/Title";
 import { ContentWrapper } from "@/components/UI/ContentWrapper";
+import { getLikedRecipes } from "@/queries/db/recipe";
 
-interface ILikesPageProps {
+interface LikesPageProps {
   recipes: Recipe[];
   currentPage: number;
   pageCount: number;
 }
 
-const LikesPage: NextPage<ILikesPageProps> = ({
-  recipes,
-  currentPage,
-  pageCount,
-}) => {
+const LikesPage = ({ recipes, currentPage, pageCount }: LikesPageProps) => {
   return (
     <ContentWrapper>
       <Title>Your liked recipes</Title>
@@ -69,33 +65,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       ? parseInt(context.query.page[0]) || 1
       : parseInt(context.query.page) || 1;
 
-  const recipes = await prisma.$transaction([
-    prisma.recipe.count({
-      where: {
-        likers: {
-          some: {
-            email: userEmail,
-          },
-        },
-      },
-    }),
-    prisma.recipe.findMany({
-      skip: (page - 1) * 5,
-      take: 5,
-      where: {
-        likers: {
-          some: {
-            email: userEmail,
-          },
-        },
-      },
-      include: {
-        category: true,
-        area: true,
-      },
-    }),
-  ]);
-
+  const recipes = await getLikedRecipes(userEmail, page);
   const pageCount = Math.ceil(recipes[0] / 5);
 
   if (pageCount > 0 && page > pageCount)

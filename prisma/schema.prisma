@@ -14,8 +14,8 @@ model User {
   password            String
   likedRecipes        Recipe[]   @relation("UserLikedRecipes")
   dislikedRecipes     Recipe[]   @relation("UserDislikedRecipes")
-  prefferedCategories Category[]
-  prefferedAreas      Area[]
+  preferredCategories Category[]
+  preferredAreas      Area[]
 }
 
 model Recipe {

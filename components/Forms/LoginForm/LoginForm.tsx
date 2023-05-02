@@ -4,11 +4,11 @@ import { Label } from "@/components/UI/Label";
 import { Input } from "@/components/UI/Input";
 import { useLogin } from "@/hooks/useLogin";
 
-interface ILoginFormProps {
+interface LoginFormProps {
   switchModal: () => void;
 }
 
-export const LoginForm: React.FC<ILoginFormProps> = ({ switchModal }) => {
+export const LoginForm = ({ switchModal }: LoginFormProps) => {
   const {
     register,
     handleSubmit,

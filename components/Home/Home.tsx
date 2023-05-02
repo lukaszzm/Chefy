@@ -5,7 +5,7 @@ import { Modal } from "../UI/Modal";
 import { HomeNavbar } from "./HomeNavbar";
 import { Welcome } from "./Welcome";
 
-export const Home: React.FC = () => {
+export const Home = () => {
   const {
     isModalOpen,
     modalType,

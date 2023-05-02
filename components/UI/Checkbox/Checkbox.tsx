@@ -1,12 +1,12 @@
 import React from "react";
 
-interface ICheckBoxProps {
+interface CheckBoxProps {
   id: string;
   text: string;
   isCheckedByDefault?: boolean;
 }
 
-export const Checkbox = React.forwardRef<HTMLInputElement, ICheckBoxProps>(
+export const Checkbox = React.forwardRef<HTMLInputElement, CheckBoxProps>(
   ({ id, text, isCheckedByDefault, ...rest }, ref) => {
     return (
       <li className="m-1">

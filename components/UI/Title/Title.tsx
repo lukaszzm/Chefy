@@ -1,9 +1,9 @@
-interface ITitleProps {
+interface TitleProps {
   children: React.ReactNode;
   id?: string;
 }
 
-export const Title: React.FC<ITitleProps> = ({ children, id }) => {
+export const Title = ({ children, id }: TitleProps) => {
   return (
     <h1
       id={id}

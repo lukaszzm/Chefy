@@ -4,11 +4,11 @@ import { Label } from "@/components/UI/Label";
 import { Input } from "@/components/UI/Input";
 import { useRegister } from "@/hooks/useRegister";
 
-interface IRegisterFormProps {
+interface RegisterFormProps {
   switchModal: () => void;
 }
 
-export const RegisterForm: React.FC<IRegisterFormProps> = ({ switchModal }) => {
+export const RegisterForm = ({ switchModal }: RegisterFormProps) => {
   const {
     register,
     errors,

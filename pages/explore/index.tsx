@@ -1,4 +1,4 @@
-import { GetServerSideProps, NextPage } from "next";
+import { GetServerSideProps } from "next";
 import { authOptions } from "../api/auth/[...nextauth]";
 import { getServerSession } from "next-auth";
 import { RecipeLoading } from "@/components/Explore/RecipeLoading";
@@ -6,11 +6,11 @@ import { RecipeNotFound } from "@/components/Explore/RecipeNotFound";
 import { Recipe } from "@/components/Explore/Recipe";
 import React from "react";
 import { AnimatePresence } from "framer-motion";
-import { fetchRecipes } from "@/queries/fetchRecipes";
+import { fetchRecipes } from "@/queries/api/fetchRecipes";
 import { useQuery } from "@tanstack/react-query";
 import { Recipe as IRecipe } from "@/interfaces";
 
-const ExplorePage: NextPage = () => {
+const ExplorePage = () => {
   const { data, isLoading, isError, isFetching } = useQuery<IRecipe[]>({
     queryKey: ["recipes"],
     queryFn: fetchRecipes,

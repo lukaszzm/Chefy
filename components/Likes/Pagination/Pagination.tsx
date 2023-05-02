@@ -7,15 +7,12 @@ import {
 } from "react-icons/fi";
 import { PaginationButton } from "../PaginationButton";
 
-interface IPaginationProps {
+interface PaginationProps {
   currentPage: number;
   pageCount: number;
 }
 
-export const Pagination: React.FC<IPaginationProps> = ({
-  currentPage,
-  pageCount,
-}) => {
+export const Pagination = ({ currentPage, pageCount }: PaginationProps) => {
   const isFirstPage = currentPage === 1;
   const isLastPage = currentPage === pageCount;
 

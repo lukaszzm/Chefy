@@ -1,7 +1,6 @@
-import { GetServerSideProps, NextPage } from "next";
+import { GetServerSideProps } from "next";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]";
-import { prisma } from "@/lib/prisma";
 import type { Area, Category } from "@/interfaces";
 import { Title } from "@/components/UI/Title";
 import { Subtitle } from "@/components/UI/Subtitle";
@@ -9,8 +8,13 @@ import { Account } from "@/components/Settings/Account";
 import { Password } from "@/components/Settings/Password";
 import { Preferences } from "@/components/Settings/Preferences";
 import { ContentWrapper } from "@/components/UI/ContentWrapper";
+import {
+  getAllCategories,
+  getPreferredCategories,
+} from "@/queries/db/category";
+import { getAllAreas, getPreferredAreas } from "@/queries/db/area";
 
-interface ISettingsPageProps {
+interface SettingsPageProps {
   name: string;
   allAreas: Area[];
   allCategories: Category[];
@@ -18,13 +22,13 @@ interface ISettingsPageProps {
   defaultCategories: Category[];
 }
 
-const SettingsPage: NextPage<ISettingsPageProps> = ({
+const SettingsPage = ({
   name,
   allAreas,
   allCategories,
   defaultAreas,
   defaultCategories,
-}) => {
+}: SettingsPageProps) => {
   return (
     <ContentWrapper fullWidth fullHeight>
       <Title>Settings</Title>
@@ -69,28 +73,12 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   }
 
   const userEmail = session.user.email;
-  const allCategories = await prisma.category.findMany();
-  const allAreas = await prisma.area.findMany();
 
-  const defaultCategories = await prisma.category.findMany({
-    where: {
-      User: {
-        some: {
-          email: userEmail,
-        },
-      },
-    },
-  });
+  const allCategories = await getAllCategories();
+  const allAreas = await getAllAreas();
 
-  const defaultAreas = await prisma.area.findMany({
-    where: {
-      User: {
-        some: {
-          email: userEmail,
-        },
-      },
-    },
-  });
+  const defaultCategories = await getPreferredCategories(userEmail);
+  const defaultAreas = await getPreferredAreas(userEmail);
 
   return {
     props: {

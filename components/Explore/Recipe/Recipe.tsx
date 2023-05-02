@@ -10,7 +10,7 @@ import { ContentWrapper } from "../../UI/ContentWrapper";
 import { SwipeCard } from "../SwipeCard";
 import { Notification } from "../../UI/Notification";
 
-export const Recipe: React.FC<IRecipe> = ({
+export const Recipe = ({
   id,
   title,
   imageSrc,
@@ -18,7 +18,7 @@ export const Recipe: React.FC<IRecipe> = ({
   area,
   ingredients,
   instructions,
-}) => {
+}: IRecipe) => {
   const {
     isShortVersion,
     setIsShortVersion,

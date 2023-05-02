@@ -1,11 +1,11 @@
 import { motion } from "framer-motion";
 import { Portal } from "../Portal";
 
-interface INotificationProps {
+interface NotificationProps {
   children: React.ReactNode;
 }
 
-export const Notification: React.FC<INotificationProps> = ({ children }) => {
+export const Notification = ({ children }: NotificationProps) => {
   return (
     <Portal selector="#notification">
       <motion.div

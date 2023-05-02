@@ -2,11 +2,11 @@ import Image from "next/image";
 import icon from "@/public/logo.svg";
 import classNames from "classnames";
 
-interface ILogoProps {
+interface LogoProps {
   hideInMobile?: boolean;
 }
 
-export const Logo: React.FC<ILogoProps> = ({ hideInMobile }) => {
+export const Logo = ({ hideInMobile }: LogoProps) => {
   const styles = classNames("w-auto", {
     "hidden sm:flex": hideInMobile,
     flex: !hideInMobile,

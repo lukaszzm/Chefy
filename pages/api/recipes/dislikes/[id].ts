@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { prisma } from "@/lib/prisma";
 import { withMethods, withAuth } from "@/api-helpers";
+import { dislikeRecipe } from "@/queries/db/recipe";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const email = req.headers.email as string;
@@ -8,18 +8,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
   if (req.method === "POST")
     try {
-      await prisma.user.update({
-        where: {
-          email,
-        },
-        data: {
-          dislikedRecipes: {
-            connect: {
-              id,
-            },
-          },
-        },
-      });
+      await dislikeRecipe(email, id);
+
       return res.status(200).json({ id });
     } catch (err) {
       return res.status(500).json({ message: "Something went wrong." });

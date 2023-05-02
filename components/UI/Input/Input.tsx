@@ -2,7 +2,7 @@ import classNames from "classnames";
 import React from "react";
 import type { FieldError } from "react-hook-form";
 
-interface IInputProps {
+interface InputProps {
   type: string;
   placeholder: string;
   error?: FieldError;
@@ -10,7 +10,7 @@ interface IInputProps {
   id: string;
 }
 
-export const Input = React.forwardRef<HTMLInputElement, IInputProps>(
+export const Input = React.forwardRef<HTMLInputElement, InputProps>(
   ({ type, placeholder, error, name, id, ...rest }, ref) => {
     const inputStyles = classNames(
       "w-full p-2 bg-gray-100 rounded border focus:outline-none",

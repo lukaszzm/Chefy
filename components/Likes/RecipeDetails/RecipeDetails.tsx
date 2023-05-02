@@ -5,19 +5,19 @@ import { Tag } from "@/components/UI/Tag";
 import { generatePDF } from "@/utils/generatePDF";
 import { useDeleteLike } from "@/hooks/useDeleteLike";
 
-interface IRecipeDetailsProps {
+interface RecipeDetailsProps {
   id: string;
   title: string;
   ingredients: string[];
   instructions: string;
 }
 
-export const RecipeDetails: React.FC<IRecipeDetailsProps> = ({
+export const RecipeDetails = ({
   ingredients,
   instructions,
   id,
   title,
-}) => {
+}: RecipeDetailsProps) => {
   const { apiResponse, isLoading, isSuccess, mutate } = useDeleteLike();
 
   return (

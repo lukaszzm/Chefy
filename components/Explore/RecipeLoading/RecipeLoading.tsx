@@ -1,6 +1,6 @@
 import { LoadingSpinner } from "@/components/UI/LoadingSpinner";
 
-export const RecipeLoading: React.FC = () => {
+export const RecipeLoading = () => {
   return (
     <div className="flex flex-col w-full h-[calc(100svh-4rem)] justify-center items-center">
       <div>

@@ -1,12 +1,12 @@
 import classNames from "classnames";
 import { motion } from "framer-motion";
 
-interface IAlertProps {
+interface AlertProps {
   children: React.ReactNode;
   variant: "error" | "success" | "warning" | "info";
 }
 
-export const Alert: React.FC<IAlertProps> = ({ children, variant }) => {
+export const Alert = ({ children, variant }: AlertProps) => {
   const styles = classNames(
     "w-11/12 m-auto text-white p-3 mt-2 mb-1 rounded text-sm",
     {

@@ -1,16 +1,12 @@
 import { Tag } from "@/components/UI/Tag";
 
-interface ICategoryProps {
+interface CategoryProps {
   category: string;
   area: string;
   hideLabel: boolean;
 }
 
-export const Category: React.FC<ICategoryProps> = ({
-  category,
-  area,
-  hideLabel,
-}) => {
+export const Category = ({ category, area, hideLabel }: CategoryProps) => {
   return (
     <>
       {!hideLabel && (

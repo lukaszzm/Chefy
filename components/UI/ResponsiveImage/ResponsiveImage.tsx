@@ -1,14 +1,11 @@
 import Image from "next/image";
 
-interface IResonsiveImageProps {
+interface ResponsiveImageProps {
   src: string;
   alt: string;
 }
 
-export const ResponsiveImage: React.FC<IResonsiveImageProps> = ({
-  src,
-  alt,
-}) => {
+export const ResponsiveImage = ({ src, alt }: ResponsiveImageProps) => {
   return (
     <Image
       alt={alt}

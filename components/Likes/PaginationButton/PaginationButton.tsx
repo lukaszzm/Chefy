@@ -1,7 +1,7 @@
 import classNames from "classnames";
 import Link from "next/link";
 
-interface IPaginationButtonProps {
+interface PaginationButtonProps {
   children: React.ReactNode;
   toPage: number;
   active?: boolean;
@@ -9,13 +9,13 @@ interface IPaginationButtonProps {
   ariaLabel?: string;
 }
 
-export const PaginationButton: React.FC<IPaginationButtonProps> = ({
+export const PaginationButton = ({
   children,
   toPage,
   active,
   disabled,
   ariaLabel,
-}) => {
+}: PaginationButtonProps) => {
   const styles = classNames(
     "w-10 h-10 flex justify-center items-center rounded-lg shadow-sm hover:shadow-md font-medium disabled:pointer-events-none rounded focus:outline-none focus:ring-0 transition duration-150 ease-in-out",
     {

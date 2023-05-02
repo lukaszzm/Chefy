@@ -1,6 +1,6 @@
 import { LoadingSpinner } from "../LoadingSpinner";
 
-export const LoadingScreen: React.FC = () => {
+export const LoadingScreen = () => {
   return (
     <div className="w-screen h-screen flex justify-center items-center bg-black">
       <LoadingSpinner size="md" color="white" />

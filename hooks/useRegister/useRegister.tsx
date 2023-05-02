@@ -1,5 +1,5 @@
 import { ApiResponse } from "@/interfaces";
-import { registerUser } from "@/queries/registerUser";
+import { registerUser } from "@/queries/api/registerUser";
 import { RegisterSchema } from "@/schemas/RegisterSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";

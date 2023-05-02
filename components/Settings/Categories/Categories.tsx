@@ -6,15 +6,15 @@ import { Alert } from "@/components/UI/Alert";
 import { Button } from "@/components/UI/Button";
 import { Label } from "@/components/UI/Label";
 
-interface ICategoriesProps {
+interface CategoriesProps {
   allCategories: Category[];
   checkedByDefaultCategories: Category[];
 }
 
-export const Categories: React.FC<ICategoriesProps> = ({
+export const Categories = ({
   allCategories,
   checkedByDefaultCategories,
-}) => {
+}: CategoriesProps) => {
   const {
     register,
     formState: { isDirty },
@@ -34,7 +34,7 @@ export const Categories: React.FC<ICategoriesProps> = ({
       <ul className="flex flex-wrap">
         {allCategories.map((el) => (
           <Checkbox
-            {...register("prefferedCategories")}
+            {...register("preferredCategories")}
             key={el.id}
             id={el.id}
             text={el.name}

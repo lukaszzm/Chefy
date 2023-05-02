@@ -4,9 +4,9 @@ import { LoadingScreen } from "@/components/UI/LoadingScreen";
 import { getServerSession } from "next-auth";
 import { authOptions } from "./api/auth/[...nextauth]";
 import { Home } from "@/components/Home";
-import { GetServerSideProps, NextPage } from "next";
+import { GetServerSideProps } from "next";
 
-const HomePage: NextPage = () => {
+const HomePage = () => {
   const { status } = useSession();
   const router = useRouter();
 

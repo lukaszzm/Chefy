@@ -2,17 +2,13 @@ import Image from "next/image";
 import noDataSvg from "@/public/noData.svg";
 import errorSvg from "@/public/error.svg";
 
-interface IRecipeErrorProps {
+interface RecipeErrorProps {
   title: string;
   text: string;
   isError?: boolean;
 }
 
-export const RecipeNotFound: React.FC<IRecipeErrorProps> = ({
-  title,
-  text,
-  isError,
-}) => {
+export const RecipeNotFound = ({ title, text, isError }: RecipeErrorProps) => {
   return (
     <div className="flex flex-col w-full h-[calc(100svh-4rem)] justify-center items-center font-medium text-gray-400 text-center">
       <div className="flex gap-6 flex-col">

@@ -4,7 +4,7 @@ import { useModal } from "@/hooks/useModal";
 import { LogoutModal } from "./LogoutModal";
 import { Logo } from "@/components/UI/Logo";
 
-export const Navbar: React.FC = () => {
+export const Navbar = () => {
   const { isModalOpen, openModal, closeModal } = useModal();
 
   return (

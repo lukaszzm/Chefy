@@ -2,21 +2,15 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import classNames from "classnames";
 
-interface IMenuItemProps {
+interface MenuItemProps {
   icon: JSX.Element;
   text: string;
   type?: "button";
   onClick?: () => void;
 }
 
-export const NavbarItem: React.FC<IMenuItemProps> = ({
-  icon,
-  text,
-  type,
-  onClick,
-}) => {
+export const NavbarItem = ({ icon, text, type, onClick }: MenuItemProps) => {
   const router = useRouter();
-
   const style = classNames(
     "p-4 w-full my-0 sm:w-auto sm:m-2 rounded-none font-medium text-lg sm:my-3 sm:mx-4 sm:px-10 flex md:gap-4 justify-around items-center sm:justify-start sm:rounded-3xl",
     {

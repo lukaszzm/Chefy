@@ -9,7 +9,7 @@ const bgColors = {
   dislike: "#f87171",
 };
 
-interface ISwipeCardProps {
+interface SwipeCardProps {
   children: React.ReactNode;
   onSwipeRight: () => void;
   onSwipeLeft: () => void;
@@ -17,13 +17,13 @@ interface ISwipeCardProps {
   setIsLike: (isLike: boolean) => void;
 }
 
-export const SwipeCard: React.FC<ISwipeCardProps> = ({
+export const SwipeCard = ({
   children,
   onSwipeRight,
   onSwipeLeft,
   isLike,
   setIsLike,
-}) => {
+}: SwipeCardProps) => {
   const constraintsRef = useRef(null);
   const x = useMotionValue(0);
   const rotate = useTransform(x, [-DRAG_LIMIT, DRAG_LIMIT], [-22.5, 22.5]);

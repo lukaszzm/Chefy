@@ -6,15 +6,12 @@ import { Alert } from "@/components/UI/Alert";
 import { Button } from "@/components/UI/Button";
 import { Label } from "@/components/UI/Label";
 
-interface IAreasProps {
+interface AreasProps {
   allAreas: Area[];
   checkedByDefaultAreas: Area[];
 }
 
-export const Areas: React.FC<IAreasProps> = ({
-  allAreas,
-  checkedByDefaultAreas,
-}) => {
+export const Areas = ({ allAreas, checkedByDefaultAreas }: AreasProps) => {
   const {
     register,
     formState: { isDirty },
@@ -31,7 +28,7 @@ export const Areas: React.FC<IAreasProps> = ({
       <ul className="flex flex-wrap">
         {allAreas.map((el) => (
           <Checkbox
-            {...register("prefferedAreas")}
+            {...register("preferredAreas")}
             key={el.id}
             id={el.id}
             text={el.name}

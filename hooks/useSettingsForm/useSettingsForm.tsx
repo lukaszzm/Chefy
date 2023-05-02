@@ -5,7 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import type { ApiResponse } from "@/interfaces";
 import { queryClient } from "@/lib/queryClient";
 import { useMutation } from "@tanstack/react-query";
-import { updateUser } from "@/queries/updateUser";
+import { updateUser } from "@/queries/api/updateUser";
 
 interface InitialProps {
   schema?: z.AnyZodObject;

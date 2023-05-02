@@ -8,7 +8,7 @@ import Image from "next/image";
 
 const foodIcons = [pizza, pot, spaghetti, sushi, steaming, omlet];
 
-export const FoodIcons: React.FC = () => {
+export const FoodIcons = () => {
   return (
     <div className="flex w-2/3 m-auto justify-around mb-8">
       {foodIcons.map((el, index) => (

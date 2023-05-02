@@ -4,7 +4,7 @@ import { Modal } from "../../UI/Modal";
 import { useModal } from "@/hooks/useModal";
 import { RecipeDetails } from "../RecipeDetails";
 
-interface ILikedRecipe {
+interface LikedRecipeProps {
   id: string;
   title: string;
   area: string;
@@ -13,14 +13,14 @@ interface ILikedRecipe {
   instructions: string;
 }
 
-export const LikedRecipe: React.FC<ILikedRecipe> = ({
+export const LikedRecipe = ({
   id,
   title,
   area,
   category,
   ingredients,
   instructions,
-}) => {
+}: LikedRecipeProps) => {
   const { isModalOpen, openModal, closeModal } = useModal();
 
   return (

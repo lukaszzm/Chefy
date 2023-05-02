@@ -3,6 +3,7 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { prisma } from "@/lib/prisma";
 import bcrypt from "bcrypt";
+import { getUser } from "@/queries/db/user";
 
 export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
@@ -20,11 +21,7 @@ export const authOptions: NextAuthOptions = {
           password: string;
         };
 
-        const user = await prisma.user.findUnique({
-          where: {
-            email: email.toLowerCase(),
-          },
-        });
+        const user = await getUser(email.toLowerCase());
 
         if (!user) throw new Error("Invalid email.");
 

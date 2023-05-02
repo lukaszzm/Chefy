@@ -1,14 +1,20 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { prisma } from "@/lib/prisma";
 import bcrypt from "bcrypt";
 import { withAuth, withMethods, withValidation } from "@/api-helpers";
 import { z } from "zod";
+import {
+  updateName,
+  updatePreferredCategories,
+  updatePreferredAreas,
+  getUser,
+  updatePassword,
+} from "@/queries/db/user";
 
 const schema = z
   .object({
     name: z.string().min(1),
-    prefferedCategories: z.array(z.string()),
-    prefferedAreas: z.array(z.string()),
+    preferredCategories: z.array(z.string()),
+    preferredAreas: z.array(z.string()),
     currentPassword: z.string().min(8),
     newPassword: z.string().min(8),
   })
@@ -19,8 +25,8 @@ type RequestBody = z.infer<typeof schema>;
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const {
     name,
-    prefferedCategories,
-    prefferedAreas,
+    preferredCategories,
+    preferredAreas,
     currentPassword,
     newPassword,
   }: RequestBody = req.body;
@@ -28,77 +34,31 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
   try {
     if (name) {
-      await prisma.user.update({
-        where: {
-          email,
-        },
-        data: {
-          name,
-        },
-      });
+      await updateName(email, name);
+
       return res
         .status(200)
         .json({ message: "Success! Your name has been changed." });
     }
 
-    if (prefferedCategories) {
-      const allCategoriesIds = await prisma.category.findMany({
-        select: { id: true },
-      });
-
-      const notPrefferedCategories = allCategoriesIds.filter(
-        (el: { id: string }) => !prefferedCategories.includes(el.id)
-      );
-
-      await prisma.user.update({
-        where: {
-          email,
-        },
-        data: {
-          prefferedCategories: {
-            connect: prefferedCategories.map((el) => ({ id: el })) || [],
-            disconnect:
-              notPrefferedCategories.map((el: any) => ({ id: el.id })) || [],
-          },
-        },
-      });
+    if (preferredCategories) {
+      await updatePreferredCategories(email, preferredCategories);
 
       return res.status(200).json({
-        message: "Success! Your preffered categories has been changed.",
+        message: "Success! Your preferred categories has been changed.",
       });
     }
 
-    if (prefferedAreas) {
-      const allAreasIds = await prisma.area.findMany({
-        select: { id: true },
-      });
-
-      const notPrefferedAreas = allAreasIds.filter(
-        (el: { id: string }) => !prefferedAreas.includes(el.id)
-      );
-
-      await prisma.user.update({
-        where: {
-          email,
-        },
-        data: {
-          prefferedAreas: {
-            connect: prefferedAreas.map((el) => ({ id: el })) || [],
-            disconnect:
-              notPrefferedAreas.map((el: any) => ({ id: el.id })) || [],
-          },
-        },
-      });
+    if (preferredAreas) {
+      await updatePreferredAreas(email, preferredAreas);
 
       return res
         .status(200)
-        .json({ message: "Success! Your preffered areas has been changed." });
+        .json({ message: "Success! Your preferred areas has been changed." });
     }
 
     if (currentPassword && newPassword) {
-      const user = await prisma.user.findUnique({
-        where: { email },
-      });
+      const user = await getUser(email);
 
       if (!user) throw new Error("Cannot find the user.");
 
@@ -109,19 +69,12 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       if (!result)
         return res.status(401).json({ message: "Invalid password." });
 
-      await prisma.user.update({
-        where: {
-          email,
-        },
-        data: {
-          password: bcrypt.hashSync(newPassword, 10),
-        },
-      });
-    }
+      await updatePassword(email, newPassword);
 
-    return res
-      .status(200)
-      .json({ message: "Success! Your password has been changed." });
+      return res
+        .status(200)
+        .json({ message: "Success! Your password has been changed." });
+    }
   } catch (err) {
     return res.status(500).json({ message: "Something went wrong." });
   }

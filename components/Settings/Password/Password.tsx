@@ -10,7 +10,7 @@ interface FormValues {
   newPassword: string;
 }
 
-export const Password: React.FC = () => {
+export const Password = () => {
   const {
     register,
     formState: { errors, isValid, isDirty },

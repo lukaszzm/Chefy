@@ -1,7 +1,7 @@
 import classNames from "classnames";
 import { LoadingSpinner } from "../LoadingSpinner";
 
-interface IButtonProps {
+interface ButtonProps {
   children: React.ReactNode;
   variant: "primary" | "danger" | "outline-danger";
   fullWidth?: boolean;
@@ -10,14 +10,14 @@ interface IButtonProps {
   onClick?: () => void;
 }
 
-export const Button: React.FC<IButtonProps> = ({
+export const Button = ({
   children,
   variant,
   disabled,
   isLoading,
   fullWidth,
   onClick,
-}) => {
+}: ButtonProps) => {
   const style = classNames(
     "font-medium disabled:opacity-60 py-2 min-w-[6rem] my-2 disabled:pointer-events-none rounded focus:outline-none focus:ring-0 transition duration-150 ease-in-out border",
     {

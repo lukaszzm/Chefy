@@ -1,14 +1,11 @@
 import classNames from "classnames";
 
-interface ILoadingSpinnerProps {
+interface LoadingSpinnerProps {
   color: "red" | "white" | "gray";
   size: "sm" | "md";
 }
 
-export const LoadingSpinner: React.FC<ILoadingSpinnerProps> = ({
-  color,
-  size,
-}) => {
+export const LoadingSpinner = ({ color, size }: LoadingSpinnerProps) => {
   const style = classNames(
     "border-t-transparent border-solid animate-spin rounded-full m-auto",
     {

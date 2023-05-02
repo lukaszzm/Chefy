@@ -1,16 +1,16 @@
 import { BiHeart, BiX } from "react-icons/bi";
 
-interface IButtonsProps {
+interface ButtonsProps {
   likeHandler?: () => void;
   dislikeHandler?: () => void;
   disabled?: boolean;
 }
 
-export const Buttons: React.FC<IButtonsProps> = ({
+export const Buttons = ({
   likeHandler,
   dislikeHandler,
   disabled,
-}) => {
+}: ButtonsProps) => {
   return (
     <div className="w-full flex justify-around border-t border-t-gray mt-auto">
       <button

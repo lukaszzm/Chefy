@@ -2,19 +2,19 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Title } from "../Title";
 import { Portal } from "../Portal";
 
-interface IModalProps {
+interface ModalProps {
   title: string;
   children: React.ReactNode;
   closeModal: () => void;
   isModalOpen: boolean;
 }
 
-export const Modal: React.FC<IModalProps> = ({
+export const Modal = ({
   children,
   title,
   closeModal,
   isModalOpen,
-}) => {
+}: ModalProps) => {
   return (
     <Portal selector="#modal">
       <AnimatePresence>

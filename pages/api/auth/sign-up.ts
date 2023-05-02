@@ -1,9 +1,8 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { prisma } from "@/lib/prisma";
-import bcrypt from "bcrypt";
 import { withMethods, withValidation } from "@/api-helpers";
 import { z } from "zod";
 import { RegisterSchema } from "@/schemas/RegisterSchema";
+import { createUser, getUser } from "@/queries/db/user";
 
 type RequestBody = z.infer<typeof RegisterSchema>;
 
@@ -12,36 +11,12 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const fixedEmail = email.toLowerCase();
 
   try {
-    const user = await prisma.user.findUnique({
-      where: {
-        email: fixedEmail,
-      },
-    });
+    const user = await getUser(fixedEmail);
 
     if (user)
       return res.status(409).json({ message: "This email is already used." });
 
-    const allCategoriesIds = await prisma.category.findMany({
-      select: { id: true },
-    });
-
-    const allAreasIds = await prisma.area.findMany({
-      select: { id: true },
-    });
-
-    await prisma.user.create({
-      data: {
-        email: fixedEmail,
-        name,
-        password: bcrypt.hashSync(password, 10),
-        prefferedCategories: {
-          connect: allCategoriesIds,
-        },
-        prefferedAreas: {
-          connect: allAreasIds,
-        },
-      },
-    });
+    await createUser(name, fixedEmail, password);
 
     return res
       .status(201)

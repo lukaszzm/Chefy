@@ -2,19 +2,19 @@ import type { Area, Category } from "@/interfaces";
 import { Areas } from "../Areas";
 import { Categories } from "../Categories";
 
-interface IPreferencesProps {
+interface PreferencesProps {
   allCategories: Category[];
   allAreas: Area[];
   defaultCategories: Category[];
   defaultAreas: Area[];
 }
 
-export const Preferences: React.FC<IPreferencesProps> = ({
+export const Preferences = ({
   allCategories,
   allAreas,
   defaultCategories,
   defaultAreas,
-}) => {
+}: PreferencesProps) => {
   return (
     <>
       <Categories
