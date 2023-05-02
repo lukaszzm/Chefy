@@ -22,7 +22,7 @@ export const Password: React.FC = () => {
   });
 
   return (
-    <form onSubmit={submitFn} className="text-left m-2">
+    <form onSubmit={submitFn} className="grid gap-1 text-left m-2">
       <Label htmlFor="currentPassword">Current Password</Label>
       <Input
         {...register("currentPassword")}

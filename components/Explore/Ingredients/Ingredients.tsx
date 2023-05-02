@@ -9,7 +9,7 @@ export const Ingredients: React.FC<IIngredientsProps> = ({
 }) => {
   return (
     <>
-      <p className="text-left font-medium text-gray-900">Ingredients</p>
+      <h2 className="text-left font-medium text-gray-900">Ingredients</h2>
       <ul className="flex flex-wrap max-w-full">
         {ingredientsList.map((el, index) => (
           <li key={index}>

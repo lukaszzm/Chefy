@@ -24,7 +24,7 @@ export const Account: React.FC<IAccountProps> = ({ name }) => {
   });
 
   return (
-    <form onSubmit={submitFn} className="text-left m-2">
+    <form onSubmit={submitFn} className="grid gap-1 text-left m-2">
       <Label htmlFor="name">Name</Label>
       <Input
         {...register("name")}

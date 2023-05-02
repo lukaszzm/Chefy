@@ -18,7 +18,7 @@ export const NavbarItem: React.FC<IMenuItemProps> = ({
   const router = useRouter();
 
   const style = classNames(
-    "p-4 w-full my-0 sm:w-auto sm:m-2 rounded-none font-medium text-lg sm:my-3 sm:mx-4 sm:px-10 flex md:gap-4 justify-around items-center sm:justify-between sm:rounded-3xl",
+    "p-4 w-full my-0 sm:w-auto sm:m-2 rounded-none font-medium text-lg sm:my-3 sm:mx-4 sm:px-10 flex md:gap-4 justify-around items-center sm:justify-start sm:rounded-3xl",
     {
       "text-primary bg-secondary rounded-3xl shadow-sm":
         router.pathname === `/${text}`,

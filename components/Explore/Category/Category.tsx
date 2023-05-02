@@ -14,7 +14,7 @@ export const Category: React.FC<ICategoryProps> = ({
   return (
     <>
       {!hideLabel && (
-        <p className="text-left font-medium text-gray-900">Category</p>
+        <h2 className="text-left font-medium text-gray-900">Category</h2>
       )}
       <div className="flex">
         <Tag color="blue">{category}</Tag>

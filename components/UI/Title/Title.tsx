@@ -1,10 +1,14 @@
 interface ITitleProps {
   children: React.ReactNode;
+  id?: string;
 }
 
-export const Title: React.FC<ITitleProps> = ({ children }) => {
+export const Title: React.FC<ITitleProps> = ({ children, id }) => {
   return (
-    <h1 className="font-medium text-gray-800 text-2xl m-2 capitalize text-center">
+    <h1
+      id={id}
+      className="font-medium text-gray-800 text-2xl m-2 capitalize text-center"
+    >
       {children}
     </h1>
   );

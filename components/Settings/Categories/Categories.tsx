@@ -28,10 +28,10 @@ export const Categories: React.FC<ICategoriesProps> = ({
   return (
     <form
       onSubmit={submitFn}
-      className="text-left m-2 pb-2 border-b border-b-gray-200"
+      className="grid gap-1 text-left m-2 pb-2 border-b border-b-gray-200"
     >
       <Label htmlFor="Category">Categories</Label>
-      <ul role="list" className="flex flex-wrap">
+      <ul className="flex flex-wrap">
         {allCategories.map((el) => (
           <Checkbox
             {...register("prefferedCategories")}

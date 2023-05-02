@@ -15,7 +15,7 @@ export const FoodIcons: React.FC = () => {
         <Image
           key={index}
           src={el}
-          alt="food"
+          alt=""
           width={40}
           height={40}
           className="w-10 mx-2 sm:w-16 sm:mx-4"

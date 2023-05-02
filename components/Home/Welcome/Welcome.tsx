@@ -15,12 +15,12 @@ export const Welcome: React.FC<IWelcomeProps> = ({ openModal }) => {
           </span>
           app!
         </h1>
-        <h2 className="text-xl text-center font-normal lg:text-2xl text-gray-600 my-6">
+        <p className="text-xl text-center font-normal lg:text-2xl text-gray-600 my-6">
           We&apos;re excited to help you discover new and delicious recipes with
           just a swipe of your finger. Our app is designed to make meal planning
           and cooking easy and fun, with a wide variety of recipes from all over
           the world.
-        </h2>
+        </p>
         <FoodIcons />
         <button
           onClick={openModal}

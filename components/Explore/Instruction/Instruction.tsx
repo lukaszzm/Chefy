@@ -5,9 +5,9 @@ interface IInstructionProps {
 export const Instruction: React.FC<IInstructionProps> = ({ instruction }) => {
   return (
     <>
-      <p className="text-left font-medium text-gray-900">Instruction</p>
+      <h2 className="text-left font-medium text-gray-900">Instruction</h2>
       <div className="flex">
-        <p className="text-gray-500 text-sm text-left p-2">{instruction}</p>
+        <p className="text-gray-500 text-sm text-left">{instruction}</p>
       </div>
     </>
   );

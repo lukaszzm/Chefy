@@ -41,17 +41,19 @@ export const Recipe: React.FC<IRecipe> = ({
           <div className="overflow-auto">
             <ResponsiveImage src={imageSrc} alt={title} />
             <Title>{title}</Title>
-            <Category
-              category={category.name}
-              area={area.name}
-              hideLabel={isShortVersion}
-            />
-            {!isShortVersion && (
-              <>
-                <Ingredients ingredientsList={ingredients} />
-                <Instruction instruction={instructions} />
-              </>
-            )}
+            <div className="grid gap-2 px-2">
+              <Category
+                category={category.name}
+                area={area.name}
+                hideLabel={isShortVersion}
+              />
+              {!isShortVersion && (
+                <>
+                  <Ingredients ingredientsList={ingredients} />
+                  <Instruction instruction={instructions} />
+                </>
+              )}
+            </div>
             <button
               onClick={() => setIsShortVersion(!isShortVersion)}
               className="font-medium text-sm p-3 m-1 text-gray-700 bg-gray-100 rounded-3xl shadow-sm hover:bg-gray-200 hover:shadow-sm  disabled:pointer-events-none focus:outline-none focus:ring-0 transition duration-150 ease-in-out"

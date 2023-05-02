@@ -21,16 +21,13 @@ const App = ({ Component, pageProps, router }: AppProps) => {
   return (
     <SessionProvider session={pageProps.session}>
       <QueryClientProvider client={queryClient}>
+        <Head>
+          <title>Chefy</title>
+          <meta name="description" content="Chefy - Because we love cooking" />
+          <link rel="icon" href="/icon.svg" />
+        </Head>
+        <NextProgress height="5px" color="#3CA83C" />
         <main className={roboto.variable}>
-          <Head>
-            <title>Chefy</title>
-            <meta
-              name="description"
-              content="Chefy - Because we love cooking"
-            />
-            <link rel="icon" href="/icon.svg" />
-          </Head>
-          <NextProgress height="5px" color="#3CA83C" />
           {protectedRoutes.includes(router.pathname) ? (
             <DashboardLayout>
               <Component {...pageProps} />

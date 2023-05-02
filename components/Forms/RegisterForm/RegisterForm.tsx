@@ -21,7 +21,7 @@ export const RegisterForm: React.FC<IRegisterFormProps> = ({ switchModal }) => {
 
   return (
     <>
-      <form onSubmit={submitFn}>
+      <form onSubmit={submitFn} className="grid gap-1">
         <Label htmlFor="name">Name</Label>
         <Input
           {...register("name")}

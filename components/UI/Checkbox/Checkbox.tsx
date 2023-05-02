@@ -22,9 +22,9 @@ export const Checkbox = React.forwardRef<HTMLInputElement, ICheckBoxProps>(
         />
         <label
           htmlFor={id}
-          className={`inline-flex p-1 px-2 text-gray-500 bg-gray-100 border-2 border-gray-200 rounded-lg cursor-pointer peer-checked:border-primary peer-checked:text-primary peer-checked:hover:border-primary-hover text-center  hover:bg-gray-200 transition duration-150  ease-in-out`}
+          className={`inline-flex p-1 px-2 text-gray-500 text-sm font-medium bg-gray-100 border-2 border-gray-200 rounded-lg cursor-pointer peer-checked:border-primary peer-checked:text-primary peer-checked:hover:border-primary-hover text-center  hover:bg-gray-200 transition duration-150  ease-in-out`}
         >
-          <p className="w-full text-sm font-medium">{text}</p>
+          {text}
         </label>
       </li>
     );

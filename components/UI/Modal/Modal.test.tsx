@@ -48,13 +48,9 @@ describe("Modal", () => {
       </Modal>
     );
 
-    const backdrop = screen.getByTestId("modal-backdrop");
     const modal = screen.getByRole("dialog");
 
-    expect(modal).toBeInTheDocument();
-    expect(backdrop).toBeInTheDocument();
-
-    await user.click(backdrop);
+    await user.click(modal);
 
     expect(mockCloseModal).toHaveBeenCalledTimes(1);
   });

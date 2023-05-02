@@ -20,17 +20,15 @@ export const RecipeNotFound: React.FC<IRecipeErrorProps> = ({
           <Image
             src={errorSvg}
             alt="Error occured"
-            width={300}
-            height={300}
-            className="m-auto"
+            className="m-auto w-64 h-auto"
+            priority
           />
         ) : (
           <Image
             src={noDataSvg}
             alt="Recipe not found"
-            width={200}
-            height={200}
-            className="m-auto"
+            className="m-auto w-64 h-auto"
+            priority
           />
         )}
 
