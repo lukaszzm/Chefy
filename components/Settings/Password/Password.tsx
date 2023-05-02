@@ -40,7 +40,9 @@ export const Password: React.FC = () => {
         id="newPassword"
       />
       {apiResponse && (
-        <Alert isError={apiResponse.isError}>{apiResponse.text}</Alert>
+        <Alert variant={apiResponse.isError ? "error" : "success"}>
+          {apiResponse.text}
+        </Alert>
       )}
       <Button
         variant="primary"

@@ -53,7 +53,9 @@ export const RecipeDetails: React.FC<IRecipeDetailsProps> = ({
         Generate PDF
       </Button>
       {apiResponse && (
-        <Alert isError={apiResponse.isError}>{apiResponse.text}</Alert>
+        <Alert variant={apiResponse.isError ? "error" : "success"}>
+          {apiResponse.text}
+        </Alert>
       )}
       <Button
         isLoading={isLoading}

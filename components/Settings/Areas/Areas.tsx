@@ -40,7 +40,9 @@ export const Areas: React.FC<IAreasProps> = ({
         ))}
       </ul>
       {apiResponse && isDirty && (
-        <Alert isError={apiResponse.isError}>{apiResponse.text}</Alert>
+        <Alert variant={apiResponse.isError ? "error" : "success"}>
+          {apiResponse.text}
+        </Alert>
       )}
       <Button variant="primary" disabled={!isDirty} isLoading={isLoading}>
         Save

@@ -39,7 +39,7 @@ export const LoginForm: React.FC<ILoginFormProps> = ({ switchModal }) => {
           error={errors.password}
           id="password"
         />
-        {apiResponse && <Alert isError>{apiResponse.text}</Alert>}
+        {apiResponse && <Alert variant="error">{apiResponse.text}</Alert>}
         <Button
           variant="primary"
           fullWidth

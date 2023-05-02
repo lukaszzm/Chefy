@@ -47,7 +47,9 @@ export const RegisterForm: React.FC<IRegisterFormProps> = ({ switchModal }) => {
           id="password"
         />
         {apiResponse && (
-          <Alert isError={apiResponse.isError}>{apiResponse.text}</Alert>
+          <Alert variant={apiResponse.isError ? "error" : "success"}>
+            {apiResponse.text}
+          </Alert>
         )}
         <Button
           variant="primary"
