@@ -22,6 +22,12 @@ export const LoginForm: React.FC<ILoginFormProps> = ({ switchModal }) => {
 
   return (
     <>
+      <Alert variant="info">
+        <span className="font-semibold"> Email: </span>
+        test@test.com
+        <br />
+        <span className="font-semibold"> Password: </span>testtest
+      </Alert>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Label htmlFor="email">Email</Label>
         <Input
