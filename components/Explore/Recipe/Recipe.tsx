@@ -27,6 +27,7 @@ export const Recipe = ({
     isLike,
     setIsLike,
     isError,
+    setIsError,
   } = useRecipe(id);
 
   return (
@@ -64,11 +65,12 @@ export const Recipe = ({
           <Buttons likeHandler={likeHandler} dislikeHandler={dislikeHandler} />
         </ContentWrapper>
       </SwipeCard>
-      {isError && (
-        <Notification>
-          Recipe could not be added to likes/dislikes.
-        </Notification>
-      )}
+      <Notification
+        isOpen={isError}
+        closeNotification={() => setIsError(false)}
+      >
+        Recipe could not be added to likes/dislikes.
+      </Notification>
     </>
   );
 };

@@ -44,5 +44,6 @@ export const useRecipe = (recipeId: string) => {
     isLike,
     setIsLike,
     isError,
+    setIsError,
   };
 };
