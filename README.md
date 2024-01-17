@@ -2,7 +2,7 @@
     <img src="public/icon.svg" alt="Logo" width="80" height="80">
   <h1 align="center">Chefy</h3>
   <p align="center">
-    Recipe app written in <b>NextJS</b> with a tinder-inspired design
+    An app that allows you to swipe and explore cooking recipes from around the world
   </p>
 </div>
 
@@ -17,7 +17,7 @@
 
 ## ️🔴 Live Preview
 
-Click on this <b>[link](https://chefy.up.railway.app/)</b> to see a live app preview.
+Click on this <b>[link](https://chefy-lm.vercel.app/)</b> to see a live app preview.
 
 ## 🔐 Login Credentials
 
