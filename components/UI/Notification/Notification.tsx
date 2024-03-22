@@ -13,7 +13,6 @@ export const Notification = ({
   closeNotification,
   isOpen,
 }: NotificationProps) => {
-  console.log("notification");
   return (
     <Portal selector="#notification">
       <AnimatePresence>
