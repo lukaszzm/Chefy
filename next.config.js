@@ -3,7 +3,13 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   images: {
-    domains: ["www.themealdb.com"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "**.themealdb.com",
+        port: "",
+      },
+    ],
   },
 };
 
