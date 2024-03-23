@@ -8,7 +8,7 @@ export const useDeleteLike = () => {
   const [apiResponse, setApiResponse] = useState<ApiResponse | null>(null);
   const router = useRouter();
   const { asPath } = router;
-  const { mutate, isLoading, isSuccess } = useMutation({
+  const { mutate, isPending, isSuccess } = useMutation({
     mutationFn: (id: string) => deleteLike(id),
     onSuccess: () => {
       setApiResponse({
@@ -27,7 +27,7 @@ export const useDeleteLike = () => {
 
   return {
     apiResponse,
-    isLoading,
+    isPending,
     isSuccess,
     mutate,
   };

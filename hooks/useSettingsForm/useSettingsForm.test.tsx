@@ -10,7 +10,7 @@ describe("useSettingsForm", () => {
 
     await waitFor(() => {
       expect(result.current.apiResponse).toBe(null);
-      expect(result.current.isLoading).toBe(false);
+      expect(result.current.isPending).toBe(false);
       expect(result.current.formState.errors).toEqual({});
       expect(result.current.formState.isValid).toBe(false);
       expect(result.current.formState.isDirty).toBe(false);

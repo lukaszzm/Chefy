@@ -18,7 +18,7 @@ export const Categories = ({
   const {
     register,
     formState: { isDirty },
-    isLoading,
+    isPending,
     apiResponse,
     submitFn,
   } = useSettingsForm({
@@ -47,7 +47,7 @@ export const Categories = ({
           {apiResponse.text}
         </Alert>
       )}
-      <Button variant="primary" disabled={!isDirty} isLoading={isLoading}>
+      <Button variant="primary" disabled={!isDirty} isLoading={isPending}>
         Save
       </Button>
     </form>

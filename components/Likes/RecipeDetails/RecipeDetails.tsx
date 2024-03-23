@@ -18,7 +18,7 @@ export const RecipeDetails = ({
   id,
   title,
 }: RecipeDetailsProps) => {
-  const { apiResponse, isLoading, isSuccess, mutate } = useDeleteLike();
+  const { apiResponse, isPending, isSuccess, mutate } = useDeleteLike();
 
   return (
     <>
@@ -58,7 +58,7 @@ export const RecipeDetails = ({
         </Alert>
       )}
       <Button
-        isLoading={isLoading}
+        isLoading={isPending}
         disabled={isSuccess}
         onClick={() => mutate(id)}
         variant="outline-danger"

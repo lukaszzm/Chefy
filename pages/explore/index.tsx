@@ -15,7 +15,6 @@ const ExplorePage = () => {
     queryKey: ["recipes"],
     queryFn: fetchRecipes,
     staleTime: 0,
-    keepPreviousData: true,
     select: (data) => [...data].reverse(),
   });
 
@@ -32,7 +31,7 @@ const ExplorePage = () => {
 
   return (
     <AnimatePresence>
-      {data.length > 0 ? (
+      {data && data.length > 0 ? (
         data.map((recipe) => (
           <Recipe
             key={recipe.id}

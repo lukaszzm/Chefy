@@ -14,7 +14,7 @@ export const Password = () => {
   const {
     register,
     formState: { errors, isValid, isDirty },
-    isLoading,
+    isPending,
     apiResponse,
     submitFn,
   } = useSettingsForm<FormValues>({
@@ -47,7 +47,7 @@ export const Password = () => {
       <Button
         variant="primary"
         disabled={!isValid || !isDirty}
-        isLoading={isLoading}
+        isLoading={isPending}
       >
         Save
       </Button>

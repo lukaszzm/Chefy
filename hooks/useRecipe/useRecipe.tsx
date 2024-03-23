@@ -12,15 +12,19 @@ export const useRecipe = (recipeId: string) => {
   const mutation = useMutation({
     mutationFn: isLike ? sendLike : sendDislike,
     onMutate: async () => {
-      queryClient.cancelQueries(["recipes"]);
+      queryClient.cancelQueries({
+        queryKey: ["recipes"],
+      });
       const snapshot = queryClient.getQueryData<Recipe[]>(["recipes"]);
       const newData = snapshot?.filter(({ id }) => id !== recipeId);
       queryClient.setQueryData<Recipe[]>(["recipes"], newData);
       if (newData && newData.length === 0)
-        queryClient.invalidateQueries(["recipes"]);
+        queryClient.invalidateQueries({
+          queryKey: ["recipes"],
+        });
       return { snapshot };
     },
-    onError: (error, variables, context) => {
+    onError: (_error, _variables, context) => {
       queryClient.setQueryData(["recipes"], context?.snapshot);
       setIsError(true);
     },

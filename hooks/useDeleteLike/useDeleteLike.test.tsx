@@ -11,7 +11,7 @@ describe("useDeleteLike", () => {
     });
 
     expect(result.current.apiResponse).toBe(null);
-    expect(result.current.isLoading).toBe(false);
+    expect(result.current.isPending).toBe(false);
     expect(result.current.isSuccess).toBe(false);
   });
 });

@@ -23,7 +23,7 @@ export const useRegister = () => {
     mode: "onChange",
   });
   const [apiResponse, setApiResponse] = useState<ApiResponse | null>(null);
-  const { mutate, isLoading } = useMutation({
+  const { mutate, isPending } = useMutation({
     mutationFn: (values: FormInputs) => registerUser(values),
     onMutate: () => {
       setApiResponse(null);
@@ -55,7 +55,7 @@ export const useRegister = () => {
     errors,
     isValid,
     isDirty,
-    isLoading,
+    isPending,
     submitFn,
     apiResponse,
   };

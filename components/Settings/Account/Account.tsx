@@ -13,7 +13,7 @@ export const Account = ({ name }: AccountProps) => {
   const {
     register,
     formState: { errors, isValid, isDirty },
-    isLoading,
+    isPending,
     apiResponse,
     submitFn,
   } = useSettingsForm<AccountProps>({
@@ -39,7 +39,7 @@ export const Account = ({ name }: AccountProps) => {
       <Button
         variant="primary"
         disabled={!isValid || !isDirty}
-        isLoading={isLoading}
+        isLoading={isPending}
       >
         Save
       </Button>

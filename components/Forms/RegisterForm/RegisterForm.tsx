@@ -15,7 +15,7 @@ export const RegisterForm = ({ switchModal }: RegisterFormProps) => {
         errors,
         isValid,
         isDirty,
-        isLoading,
+        isPending,
         submitFn,
         apiResponse,
     } = useRegister()
@@ -55,7 +55,7 @@ export const RegisterForm = ({ switchModal }: RegisterFormProps) => {
                     variant="primary"
                     fullWidth
                     disabled={!isDirty || !isValid}
-                    isLoading={isLoading}
+                    isLoading={isPending}
                 >
                     Submit
                 </Button>

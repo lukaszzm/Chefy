@@ -9,7 +9,7 @@ describe("useRegister", () => {
     });
 
     expect(result.current.apiResponse).toBe(null);
-    expect(result.current.isLoading).toBe(false);
+    expect(result.current.isPending).toBe(false);
     expect(result.current.errors).toEqual({});
     expect(result.current.isValid).toBe(false);
     expect(result.current.isDirty).toBe(false);

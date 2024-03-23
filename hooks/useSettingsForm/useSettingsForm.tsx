@@ -26,7 +26,7 @@ export const useSettingsForm = <T extends FieldValues>(props: InitialProps) => {
     defaultValues: defaultValues,
   });
   const [apiResponse, setApiResponse] = useState<ApiResponse | null>(null);
-  const { mutate, isLoading } = useMutation({
+  const { mutate, isPending } = useMutation({
     mutationFn: (values: T) => updateUser(values),
     onMutate: () => {
       setApiResponse(null);
@@ -37,7 +37,10 @@ export const useSettingsForm = <T extends FieldValues>(props: InitialProps) => {
         text: data.message || "Success! Your data has been changed. ",
       });
 
-      if (refetchRecipes) queryClient.refetchQueries(["recipes"]);
+      if (refetchRecipes)
+        queryClient.refetchQueries({
+          queryKey: ["recipes"],
+        });
     },
     onError: async (error) => {
       if (error instanceof Error)
@@ -55,7 +58,7 @@ export const useSettingsForm = <T extends FieldValues>(props: InitialProps) => {
     handleSubmit,
     formState: { errors, isValid, isDirty },
     submitFn,
-    isLoading,
+    isPending,
     apiResponse,
   };
 };
