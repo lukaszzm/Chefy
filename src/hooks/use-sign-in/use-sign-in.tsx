@@ -1,27 +1,18 @@
 import type { ApiResponse } from "@/interfaces";
-import { LoginSchema } from "@/schemas/LoginSchema";
+import { signInSchema, type SignInValues } from "@/schemas/sign-in-schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signIn } from "next-auth/react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 
-interface FormInputs {
-  email: string;
-  password: string;
-}
-
-export const useLogin = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors, isValid, isDirty, isSubmitting },
-  } = useForm<FormInputs>({
-    resolver: zodResolver(LoginSchema),
+export const useSignIn = () => {
+  const form = useForm<SignInValues>({
+    resolver: zodResolver(signInSchema),
     mode: "onChange",
   });
   const [apiResponse, setApiResponse] = useState<ApiResponse | null>(null);
 
-  const onSubmit = async (values: FormInputs) => {
+  const onSubmit = async (values: SignInValues) => {
     const { email, password } = values;
     const response = await signIn("credentials", {
       email: email,
@@ -37,12 +28,7 @@ export const useLogin = () => {
   };
 
   return {
-    register,
-    handleSubmit,
-    errors,
-    isValid,
-    isDirty,
-    isSubmitting,
+    form,
     onSubmit,
     apiResponse,
   };

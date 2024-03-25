@@ -1,9 +1,9 @@
 import { renderHook } from "@testing-library/react";
-import { useLogin } from "./useLogin";
+import { useSignIn } from "./use-sign-in";
 
-describe("useLogin", () => {
+describe("useSignIn", () => {
   it("should initially have apiResponse as null", () => {
-    const { result } = renderHook(() => useLogin());
+    const { result } = renderHook(() => useSignIn());
 
     expect(result.current.apiResponse).toBe(null);
   });
