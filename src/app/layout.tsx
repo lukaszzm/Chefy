@@ -4,7 +4,6 @@ import type { Metadata } from "next";
 import type { PropsWithChildren } from "react";
 import { Providers } from "@/app/providers";
 import { Quicksand } from "next/font/google";
-import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: "Chefy",
@@ -19,10 +18,7 @@ const quicksand = Quicksand({
 export default function RootLayout({ children }: PropsWithChildren) {
   return (
     <Providers>
-      <html
-        lang="en"
-        className={cn("min-h-screen bg-background", quicksand.className)}
-      >
+      <html lang="en" className={quicksand.className}>
         <body>{children}</body>
       </html>
     </Providers>
