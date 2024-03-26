@@ -1,4 +1,57 @@
 {
-  "extends": ["next", "prettier"]
+  "extends": ["next/core-web-vitals", "eslint:recommended", "plugin:@typescript-eslint/recommended", "prettier"],
+  "rules": {
+    "no-unused-vars": ["error", { "argsIgnorePattern": "^_", "varsIgnorePattern": "^_" }],
+    "import/order": [
+      "warn",
+      {
+        "groups": ["external", "builtin", "internal", "sibling", "parent", "index"],
+        "pathGroups": [
+          {
+            "pattern": "react",
+            "group": "external",
+            "position": "before"
+          },
+          {
+            "pattern": "next",
+            "group": "external",
+            "position": "before"
+          }
+        ],
+        "pathGroupsExcludedImportTypes": ["react", "next"],
+        "newlines-between": "always",
+        "alphabetize": {
+          "order": "asc",
+          "caseInsensitive": true
+        }
+      }
+    ],
+    "import/no-extraneous-dependencies": "error",
+    "import/prefer-default-export": "off",
+    "react/jsx-sort-props": [
+      "warn",
+      {
+        "callbacksLast": true,
+        "shorthandFirst": false,
+        "shorthandLast": true,
+        "ignoreCase": true,
+        "noSortAlphabetically": false
+      }
+    ],
+    "@typescript-eslint/consistent-type-imports": "error",
+    "no-restricted-imports": [
+      "warn",
+      {
+        "patterns": [".*"]
+      }
+    ]
+  },
+  "overrides": [
+    {
+      "files": ["*-test.js"],
+      "rules": {
+        "no-restricted-imports": "off"
+      }
+    }
+  ]
 }
-
