@@ -1,9 +1,9 @@
-import { Hero } from "@/components/new-home/hero";
-import { Navbar } from "@/components/new-home/navbar";
+import { Hero } from "@/components/home/hero";
+import { Navbar } from "@/components/home/navbar";
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen flex flex-col gap-4">
+    <div className="flex min-h-screen flex-col gap-4">
       <Navbar />
       <Hero />
     </div>

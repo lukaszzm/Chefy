@@ -5,7 +5,7 @@ import { signIn } from "next-auth/react";
 import { useForm } from "react-hook-form";
 
 import type { ApiResponse } from "@/interfaces";
-import { signInSchema, type SignInValues } from "@/schemas/sign-in-schema";
+import { signInSchema, type SignInValues } from "@/schemas/auth/sign-in-schema";
 
 export const useSignIn = () => {
   const form = useForm<SignInValues>({

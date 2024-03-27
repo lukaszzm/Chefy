@@ -1,14 +1,13 @@
 "use client";
 
-import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
-import { Form, FormLabel, FormField, FormItem, FormControl, FormMessage } from "@/components/ui/form";
+import { Form, FormField, FormItem, FormLabel, FormControl, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { useSignIn } from "@/hooks/use-sign-in";
+import { useSignUp } from "@/hooks/use-sign-up";
 
-// TODO: implement sign in logic
-export const SignInForm = () => {
-  const { form, apiResponse } = useSignIn();
+// TODO: implement sign up logic
+export const SignUpForm = () => {
+  const form = useSignUp();
   const {
     control,
     formState: { isValid },
@@ -19,12 +18,25 @@ export const SignInForm = () => {
       <form className="space-y-4">
         <FormField
           control={control}
+          name="name"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Name</FormLabel>
+              <FormControl>
+                <Input placeholder="Enter your name" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={control}
           name="email"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Email</FormLabel>
               <FormControl>
-                <Input placeholder="example@example.com" {...field} />
+                <Input placeholder="Enter your email" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -37,19 +49,14 @@ export const SignInForm = () => {
             <FormItem>
               <FormLabel>Password</FormLabel>
               <FormControl>
-                <Input placeholder="********" type="password" {...field} />
+                <Input placeholder="Enter your password" type="password" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
-        {apiResponse && (
-          <Alert variant="destructive">
-            <AlertDescription>{apiResponse.text}</AlertDescription>
-          </Alert>
-        )}
         <Button className="w-full" disabled={!isValid}>
-          Sign In
+          Create An Account
         </Button>
       </form>
     </Form>

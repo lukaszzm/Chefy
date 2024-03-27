@@ -2,12 +2,12 @@ import type { GetServerSideProps } from "next";
 
 import { getServerSession } from "next-auth";
 
-import { Account } from "@/components/Settings/Account";
-import { Password } from "@/components/Settings/Password";
-import { Preferences } from "@/components/Settings/Preferences";
 import { ContentWrapper } from "@/components/OLD_UI/ContentWrapper";
 import { Subtitle } from "@/components/OLD_UI/Subtitle";
 import { Title } from "@/components/OLD_UI/Title";
+import { Account } from "@/components/Settings/Account";
+import { Password } from "@/components/Settings/Password";
+import { Preferences } from "@/components/Settings/Preferences";
 import type { Area, Category } from "@/interfaces";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import { getAllAreas, getPreferredAreas } from "@/queries/db/area";
