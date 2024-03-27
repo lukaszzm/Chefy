@@ -1,8 +1,9 @@
-import { Category } from "../../Explore/Category";
 import { BiInfoCircle } from "react-icons/bi";
-import { Modal } from "../../UI/Modal";
+
+import { Category } from "@/components/Explore/Category";
+import { RecipeDetails } from "@/components/Likes/RecipeDetails";
+import { Modal } from "@/components/UI/Modal";
 import { useModal } from "@/hooks/useModal";
-import { RecipeDetails } from "../RecipeDetails";
 
 interface LikedRecipeProps {
   id: string;
@@ -13,38 +14,26 @@ interface LikedRecipeProps {
   instructions: string;
 }
 
-export const LikedRecipe = ({
-  id,
-  title,
-  area,
-  category,
-  ingredients,
-  instructions,
-}: LikedRecipeProps) => {
+export const LikedRecipe = ({ id, title, area, category, ingredients, instructions }: LikedRecipeProps) => {
   const { isModalOpen, openModal, closeModal } = useModal();
 
   return (
     <>
-      <div className="flex justify-between items-center bg-gray-100 p-2 px-4 m-2 rounded-md shadow-sm border border-gray-200">
+      <div className="m-2 flex items-center justify-between rounded-md border border-gray-200 bg-gray-100 p-2 px-4 shadow-sm">
         <div>
-          <p className="text-left p-1 font-medium text-md">{title}</p>
-          <Category hideLabel={true} category={category} area={area} />
+          <p className="text-md p-1 text-left font-medium">{title}</p>
+          <Category area={area} category={category} hideLabel={true} />
         </div>
         <button
           aria-label="info"
+          className="rounded-full border-none bg-none text-gray-400 shadow-none transition duration-150 ease-in-out hover:scale-110  hover:text-gray-600 hover:shadow-none focus:text-gray-600 focus:shadow-none active:text-gray-600  active:shadow-none"
           onClick={openModal}
-          className="rounded-full border-none bg-none shadow-none hover:shadow-none focus:shadow-none active:shadow-none active:text-gray-600 focus:text-gray-600  text-gray-400 hover:text-gray-600 hover:scale-110 transition duration-150  ease-in-out"
         >
-          <BiInfoCircle size="34px" height="1x" />
+          <BiInfoCircle height="1x" size="34px" />
         </button>
       </div>
-      <Modal isModalOpen={isModalOpen} closeModal={closeModal} title={title}>
-        <RecipeDetails
-          id={id}
-          title={title}
-          ingredients={ingredients}
-          instructions={instructions}
-        />
+      <Modal closeModal={closeModal} isModalOpen={isModalOpen} title={title}>
+        <RecipeDetails id={id} ingredients={ingredients} instructions={instructions} title={title} />
       </Modal>
     </>
   );

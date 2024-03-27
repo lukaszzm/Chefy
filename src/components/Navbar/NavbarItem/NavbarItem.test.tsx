@@ -1,20 +1,14 @@
-import { getByTestId, render, screen, within } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
+
 import { NavbarItem } from "./NavbarItem";
-import Image from "next/image";
 
 jest.mock("next/router", () => require("next-router-mock"));
 
-const testIcon = <span data-testid="test-icon">icon</span>
+const testIcon = <span data-testid="test-icon">icon</span>;
 
 describe("NavbarItem", () => {
   it("should render correctly as a button", () => {
-    render(
-      <NavbarItem
-        icon={testIcon}
-        text="test"
-        type="button"
-      />
-    );
+    render(<NavbarItem icon={testIcon} text="test" type="button" />);
 
     const button = screen.getByRole("button", {
       name: /test/i,
@@ -32,7 +26,6 @@ describe("NavbarItem", () => {
       name: /test/i,
     });
     const icon = within(link).getByTestId("test-icon");
-
 
     expect(link).toBeInTheDocument();
     expect(icon).toBeInTheDocument();

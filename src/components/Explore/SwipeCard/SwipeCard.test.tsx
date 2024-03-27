@@ -1,4 +1,5 @@
 import { render, screen } from "@testing-library/react";
+
 import { SwipeCard } from "./SwipeCard";
 
 const mockOnSwipeRight = jest.fn();
@@ -8,12 +9,7 @@ const mockSetIsLike = jest.fn();
 describe("SwipeCard", () => {
   it("should render children", () => {
     render(
-      <SwipeCard
-        onSwipeLeft={mockOnSwipeLeft}
-        onSwipeRight={mockOnSwipeRight}
-        isLike={false}
-        setIsLike={mockSetIsLike}
-      >
+      <SwipeCard isLike={false} setIsLike={mockSetIsLike} onSwipeLeft={mockOnSwipeLeft} onSwipeRight={mockOnSwipeRight}>
         <div>Child Content</div>
       </SwipeCard>
     );

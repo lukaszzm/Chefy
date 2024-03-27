@@ -1,4 +1,5 @@
 import { render } from "@testing-library/react";
+
 import { Instruction } from "./Instruction";
 
 const text = "sample text";

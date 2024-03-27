@@ -1,6 +1,8 @@
 import { renderHook } from "@testing-library/react";
-import { useRecipe } from "./useRecipe";
+
 import { createWrapper } from "@/utils/createWrapper";
+
+import { useRecipe } from "./useRecipe";
 
 describe("useRecipe", () => {
   it("should initially return correct states", () => {

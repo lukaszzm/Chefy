@@ -9,14 +9,14 @@ export const ResponsiveImage = ({ src, alt }: ResponsiveImageProps) => {
   return (
     <Image
       alt={alt}
-      src={src}
-      priority
-      width={700}
-      height={475}
-      sizes="20vw"
-      className="w-full h-auto max-h-[25rem] sm:min-h-[25rem] rounded-lg"
-      placeholder="blur"
       blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mN88AkAArgB1ER6gHQAAAAASUVORK5CYII="
+      className="h-auto max-h-[25rem] w-full rounded-lg sm:min-h-[25rem]"
+      height={475}
+      placeholder="blur"
+      sizes="20vw"
+      src={src}
+      width={700}
+      priority
     />
   );
 };

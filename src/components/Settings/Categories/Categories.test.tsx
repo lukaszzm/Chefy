@@ -1,7 +1,9 @@
 import { act, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { Categories } from "./Categories";
+
 import { createWrapper } from "@/utils/createWrapper";
+
+import { Categories } from "./Categories";
 
 const mockAllCategories = [
   { id: "1", name: "Category 1" },
@@ -13,13 +15,9 @@ const mockCheckedByDefault = [{ id: "1", name: "Category 1" }];
 describe("Categories", () => {
   it("should render with allCategories prop as default value", async () => {
     await act(async () =>
-      render(
-        <Categories
-          allCategories={mockAllCategories}
-          checkedByDefaultCategories={mockCheckedByDefault}
-        />,
-        { wrapper: createWrapper() }
-      )
+      render(<Categories allCategories={mockAllCategories} checkedByDefaultCategories={mockCheckedByDefault} />, {
+        wrapper: createWrapper(),
+      })
     );
 
     const category1 = screen.getByRole("checkbox", { name: /category 1/i });
@@ -31,13 +29,9 @@ describe("Categories", () => {
 
   it("should initially disable the save button", async () => {
     await act(async () =>
-      render(
-        <Categories
-          allCategories={mockAllCategories}
-          checkedByDefaultCategories={mockCheckedByDefault}
-        />,
-        { wrapper: createWrapper() }
-      )
+      render(<Categories allCategories={mockAllCategories} checkedByDefaultCategories={mockCheckedByDefault} />, {
+        wrapper: createWrapper(),
+      })
     );
 
     const button = screen.getByRole("button", { name: /save/i });
@@ -47,13 +41,9 @@ describe("Categories", () => {
 
   it("should enable the save button when an category is checked", async () => {
     const user = userEvent.setup();
-    render(
-      <Categories
-        allCategories={mockAllCategories}
-        checkedByDefaultCategories={mockCheckedByDefault}
-      />,
-      { wrapper: createWrapper() }
-    );
+    render(<Categories allCategories={mockAllCategories} checkedByDefaultCategories={mockCheckedByDefault} />, {
+      wrapper: createWrapper(),
+    });
 
     const category2 = screen.getByRole("checkbox", { name: /category 2/i });
 

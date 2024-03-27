@@ -1,7 +1,9 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { Password } from "./Password";
+
 import { createWrapper } from "@/utils/createWrapper";
+
+import { Password } from "./Password";
 
 describe("Password", () => {
   it("should render correctly", () => {
@@ -34,9 +36,7 @@ describe("Password", () => {
     await user.type(currentPasswordInput, "123");
     await user.type(newPasswordInput, "123");
 
-    const errorMessages = screen.queryAllByText(
-      /your password must have at least 8 characters/i
-    );
+    const errorMessages = screen.queryAllByText(/your password must have at least 8 characters/i);
 
     expect(errorMessages).toHaveLength(2);
   });

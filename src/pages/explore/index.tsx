@@ -1,14 +1,17 @@
-import { GetServerSideProps } from "next";
-import { authOptions } from "../api/auth/[...nextauth]";
+import React from "react";
+
+import type { GetServerSideProps } from "next";
+
+import { useQuery } from "@tanstack/react-query";
+import { AnimatePresence } from "framer-motion";
 import { getServerSession } from "next-auth";
+
+import { Recipe } from "@/components/Explore/Recipe";
 import { RecipeLoading } from "@/components/Explore/RecipeLoading";
 import { RecipeNotFound } from "@/components/Explore/RecipeNotFound";
-import { Recipe } from "@/components/Explore/Recipe";
-import React from "react";
-import { AnimatePresence } from "framer-motion";
+import type { Recipe as IRecipe } from "@/interfaces";
+import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import { fetchRecipes } from "@/queries/api/fetchRecipes";
-import { useQuery } from "@tanstack/react-query";
-import { Recipe as IRecipe } from "@/interfaces";
 
 const ExplorePage = () => {
   const { data, isLoading, isError, isFetching } = useQuery<IRecipe[]>({
@@ -20,37 +23,27 @@ const ExplorePage = () => {
 
   if (isLoading) return <RecipeLoading />;
 
-  if (isError)
-    return (
-      <RecipeNotFound
-        title="Something went wrong."
-        text="Try again later."
-        isError={true}
-      />
-    );
+  if (isError) return <RecipeNotFound isError={true} text="Try again later." title="Something went wrong." />;
 
   return (
     <AnimatePresence>
       {data && data.length > 0 ? (
         data.map((recipe) => (
           <Recipe
-            key={recipe.id}
-            id={recipe.id}
-            title={recipe.title}
-            imageSrc={recipe.imageSrc}
-            category={recipe.category}
             area={recipe.area}
+            category={recipe.category}
+            id={recipe.id}
+            imageSrc={recipe.imageSrc}
             ingredients={recipe.ingredients}
             instructions={recipe.instructions}
+            key={recipe.id}
+            title={recipe.title}
           />
         ))
       ) : isFetching ? (
         <RecipeLoading />
       ) : (
-        <RecipeNotFound
-          title="No recipes found."
-          text="Change preferences to discover new recipes."
-        />
+        <RecipeNotFound text="Change preferences to discover new recipes." title="No recipes found." />
       )}
     </AnimatePresence>
   );

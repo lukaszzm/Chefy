@@ -1,7 +1,8 @@
 import type { NextApiRequest, NextApiResponse } from "next";
+
 import { withAuth, withMethods } from "@/api-helpers";
-import { getPreferences } from "@/queries/db/user";
 import { getRandomRecipes } from "@/queries/db/recipe";
+import { getPreferences } from "@/queries/db/user";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const email = req.headers.email as string;
@@ -11,11 +12,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
     if (!userPreferences) throw new Error("Something went wrong.");
 
-    const recipes = await getRandomRecipes(
-      email,
-      userPreferences.preferredAreas,
-      userPreferences.preferredCategories
-    );
+    const recipes = await getRandomRecipes(email, userPreferences.preferredAreas, userPreferences.preferredCategories);
 
     return res.status(200).json(recipes);
   } catch (err) {

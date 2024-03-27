@@ -1,9 +1,9 @@
-import { PasswordSchema } from "@/schemas/PasswordSchema";
+import { Alert } from "@/components/UI/Alert/Alert";
+import { Button } from "@/components/UI/Button/Button";
+import { Input } from "@/components/UI/Input/Input";
+import { Label } from "@/components/UI/Label/Label";
 import { useSettingsForm } from "@/hooks/useSettingsForm";
-import { Label } from "@/components/UI/Label";
-import { Button } from "@/components/UI/Button";
-import { Alert } from "@/components/UI/Alert";
-import { Input } from "@/components/UI/Input";
+import { PasswordSchema } from "@/schemas/PasswordSchema";
 
 interface FormValues {
   currentPassword: string;
@@ -22,33 +22,25 @@ export const Password = () => {
   });
 
   return (
-    <form onSubmit={submitFn} className="grid gap-1 text-left m-2">
+    <form className="m-2 grid gap-1 text-left" onSubmit={submitFn}>
       <Label htmlFor="currentPassword">Current Password</Label>
       <Input
         {...register("currentPassword")}
-        type="password"
-        placeholder="********"
         error={errors.currentPassword}
         id="currentPassword"
+        placeholder="********"
+        type="password"
       />
       <Label htmlFor="newPassword">New Password</Label>
       <Input
         {...register("newPassword")}
-        type="password"
-        placeholder="********"
         error={errors.newPassword}
         id="newPassword"
+        placeholder="********"
+        type="password"
       />
-      {apiResponse && (
-        <Alert variant={apiResponse.isError ? "error" : "success"}>
-          {apiResponse.text}
-        </Alert>
-      )}
-      <Button
-        variant="primary"
-        disabled={!isValid || !isDirty}
-        isLoading={isPending}
-      >
+      {apiResponse && <Alert variant={apiResponse.isError ? "error" : "success"}>{apiResponse.text}</Alert>}
+      <Button disabled={!isValid || !isDirty} isLoading={isPending} variant="primary">
         Save
       </Button>
     </form>

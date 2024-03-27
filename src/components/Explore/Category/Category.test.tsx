@@ -1,11 +1,10 @@
 import { render, screen } from "@testing-library/react";
+
 import { Category } from "./Category";
 
 describe("Category", () => {
   it("should render without label when hideLabel props is true", () => {
-    render(
-      <Category category="sampleCategory" area="sampleArea" hideLabel={true} />
-    );
+    render(<Category area="sampleArea" category="sampleCategory" hideLabel={true} />);
 
     const categoryLabel = screen.queryByText("Category");
     const category = screen.getByText("sampleCategory");
@@ -17,9 +16,7 @@ describe("Category", () => {
   });
 
   it("should render with label when hideLabel props is false", () => {
-    render(
-      <Category category="sampleCategory" area="sampleArea" hideLabel={false} />
-    );
+    render(<Category area="sampleArea" category="sampleCategory" hideLabel={false} />);
 
     const categoryLabel = screen.getByText("Category");
     const category = screen.getByText("sampleCategory");

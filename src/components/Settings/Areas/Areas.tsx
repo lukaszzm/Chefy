@@ -1,10 +1,10 @@
+import { Alert } from "@/components/UI/Alert/Alert";
+import { Button } from "@/components/UI/Button/Button";
+import { Checkbox } from "@/components/UI/Checkbox/Checkbox";
+import { Label } from "@/components/UI/Label/Label";
+import { useSettingsForm } from "@/hooks/useSettingsForm";
 import type { Area } from "@/interfaces";
 import { isItemChosen } from "@/utils/isItemChosen";
-import { useSettingsForm } from "@/hooks/useSettingsForm";
-import { Checkbox } from "@/components/UI/Checkbox";
-import { Alert } from "@/components/UI/Alert";
-import { Button } from "@/components/UI/Button";
-import { Label } from "@/components/UI/Label";
 
 interface AreasProps {
   allAreas: Area[];
@@ -23,25 +23,21 @@ export const Areas = ({ allAreas, checkedByDefaultAreas }: AreasProps) => {
   });
 
   return (
-    <form onSubmit={submitFn} className="grid gap-1 text-left m-2">
+    <form className="m-2 grid gap-1 text-left" onSubmit={submitFn}>
       <Label htmlFor="Areas">Areas</Label>
       <ul className="flex flex-wrap">
         {allAreas.map((el) => (
           <Checkbox
             {...register("preferredAreas")}
-            key={el.id}
             id={el.id}
-            text={el.name}
             isCheckedByDefault={isItemChosen(el, checkedByDefaultAreas)}
+            key={el.id}
+            text={el.name}
           />
         ))}
       </ul>
-      {apiResponse && isDirty && (
-        <Alert variant={apiResponse.isError ? "error" : "success"}>
-          {apiResponse.text}
-        </Alert>
-      )}
-      <Button variant="primary" disabled={!isDirty} isLoading={isPending}>
+      {apiResponse && isDirty && <Alert variant={apiResponse.isError ? "error" : "success"}>{apiResponse.text}</Alert>}
+      <Button disabled={!isDirty} isLoading={isPending} variant="primary">
         Save
       </Button>
     </form>

@@ -1,6 +1,7 @@
-import Image from "next/image";
-import icon from "@/public/logo.svg";
 import classNames from "classnames";
+import Image from "next/image";
+
+import icon from "@/public/logo.svg";
 
 interface LogoProps {
   hideInMobile?: boolean;
@@ -14,14 +15,8 @@ export const Logo = ({ hideInMobile }: LogoProps) => {
 
   return (
     <div className={styles}>
-      <Image
-        src={icon}
-        alt="Chefy Logo"
-        height={12}
-        width={12}
-        className="w-10 h-auto mx-1"
-      />
-      <p className="hidden font-medium text-4xl md:inline-block">Chefy</p>
+      <Image alt="Chefy Logo" className="mx-1 h-auto w-10" height={12} src={icon} width={12} />
+      <p className="hidden text-4xl font-medium md:inline-block">Chefy</p>
     </div>
   );
 };

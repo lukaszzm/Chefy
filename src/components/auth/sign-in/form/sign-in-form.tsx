@@ -1,25 +1,18 @@
 "use client";
 
-import { useSignIn } from "@/hooks/use-sign-in";
+import { CredentialsInfo } from "@/components/auth/credentials-info";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
-import {
-  Form,
-  FormLabel,
-  FormField,
-  FormItem,
-  FormControl,
-  FormMessage,
-} from "@/components/ui/form";
+import { Form, FormLabel, FormField, FormItem, FormControl, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
-import { CredentialsInfo } from "@/components/auth/credentials-info";
+import { useSignIn } from "@/hooks/use-sign-in";
 
 export const SignInForm = () => {
   const { form, apiResponse } = useSignIn();
   const {
     control,
-    formState: { isValid, isDirty, isSubmitting },
+    formState: { isValid, isDirty },
   } = form;
 
   return (
@@ -56,12 +49,12 @@ export const SignInForm = () => {
             <AlertDescription>{apiResponse.text}</AlertDescription>
           </Alert>
         )}
-        <Button disabled={!isValid || !isDirty} className="w-full">
+        <Button className="w-full" disabled={!isValid || !isDirty}>
           Submit
         </Button>
       </Form>
       <Separator />
-      <CredentialsInfo onClick={() => {}} variant="sign-in" />
+      <CredentialsInfo variant="sign-in" onClick={() => {}} />
     </div>
   );
 };

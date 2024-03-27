@@ -48,7 +48,7 @@
   },
   "overrides": [
     {
-      "files": ["*-test.js"],
+      "files": ["*.test.tsx", "index.ts"],
       "rules": {
         "no-restricted-imports": "off"
       }

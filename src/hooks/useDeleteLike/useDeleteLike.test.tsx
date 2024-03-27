@@ -1,6 +1,8 @@
 import { renderHook } from "@testing-library/react";
-import { useDeleteLike } from "./useDeleteLike";
+
 import { createWrapper } from "@/utils/createWrapper";
+
+import { useDeleteLike } from "./useDeleteLike";
 
 jest.mock("next/router", () => require("next-router-mock"));
 

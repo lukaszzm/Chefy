@@ -1,6 +1,8 @@
 import { renderHook, waitFor } from "@testing-library/react";
-import { useSettingsForm } from "./useSettingsForm";
+
 import { createWrapper } from "@/utils/createWrapper";
+
+import { useSettingsForm } from "./useSettingsForm";
 
 describe("useSettingsForm", () => {
   it("should initially return correct states", async () => {

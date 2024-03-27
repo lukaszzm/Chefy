@@ -1,11 +1,6 @@
-import {
-  FiChevronLeft,
-  FiChevronRight,
-  FiChevronsLeft,
-  FiChevronsRight,
-  FiMoreHorizontal,
-} from "react-icons/fi";
-import { PaginationButton } from "../PaginationButton";
+import { FiChevronLeft, FiChevronRight, FiChevronsLeft, FiChevronsRight, FiMoreHorizontal } from "react-icons/fi";
+
+import { PaginationButton } from "@/components/Likes/PaginationButton";
 
 interface PaginationProps {
   currentPage: number;
@@ -17,19 +12,11 @@ export const Pagination = ({ currentPage, pageCount }: PaginationProps) => {
   const isLastPage = currentPage === pageCount;
 
   return (
-    <div className="p-1 w-full flex justify-center items-center mt-auto">
-      <PaginationButton
-        toPage={1}
-        disabled={isFirstPage}
-        ariaLabel="first page"
-      >
+    <div className="mt-auto flex w-full items-center justify-center p-1">
+      <PaginationButton ariaLabel="first page" disabled={isFirstPage} toPage={1}>
         <FiChevronsLeft />
       </PaginationButton>
-      <PaginationButton
-        toPage={currentPage - 1}
-        disabled={isFirstPage}
-        ariaLabel="previous page"
-      >
+      <PaginationButton ariaLabel="previous page" disabled={isFirstPage} toPage={currentPage - 1}>
         <FiChevronLeft />
       </PaginationButton>
       {currentPage - 1 > 1 && (
@@ -37,36 +24,20 @@ export const Pagination = ({ currentPage, pageCount }: PaginationProps) => {
           <FiMoreHorizontal />
         </div>
       )}
-      {!isFirstPage && (
-        <PaginationButton toPage={currentPage - 1}>
-          {currentPage - 1}
-        </PaginationButton>
-      )}
-      <PaginationButton active toPage={currentPage}>
+      {!isFirstPage && <PaginationButton toPage={currentPage - 1}>{currentPage - 1}</PaginationButton>}
+      <PaginationButton toPage={currentPage} active>
         {currentPage}
       </PaginationButton>
-      {!isLastPage && (
-        <PaginationButton toPage={currentPage + 1}>
-          {currentPage + 1}
-        </PaginationButton>
-      )}
+      {!isLastPage && <PaginationButton toPage={currentPage + 1}>{currentPage + 1}</PaginationButton>}
       {currentPage + 1 < pageCount && (
         <div className="m-2">
           <FiMoreHorizontal />
         </div>
       )}
-      <PaginationButton
-        toPage={currentPage + 1}
-        disabled={isLastPage}
-        ariaLabel="next page"
-      >
+      <PaginationButton ariaLabel="next page" disabled={isLastPage} toPage={currentPage + 1}>
         <FiChevronRight />
       </PaginationButton>
-      <PaginationButton
-        toPage={pageCount}
-        disabled={isLastPage}
-        ariaLabel="last page"
-      >
+      <PaginationButton ariaLabel="last page" disabled={isLastPage} toPage={pageCount}>
         <FiChevronsRight />
       </PaginationButton>
     </div>

@@ -1,9 +1,9 @@
-import { Alert } from "@/components/UI/Alert";
+import { Alert } from "@/components/UI/Alert/Alert";
+import { Button } from "@/components/UI/Button/Button";
 import { Subtitle } from "@/components/UI/Subtitle";
-import { Button } from "@/components/UI/Button";
 import { Tag } from "@/components/UI/Tag";
-import { generatePDF } from "@/utils/generatePDF";
 import { useDeleteLike } from "@/hooks/useDeleteLike";
+import { generatePDF } from "@/utils/generatePDF";
 
 interface RecipeDetailsProps {
   id: string;
@@ -12,23 +12,15 @@ interface RecipeDetailsProps {
   instructions: string;
 }
 
-export const RecipeDetails = ({
-  ingredients,
-  instructions,
-  id,
-  title,
-}: RecipeDetailsProps) => {
+export const RecipeDetails = ({ ingredients, instructions, id, title }: RecipeDetailsProps) => {
   const { apiResponse, isPending, isSuccess, mutate } = useDeleteLike();
 
   return (
     <>
-      <div className="overflow-auto h-96 px-2 mb-3">
+      <div className="mb-3 h-96 overflow-auto px-2">
         <div>
           <Subtitle id="ingredients-heading">Ingredients</Subtitle>
-          <ul
-            className="flex flex-wrap max-w-full"
-            aria-labelledby="ingredients-heading"
-          >
+          <ul aria-labelledby="ingredients-heading" className="flex max-w-full flex-wrap">
             {ingredients.map((el, index) => (
               <li key={index}>
                 <Tag>{el}</Tag>
@@ -36,34 +28,20 @@ export const RecipeDetails = ({
             ))}
           </ul>
         </div>
-        <div className="text-left py-2 border-b-2">
+        <div className="border-b-2 py-2 text-left">
           <Subtitle id="instructions-heading">Instructions</Subtitle>
-          <div className="flex flex-wrap max-w-full">
-            <p className="text-sm p-1" aria-labelledby="instructions-heading">
+          <div className="flex max-w-full flex-wrap">
+            <p aria-labelledby="instructions-heading" className="p-1 text-sm">
               {instructions}
             </p>
           </div>
         </div>
       </div>
-      <Button
-        variant="primary"
-        fullWidth
-        onClick={() => generatePDF({ title, ingredients, instructions })}
-      >
+      <Button variant="primary" fullWidth onClick={() => generatePDF({ title, ingredients, instructions })}>
         Generate PDF
       </Button>
-      {apiResponse && (
-        <Alert variant={apiResponse.isError ? "error" : "success"}>
-          {apiResponse.text}
-        </Alert>
-      )}
-      <Button
-        isLoading={isPending}
-        disabled={isSuccess}
-        onClick={() => mutate(id)}
-        variant="outline-danger"
-        fullWidth
-      >
+      {apiResponse && <Alert variant={apiResponse.isError ? "error" : "success"}>{apiResponse.text}</Alert>}
+      <Button disabled={isSuccess} isLoading={isPending} variant="outline-danger" fullWidth onClick={() => mutate(id)}>
         Delete from likes
       </Button>
     </>

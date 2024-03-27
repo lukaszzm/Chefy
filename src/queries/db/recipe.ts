@@ -1,5 +1,6 @@
+import type { Area, Category } from "@prisma/client";
+
 import { prisma } from "@/lib/prisma";
-import { Area, Category } from "@prisma/client";
 
 export const getLikedRecipes = async (email: string, page: number) =>
   await prisma.$transaction([
@@ -29,11 +30,7 @@ export const getLikedRecipes = async (email: string, page: number) =>
     }),
   ]);
 
-export const getRandomRecipes = async (
-  email: string,
-  preferredAreas: Area[],
-  preferredCategories: Category[]
-) =>
+export const getRandomRecipes = async (email: string, preferredAreas: Area[], preferredCategories: Category[]) =>
   await prisma.recipe.findMany({
     take: 10,
     where: {

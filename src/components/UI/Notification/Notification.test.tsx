@@ -1,6 +1,7 @@
 import { render, screen } from "@testing-library/react";
-import { Notification } from "./Notification";
 import userEvent from "@testing-library/user-event";
+
+import { Notification } from "./Notification";
 
 const modalRoot = document.createElement("div");
 modalRoot.setAttribute("id", "notification");
@@ -11,7 +12,7 @@ const mockCloseNotification = jest.fn();
 describe("Notification", () => {
   it("should render when isOpen prop is true", () => {
     render(
-      <Notification isOpen={true} closeNotification={mockCloseNotification}>
+      <Notification closeNotification={mockCloseNotification} isOpen={true}>
         Child
       </Notification>
     );
@@ -25,7 +26,7 @@ describe("Notification", () => {
 
   it("should not render when isOpen prop is false", () => {
     render(
-      <Notification isOpen={false} closeNotification={mockCloseNotification}>
+      <Notification closeNotification={mockCloseNotification} isOpen={false}>
         Child
       </Notification>
     );
@@ -38,7 +39,7 @@ describe("Notification", () => {
   it("should close notification after click close button", async () => {
     const user = userEvent.setup();
     render(
-      <Notification isOpen={true} closeNotification={mockCloseNotification}>
+      <Notification closeNotification={mockCloseNotification} isOpen={true}>
         Child
       </Notification>
     );

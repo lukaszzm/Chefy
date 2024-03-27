@@ -9,13 +9,7 @@ interface PaginationButtonProps {
   ariaLabel?: string;
 }
 
-export const PaginationButton = ({
-  children,
-  toPage,
-  active,
-  disabled,
-  ariaLabel,
-}: PaginationButtonProps) => {
+export const PaginationButton = ({ children, toPage, active, disabled, ariaLabel }: PaginationButtonProps) => {
   const styles = classNames(
     "w-10 h-10 flex justify-center items-center rounded-lg shadow-sm hover:shadow-md font-medium disabled:pointer-events-none rounded focus:outline-none focus:ring-0 transition duration-150 ease-in-out",
     {
@@ -32,7 +26,7 @@ export const PaginationButton = ({
         query: { page: toPage },
       }}
     >
-      <button aria-label={ariaLabel} disabled={disabled} className={styles}>
+      <button aria-label={ariaLabel} className={styles} disabled={disabled}>
         {children}
       </button>
     </Link>

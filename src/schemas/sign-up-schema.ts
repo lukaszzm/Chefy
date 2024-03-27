@@ -1,5 +1,6 @@
 import { z } from "zod";
-import { signInSchema } from "./sign-in-schema";
+
+import { signInSchema } from "@/schemas/sign-in-schema";
 
 export const signUpSchema = z
   .object({

@@ -1,13 +1,13 @@
 import { act, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { Account } from "./Account";
+
 import { createWrapper } from "@/utils/createWrapper";
+
+import { Account } from "./Account";
 
 describe("Account", () => {
   it("should render with name prop as default value", async () => {
-    await act(async () =>
-      render(<Account name="John Doe" />, { wrapper: createWrapper() })
-    );
+    await act(async () => render(<Account name="John Doe" />, { wrapper: createWrapper() }));
 
     const textbox = screen.getByRole("textbox", { name: /name/i });
 
@@ -15,9 +15,7 @@ describe("Account", () => {
   });
 
   it("should initially disable the save button", async () => {
-    await act(async () =>
-      render(<Account name="John Doe" />, { wrapper: createWrapper() })
-    );
+    await act(async () => render(<Account name="John Doe" />, { wrapper: createWrapper() }));
 
     const button = screen.getByRole("button", { name: /save/i });
 

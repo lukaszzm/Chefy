@@ -1,9 +1,11 @@
-import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
+
+import { useMutation } from "@tanstack/react-query";
+
+import type { Recipe } from "@/interfaces";
+import { queryClient } from "@/lib/queryClient";
 import { sendDislike } from "@/queries/api/sendDislike";
 import { sendLike } from "@/queries/api/sendLike";
-import { queryClient } from "@/lib/queryClient";
-import { Recipe } from "@/interfaces";
 
 export const useRecipe = (recipeId: string) => {
   const [isShortVersion, setIsShortVersion] = useState(true);

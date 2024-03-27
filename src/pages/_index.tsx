@@ -1,10 +1,12 @@
-import { useSession } from "next-auth/react";
+import type { GetServerSideProps } from "next";
+
 import { useRouter } from "next/router";
-import { LoadingScreen } from "@/components/UI/LoadingScreen";
 import { getServerSession } from "next-auth";
-import { authOptions } from "./api/auth/[...nextauth]";
+import { useSession } from "next-auth/react";
+
 import { Home } from "@/components/Home";
-import { GetServerSideProps } from "next";
+import { LoadingScreen } from "@/components/UI/LoadingScreen";
+import { authOptions } from "@/pages/api/auth/[...nextauth]";
 
 const HomePage = () => {
   const { status } = useSession();

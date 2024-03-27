@@ -1,7 +1,9 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { Recipe } from "./Recipe";
+
 import { createWrapper } from "@/utils/createWrapper";
+
+import { Recipe } from "./Recipe";
 
 const mockRecipe = {
   id: "1",

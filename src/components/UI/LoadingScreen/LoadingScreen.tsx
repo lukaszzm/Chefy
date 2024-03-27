@@ -1,9 +1,9 @@
-import { LoadingSpinner } from "../LoadingSpinner";
+import { LoadingSpinner } from "@/components/UI/LoadingSpinner";
 
 export const LoadingScreen = () => {
   return (
-    <div className="w-screen h-screen flex justify-center items-center bg-black">
-      <LoadingSpinner size="md" color="white" />
+    <div className="flex h-screen w-screen items-center justify-center bg-black">
+      <LoadingSpinner color="white" size="md" />
       <span className="sr-only">Loading...</span>
     </div>
   );

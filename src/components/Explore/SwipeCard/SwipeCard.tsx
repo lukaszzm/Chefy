@@ -1,5 +1,7 @@
-import { PanInfo, motion, useMotionValue, useTransform } from "framer-motion";
 import { useRef } from "react";
+
+import type { PanInfo } from "framer-motion";
+import { motion, useMotionValue, useTransform } from "framer-motion";
 
 const DRAG_LIMIT = 300;
 
@@ -14,29 +16,16 @@ interface SwipeCardProps {
   onSwipeRight: () => void;
   onSwipeLeft: () => void;
   isLike: boolean;
-  setIsLike: (isLike: boolean) => void;
+  setIsLike: (_like: boolean) => void;
 }
 
-export const SwipeCard = ({
-  children,
-  onSwipeRight,
-  onSwipeLeft,
-  isLike,
-  setIsLike,
-}: SwipeCardProps) => {
+export const SwipeCard = ({ children, onSwipeRight, onSwipeLeft, isLike, setIsLike }: SwipeCardProps) => {
   const constraintsRef = useRef(null);
   const x = useMotionValue(0);
   const rotate = useTransform(x, [-DRAG_LIMIT, DRAG_LIMIT], [-22.5, 22.5]);
-  const background = useTransform(
-    x,
-    [-DRAG_LIMIT, 0, DRAG_LIMIT],
-    [bgColors.dislike, bgColors.default, bgColors.like]
-  );
+  const background = useTransform(x, [-DRAG_LIMIT, 0, DRAG_LIMIT], [bgColors.dislike, bgColors.default, bgColors.like]);
 
-  const dragEndHandler = (
-    event: MouseEvent | TouchEvent | PointerEvent,
-    info: PanInfo
-  ) => {
+  const dragEndHandler = (event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
     if (info.offset.x > DRAG_LIMIT) {
       onSwipeRight();
     } else if (info.offset.x < -DRAG_LIMIT) {
@@ -44,10 +33,7 @@ export const SwipeCard = ({
     }
   };
 
-  const dragHandler = (
-    event: MouseEvent | TouchEvent | PointerEvent,
-    info: PanInfo
-  ) => {
+  const dragHandler = (event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
     if (info.offset.x > 0) {
       setIsLike(true);
     } else {
@@ -57,26 +43,26 @@ export const SwipeCard = ({
 
   return (
     <motion.div
+      className="fixed flex h-[calc(100svh-4rem)] w-full items-center justify-center sm:min-h-screen"
+      exit={{ opacity: 0, transition: { duration: 0.4 } }}
       ref={constraintsRef}
       style={{ background }}
-      className="w-full h-[calc(100svh-4rem)] sm:min-h-screen flex justify-center items-center fixed"
-      exit={{ opacity: 0, transition: { duration: 0.4 } }}
     >
       <motion.div
-        drag
+        animate={{ scale: 1, opacity: 1 }}
+        className="w-full sm:w-auto"
+        data-testid="swipe-card"
         dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
         dragElastic={0.3}
-        onDragEnd={dragEndHandler}
-        onDrag={dragHandler}
-        animate={{ scale: 1, opacity: 1 }}
         exit={{
           x: isLike ? 400 : -400,
           opacity: 0,
           transition: { duration: 0.4 },
         }}
         style={{ x, rotate }}
-        className="w-full sm:w-auto"
-        data-testid="swipe-card"
+        drag
+        onDrag={dragHandler}
+        onDragEnd={dragEndHandler}
       >
         {children}
       </motion.div>

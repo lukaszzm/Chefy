@@ -1,9 +1,12 @@
 import "@/styles/globals.css";
 
-import type { Metadata } from "next";
 import type { PropsWithChildren } from "react";
-import { Providers } from "@/app/providers";
+
+import type { Metadata } from "next";
+
 import { Quicksand } from "next/font/google";
+
+import { Providers } from "@/app/providers";
 
 export const metadata: Metadata = {
   title: "Chefy",
@@ -18,7 +21,7 @@ const quicksand = Quicksand({
 export default function RootLayout({ children }: PropsWithChildren) {
   return (
     <Providers>
-      <html lang="en" className={quicksand.className}>
+      <html className={quicksand.className} lang="en">
         <body>{children}</body>
       </html>
     </Providers>

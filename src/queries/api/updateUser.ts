@@ -1,4 +1,4 @@
-import { FieldValues } from "react-hook-form";
+import type { FieldValues } from "react-hook-form";
 
 export const updateUser = async (values: FieldValues) => {
   const response = await fetch("/api/users/me", {

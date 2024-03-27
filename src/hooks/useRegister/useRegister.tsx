@@ -1,11 +1,14 @@
-import { ApiResponse } from "@/interfaces";
-import { registerUser } from "@/queries/api/registerUser";
-import { RegisterSchema } from "@/schemas/RegisterSchema";
+import { useState } from "react";
+
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
 import { signIn } from "next-auth/react";
-import { useState } from "react";
 import { useForm } from "react-hook-form";
+
+import type { ApiResponse } from "@/interfaces";
+import { registerUser } from "@/queries/api/registerUser";
+
+import { RegisterSchema } from "@/schemas/RegisterSchema";
 
 interface FormInputs {
   name: string;

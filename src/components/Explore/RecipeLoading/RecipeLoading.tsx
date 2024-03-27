@@ -2,12 +2,10 @@ import { LoadingSpinner } from "@/components/UI/LoadingSpinner";
 
 export const RecipeLoading = () => {
   return (
-    <div className="flex flex-col w-full h-[calc(100svh-4rem)] justify-center items-center">
+    <div className="flex h-[calc(100svh-4rem)] w-full flex-col items-center justify-center">
       <div>
-        <LoadingSpinner size="md" color="gray" />
-        <p className="font-medium text-gray-400 pt-2">
-          Searching recipes for you..
-        </p>
+        <LoadingSpinner color="gray" size="md" />
+        <p className="pt-2 font-medium text-gray-400">Searching recipes for you..</p>
       </div>
     </div>
   );

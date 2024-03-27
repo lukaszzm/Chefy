@@ -1,53 +1,28 @@
-import { useRecipe } from "@/hooks/useRecipe";
-import type { Recipe as IRecipe } from "@/interfaces";
+import { Buttons } from "@/components/Explore/Buttons";
+import { Category } from "@/components/Explore/Category";
+import { Ingredients } from "@/components/Explore/Ingredients";
+import { Instruction } from "@/components/Explore/Instruction";
+import { SwipeCard } from "@/components/Explore/SwipeCard";
+import { ContentWrapper } from "@/components/UI/ContentWrapper";
+import { Notification } from "@/components/UI/Notification";
 import { ResponsiveImage } from "@/components/UI/ResponsiveImage";
 import { Title } from "@/components/UI/Title";
-import { Buttons } from "../Buttons";
-import { Category } from "../Category";
-import { Ingredients } from "../Ingredients";
-import { Instruction } from "../Instruction";
-import { ContentWrapper } from "../../UI/ContentWrapper";
-import { SwipeCard } from "../SwipeCard";
-import { Notification } from "../../UI/Notification";
+import { useRecipe } from "@/hooks/useRecipe";
+import type { Recipe as IRecipe } from "@/interfaces";
 
-export const Recipe = ({
-  id,
-  title,
-  imageSrc,
-  category,
-  area,
-  ingredients,
-  instructions,
-}: IRecipe) => {
-  const {
-    isShortVersion,
-    setIsShortVersion,
-    likeHandler,
-    dislikeHandler,
-    isLike,
-    setIsLike,
-    isError,
-    setIsError,
-  } = useRecipe(id);
+export const Recipe = ({ id, title, imageSrc, category, area, ingredients, instructions }: IRecipe) => {
+  const { isShortVersion, setIsShortVersion, likeHandler, dislikeHandler, isLike, setIsLike, isError, setIsError } =
+    useRecipe(id);
 
   return (
     <>
-      <SwipeCard
-        onSwipeRight={likeHandler}
-        onSwipeLeft={dislikeHandler}
-        isLike={isLike}
-        setIsLike={setIsLike}
-      >
+      <SwipeCard isLike={isLike} setIsLike={setIsLike} onSwipeLeft={dislikeHandler} onSwipeRight={likeHandler}>
         <ContentWrapper>
           <div className="overflow-auto">
-            <ResponsiveImage src={imageSrc} alt={title} />
+            <ResponsiveImage alt={title} src={imageSrc} />
             <Title>{title}</Title>
             <div className="grid gap-2 px-2">
-              <Category
-                category={category.name}
-                area={area.name}
-                hideLabel={isShortVersion}
-              />
+              <Category area={area.name} category={category.name} hideLabel={isShortVersion} />
               {!isShortVersion && (
                 <>
                   <Ingredients ingredientsList={ingredients} />
@@ -56,19 +31,16 @@ export const Recipe = ({
               )}
             </div>
             <button
+              className="m-1 rounded-3xl bg-gray-100 p-3 text-sm font-medium text-gray-700 shadow-sm transition duration-150  ease-in-out hover:bg-gray-200 hover:shadow-sm focus:outline-none focus:ring-0 disabled:pointer-events-none"
               onClick={() => setIsShortVersion(!isShortVersion)}
-              className="font-medium text-sm p-3 m-1 text-gray-700 bg-gray-100 rounded-3xl shadow-sm hover:bg-gray-200 hover:shadow-sm  disabled:pointer-events-none focus:outline-none focus:ring-0 transition duration-150 ease-in-out"
             >
               {isShortVersion ? "Read More" : "Read less"}
             </button>
           </div>
-          <Buttons likeHandler={likeHandler} dislikeHandler={dislikeHandler} />
+          <Buttons dislikeHandler={dislikeHandler} likeHandler={likeHandler} />
         </ContentWrapper>
       </SwipeCard>
-      <Notification
-        isOpen={isError}
-        closeNotification={() => setIsError(false)}
-      >
+      <Notification closeNotification={() => setIsError(false)} isOpen={isError}>
         Recipe could not be added to likes/dislikes.
       </Notification>
     </>

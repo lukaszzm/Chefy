@@ -23,7 +23,7 @@ export const generatePDF = ({
   i += 8;
 
   doc.setFontSize(12);
-  for (let ingredient of ingredients) {
+  for (const ingredient of ingredients) {
     doc.text(`- ${ingredient}`, 25, i);
     i += 5;
   }

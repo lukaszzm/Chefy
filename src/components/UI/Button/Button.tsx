@@ -1,5 +1,6 @@
 import classNames from "classnames";
-import { LoadingSpinner } from "../LoadingSpinner";
+
+import { LoadingSpinner } from "@/components/UI/LoadingSpinner";
 
 interface ButtonProps {
   children: React.ReactNode;
@@ -10,14 +11,7 @@ interface ButtonProps {
   onClick?: () => void;
 }
 
-export const Button = ({
-  children,
-  variant,
-  disabled,
-  isLoading,
-  fullWidth,
-  onClick,
-}: ButtonProps) => {
+export const Button = ({ children, variant, disabled, isLoading, fullWidth, onClick }: ButtonProps) => {
   const style = classNames(
     "font-medium disabled:opacity-60 py-2 min-w-[6rem] my-2 disabled:pointer-events-none rounded focus:outline-none focus:ring-0 transition duration-150 ease-in-out border",
     {
@@ -31,21 +25,11 @@ export const Button = ({
     }
   );
 
-  const loadingSpinnerColor =
-    variant === "danger" || variant === "outline-danger" ? "red" : "white";
+  const loadingSpinnerColor = variant === "danger" || variant === "outline-danger" ? "red" : "white";
 
   return (
-    <button
-      type="submit"
-      disabled={disabled || isLoading}
-      className={style}
-      onClick={onClick}
-    >
-      {isLoading ? (
-        <LoadingSpinner size="sm" color={loadingSpinnerColor} />
-      ) : (
-        children
-      )}
+    <button className={style} disabled={disabled || isLoading} type="submit" onClick={onClick}>
+      {isLoading ? <LoadingSpinner color={loadingSpinnerColor} size="sm" /> : children}
     </button>
   );
 };

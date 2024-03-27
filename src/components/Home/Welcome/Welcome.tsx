@@ -1,4 +1,4 @@
-import { FoodIcons } from "../FoodIcons";
+import { FoodIcons } from "@/components/Home/FoodIcons";
 
 interface WelcomeProps {
   openModal: () => void;
@@ -6,25 +6,22 @@ interface WelcomeProps {
 
 export const Welcome = ({ openModal }: WelcomeProps) => {
   return (
-    <div className="w-full h-full m-auto flex items-center justify-center text-center">
+    <div className="m-auto flex h-full w-full items-center justify-center text-center">
       <div className="max-w-4xl p-6">
-        <h1 className="text-7xl sm:text-8xl font-bold mx-2 mb-12">
+        <h1 className="mx-2 mb-12 text-7xl font-bold sm:text-8xl">
           Welcome to our{" "}
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-primary-hover">
-            recipe{" "}
-          </span>
+          <span className="to-primary-hover bg-gradient-to-r from-primary bg-clip-text text-transparent">recipe </span>
           app!
         </h1>
-        <p className="text-xl text-center font-normal lg:text-2xl text-gray-600 my-6">
-          We&apos;re excited to help you discover new and delicious recipes with
-          just a swipe of your finger. Our app is designed to make meal planning
-          and cooking easy and fun, with a wide variety of recipes from all over
-          the world.
+        <p className="my-6 text-center text-xl font-normal text-gray-600 lg:text-2xl">
+          We&apos;re excited to help you discover new and delicious recipes with just a swipe of your finger. Our app is
+          designed to make meal planning and cooking easy and fun, with a wide variety of recipes from all over the
+          world.
         </p>
         <FoodIcons />
         <button
+          className="text-l hover:bg-primary-hover hover:border-primary-hover focus:bg-primary-hover focus:border-primary-hover active:bg-primary-hover active:border-primary-hover my-2 rounded border-primary bg-primary px-12 py-3 text-xl font-medium leading-tight text-white transition duration-150 ease-in-out focus:outline-none focus:ring-0 disabled:pointer-events-none disabled:opacity-60"
           onClick={openModal}
-          className="font-medium disabled:opacity-60 text-xl py-3 my-2 px-12 disabled:pointer-events-none text-l leading-tight rounded focus:outline-none focus:ring-0 transition duration-150 ease-in-out border-primary bg-primary text-white hover:bg-primary-hover hover:border-primary-hover focus:bg-primary-hover focus:border-primary-hover active:bg-primary-hover active:border-primary-hover"
         >
           Get Started
         </button>

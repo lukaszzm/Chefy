@@ -5,7 +5,7 @@ interface SubtitleProps {
 
 export const Subtitle = ({ children, id }: SubtitleProps) => {
   return (
-    <h2 id={id} className="text-left font-medium border-b-gray-400  text-lg">
+    <h2 className="border-b-gray-400 text-left text-lg  font-medium" id={id}>
       {children}
     </h2>
   );

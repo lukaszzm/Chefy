@@ -1,8 +1,10 @@
-import { ApiResponse } from "@/interfaces";
-import { deleteLike } from "@/queries/api/deleteLike";
+import { useState } from "react";
+
 import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/router";
-import { useState } from "react";
+
+import type { ApiResponse } from "@/interfaces";
+import { deleteLike } from "@/queries/api/deleteLike";
 
 export const useDeleteLike = () => {
   const [apiResponse, setApiResponse] = useState<ApiResponse | null>(null);

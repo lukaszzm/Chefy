@@ -1,11 +1,8 @@
 import { render, screen } from "@testing-library/react";
+
 import { Ingredients } from "./Ingredients";
 
-const sampleIngredientsList = [
-  "sampleIngredient1",
-  "sampleIngredient2",
-  "sampleIngredient3",
-];
+const sampleIngredientsList = ["sampleIngredient1", "sampleIngredient2", "sampleIngredient3"];
 
 describe("Ingredients", () => {
   it("should render all ingredients", () => {

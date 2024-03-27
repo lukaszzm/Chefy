@@ -1,7 +1,9 @@
 import type { NextApiRequest, NextApiResponse } from "next";
+
 import bcrypt from "bcrypt";
-import { withAuth, withMethods, withValidation } from "@/api-helpers";
 import { z } from "zod";
+
+import { withAuth, withMethods, withValidation } from "@/api-helpers";
 import {
   updateName,
   updatePreferredCategories,
@@ -23,22 +25,14 @@ const schema = z
 type RequestBody = z.infer<typeof schema>;
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  const {
-    name,
-    preferredCategories,
-    preferredAreas,
-    currentPassword,
-    newPassword,
-  }: RequestBody = req.body;
+  const { name, preferredCategories, preferredAreas, currentPassword, newPassword }: RequestBody = req.body;
   const email = req.headers.email as string;
 
   try {
     if (name) {
       await updateName(email, name);
 
-      return res
-        .status(200)
-        .json({ message: "Success! Your name has been changed." });
+      return res.status(200).json({ message: "Success! Your name has been changed." });
     }
 
     if (preferredCategories) {
@@ -52,9 +46,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     if (preferredAreas) {
       await updatePreferredAreas(email, preferredAreas);
 
-      return res
-        .status(200)
-        .json({ message: "Success! Your preferred areas has been changed." });
+      return res.status(200).json({ message: "Success! Your preferred areas has been changed." });
     }
 
     if (currentPassword && newPassword) {
@@ -62,25 +54,17 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
       if (!user) throw new Error("Cannot find the user.");
 
-      const result = user.password
-        ? await bcrypt.compare(currentPassword, user.password)
-        : false;
+      const result = user.password ? await bcrypt.compare(currentPassword, user.password) : false;
 
-      if (!result)
-        return res.status(401).json({ message: "Invalid password." });
+      if (!result) return res.status(401).json({ message: "Invalid password." });
 
       await updatePassword(email, newPassword);
 
-      return res
-        .status(200)
-        .json({ message: "Success! Your password has been changed." });
+      return res.status(200).json({ message: "Success! Your password has been changed." });
     }
   } catch (err) {
     return res.status(500).json({ message: "Something went wrong." });
   }
 };
 
-export default withMethods(
-  ["PATCH"],
-  withAuth(withValidation(schema, handler))
-);
+export default withMethods(["PATCH"], withAuth(withValidation(schema, handler)));

@@ -1,19 +1,22 @@
 import { useState } from "react";
-import { FieldValues, useForm } from "react-hook-form";
-import { z } from "zod";
+
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useMutation } from "@tanstack/react-query";
+import type { DefaultValues, FieldValues } from "react-hook-form";
+import { useForm } from "react-hook-form";
+import type { z } from "zod";
+
 import type { ApiResponse } from "@/interfaces";
 import { queryClient } from "@/lib/queryClient";
-import { useMutation } from "@tanstack/react-query";
 import { updateUser } from "@/queries/api/updateUser";
 
-interface InitialProps {
+interface InitialProps<T extends FieldValues> {
   schema?: z.AnyZodObject;
-  defaultValues?: any;
+  defaultValues?: DefaultValues<T>;
   refetchRecipes?: boolean;
 }
 
-export const useSettingsForm = <T extends FieldValues>(props: InitialProps) => {
+export const useSettingsForm = <T extends FieldValues>(props: InitialProps<T>) => {
   const { schema, defaultValues, refetchRecipes } = props;
 
   const {

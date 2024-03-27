@@ -1,5 +1,6 @@
-import classNames from "classnames";
 import React from "react";
+
+import classNames from "classnames";
 import type { FieldError } from "react-hook-form";
 
 interface InputProps {
@@ -12,26 +13,15 @@ interface InputProps {
 
 export const Input = React.forwardRef<HTMLInputElement, InputProps>(
   ({ type, placeholder, error, name, id, ...rest }, ref) => {
-    const inputStyles = classNames(
-      "w-full p-2 bg-gray-100 rounded border focus:outline-none",
-      {
-        "border-red-500": error,
-        "border-gray-200": !error,
-      }
-    );
+    const inputStyles = classNames("w-full p-2 bg-gray-100 rounded border focus:outline-none", {
+      "border-red-500": error,
+      "border-gray-200": !error,
+    });
 
     return (
       <>
-        <input
-          ref={ref}
-          type={type}
-          placeholder={placeholder}
-          className={inputStyles}
-          name={name}
-          id={id}
-          {...rest}
-        />
-        {error && <p className="text-red-500 px-1 text-xs">{error.message}</p>}
+        <input className={inputStyles} id={id} name={name} placeholder={placeholder} ref={ref} type={type} {...rest} />
+        {error && <p className="px-1 text-xs text-red-500">{error.message}</p>}
       </>
     );
   }

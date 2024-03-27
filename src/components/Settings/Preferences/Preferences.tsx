@@ -1,6 +1,6 @@
+import { Areas } from "@/components/Settings/Areas";
+import { Categories } from "@/components/Settings/Categories";
 import type { Area, Category } from "@/interfaces";
-import { Areas } from "../Areas";
-import { Categories } from "../Categories";
 
 interface PreferencesProps {
   allCategories: Category[];
@@ -9,18 +9,10 @@ interface PreferencesProps {
   defaultAreas: Area[];
 }
 
-export const Preferences = ({
-  allCategories,
-  allAreas,
-  defaultCategories,
-  defaultAreas,
-}: PreferencesProps) => {
+export const Preferences = ({ allCategories, allAreas, defaultCategories, defaultAreas }: PreferencesProps) => {
   return (
     <>
-      <Categories
-        allCategories={allCategories}
-        checkedByDefaultCategories={defaultCategories}
-      />
+      <Categories allCategories={allCategories} checkedByDefaultCategories={defaultCategories} />
       <Areas allAreas={allAreas} checkedByDefaultAreas={defaultAreas} />
     </>
   );

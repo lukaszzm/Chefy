@@ -1,18 +1,12 @@
-import { Button } from "@/components/ui/button";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
 import { SignInForm } from "@/components/auth/sign-in/form";
+import { Button } from "@/components/ui/button";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 
 export const SignInDialog = () => {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button size="lg" className="text-base">
+        <Button className="text-base" size="lg">
           Sign In
         </Button>
       </DialogTrigger>

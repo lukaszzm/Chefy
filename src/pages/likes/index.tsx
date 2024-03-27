@@ -1,11 +1,13 @@
-import { GetServerSideProps } from "next";
+import type { GetServerSideProps } from "next";
+
 import { getServerSession } from "next-auth";
-import { authOptions } from "../api/auth/[...nextauth]";
-import type { Recipe } from "@/interfaces";
-import { Pagination } from "@/components/Likes/Pagination";
+
 import { LikedRecipe } from "@/components/Likes/LikedRecipe";
-import { Title } from "@/components/UI/Title";
+import { Pagination } from "@/components/Likes/Pagination";
 import { ContentWrapper } from "@/components/UI/ContentWrapper";
+import { Title } from "@/components/UI/Title";
+import type { Recipe } from "@/interfaces";
+import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import { getLikedRecipes } from "@/queries/db/recipe";
 
 interface LikesPageProps {
@@ -20,25 +22,21 @@ const LikesPage = ({ recipes, currentPage, pageCount }: LikesPageProps) => {
       <Title>Your liked recipes</Title>
       {recipes.length > 0 ? (
         <>
-          {recipes.map(
-            ({ id, title, area, category, ingredients, instructions }) => (
-              <LikedRecipe
-                key={id}
-                id={id}
-                title={title}
-                area={area.name}
-                category={category.name}
-                ingredients={ingredients}
-                instructions={instructions}
-              />
-            )
-          )}
+          {recipes.map(({ id, title, area, category, ingredients, instructions }) => (
+            <LikedRecipe
+              area={area.name}
+              category={category.name}
+              id={id}
+              ingredients={ingredients}
+              instructions={instructions}
+              key={id}
+              title={title}
+            />
+          ))}
           <Pagination currentPage={currentPage} pageCount={pageCount} />
         </>
       ) : (
-        <p className="font-medium text-gray-500 my-auto">
-          You don&apos;t have any recipes yet.
-        </p>
+        <p className="my-auto font-medium text-gray-500">You don&apos;t have any recipes yet.</p>
       )}
     </ContentWrapper>
   );
@@ -61,9 +59,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   let page = 1;
 
   if (context.query.page)
-    page = Array.isArray(context.query.page)
-      ? parseInt(context.query.page[0]) || 1
-      : parseInt(context.query.page) || 1;
+    page = Array.isArray(context.query.page) ? parseInt(context.query.page[0]) || 1 : parseInt(context.query.page) || 1;
 
   const recipes = await getLikedRecipes(userEmail, page);
   const pageCount = Math.ceil(recipes[0] / 5);

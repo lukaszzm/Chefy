@@ -1,9 +1,9 @@
-import { UserSettingsSchema } from "@/schemas/UserSettingsSchema";
+import { Alert } from "@/components/UI/Alert/Alert";
+import { Button } from "@/components/UI/Button/Button";
+import { Input } from "@/components/UI/Input/Input";
+import { Label } from "@/components/UI/Label/Label";
 import { useSettingsForm } from "@/hooks/useSettingsForm";
-import { Alert } from "@/components/UI/Alert";
-import { Button } from "@/components/UI/Button";
-import { Label } from "@/components/UI/Label";
-import { Input } from "@/components/UI/Input";
+import { UserSettingsSchema } from "@/schemas/UserSettingsSchema";
 
 interface AccountProps {
   name: string;
@@ -22,25 +22,11 @@ export const Account = ({ name }: AccountProps) => {
   });
 
   return (
-    <form onSubmit={submitFn} className="grid gap-1 text-left m-2">
+    <form className="m-2 grid gap-1 text-left" onSubmit={submitFn}>
       <Label htmlFor="name">Name</Label>
-      <Input
-        {...register("name")}
-        type="text"
-        placeholder="Your name"
-        error={errors.name}
-        id="name"
-      />
-      {apiResponse && (
-        <Alert variant={apiResponse.isError ? "error" : "success"}>
-          {apiResponse.text}
-        </Alert>
-      )}
-      <Button
-        variant="primary"
-        disabled={!isValid || !isDirty}
-        isLoading={isPending}
-      >
+      <Input {...register("name")} error={errors.name} id="name" placeholder="Your name" type="text" />
+      {apiResponse && <Alert variant={apiResponse.isError ? "error" : "success"}>{apiResponse.text}</Alert>}
+      <Button disabled={!isValid || !isDirty} isLoading={isPending} variant="primary">
         Save
       </Button>
     </form>

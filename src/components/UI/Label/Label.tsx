@@ -5,7 +5,7 @@ interface LabelProps {
 
 export const Label = ({ children, htmlFor }: LabelProps) => {
   return (
-    <label htmlFor={htmlFor} className="px-2 font-medium text-gray-700">
+    <label className="px-2 font-medium text-gray-700" htmlFor={htmlFor}>
       {children}
     </label>
   );

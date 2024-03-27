@@ -1,6 +1,8 @@
 import { render, screen, within } from "@testing-library/react";
-import { RecipeDetails } from "./RecipeDetails";
+
 import { createWrapper } from "@/utils/createWrapper";
+
+import { RecipeDetails } from "./RecipeDetails";
 
 jest.mock("next/router", () => require("next-router-mock"));
 

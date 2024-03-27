@@ -1,5 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+
 import { Modal } from "./Modal";
 
 const modalRoot = document.createElement("div");
@@ -10,7 +11,7 @@ describe("Modal", () => {
   it("should render modal", async () => {
     const mockCloseModal = jest.fn();
     render(
-      <Modal title="Test" closeModal={mockCloseModal} isModalOpen={true}>
+      <Modal closeModal={mockCloseModal} isModalOpen={true} title="Test">
         <div>content</div>
       </Modal>
     );
@@ -29,7 +30,7 @@ describe("Modal", () => {
   it("should not render modal when isModalOpen is false", async () => {
     const mockCloseModal = jest.fn();
     render(
-      <Modal title="Test" closeModal={mockCloseModal} isModalOpen={false}>
+      <Modal closeModal={mockCloseModal} isModalOpen={false} title="Test">
         <div>content</div>
       </Modal>
     );
@@ -43,7 +44,7 @@ describe("Modal", () => {
     const mockCloseModal = jest.fn();
     const user = userEvent.setup();
     render(
-      <Modal title="Test" closeModal={mockCloseModal} isModalOpen={true}>
+      <Modal closeModal={mockCloseModal} isModalOpen={true} title="Test">
         <div>content</div>
       </Modal>
     );

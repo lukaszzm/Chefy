@@ -6,28 +6,24 @@ interface ButtonsProps {
   disabled?: boolean;
 }
 
-export const Buttons = ({
-  likeHandler,
-  dislikeHandler,
-  disabled,
-}: ButtonsProps) => {
+export const Buttons = ({ likeHandler, dislikeHandler, disabled }: ButtonsProps) => {
   return (
-    <div className="w-full flex justify-around border-t border-t-gray mt-auto">
+    <div className="border-t-gray mt-auto flex w-full justify-around border-t">
       <button
         aria-label="dislike"
+        className="m-2 flex h-20 w-20 items-center justify-center rounded-full bg-red-400 text-lg font-medium text-white shadow-sm transition duration-150 ease-in-out  hover:bg-red-500 focus:outline-none focus:ring-0 disabled:pointer-events-none disabled:opacity-40 disabled:hover:bg-red-400"
         disabled={disabled}
         onClick={dislikeHandler}
-        className="flex m-2 justify-center items-center w-20 h-20 font-medium text-lg text-white bg-red-400 rounded-full shadow-sm hover:bg-red-500 disabled:opacity-40 disabled:hover:bg-red-400  disabled:pointer-events-none focus:outline-none focus:ring-0 transition duration-150 ease-in-out"
       >
-        <BiX size="42px" height="1x" />
+        <BiX height="1x" size="42px" />
       </button>
       <button
         aria-label="like"
+        className="m-2 flex h-20 w-20 items-center justify-center rounded-full bg-green-400  text-lg font-medium text-white shadow-sm transition duration-150 ease-in-out  hover:bg-green-500 focus:outline-none focus:ring-0 disabled:pointer-events-none disabled:opacity-40 disabled:hover:bg-green-400"
         disabled={disabled}
         onClick={likeHandler}
-        className="flex m-2 justify-center items-center w-20 h-20 font-medium text-lg  text-white bg-green-400 rounded-full shadow-sm hover:bg-green-500 disabled:opacity-40 disabled:hover:bg-green-400  disabled:pointer-events-none focus:outline-none focus:ring-0 transition duration-150 ease-in-out"
       >
-        <BiHeart size="32px" height="1x" />
+        <BiHeart height="1x" size="32px" />
       </button>
     </div>
   );

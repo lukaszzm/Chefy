@@ -1,5 +1,6 @@
-import { prisma } from "@/lib/prisma";
 import bcrypt from "bcrypt";
+
+import { prisma } from "@/lib/prisma";
 
 export const updateName = async (email: string, name: string) =>
   await prisma.user.update({
@@ -11,17 +12,12 @@ export const updateName = async (email: string, name: string) =>
     },
   });
 
-export const updatePreferredCategories = async (
-  email: string,
-  preferredCategories: string[]
-) => {
+export const updatePreferredCategories = async (email: string, preferredCategories: string[]) => {
   const allCategoriesIds = await prisma.category.findMany({
     select: { id: true },
   });
 
-  const notPreferredCategories = allCategoriesIds.filter(
-    (el: { id: string }) => !preferredCategories.includes(el.id)
-  );
+  const notPreferredCategories = allCategoriesIds.filter((el: { id: string }) => !preferredCategories.includes(el.id));
 
   return await prisma.user.update({
     where: {
@@ -30,24 +26,18 @@ export const updatePreferredCategories = async (
     data: {
       preferredCategories: {
         connect: preferredCategories.map((el) => ({ id: el })) || [],
-        disconnect:
-          notPreferredCategories.map((el: any) => ({ id: el.id })) || [],
+        disconnect: notPreferredCategories.map((el) => ({ id: el.id })) || [],
       },
     },
   });
 };
 
-export const updatePreferredAreas = async (
-  email: string,
-  preferredAreas: string[]
-) => {
+export const updatePreferredAreas = async (email: string, preferredAreas: string[]) => {
   const allAreasIds = await prisma.area.findMany({
     select: { id: true },
   });
 
-  const notPreferredAreas = allAreasIds.filter(
-    (el: { id: string }) => !preferredAreas.includes(el.id)
-  );
+  const notPreferredAreas = allAreasIds.filter((el: { id: string }) => !preferredAreas.includes(el.id));
 
   return await prisma.user.update({
     where: {
@@ -56,7 +46,7 @@ export const updatePreferredAreas = async (
     data: {
       preferredAreas: {
         connect: preferredAreas.map((el) => ({ id: el })) || [],
-        disconnect: notPreferredAreas.map((el: any) => ({ id: el.id })) || [],
+        disconnect: notPreferredAreas.map((el) => ({ id: el.id })) || [],
       },
     },
   });
@@ -86,11 +76,7 @@ export const getPreferences = async (email: string) =>
     },
   });
 
-export const createUser = async (
-  name: string,
-  email: string,
-  password: string
-) => {
+export const createUser = async (name: string, email: string, password: string) => {
   const allCategoriesIds = await prisma.category.findMany({
     select: { id: true },
   });
