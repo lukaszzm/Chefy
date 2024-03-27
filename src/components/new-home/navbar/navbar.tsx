@@ -1,9 +1,9 @@
 import { SignInDialog } from "@/components/auth/sign-in/dialog";
-import { Logo } from "@/components/ui/new-logo";
+import { Logo } from "@/components/ui/logo";
 
 export const Navbar = () => {
   return (
-    <nav className="w-full flex justify-between p-5 max-w-7xl mx-auto items-center">
+    <nav className="mx-auto flex w-full max-w-7xl items-center justify-between p-5">
       <Logo withText />
       <SignInDialog />
     </nav>

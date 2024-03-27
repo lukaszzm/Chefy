@@ -1,7 +1,7 @@
-import { Alert } from "@/components/UI/Alert/Alert";
-import { Button } from "@/components/UI/Button/Button";
-import { Subtitle } from "@/components/UI/Subtitle";
-import { Tag } from "@/components/UI/Tag";
+import { Alert } from "@/components/OLD_UI/Alert/Alert";
+import { Button } from "@/components/OLD_UI/Button/Button";
+import { Subtitle } from "@/components/OLD_UI/Subtitle";
+import { Tag } from "@/components/OLD_UI/Tag";
 import { useDeleteLike } from "@/hooks/useDeleteLike";
 import { generatePDF } from "@/utils/generatePDF";
 

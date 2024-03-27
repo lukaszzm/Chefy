@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
-import { PasswordInput } from "@/components/UI/PasswordInput";
+import { PasswordInput } from "@/components/OLD_UI/PasswordInput";
 
 describe("PasswordInput", () => {
   it("should render initially as password", () => {

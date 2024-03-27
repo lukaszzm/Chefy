@@ -5,7 +5,7 @@ import { getServerSession } from "next-auth";
 import { useSession } from "next-auth/react";
 
 import { Home } from "@/components/Home";
-import { LoadingScreen } from "@/components/UI/LoadingScreen";
+import { LoadingScreen } from "@/components/OLD_UI/LoadingScreen";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
 
 const HomePage = () => {

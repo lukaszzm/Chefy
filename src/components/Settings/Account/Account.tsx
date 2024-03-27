@@ -1,7 +1,7 @@
-import { Alert } from "@/components/UI/Alert/Alert";
-import { Button } from "@/components/UI/Button/Button";
-import { Input } from "@/components/UI/Input/Input";
-import { Label } from "@/components/UI/Label/Label";
+import { Alert } from "@/components/OLD_UI/Alert/Alert";
+import { Button } from "@/components/OLD_UI/Button/Button";
+import { Input } from "@/components/OLD_UI/Input/Input";
+import { Label } from "@/components/OLD_UI/Label/Label";
 import { useSettingsForm } from "@/hooks/useSettingsForm";
 import { UserSettingsSchema } from "@/schemas/UserSettingsSchema";
 

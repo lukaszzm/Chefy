@@ -3,10 +3,10 @@ import { Category } from "@/components/Explore/Category";
 import { Ingredients } from "@/components/Explore/Ingredients";
 import { Instruction } from "@/components/Explore/Instruction";
 import { SwipeCard } from "@/components/Explore/SwipeCard";
-import { ContentWrapper } from "@/components/UI/ContentWrapper";
-import { Notification } from "@/components/UI/Notification";
-import { ResponsiveImage } from "@/components/UI/ResponsiveImage";
-import { Title } from "@/components/UI/Title";
+import { ContentWrapper } from "@/components/OLD_UI/ContentWrapper";
+import { Notification } from "@/components/OLD_UI/Notification";
+import { ResponsiveImage } from "@/components/OLD_UI/ResponsiveImage";
+import { Title } from "@/components/OLD_UI/Title";
 import { useRecipe } from "@/hooks/useRecipe";
 import type { Recipe as IRecipe } from "@/interfaces";
 

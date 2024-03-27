@@ -1,5 +1,5 @@
 import { Navbar } from "@/components/Navbar";
-import { Container } from "@/components/UI/Container";
+import { Container } from "@/components/OLD_UI/Container";
 
 interface DashboardLayoutProps {
   children: React.ReactNode;
@@ -7,7 +7,7 @@ interface DashboardLayoutProps {
 
 export const DashboardLayout = ({ children }: DashboardLayoutProps) => {
   return (
-    <div className="w-full h-full overflow-auto flex">
+    <div className="flex h-full w-full overflow-auto">
       <Navbar />
       <Container>{children}</Container>
     </div>

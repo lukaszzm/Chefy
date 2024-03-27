@@ -2,7 +2,7 @@ import { BiInfoCircle } from "react-icons/bi";
 
 import { Category } from "@/components/Explore/Category";
 import { RecipeDetails } from "@/components/Likes/RecipeDetails";
-import { Modal } from "@/components/UI/Modal";
+import { Modal } from "@/components/OLD_UI/Modal";
 import { useModal } from "@/hooks/useModal";
 
 interface LikedRecipeProps {

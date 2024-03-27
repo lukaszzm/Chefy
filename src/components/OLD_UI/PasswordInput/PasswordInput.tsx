@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import type { FieldError } from "react-hook-form";
 import { BiHide, BiShow } from "react-icons/bi";
 
-import { Input } from "@/components/UI/Input/Input";
+import { Input } from "@/components/OLD_UI/Input/Input";
 
 interface PasswordInputProps {
   placeholder: string;

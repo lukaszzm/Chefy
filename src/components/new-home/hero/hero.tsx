@@ -1,5 +1,5 @@
 import { FoodOverlay } from "@/components/new-home/food-overlay";
-import { Button } from "@/components/UI/Button";
+import { Button } from "@/components/ui/Button";
 
 export const Hero = () => {
   return (

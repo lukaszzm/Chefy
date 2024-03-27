@@ -1,5 +1,5 @@
 import { SignInForm } from "@/components/auth/sign-in/form";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/Button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 
 export const SignInDialog = () => {

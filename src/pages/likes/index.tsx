@@ -4,8 +4,8 @@ import { getServerSession } from "next-auth";
 
 import { LikedRecipe } from "@/components/Likes/LikedRecipe";
 import { Pagination } from "@/components/Likes/Pagination";
-import { ContentWrapper } from "@/components/UI/ContentWrapper";
-import { Title } from "@/components/UI/Title";
+import { ContentWrapper } from "@/components/OLD_UI/ContentWrapper";
+import { Title } from "@/components/OLD_UI/Title";
 import type { Recipe } from "@/interfaces";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import { getLikedRecipes } from "@/queries/db/recipe";

@@ -2,7 +2,7 @@ import { BiHeart, BiGlobe, BiLogOut, BiSlider } from "react-icons/bi";
 
 import { LogoutModal } from "@/components/Navbar/LogoutModal";
 import { NavbarItem } from "@/components/Navbar/NavbarItem";
-import { Logo } from "@/components/UI/Logo";
+import { Logo } from "@/components/OLD_UI/Logo";
 import { useModal } from "@/hooks/useModal";
 
 export const Navbar = () => {

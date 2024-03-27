@@ -1,7 +1,7 @@
-import { Alert } from "@/components/UI/Alert/Alert";
-import { Button } from "@/components/UI/Button/Button";
-import { Checkbox } from "@/components/UI/Checkbox/Checkbox";
-import { Label } from "@/components/UI/Label/Label";
+import { Alert } from "@/components/OLD_UI/Alert/Alert";
+import { Button } from "@/components/OLD_UI/Button/Button";
+import { Checkbox } from "@/components/OLD_UI/Checkbox/Checkbox";
+import { Label } from "@/components/OLD_UI/Label/Label";
 import { useSettingsForm } from "@/hooks/useSettingsForm";
 import type { Category } from "@/interfaces";
 import { isItemChosen } from "@/utils/isItemChosen";

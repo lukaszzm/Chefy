@@ -1,7 +1,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { BiX } from "react-icons/bi";
 
-import { Portal } from "@/components/UI/Portal";
+import { Portal } from "@/components/OLD_UI/Portal";
 
 interface NotificationProps {
   children: React.ReactNode;

@@ -1,7 +1,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 
-import { Portal } from "@/components/UI/Portal";
-import { Title } from "@/components/UI/Title";
+import { Portal } from "@/components/OLD_UI/Portal";
+import { Title } from "@/components/OLD_UI/Title";
 
 interface ModalProps {
   title: string;

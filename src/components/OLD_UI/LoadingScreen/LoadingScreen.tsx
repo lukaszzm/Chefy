@@ -1,4 +1,4 @@
-import { LoadingSpinner } from "@/components/UI/LoadingSpinner";
+import { LoadingSpinner } from "@/components/OLD_UI/LoadingSpinner";
 
 export const LoadingScreen = () => {
   return (

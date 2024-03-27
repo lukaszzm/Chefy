@@ -1,7 +1,7 @@
 import { signOut } from "next-auth/react";
 
-import { Button } from "@/components/UI/Button/Button";
-import { Modal } from "@/components/UI/Modal";
+import { Button } from "@/components/OLD_UI/Button/Button";
+import { Modal } from "@/components/OLD_UI/Modal";
 
 interface LogoutModalProps {
   isModalOpen: boolean;
