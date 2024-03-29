@@ -1,37 +1,36 @@
-import { useState } from "react";
+import { useState, useTransition } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { signIn } from "next-auth/react";
 import { useForm } from "react-hook-form";
 
-import type { ApiResponse } from "@/interfaces";
+import { signIn } from "@/actions/auth/sign-in";
 import { signInSchema, type SignInValues } from "@/schemas/auth/sign-in-schema";
 
 export const useSignIn = () => {
+  const [isPending, startTransition] = useTransition();
+  const [credentialsError, setCredentialsError] = useState<string | null>(null);
+
   const form = useForm<SignInValues>({
     resolver: zodResolver(signInSchema),
     mode: "onChange",
   });
-  const [apiResponse, setApiResponse] = useState<ApiResponse | null>(null);
 
-  const onSubmit = async (values: SignInValues) => {
-    const { email, password } = values;
-    const response = await signIn("credentials", {
-      email: email,
-      password: password,
-      redirect: false,
+  const onSubmit = form.handleSubmit((values: SignInValues) => {
+    setCredentialsError(null);
+
+    startTransition(async () => {
+      const res = await signIn(values);
+
+      if (res.error) {
+        setCredentialsError(res.error);
+      }
     });
-
-    if (!response || !response.ok)
-      setApiResponse({
-        isError: true,
-        text: response?.error || "Something went wrong.",
-      });
-  };
+  });
 
   return {
     form,
     onSubmit,
-    apiResponse,
+    isPending,
+    credentialsError,
   };
 };

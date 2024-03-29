@@ -1,23 +1,19 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { ErrorAlert } from "@/components/ui/error-alert";
 import { Form, FormField, FormItem, FormLabel, FormControl, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useSignUp } from "@/hooks/use-sign-up";
 
-// TODO: implement sign up logic
 export const SignUpForm = () => {
-  const form = useSignUp();
-  const {
-    control,
-    formState: { isValid },
-  } = form;
+  const { form, onSubmit, isPending, credentialsError } = useSignUp();
 
   return (
     <Form {...form}>
-      <form className="space-y-4">
+      <form className="space-y-4" onSubmit={onSubmit}>
         <FormField
-          control={control}
+          control={form.control}
           name="name"
           render={({ field }) => (
             <FormItem>
@@ -30,7 +26,7 @@ export const SignUpForm = () => {
           )}
         />
         <FormField
-          control={control}
+          control={form.control}
           name="email"
           render={({ field }) => (
             <FormItem>
@@ -43,7 +39,7 @@ export const SignUpForm = () => {
           )}
         />
         <FormField
-          control={control}
+          control={form.control}
           name="password"
           render={({ field }) => (
             <FormItem>
@@ -55,7 +51,9 @@ export const SignUpForm = () => {
             </FormItem>
           )}
         />
-        <Button className="w-full" disabled={!isValid}>
+
+        <ErrorAlert error={credentialsError} />
+        <Button className="w-full" isLoading={isPending}>
           Create An Account
         </Button>
       </form>

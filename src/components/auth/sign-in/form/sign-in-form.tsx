@@ -1,24 +1,19 @@
 "use client";
 
-import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
+import { ErrorAlert } from "@/components/ui/error-alert";
 import { Form, FormLabel, FormField, FormItem, FormControl, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useSignIn } from "@/hooks/use-sign-in";
 
-// TODO: implement sign in logic
 export const SignInForm = () => {
-  const { form, apiResponse } = useSignIn();
-  const {
-    control,
-    formState: { isValid },
-  } = form;
+  const { form, onSubmit, isPending, credentialsError } = useSignIn();
 
   return (
     <Form {...form}>
-      <form className="space-y-4">
+      <form className="space-y-4" onSubmit={onSubmit}>
         <FormField
-          control={control}
+          control={form.control}
           name="email"
           render={({ field }) => (
             <FormItem>
@@ -31,7 +26,7 @@ export const SignInForm = () => {
           )}
         />
         <FormField
-          control={control}
+          control={form.control}
           name="password"
           render={({ field }) => (
             <FormItem>
@@ -43,12 +38,9 @@ export const SignInForm = () => {
             </FormItem>
           )}
         />
-        {apiResponse && (
-          <Alert variant="destructive">
-            <AlertDescription>{apiResponse.text}</AlertDescription>
-          </Alert>
-        )}
-        <Button className="w-full" disabled={!isValid}>
+
+        <ErrorAlert error={credentialsError} />
+        <Button className="w-full" isLoading={isPending}>
           Sign In
         </Button>
       </form>

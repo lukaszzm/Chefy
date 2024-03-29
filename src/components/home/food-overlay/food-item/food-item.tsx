@@ -1,6 +1,6 @@
 import { cva, type VariantProps } from "class-variance-authority";
 
-import { cn } from "@/lib/utils/cn";
+import { cn } from "@/utils/cn";
 
 const foodItemVariants = cva("absolute size-16 hidden place-items-center p-2 border rounded-lg hidden xl:grid", {
   variants: {
