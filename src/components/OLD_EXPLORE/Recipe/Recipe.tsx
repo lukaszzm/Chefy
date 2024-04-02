@@ -1,8 +1,8 @@
-import { Buttons } from "@/components/Explore/Buttons";
-import { Category } from "@/components/Explore/Category";
-import { Ingredients } from "@/components/Explore/Ingredients";
-import { Instruction } from "@/components/Explore/Instruction";
-import { SwipeCard } from "@/components/Explore/SwipeCard";
+import { Buttons } from "@/components/OLD_EXPLORE/Buttons";
+import { Category } from "@/components/OLD_EXPLORE/Category";
+import { Ingredients } from "@/components/OLD_EXPLORE/Ingredients";
+import { Instruction } from "@/components/OLD_EXPLORE/Instruction";
+import { SwipeCard } from "@/components/OLD_EXPLORE/SwipeCard";
 import { ContentWrapper } from "@/components/OLD_UI/ContentWrapper";
 import { Notification } from "@/components/OLD_UI/Notification";
 import { ResponsiveImage } from "@/components/OLD_UI/ResponsiveImage";
