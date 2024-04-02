@@ -13,6 +13,10 @@ export const useSignIn = () => {
   const form = useForm<SignInValues>({
     resolver: zodResolver(signInSchema),
     mode: "onChange",
+    defaultValues: {
+      email: "",
+      password: "",
+    },
   });
 
   const onSubmit = form.handleSubmit((values: SignInValues) => {
