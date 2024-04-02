@@ -87,7 +87,7 @@ export const userLikedRecipe = pgTable(
 );
 
 export const userLikedRecipeRelations = relations(userLikedRecipe, ({ one }) => ({
-  group: one(recipe, {
+  recipe: one(recipe, {
     fields: [userLikedRecipe.recipeId],
     references: [recipe.id],
   }),
@@ -115,7 +115,7 @@ export const userDislikedRecipe = pgTable(
 );
 
 export const userDislikedRecipeRelations = relations(userDislikedRecipe, ({ one }) => ({
-  group: one(recipe, {
+  recipe: one(recipe, {
     fields: [userDislikedRecipe.recipeId],
     references: [recipe.id],
   }),
