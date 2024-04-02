@@ -56,7 +56,9 @@ export const recipe = pgTable("recipe", {
   ingredients: text("ingredients").array().notNull(),
 });
 
-export const recipeRelations = relations(recipe, ({ one, many }) => ({
+export const recipeRelations = relations(recipe, ({ many, one }) => ({
+  likedBy: many(userLikedRecipe),
+  dislikedBy: many(userDislikedRecipe),
   category: one(category, {
     fields: [recipe.categoryId],
     references: [category.id],
@@ -65,8 +67,6 @@ export const recipeRelations = relations(recipe, ({ one, many }) => ({
     fields: [recipe.areaId],
     references: [area.id],
   }),
-  likedBy: many(userLikedRecipe),
-  dislikedBy: many(userDislikedRecipe),
 }));
 
 export const userLikedRecipe = pgTable(
@@ -78,10 +78,6 @@ export const userLikedRecipe = pgTable(
     recipeId: text("recipe_id")
       .notNull()
       .references(() => recipe.id),
-    likedAt: timestamp("liked_at", {
-      withTimezone: true,
-      mode: "date",
-    }).notNull(),
   },
   (t) => ({
     pk: primaryKey({
@@ -89,6 +85,17 @@ export const userLikedRecipe = pgTable(
     }),
   })
 );
+
+export const userLikedRecipeRelations = relations(userLikedRecipe, ({ one }) => ({
+  group: one(recipe, {
+    fields: [userLikedRecipe.recipeId],
+    references: [recipe.id],
+  }),
+  user: one(user, {
+    fields: [userLikedRecipe.userId],
+    references: [user.id],
+  }),
+}));
 
 export const userDislikedRecipe = pgTable(
   "user_disliked_recipe",
@@ -99,10 +106,6 @@ export const userDislikedRecipe = pgTable(
     recipeId: text("recipe_id")
       .notNull()
       .references(() => recipe.id),
-    likedAt: timestamp("liked_at", {
-      withTimezone: true,
-      mode: "date",
-    }).notNull(),
   },
   (t) => ({
     pk: primaryKey({
@@ -110,6 +113,17 @@ export const userDislikedRecipe = pgTable(
     }),
   })
 );
+
+export const userDislikedRecipeRelations = relations(userDislikedRecipe, ({ one }) => ({
+  group: one(recipe, {
+    fields: [userDislikedRecipe.recipeId],
+    references: [recipe.id],
+  }),
+  user: one(user, {
+    fields: [userDislikedRecipe.userId],
+    references: [user.id],
+  }),
+}));
 
 export const userPreferredCategory = pgTable(
   "user_preferred_category",
@@ -128,6 +142,17 @@ export const userPreferredCategory = pgTable(
   })
 );
 
+export const userPreferredCategoryRelations = relations(userPreferredCategory, ({ one }) => ({
+  category: one(category, {
+    fields: [userPreferredCategory.categoryId],
+    references: [category.id],
+  }),
+  user: one(user, {
+    fields: [userPreferredCategory.userId],
+    references: [user.id],
+  }),
+}));
+
 export const userPreferredArea = pgTable(
   "user_preferred_area",
   {
@@ -144,3 +169,14 @@ export const userPreferredArea = pgTable(
     }),
   })
 );
+
+export const userPreferredAreaRelations = relations(userPreferredArea, ({ one }) => ({
+  area: one(area, {
+    fields: [userPreferredArea.areaId],
+    references: [area.id],
+  }),
+  user: one(user, {
+    fields: [userPreferredArea.userId],
+    references: [user.id],
+  }),
+}));
