@@ -53,7 +53,7 @@ export const recipe = pgTable("recipe", {
   categoryId: text("category_id").notNull(),
   areaId: text("area_id").notNull(),
   instructions: text("instructions").notNull(),
-  ingredients: text("ingredients").notNull().array(),
+  ingredients: text("ingredients").array().notNull(),
 });
 
 export const recipeRelations = relations(recipe, ({ one, many }) => ({
