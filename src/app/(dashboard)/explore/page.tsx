@@ -1,3 +1,13 @@
-export default function ExplorePage() {
-  return <h1>Explore</h1>;
+import { getSuggestedRecipes } from "@/actions/recipe/get-suggested-recipes";
+import { ExploreStack } from "@/components/explore/explore-stack";
+import { RecipesContextProvider } from "@/contexts/recipes/provider";
+
+export default async function ExplorePage() {
+  const suggestions = await getSuggestedRecipes();
+
+  return (
+    <RecipesContextProvider initialData={suggestions}>
+      <ExploreStack />
+    </RecipesContextProvider>
+  );
 }

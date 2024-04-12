@@ -1,3 +1,9 @@
+import { Container } from "@/components/ui/container";
+
 export default function LikesPage() {
-  return <h1>Likes</h1>;
+  return (
+    <Container>
+      <h1>Likes</h1>
+    </Container>
+  );
 }

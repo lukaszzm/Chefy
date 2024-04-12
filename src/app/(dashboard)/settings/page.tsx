@@ -1,3 +1,9 @@
+import { Container } from "@/components/ui/container";
+
 export default function SettingsPage() {
-  return <h1>Settings</h1>;
+  return (
+    <Container>
+      <h1>Settings</h1>
+    </Container>
+  );
 }

@@ -5,8 +5,9 @@ import { cn } from "@/utils/cn";
 
 export const LoadingSpinner = ({ className, ...props }: LucideProps) => {
   return (
-    <LoaderCircle className={cn("h-4 w-4 animate-spin", className)} role="status" {...props}>
+    <div className="flex items-center justify-center" role="status">
+      <LoaderCircle className={cn("size-4 animate-spin", className)} {...props} />
       <span className="sr-only">Loading...</span>
-    </LoaderCircle>
+    </div>
   );
 };

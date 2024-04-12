@@ -16,9 +16,7 @@ export default async function DashboardLayout({ children }: PropsWithChildren) {
   return (
     <div className="grid h-screen w-full bg-popover pb-16 sm:pb-0 sm:pl-20 lg:pl-52">
       <Sidebar />
-      <div className="flex h-full w-full items-center justify-center bg-background  ">
-        <main>{children}</main>
-      </div>
+      <main className="flex h-full w-full items-center justify-center bg-background">{children}</main>
     </div>
   );
 }
