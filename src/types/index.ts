@@ -4,8 +4,8 @@ export type Recipe = {
   imageSrc: string;
   ingredients: string[];
   instructions: string;
-  category: Category;
-  area: Area;
+  categoryId: string;
+  areaId: string;
 };
 
 export type Area = {
@@ -19,7 +19,7 @@ export type Category = {
 };
 
 export type SuggestedRecipe = {
-  recipe: Omit<Recipe, "category" | "area">;
+  recipe: Recipe;
   category: Category;
   area: Area;
 };

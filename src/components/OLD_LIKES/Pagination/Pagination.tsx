@@ -1,6 +1,6 @@
 import { FiChevronLeft, FiChevronRight, FiChevronsLeft, FiChevronsRight, FiMoreHorizontal } from "react-icons/fi";
 
-import { PaginationButton } from "@/components/Likes/PaginationButton";
+import { PaginationButton } from "@/components/OLD_LIKES/PaginationButton";
 
 interface PaginationProps {
   currentPage: number;

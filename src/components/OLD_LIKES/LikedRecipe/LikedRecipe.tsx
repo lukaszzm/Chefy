@@ -1,7 +1,7 @@
 import { BiInfoCircle } from "react-icons/bi";
 
 import { Category } from "@/components/OLD_EXPLORE/Category";
-import { RecipeDetails } from "@/components/Likes/RecipeDetails";
+import { RecipeDetails } from "@/components/OLD_LIKES/RecipeDetails";
 import { Modal } from "@/components/OLD_UI/Modal";
 import { useModal } from "@/hooks/useModal";
 

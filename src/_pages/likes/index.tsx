@@ -3,8 +3,8 @@ import type { GetServerSideProps } from "next";
 import { getServerSession } from "next-auth";
 
 import { authOptions } from "@/_pages/api/auth/[...nextauth]";
-import { LikedRecipe } from "@/components/Likes/LikedRecipe";
-import { Pagination } from "@/components/Likes/Pagination";
+import { LikedRecipe } from "@/components/OLD_LIKES/LikedRecipe";
+import { Pagination } from "@/components/OLD_LIKES/Pagination";
 import { ContentWrapper } from "@/components/OLD_UI/ContentWrapper";
 import { Title } from "@/components/OLD_UI/Title";
 import type { Recipe } from "@/interfaces";
