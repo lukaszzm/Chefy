@@ -1,5 +1,4 @@
 import { CircleEllipsis } from "lucide-react";
-import Image from "next/image";
 
 import { RecipeBadges } from "@/components/recipe/recipe-badges";
 import { Button } from "@/components/ui/button";
@@ -10,16 +9,9 @@ interface LikesItemProps extends Recipe {
   area: string;
 }
 
-export const LikesItem = ({ title, imageSrc, category, area }: LikesItemProps) => {
+export const LikesItem = ({ title, category, area }: LikesItemProps) => {
   return (
     <li className="flex items-center gap-2 rounded-md border border-border bg-background px-6 py-3">
-      <Image
-        alt={`Image of ${title}`}
-        className="hidden rounded-sm border border-border sm:block"
-        height={50}
-        src={imageSrc}
-        width={50}
-      />
       <div className="flex-1 space-y-1">
         <h2 className="font-medium">{title}</h2>
         <RecipeBadges area={area} category={category} size="xs" />

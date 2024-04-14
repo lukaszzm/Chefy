@@ -1,12 +1,14 @@
-import { getLikedRecipes } from "@/actions/recipe/get-liked-recipes";
 import { LikesItem } from "@/components/likes/likes-item";
+import type { SuggestedRecipe } from "@/types";
 
-export const LikesList = async () => {
-  const likes = await getLikedRecipes();
+interface LikesListProps {
+  recipes: SuggestedRecipe[];
+}
 
+export const LikesList = ({ recipes }: LikesListProps) => {
   return (
     <ul className="space-y-3">
-      {likes.map(({ recipe, category, area }) => (
+      {recipes.map(({ recipe, category, area }) => (
         <LikesItem area={area.name} category={category.name} key={recipe.id} {...recipe} />
       ))}
     </ul>
