@@ -10,12 +10,14 @@ interface UseActionProps<TValues, TData> {
   action: (values: TValues) => Promise<ActionResponse<TData>>;
   onSuccess?: (data: TData) => void;
   onError?: (error: string) => void;
+  refreshOnSuccess?: boolean;
 }
 
 export const useAction = <TValues = unknown, TData = unknown>({
   action,
   onError,
   onSuccess,
+  refreshOnSuccess = true,
 }: UseActionProps<TValues, TData>) => {
   const [state, dispatch] = useReducer(createActionReducer<TData>(), defaultState);
   const [, startTransition] = useTransition();
@@ -26,13 +28,15 @@ export const useAction = <TValues = unknown, TData = unknown>({
       if (res.ok) {
         onSuccess?.(res.data);
         dispatch({ type: ActionType.Success, data: res.data });
-        refresh();
+        if (refreshOnSuccess) {
+          refresh();
+        }
       } else {
         onError?.(res.error);
         dispatch({ type: ActionType.Error, error: res.error });
       }
     },
-    [onError, onSuccess, refresh]
+    [onError, onSuccess, refresh, refreshOnSuccess]
   );
 
   const execute = useCallback(
