@@ -16,7 +16,7 @@ export const SidebarLink = ({ href, icon, label }: SidebarLinkProps) => {
   const pathname = usePathname();
 
   return (
-    <SidebarButton isActive={pathname === href} label={label} asChild>
+    <SidebarButton isActive={pathname.includes(href)} label={label} asChild>
       <Link href={href}>
         <SidebarText icon={icon} label={label} />
       </Link>

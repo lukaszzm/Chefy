@@ -5,4 +5,6 @@ export const routes = {
   explore: "/explore",
   likes: "/likes",
   settings: "/settings",
+  account: "/settings/account",
+  preferences: "/settings/preferences",
 } as const satisfies Record<string, string>;
