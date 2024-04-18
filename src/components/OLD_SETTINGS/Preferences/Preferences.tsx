@@ -1,5 +1,5 @@
-import { Areas } from "@/components/Settings/Areas";
-import { Categories } from "@/components/Settings/Categories";
+import { Areas } from "@/components/OLD_SETTINGS/Areas";
+import { Categories } from "@/components/OLD_SETTINGS/Categories";
 import type { Area, Category } from "@/interfaces";
 
 interface PreferencesProps {
