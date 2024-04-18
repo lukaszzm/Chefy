@@ -23,3 +23,15 @@ export type SuggestedRecipe = {
   category: Category;
   area: Area;
 };
+
+export type ActionError = {
+  ok: false;
+  error: string;
+};
+
+export type ActionSuccess<T> = {
+  ok: true;
+  data: T;
+};
+
+export type ActionResponse<T> = ActionError | ActionSuccess<T>;
