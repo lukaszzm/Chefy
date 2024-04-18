@@ -1,1 +1,0 @@
-export { LikedRecipe } from "./LikedRecipe";
