@@ -4,23 +4,35 @@ import { ActionError } from "@/components/ui/action-error";
 import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { useNameForm } from "@/hooks/use-name-form";
+import { usePasswordForm } from "@/hooks/use-password-form";
 
-// TODO: add default name
-export const NameForm = () => {
-  const { form, onSubmit, isPending, error } = useNameForm();
+export const PasswordForm = () => {
+  const { form, onSubmit, isPending, error } = usePasswordForm();
 
   return (
     <Form {...form}>
       <form className="space-y-4" onSubmit={onSubmit}>
         <FormField
           control={form.control}
-          name="name"
+          name="currentPassword"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Name</FormLabel>
+              <FormLabel>Current password</FormLabel>
               <FormControl>
-                <Input placeholder="Your name" {...field} />
+                <Input placeholder="********" type="password" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="newPassword"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>New password</FormLabel>
+              <FormControl>
+                <Input placeholder="********" type="password" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>

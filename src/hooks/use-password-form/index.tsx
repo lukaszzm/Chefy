@@ -2,20 +2,22 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
-import { updateName } from "@/actions/user/update-name";
+import { updatePassword } from "@/actions/user/update-password";
 import { useAction } from "@/hooks/use-action";
-import { changeNameSchema, type ChangeNameValues } from "@/schemas/settings/name-schema";
+import type { ChangePasswordValues } from "@/schemas/settings/password-schema";
+import { changePasswordSchema } from "@/schemas/settings/password-schema";
 
-export const useNameForm = (defaultName?: string) => {
-  const form = useForm<ChangeNameValues>({
-    resolver: zodResolver(changeNameSchema),
+export const usePasswordForm = () => {
+  const form = useForm<ChangePasswordValues>({
+    resolver: zodResolver(changePasswordSchema),
     defaultValues: {
-      name: defaultName ?? "",
+      currentPassword: "",
+      newPassword: "",
     },
   });
 
   const { execute, isPending, error } = useAction({
-    action: updateName,
+    action: updatePassword,
     onSuccess: (data) => toast.success(data),
     refreshOnSuccess: false,
   });
