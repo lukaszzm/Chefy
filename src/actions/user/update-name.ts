@@ -10,7 +10,7 @@ import { errorResponse, successResponse } from "@/utils/action-response";
 export const updateName = async (name: string) => {
   const { user: authUser } = await validateRequest();
 
-  if (authUser) {
+  if (!authUser) {
     return errorResponse("Unauthorized");
   }
 
