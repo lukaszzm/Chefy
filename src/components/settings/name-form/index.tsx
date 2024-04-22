@@ -6,9 +6,12 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "@/components/ui/input";
 import { useNameForm } from "@/hooks/use-name-form";
 
-// TODO: add default name
-export const NameForm = () => {
-  const { form, onSubmit, isPending, error } = useNameForm();
+interface NameFormProps {
+  defaultName: string;
+}
+
+export const NameForm = ({ defaultName }: NameFormProps) => {
+  const { form, onSubmit, isPending, error } = useNameForm(defaultName);
 
   return (
     <Form {...form}>

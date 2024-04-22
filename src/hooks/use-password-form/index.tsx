@@ -19,7 +19,6 @@ export const usePasswordForm = () => {
   const { execute, isPending, error } = useAction({
     action: updatePassword,
     onSuccess: (data) => toast.success(data),
-    refreshOnSuccess: false,
   });
 
   const onSubmit = form.handleSubmit(execute);

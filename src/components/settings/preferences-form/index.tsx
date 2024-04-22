@@ -9,21 +9,23 @@ import type { PreferenceValue } from "@/schemas/settings/preferences-schema";
 import type { ActionResponse } from "@/types";
 
 interface PreferencesFormProps {
-  defaultData: PreferenceValue[];
+  allValues: Omit<PreferenceValue, "selected">[];
+  preferredValues: Omit<PreferenceValue, "selected">[];
   keyName: string;
   actionOnSubmit: (values: string[]) => Promise<ActionResponse<string>>;
 }
 
-export const PreferencesForm = ({ defaultData, keyName, actionOnSubmit }: PreferencesFormProps) => {
+export const PreferencesForm = ({ allValues, preferredValues, keyName, actionOnSubmit }: PreferencesFormProps) => {
   const { form, fields, onSubmit, error, isPending } = usePreferencesForm({
-    defaultData,
+    allValues,
+    preferredValues,
     keyName,
     actionOnSubmit,
   });
 
   return (
     <Form {...form}>
-      <form className="space-y-4" onSubmit={onSubmit}>
+      <form className="space-y-6" onSubmit={onSubmit}>
         <fieldset className="flex flex-1 flex-wrap gap-2">
           {fields.map((arrayField, index) => {
             return (

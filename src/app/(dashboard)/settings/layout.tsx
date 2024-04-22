@@ -1,13 +1,24 @@
-import type { PropsWithChildren } from "react";
-
 import { Container } from "@/components/ui/container";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Title } from "@/components/ui/title";
 
-export default function SettingsLayout({ children }: PropsWithChildren) {
+interface SettingsLayoutProps {
+  account: React.ReactNode;
+  preferences: React.ReactNode;
+}
+
+export default function SettingsLayout({ account, preferences }: SettingsLayoutProps) {
   return (
     <Container className="space-y-6">
       <Title>Settings</Title>
-      {children}
+      <Tabs defaultValue="account">
+        <TabsList>
+          <TabsTrigger value="account">Account</TabsTrigger>
+          <TabsTrigger value="preferences">Preferences</TabsTrigger>
+        </TabsList>
+        <TabsContent value="account">{account}</TabsContent>
+        <TabsContent value="preferences">{preferences}</TabsContent>
+      </Tabs>
     </Container>
   );
 }
