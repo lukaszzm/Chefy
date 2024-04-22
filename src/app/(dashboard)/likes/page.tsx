@@ -1,9 +1,8 @@
-import { redirect } from "next/navigation";
-
 import { getLikedRecipes } from "@/actions/recipe/get-liked-recipes";
 import { LikesList } from "@/components/likes/likes-list";
 import { LikesPagination } from "@/components/likes/likes-pagination";
 import { routes } from "@/config/routes";
+import { redirectWithParams } from "@/utils/redirect-with-params";
 import { safeNumber } from "@/utils/safe-number";
 
 interface PageProps {
@@ -18,8 +17,9 @@ export default async function LikesPage({ searchParams: { page } }: PageProps) {
   const { recipes, pageCount } = await getLikedRecipes(fixedPage);
 
   if (fixedPage > pageCount) {
-    // TODO: Don't provide manual query string, after implementing filters
-    return redirect(`${routes.likes}?page=${pageCount}`);
+    return redirectWithParams(routes.likes, {
+      page: String(pageCount),
+    });
   }
 
   return (
