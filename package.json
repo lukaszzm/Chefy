@@ -9,12 +9,13 @@
     "lint": "next lint",
     "test": "jest",
     "prepare": "husky",
+    "pre-commit": "lint-staged",
     "db:push": "drizzle-kit push:pg",
     "db:studio": "drizzle-kit studio"
   },
   "lint-staged": {
     "*.{js, jsx,ts,tsx}": [
-      "eslint --quiet --fix"
+      "eslint --fix"
     ],
     "*.{json,js,ts,jsx,tsx,html}": [
       "prettier --write --ignore-unknown"
