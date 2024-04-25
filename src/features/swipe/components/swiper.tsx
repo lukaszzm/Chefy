@@ -13,9 +13,10 @@ interface SwiperProps {
   changeVariant: (_variant: SwipeVariant) => void;
   variant: SwipeVariant;
   children: ReactNode;
+  isDragEnabled: boolean;
 }
 
-export const Swiper = ({ children, onSwipeLeft, onSwipeRight, changeVariant, variant }: SwiperProps) => {
+export const Swiper = ({ children, onSwipeLeft, onSwipeRight, changeVariant, variant, isDragEnabled }: SwiperProps) => {
   const { constraintsRef, background, x, rotate, swipeEndHandler } = useSwipe({
     onSwipeLeft,
     onSwipeRight,
@@ -34,6 +35,7 @@ export const Swiper = ({ children, onSwipeLeft, onSwipeRight, changeVariant, var
       <motion.div
         animate={{ scale: 1 }}
         className="h-full"
+        drag={isDragEnabled}
         dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
         dragElastic={0.3}
         exit={{
@@ -42,7 +44,6 @@ export const Swiper = ({ children, onSwipeLeft, onSwipeRight, changeVariant, var
           transition: { duration: 0.4 },
         }}
         style={{ x, rotate }}
-        drag
         onDragEnd={swipeEndHandler}
       >
         {children}
