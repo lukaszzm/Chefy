@@ -19,7 +19,7 @@ export const SidebarButton = forwardRef<HTMLButtonElement, SidebarButtonProps>(
             <Button
               aria-label={label}
               className={cn(
-                "flex w-full min-w-0 items-center justify-center gap-3 rounded-none py-8 text-lg text-accent-foreground/40 hover:bg-accent hover:text-accent-foreground/90 sm:justify-start sm:rounded-lg sm:p-5 sm:py-6 lg:pr-12",
+                "flex w-full min-w-0 items-center justify-center gap-3 rounded-none py-8 text-lg text-muted-foreground hover:bg-accent hover:text-foreground sm:justify-start sm:rounded-lg sm:p-5 sm:py-6 lg:pr-12",
                 isActive &&
                   "font-bold text-primary sm:bg-primary sm:font-medium sm:text-white sm:hover:bg-primary/90 sm:hover:text-primary-foreground",
                 className
