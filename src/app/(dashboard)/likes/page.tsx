@@ -1,7 +1,7 @@
-import { getLikedRecipes } from "@/actions/recipe/get-liked-recipes";
-import { LikesList } from "@/components/likes/likes-list";
-import { LikesPagination } from "@/components/likes/likes-pagination";
 import { routes } from "@/config/routes";
+import { LikesList, LikesPagination } from "@/features/likes";
+import { authUser } from "@/lib/auth";
+import { getLikedRecipes } from "@/lib/db/queries/recipe";
 import { redirectWithParams } from "@/utils/redirect-with-params";
 import { safeNumber } from "@/utils/safe-number";
 
@@ -13,8 +13,9 @@ interface PageProps {
 
 export default async function LikesPage({ searchParams: { page } }: PageProps) {
   const fixedPage = safeNumber(page);
+  const { id } = await authUser();
 
-  const { recipes, pageCount } = await getLikedRecipes(fixedPage);
+  const { recipes, pageCount } = await getLikedRecipes(id, fixedPage);
 
   if (fixedPage > pageCount) {
     return redirectWithParams(routes.likes, {

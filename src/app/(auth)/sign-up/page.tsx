@@ -1,8 +1,6 @@
-import { CredentialsFooter } from "@/components/auth/credentials-footer";
-import { CredentialsHeading } from "@/components/auth/credentials-heading";
-import { SignUpForm } from "@/components/auth/sign-up/form";
 import { Separator } from "@/components/ui/separator";
 import { routes } from "@/config/routes";
+import { CredentialsFooter, CredentialsHeading, SignUpForm } from "@/features/auth";
 
 export default function SignUpPage() {
   return (

@@ -1,19 +1,19 @@
-import { getCurrentUser } from "@/actions/user/get-current-user";
-import { NameForm } from "@/components/settings/name-form";
-import { PasswordForm } from "@/components/settings/password-form";
-import { SettingsContainer } from "@/components/settings/settings-container";
+import { UpdateNameForm, UpdatePasswordForm } from "@/features/settings";
+import { authUser } from "@/lib/auth";
+import { getUserById } from "@/lib/db/queries/user";
 
 export default async function AccountPage() {
-  const user = await getCurrentUser();
+  const { id } = await authUser();
+  const user = await getUserById(id);
+
+  if (!user) {
+    throw new Error("User not found");
+  }
 
   return (
     <>
-      <SettingsContainer subtitle="General Info">
-        <NameForm defaultName={user.name} />
-      </SettingsContainer>
-      <SettingsContainer subtitle="Password">
-        <PasswordForm />
-      </SettingsContainer>
+      <UpdateNameForm defaultName={user.name} />
+      <UpdatePasswordForm />
     </>
   );
 }

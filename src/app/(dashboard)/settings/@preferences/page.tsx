@@ -1,38 +1,22 @@
-import { getAllAreas } from "@/actions/area/get-all-areas";
-import { getAllCategories } from "@/actions/category/get-all-categories";
-import { getPreferredAreas } from "@/actions/user/get-preferred-areas";
-import { getPreferredCategories } from "@/actions/user/get-preferred-categories";
-import { updatePreferredAreas } from "@/actions/user/update-preferred-areas";
-import { updatePreferredCategories } from "@/actions/user/update-preferred-categories";
-import { PreferencesForm } from "@/components/settings/preferences-form";
-import { SettingsContainer } from "@/components/settings/settings-container";
+import { UpdateAreaPreferencesForm, UpdateCategoryPreferencesForm } from "@/features/settings";
+import { authUser } from "@/lib/auth";
+import { getAllAreas, getPreferredAreas } from "@/lib/db/queries/area";
+import { getAllCategories, getPreferredCategories } from "@/lib/db/queries/category";
 
 export default async function PreferencesPage() {
+  const { id } = await authUser();
+
   const [allCategories, preferredCategories, allAreas, preferredAreas] = await Promise.all([
     getAllCategories(),
-    getPreferredCategories(),
+    getPreferredCategories(id),
     getAllAreas(),
-    getPreferredAreas(),
+    getPreferredAreas(id),
   ]);
 
   return (
     <>
-      <SettingsContainer subtitle="Categories">
-        <PreferencesForm
-          actionOnSubmit={updatePreferredCategories}
-          allValues={allCategories}
-          keyName="categoryId"
-          preferredValues={preferredCategories}
-        />
-      </SettingsContainer>
-      <SettingsContainer subtitle="Areas">
-        <PreferencesForm
-          actionOnSubmit={updatePreferredAreas}
-          allValues={allAreas}
-          keyName="areaId"
-          preferredValues={preferredAreas}
-        />
-      </SettingsContainer>
+      <UpdateCategoryPreferencesForm allCategories={allCategories} preferredCategories={preferredCategories} />
+      <UpdateAreaPreferencesForm allAreas={allAreas} preferredAreas={preferredAreas} />
     </>
   );
 }

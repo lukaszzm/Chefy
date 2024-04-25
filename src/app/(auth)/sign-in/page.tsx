@@ -1,8 +1,6 @@
-import { CredentialsFooter } from "@/components/auth/credentials-footer";
-import { CredentialsHeading } from "@/components/auth/credentials-heading";
-import { SignInForm } from "@/components/auth/sign-in/form";
 import { Separator } from "@/components/ui/separator";
 import { routes } from "@/config/routes";
+import { CredentialsFooter, CredentialsHeading, SignInForm } from "@/features/auth";
 
 export default function SignInPage() {
   return (

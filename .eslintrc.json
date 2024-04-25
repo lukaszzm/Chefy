@@ -42,9 +42,9 @@
     ],
     "@typescript-eslint/consistent-type-imports": "error",
     "no-restricted-imports": [
-      "warn",
+      "error",
       {
-        "patterns": [".*"]
+        "patterns": ["@/src/features/*/*"]
       }
     ]
   },

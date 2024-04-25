@@ -1,13 +1,10 @@
-import { getSuggestedRecipes } from "@/actions/recipe/get-suggested-recipes";
-import { ExploreStack } from "@/components/explore/explore-stack";
-import { RecipesContextProvider } from "@/contexts/recipes/provider";
+import { ExploreRecipes } from "@/features/explore";
+import { authUser } from "@/lib/auth";
+import { getSuggestedRecipes } from "@/lib/db/queries/recipe";
 
 export default async function ExplorePage() {
-  const suggestions = await getSuggestedRecipes();
+  const { id } = await authUser();
+  const suggestions = await getSuggestedRecipes(id);
 
-  return (
-    <RecipesContextProvider initialData={suggestions}>
-      <ExploreStack />
-    </RecipesContextProvider>
-  );
+  return <ExploreRecipes initialData={suggestions} />;
 }

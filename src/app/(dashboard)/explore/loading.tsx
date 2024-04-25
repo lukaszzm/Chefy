@@ -1,4 +1,4 @@
-import { ExploreLoading } from "@/components/explore/explore-loading";
+import { ExploreLoading } from "@/features/explore";
 
 export default function ExploreLoadingPage() {
   return <ExploreLoading />;

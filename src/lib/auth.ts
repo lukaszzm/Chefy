@@ -48,6 +48,16 @@ export const validateRequest = cache(
   }
 );
 
+export const authUser = cache(async (): Promise<User> => {
+  const { user } = await validateRequest();
+
+  if (!user) {
+    throw new Error("User is not authenticated");
+  }
+
+  return user;
+});
+
 declare module "lucia" {
   interface Register {
     Lucia: typeof lucia;

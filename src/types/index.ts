@@ -1,24 +1,16 @@
-export type Recipe = {
-  id: string;
-  title: string;
-  imageSrc: string;
-  ingredients: string[];
-  instructions: string;
-  categoryId: string;
-  areaId: string;
-};
+import type { InferSelectModel } from "drizzle-orm";
 
-export type Area = {
-  id: string;
-  name: string;
-};
+import type { area, category, recipe, user } from "@/lib/db/schema";
 
-export type Category = {
-  id: string;
-  name: string;
-};
+export type Recipe = InferSelectModel<typeof recipe>;
 
-export type SuggestedRecipe = {
+export type Area = InferSelectModel<typeof area>;
+
+export type Category = InferSelectModel<typeof category>;
+
+export type User = InferSelectModel<typeof user>;
+
+export type RecipeWithRelations = {
   recipe: Recipe;
   category: Category;
   area: Area;

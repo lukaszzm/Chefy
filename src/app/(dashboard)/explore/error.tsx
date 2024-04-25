@@ -1,6 +1,6 @@
 "use client";
 
-import { ExploreError } from "@/components/explore/explore-error";
+import { ExploreError } from "@/features/explore";
 
 export default function ExploreErrorPage() {
   return <ExploreError />;
