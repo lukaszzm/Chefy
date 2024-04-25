@@ -5,7 +5,6 @@ import {
   area,
   category,
   recipe,
-  user,
   userDislikedRecipe,
   userLikedRecipe,
   userPreferredArea,
@@ -66,14 +65,14 @@ export const getSuggestedRecipes = async (userId: string) => {
       id: userLikedRecipe.recipeId,
     })
     .from(userLikedRecipe)
-    .where(eq(userLikedRecipe.userId, user.id));
+    .where(eq(userLikedRecipe.userId, userId));
 
   const dislikedRecipes = db
     .select({
       id: userDislikedRecipe.recipeId,
     })
     .from(userDislikedRecipe)
-    .where(eq(userDislikedRecipe.userId, user.id));
+    .where(eq(userDislikedRecipe.userId, userId));
 
   return await db
     .select()
