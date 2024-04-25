@@ -1,5 +1,5 @@
 import { routes } from "@/config/routes";
-import { LikesList, LikesPagination } from "@/features/likes";
+import { LikesList, LikesNotFound, LikesPagination } from "@/features/likes";
 import { authUser } from "@/lib/auth";
 import { getLikedRecipes } from "@/lib/db/queries/recipe";
 import { redirectWithParams } from "@/utils/redirect-with-params";
@@ -17,6 +17,10 @@ export default async function LikesPage({ searchParams: { page } }: PageProps) {
 
   const { recipes, pageCount } = await getLikedRecipes(id, fixedPage);
 
+  if (pageCount === 0) {
+    return <LikesNotFound />;
+  }
+
   if (fixedPage > pageCount) {
     return redirectWithParams(routes.likes, {
       page: String(pageCount),
@@ -25,7 +29,7 @@ export default async function LikesPage({ searchParams: { page } }: PageProps) {
 
   return (
     <>
-      <LikesList recipes={recipes} />
+      <LikesList data={recipes} />
       <LikesPagination lastPage={pageCount} page={fixedPage} />
     </>
   );

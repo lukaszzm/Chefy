@@ -1,14 +1,14 @@
 import { LikesItem } from "@/features/likes/components/likes-item";
-import type { SuggestedRecipe } from "@/types";
+import type { RecipeWithRelations } from "@/types";
 
 interface LikesListProps {
-  recipes: SuggestedRecipe[];
+  data: Array<RecipeWithRelations>;
 }
 
-export const LikesList = ({ recipes }: LikesListProps) => {
+export const LikesList = ({ data }: LikesListProps) => {
   return (
     <ul className="space-y-3">
-      {recipes.map(({ recipe, category, area }) => (
+      {data.map(({ recipe, category, area }) => (
         <LikesItem area={area.name} category={category.name} key={recipe.id} {...recipe} />
       ))}
     </ul>
