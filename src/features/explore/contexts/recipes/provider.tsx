@@ -8,9 +8,9 @@ import { toast } from "sonner";
 import { dislikeRecipe } from "@/features/explore/actions/dislike-recipe";
 import { fetchMoreRecipes } from "@/features/explore/actions/fetch-more-recipes";
 import { likeRecipe } from "@/features/explore/actions/like-recipe";
+import type { SwipeVariant } from "@/features/explore/config";
 import { RecipesContext } from "@/features/explore/contexts/recipes/context";
 import type { RecipesContextType } from "@/features/explore/contexts/recipes/context";
-import type { SwipeVariant } from "@/features/swipe";
 import type { RecipeWithRelations } from "@/types";
 import { sleep } from "@/utils/sleep";
 

@@ -1,6 +1,6 @@
 import { createContext } from "react";
 
-import type { SwipeVariant } from "@/features/swipe";
+import type { SwipeVariant } from "@/features/explore/config";
 import type { RecipeWithRelations } from "@/types";
 
 export interface RecipesContextType {
