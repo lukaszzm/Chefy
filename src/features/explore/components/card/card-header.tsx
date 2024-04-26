@@ -9,7 +9,7 @@ export const ExploreCardHeader = ({ title, imageSrc }: ExploreCardHeaderProps) =
   return (
     <CardHeader className="mb-4 flex-none space-y-2">
       <div className="relative h-80 w-full rounded-xl bg-muted">
-        <Image alt={`Image of ${title}`} className="rounded-xl" src={imageSrc} fill priority />
+        <Image alt={`Image of ${title}`} className="rounded-xl" sizes="350px" src={imageSrc} fill priority />
       </div>
 
       <CardTitle>{title}</CardTitle>

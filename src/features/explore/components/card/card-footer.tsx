@@ -21,10 +21,11 @@ export const ExploreCardFooter = ({ id, onExpand, isExpanded }: ExploreCardFoote
         isExpanded ? "relative" : "absolute"
       )}
     >
-      <Button size="control" variant="destructive" onClick={() => dislike(id)}>
+      <Button aria-label="Dislike recipe" size="control" variant="destructive" onClick={() => dislike(id)}>
         <X size={44} />
       </Button>
       <Button
+        aria-label={isExpanded ? "Collapse recipe information" : "Expand recipe information"}
         className="size-14 self-end [&[data-expanded=true]>svg]:rotate-180"
         data-expanded={isExpanded ? "true" : "false"}
         size="control"
@@ -33,7 +34,7 @@ export const ExploreCardFooter = ({ id, onExpand, isExpanded }: ExploreCardFoote
       >
         <ChevronDown className="shrink-0 transition-transform duration-200" size={32} />
       </Button>
-      <Button size="control" variant="success" onClick={() => like(id)}>
+      <Button aria-label="Like recipe" size="control" variant="success" onClick={() => like(id)}>
         <Heart size={44} />
       </Button>
     </CardFooter>

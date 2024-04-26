@@ -21,7 +21,7 @@ export const LikesItemDeleteButton = () => {
   });
 
   return (
-    <Button disabled={isPending} items="start" variant="destructiveGhost" onClick={execute}>
+    <Button disabled={isPending} items="start" role="menuitem" variant="destructiveGhost" onClick={execute}>
       <Trash2 />
       <span>{isPending ? "Deleting..." : "Delete"}</span>
     </Button>

@@ -15,7 +15,7 @@ export const LikesItemDropdownMenu = () => {
   return (
     <DropdownMenu open={isOpen} onOpenChange={changeMenuState}>
       <DropdownMenuTrigger asChild>
-        <Button size="icon" variant="ghost">
+        <Button aria-label="Open Menu" size="icon" variant="ghost">
           <Ellipsis />
         </Button>
       </DropdownMenuTrigger>

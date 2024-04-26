@@ -14,7 +14,7 @@ export const LikesItemDetailsDialog = () => {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button items="start" variant="ghost">
+        <Button items="start" role="menuitem" variant="ghost">
           <BadgeInfo />
           <span>Show Recipe</span>
         </Button>

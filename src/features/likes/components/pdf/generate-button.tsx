@@ -16,7 +16,7 @@ export const PDFGenerateButton = () => {
   }
 
   return (
-    <Button items="start" variant="ghost" onClick={() => setStatus(PDFStatus.Download)}>
+    <Button items="start" role="menuitem" variant="ghost" onClick={() => setStatus(PDFStatus.Download)}>
       <FileText />
       <span>Generate PDF</span>
     </Button>
