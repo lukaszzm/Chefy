@@ -37,7 +37,7 @@ export const ExploreCard = ({
     >
       <Card
         className={cn(
-          "relative h-full max-h-screenWithoutNav overflow-auto rounded-none sm:max-h-[550px] sm:max-w-sm sm:rounded-xl",
+          "relative h-full max-h-screen-nav rounded-none sm:max-h-[550px] sm:max-w-sm sm:rounded-xl",
           isPreviewMode ? "overflow-auto" : "overflow-hidden"
         )}
       >

@@ -9,7 +9,7 @@ interface SettingsLayoutProps {
 
 export default function SettingsLayout({ account, preferences }: SettingsLayoutProps) {
   return (
-    <Container className="space-y-6">
+    <Container>
       <Title>Settings</Title>
       <Tabs defaultValue="account">
         <TabsList>

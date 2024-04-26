@@ -17,7 +17,7 @@ const config = {
     },
     extend: {
       maxHeight: {
-        screenWithoutNav: "calc(100vh - 4rem)",
+        "screen-nav": "calc(100dvh - 4rem)",
       },
       colors: {
         border: "hsl(var(--border))",
