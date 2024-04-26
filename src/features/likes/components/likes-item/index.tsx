@@ -1,5 +1,6 @@
 import { RecipeBadges } from "@/components/recipe/recipe-badges";
 import { LikesItemDropdownMenu } from "@/features/likes/components/likes-item/dropdown-menu";
+import { MenuContextProvider } from "@/features/likes/contexts/menu/provider";
 import type { Recipe } from "@/types";
 
 interface LikesItemProps extends Recipe {
@@ -14,7 +15,10 @@ export const LikesItem = ({ title, category, area, ...props }: LikesItemProps) =
         <h2 className="font-medium">{title}</h2>
         <RecipeBadges area={area} category={category} size="xs" />
       </div>
-      <LikesItemDropdownMenu title={title} {...props} />
+
+      <MenuContextProvider recipe={{ ...props, title }}>
+        <LikesItemDropdownMenu />
+      </MenuContextProvider>
     </li>
   );
 };

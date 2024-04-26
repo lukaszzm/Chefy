@@ -5,17 +5,14 @@ import { useState } from "react";
 import { FileText } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import { PDFDownloadButton } from "@/features/pdf/components/download-button";
-import { PDFStatus } from "@/features/pdf/config";
-import type { Recipe } from "@/types";
+import { PDFDownloadButton } from "@/features/likes/components/pdf/download-button";
+import { PDFStatus } from "@/features/likes/config/pdf-status";
 
-interface PDFGenerateButtonProps extends Recipe {}
-
-export const PDFGenerateButton = (props: PDFGenerateButtonProps) => {
+export const PDFGenerateButton = () => {
   const [status, setStatus] = useState<PDFStatus>(PDFStatus.Generate);
 
   if (status === PDFStatus.Download) {
-    return <PDFDownloadButton {...props} />;
+    return <PDFDownloadButton />;
   }
 
   return (

@@ -3,14 +3,14 @@ import { FileText } from "lucide-react";
 import Link from "next/link";
 
 import { Button } from "@/components/ui/button";
-import { PDFTemplate } from "@/features/pdf/components/template";
-import type { Recipe } from "@/types";
+import { PDFTemplate } from "@/features/likes/components/pdf/template";
+import { useMenu } from "@/features/likes/hooks/use-menu";
 
-interface PDFDownloadButtonProps extends Recipe {}
+export const PDFDownloadButton = () => {
+  const { recipe } = useMenu();
 
-export const PDFDownloadButton = (props: PDFDownloadButtonProps) => {
   const [instance] = usePDF({
-    document: <PDFTemplate {...props} />,
+    document: <PDFTemplate {...recipe} />,
   });
 
   if (instance.loading) {
@@ -32,7 +32,7 @@ export const PDFDownloadButton = (props: PDFDownloadButtonProps) => {
 
   return (
     <Button items="start" variant="ghost" asChild>
-      <Link download={`${props.title}_chefy.pdf`} href={instance.url} target="_blank">
+      <Link download={`${recipe.title}_chefy.pdf`} href={instance.url} target="_blank">
         <FileText />
         <span>Download PDF</span>
       </Link>

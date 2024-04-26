@@ -1,3 +1,3 @@
-export { LikesList } from "./components/likes-list";
-export { LikesPagination } from "./components/likes-pagination";
-export { LikesNotFound } from "./components/likes-not-found";
+export { LikesList } from "./components/list";
+export { LikesPagination } from "./components/pagination";
+export { LikesNotFound } from "./components/not-found";

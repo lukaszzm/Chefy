@@ -5,17 +5,18 @@ import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
 import { deleteLike } from "@/features/likes/actions/delete-like";
+import { useMenu } from "@/features/likes/hooks/use-menu";
 import { useAction } from "@/hooks/use-action";
 
-interface LikesItemDeleteButtonProps {
-  id: string;
-  onDelete?: () => void;
-}
+export const LikesItemDeleteButton = () => {
+  const {
+    recipe: { id },
+    changeMenuState,
+  } = useMenu();
 
-export const LikesItemDeleteButton = ({ id, onDelete }: LikesItemDeleteButtonProps) => {
   const { execute, isPending } = useAction({
     action: () => deleteLike(id),
-    onSuccess: () => onDelete?.(),
+    onSuccess: () => changeMenuState(false),
     onError: (e) => toast.error(e),
   });
 

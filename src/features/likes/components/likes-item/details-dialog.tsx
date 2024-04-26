@@ -4,11 +4,13 @@ import { RecipeIngredients } from "@/components/recipe/recipe-ingredients";
 import { RecipeSubtitle } from "@/components/recipe/recipe-subtitle";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import type { Recipe } from "@/types";
+import { useMenu } from "@/features/likes/hooks/use-menu";
 
-interface LikesItemDetailsDialogProps extends Pick<Recipe, "title" | "ingredients" | "instructions"> {}
+export const LikesItemDetailsDialog = () => {
+  const {
+    recipe: { title, ingredients, instructions },
+  } = useMenu();
 
-export const LikesItemDetailsDialog = ({ title, ingredients, instructions }: LikesItemDetailsDialogProps) => {
   return (
     <Dialog>
       <DialogTrigger asChild>
