@@ -6,12 +6,12 @@ import { useRecipes } from "@/features/explore/hooks/use-recipes";
 import type { Recipe } from "@/types";
 import { cn } from "@/utils/cn";
 
-interface ExploreCardControlsProps extends Pick<Recipe, "id"> {
+interface ExploreCardFooterProps extends Pick<Recipe, "id"> {
   onExpand: (expand: boolean) => void;
   isExpanded: boolean;
 }
 
-export const ExploreCardControls = ({ id, onExpand, isExpanded }: ExploreCardControlsProps) => {
+export const ExploreCardFooter = ({ id, onExpand, isExpanded }: ExploreCardFooterProps) => {
   const { dislike, like } = useRecipes();
 
   return (
@@ -25,8 +25,8 @@ export const ExploreCardControls = ({ id, onExpand, isExpanded }: ExploreCardCon
         <X size={44} />
       </Button>
       <Button
-        className="size-14 self-end [&[data-state=expanded]>svg]:rotate-180"
-        data-state={isExpanded ? "expanded" : undefined}
+        className="size-14 self-end [&[data-expanded=true]>svg]:rotate-180"
+        data-expanded={isExpanded ? "true" : "false"}
         size="control"
         variant="info"
         onClick={() => onExpand(!isExpanded)}
