@@ -3,7 +3,7 @@ import { useCallback, useRef } from "react";
 import type { PanInfo } from "framer-motion";
 import { useMotionValue, useTransform } from "framer-motion";
 
-import { BackgroundColors, DragLimit, SwipeVariant } from "@/features/swipe/config";
+import { BackgroundColors, DragLimit, SwipeVariant } from "@/features/explore/config";
 
 interface UseSwipeHookProps {
   onSwipeLeft: () => void;

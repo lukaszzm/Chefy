@@ -4,10 +4,10 @@ import type { ReactNode } from "react";
 
 import { motion } from "framer-motion";
 
-import { SwipeVariant } from "@/features/swipe/config";
-import { useSwipe } from "@/features/swipe/hooks/use-swipe";
+import { SwipeVariant } from "@/features/explore/config";
+import { useSwipe } from "@/features/explore/hooks/use-swipe";
 
-interface SwiperProps {
+interface SwipeItemProps {
   onSwipeLeft: () => void;
   onSwipeRight: () => void;
   changeVariant: (_variant: SwipeVariant) => void;
@@ -16,7 +16,14 @@ interface SwiperProps {
   isDragEnabled: boolean;
 }
 
-export const Swiper = ({ children, onSwipeLeft, onSwipeRight, changeVariant, variant, isDragEnabled }: SwiperProps) => {
+export const SwipeItem = ({
+  children,
+  onSwipeLeft,
+  onSwipeRight,
+  changeVariant,
+  variant,
+  isDragEnabled,
+}: SwipeItemProps) => {
   const { constraintsRef, background, x, rotate, swipeEndHandler } = useSwipe({
     onSwipeLeft,
     onSwipeRight,
