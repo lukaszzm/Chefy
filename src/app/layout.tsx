@@ -10,7 +10,7 @@ import { Toaster } from "@/components/ui/sonner";
 
 export const metadata: Metadata = {
   title: "Chefy",
-  description: "Chefy - Because we love cooking",
+  description: "Chefy - Explore recipes from around the world",
 };
 
 const quicksand = Quicksand({

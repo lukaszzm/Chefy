@@ -1,3 +1,5 @@
+import type { Metadata } from "next";
+
 import { Container } from "@/components/ui/container";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Title } from "@/components/ui/title";
@@ -6,6 +8,10 @@ interface SettingsLayoutProps {
   account: React.ReactNode;
   preferences: React.ReactNode;
 }
+
+export const metadata: Metadata = {
+  title: "Chefy - Settings",
+};
 
 export default function SettingsLayout({ account, preferences }: SettingsLayoutProps) {
   return (
