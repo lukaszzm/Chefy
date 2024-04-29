@@ -4,8 +4,8 @@ import { forwardRef } from "react";
 
 import { useRouter } from "next/navigation";
 
-import type { ButtonProps } from "@/components/new_ui/button";
-import { Button } from "@/components/new_ui/button";
+import type { ButtonProps } from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
 
 export const BackButton = forwardRef<HTMLButtonElement, Omit<ButtonProps, "onClick">>((props, ref) => {
   const { back } = useRouter();

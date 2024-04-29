@@ -3,11 +3,11 @@ import type { Metadata } from "next";
 import { Undo2 } from "lucide-react";
 import { redirect } from "next/navigation";
 
-import { BackButton } from "@/components/new_ui/back-button";
-import { Title } from "@/components/new_ui/title";
 import { RecipeBadges } from "@/components/recipe/recipe-badges";
 import { RecipeIngredients } from "@/components/recipe/recipe-ingredients";
 import { RecipeLabel } from "@/components/recipe/recipe-label";
+import { BackButton } from "@/components/ui/back-button";
+import { Title } from "@/components/ui/title";
 import { routes } from "@/config/routes";
 import { LikesDropdownMenu } from "@/features/likes";
 import { getLikeRecipeById } from "@/lib/db/queries/recipe";

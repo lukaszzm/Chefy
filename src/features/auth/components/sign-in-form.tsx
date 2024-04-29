@@ -1,9 +1,9 @@
 "use client";
 
-import { Button } from "@/components/new_ui/button";
-import { ErrorAlert } from "@/components/new_ui/error-alert";
-import { Form, FormLabel, FormField, FormItem, FormControl, FormMessage } from "@/components/new_ui/form";
-import { Input } from "@/components/new_ui/input";
+import { Button } from "@/components/ui/button";
+import { ErrorAlert } from "@/components/ui/error-alert";
+import { Form, FormLabel, FormField, FormItem, FormControl, FormMessage } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
 import { useSignIn } from "@/features/auth/hooks/use-sign-in";
 
 export const SignInForm = () => {

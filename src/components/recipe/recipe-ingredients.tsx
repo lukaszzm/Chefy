@@ -1,4 +1,4 @@
-import { Badge } from "@/components/new_ui/badge";
+import { Badge } from "@/components/ui/badge";
 
 interface RecipeIngredientsProps {
   ingredients: string[];

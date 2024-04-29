@@ -1,4 +1,4 @@
-import { LoadingSpinner } from "@/components/new_ui/loading-spinner";
+import { LoadingSpinner } from "@/components/ui/loading-spinner";
 
 export const ExploreLoading = () => {
   return (

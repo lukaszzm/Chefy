@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 
-import { Container } from "@/components/new_ui/container";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/new_ui/tabs";
-import { Title } from "@/components/new_ui/title";
+import { Container } from "@/components/ui/container";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Title } from "@/components/ui/title";
 
 interface SettingsLayoutProps {
   account: React.ReactNode;

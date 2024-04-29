@@ -2,7 +2,7 @@
 
 import { ServerCrash } from "lucide-react";
 
-import { Container } from "@/components/new_ui/container";
+import { Container } from "@/components/ui/container";
 
 export default function GlobalError() {
   return (

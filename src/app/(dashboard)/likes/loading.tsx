@@ -1,5 +1,5 @@
-import { Skeleton } from "@/components/new_ui/skeleton";
-import { Title } from "@/components/new_ui/title";
+import { Skeleton } from "@/components/ui/skeleton";
+import { Title } from "@/components/ui/title";
 
 export default function LikesLoading() {
   return (

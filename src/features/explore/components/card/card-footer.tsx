@@ -1,7 +1,7 @@
 import { ChevronDown, Heart, X } from "lucide-react";
 
-import { Button } from "@/components/new_ui/button";
-import { CardFooter } from "@/components/new_ui/card";
+import { Button } from "@/components/ui/button";
+import { CardFooter } from "@/components/ui/card";
 import { useRecipes } from "@/features/explore/hooks/use-recipes";
 import type { Recipe } from "@/types";
 import { cn } from "@/utils/cn";

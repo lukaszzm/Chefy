@@ -1,8 +1,8 @@
 import type { HTMLAttributes } from "react";
 import { forwardRef } from "react";
 
-import type { BadgeProps } from "@/components/new_ui/badge";
-import { Badge } from "@/components/new_ui/badge";
+import type { BadgeProps } from "@/components/ui/badge";
+import { Badge } from "@/components/ui/badge";
 import { cn } from "@/utils/cn";
 
 interface RecipeBadgesProps extends Omit<HTMLAttributes<HTMLDivElement>, "children"> {

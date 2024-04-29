@@ -6,7 +6,7 @@ import type { Metadata } from "next";
 
 import { Quicksand } from "next/font/google";
 
-import { Toaster } from "@/components/new_ui/sonner";
+import { Toaster } from "@/components/ui/sonner";
 
 export const metadata: Metadata = {
   title: "Chefy",

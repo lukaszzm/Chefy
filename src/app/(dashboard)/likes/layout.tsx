@@ -2,7 +2,7 @@ import type { PropsWithChildren } from "react";
 
 import type { Metadata } from "next";
 
-import { Container } from "@/components/new_ui/container";
+import { Container } from "@/components/ui/container";
 
 export const metadata: Metadata = {
   title: "Chefy - Liked recipes",

@@ -1,4 +1,4 @@
-import { Alert, AlertDescription } from "@/components/new_ui/alert";
+import { Alert, AlertDescription } from "@/components/ui/alert";
 
 interface ErrorAlertProps {
   error: string | null | undefined;

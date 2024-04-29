@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import { Button } from "@/components/new_ui/button";
+import { Button } from "@/components/ui/button";
 import { routes } from "@/config/routes";
 import { FoodOverlay } from "@/features/home/components/food-overlay";
 

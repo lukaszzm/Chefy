@@ -10,7 +10,7 @@ import {
   PaginationLink,
   PaginationNext,
   PaginationPrevious,
-} from "@/components/new_ui/pagination";
+} from "@/components/ui/pagination";
 import { routes } from "@/config/routes";
 import { dynamicRoute } from "@/utils/dynamic-route";
 

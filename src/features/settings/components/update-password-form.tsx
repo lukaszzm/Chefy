@@ -1,9 +1,9 @@
 "use client";
 
-import { ActionError } from "@/components/new_ui/action-error";
-import { Button } from "@/components/new_ui/button";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/new_ui/form";
-import { Input } from "@/components/new_ui/input";
+import { ActionError } from "@/components/ui/action-error";
+import { Button } from "@/components/ui/button";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
 import { SettingsContainer } from "@/features/settings/components/settings-container";
 import { usePasswordForm } from "@/features/settings/hooks/use-password-form";
 

@@ -12,8 +12,8 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "@/components/new_ui/alert-dialog";
-import { Button } from "@/components/new_ui/button";
+} from "@/components/ui/alert-dialog";
+import { Button } from "@/components/ui/button";
 import { useSignOut } from "@/features/auth/hooks/use-sign-out";
 
 export const SignOutDialog = ({ children }: PropsWithChildren) => {
