@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 
+import { Undo2 } from "lucide-react";
 import { redirect } from "next/navigation";
 
 import { RecipeBadges } from "@/components/recipe/recipe-badges";
 import { RecipeIngredients } from "@/components/recipe/recipe-ingredients";
 import { RecipeSubtitle } from "@/components/recipe/recipe-subtitle";
+import { BackButton } from "@/components/ui/back-button";
 import { Title } from "@/components/ui/title";
 import { routes } from "@/config/routes";
 import { LikesDropdownMenu } from "@/features/likes";
@@ -37,11 +39,15 @@ export default async function LikePage({ params: { id } }: PageProps) {
         </div>
         <LikesDropdownMenu recipe={data.recipe} deleteWithRedirect />
       </div>
-      <div className="space-y-4">
+      <div className="flex flex-col space-y-4">
         <RecipeSubtitle>Ingredients</RecipeSubtitle>
         <RecipeIngredients ingredients={data.recipe.ingredients} />
         <RecipeSubtitle>Instructions</RecipeSubtitle>
         <p>{data.recipe.instructions}</p>
+        <BackButton className="mr-2 self-end">
+          <span>Back</span>
+          <Undo2 />
+        </BackButton>
       </div>
     </>
   );
