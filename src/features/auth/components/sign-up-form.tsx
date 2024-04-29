@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input";
 import { useSignUp } from "@/features/auth/hooks/use-sign-up";
 
 export const SignUpForm = () => {
-  const { form, onSubmit, isPending, credentialsError } = useSignUp();
+  const { form, onSubmit, isPending, error } = useSignUp();
 
   return (
     <Form {...form}>
@@ -52,7 +52,7 @@ export const SignUpForm = () => {
           )}
         />
 
-        <ErrorAlert error={credentialsError} />
+        <ErrorAlert error={error} />
         <Button className="w-full" isLoading={isPending}>
           Create An Account
         </Button>

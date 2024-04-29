@@ -7,7 +7,7 @@ import { routes } from "@/config/routes";
 import { lucia, validateRequest } from "@/lib/auth";
 import { errorResponse } from "@/utils/action-response";
 
-export async function signOut() {
+export const signOut = async () => {
   const { session } = await validateRequest();
 
   if (!session) {
@@ -21,4 +21,4 @@ export async function signOut() {
   cookies().set(sessionCookie.name, sessionCookie.value, sessionCookie.attributes);
 
   return redirect(routes.home);
-}
+};

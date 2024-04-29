@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input";
 import { useSignIn } from "@/features/auth/hooks/use-sign-in";
 
 export const SignInForm = () => {
-  const { form, onSubmit, isPending, credentialsError } = useSignIn();
+  const { form, onSubmit, isPending, error } = useSignIn();
 
   return (
     <Form {...form}>
@@ -39,7 +39,7 @@ export const SignInForm = () => {
           )}
         />
 
-        <ErrorAlert error={credentialsError} />
+        <ErrorAlert error={error} />
         <Button className="w-full" isLoading={isPending}>
           Sign In
         </Button>

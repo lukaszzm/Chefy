@@ -1,15 +1,11 @@
-import { useState, useTransition } from "react";
-
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 
 import { signUp } from "@/features/auth/actions/sign-up";
 import { signUpSchema, type SignUpPayload } from "@/features/auth/schemas/sign-up-schema";
+import { useAction } from "@/hooks/use-action";
 
 export const useSignUp = () => {
-  const [isPending, startTransition] = useTransition();
-  const [credentialsError, setCredentialsError] = useState<string | null>(null);
-
   const form = useForm<SignUpPayload>({
     resolver: zodResolver(signUpSchema),
     defaultValues: {
@@ -20,17 +16,11 @@ export const useSignUp = () => {
     mode: "onSubmit",
   });
 
-  const onSubmit = form.handleSubmit((values) => {
-    setCredentialsError(null);
-
-    startTransition(async () => {
-      const result = await signUp(values);
-
-      if (result.error) {
-        setCredentialsError(result.error);
-      }
-    });
+  const { isPending, execute, error } = useAction({
+    action: signUp,
   });
 
-  return { form, onSubmit, credentialsError, isPending };
+  const onSubmit = form.handleSubmit(execute);
+
+  return { form, onSubmit, error, isPending };
 };

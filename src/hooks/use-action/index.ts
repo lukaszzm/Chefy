@@ -30,6 +30,11 @@ export const useAction = <TValues = unknown, TData = unknown>({
       startTransition(async () => {
         const res = await action(values);
 
+        // Redirect inside action
+        if (!res) {
+          return;
+        }
+
         if (!res.ok) {
           onError?.(res.error);
           dispatch({ type: ActionType.Error, error: res.error });
