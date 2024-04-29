@@ -3,7 +3,7 @@ import type { PropsWithChildren } from "react";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
-import { Logo } from "@/components/ui/logo";
+import { Logo } from "@/components/new_ui/logo";
 import { routes } from "@/config/routes";
 import { validateRequest } from "@/lib/auth";
 

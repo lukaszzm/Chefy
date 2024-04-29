@@ -1,9 +1,9 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { ErrorAlert } from "@/components/ui/error-alert";
-import { Form, FormField, FormItem, FormLabel, FormControl, FormMessage } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
+import { Button } from "@/components/new_ui/button";
+import { ErrorAlert } from "@/components/new_ui/error-alert";
+import { Form, FormField, FormItem, FormLabel, FormControl, FormMessage } from "@/components/new_ui/form";
+import { Input } from "@/components/new_ui/input";
 import { useSignUp } from "@/features/auth/hooks/use-sign-up";
 
 export const SignUpForm = () => {

@@ -1,8 +1,8 @@
 import { forwardRef } from "react";
 
-import type { ButtonProps } from "@/components/ui/button";
-import { Button } from "@/components/ui/button";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import type { ButtonProps } from "@/components/new_ui/button";
+import { Button } from "@/components/new_ui/button";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/new_ui/tooltip";
 import { cn } from "@/utils/cn";
 
 interface SidebarButtonProps extends ButtonProps {

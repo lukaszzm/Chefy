@@ -5,8 +5,8 @@ import { Ellipsis } from "lucide-react";
 import Link from "next/link";
 import { toast } from "sonner";
 
-import { Button } from "@/components/ui/button";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem } from "@/components/ui/dropdown-menu";
+import { Button } from "@/components/new_ui/button";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem } from "@/components/new_ui/dropdown-menu";
 import { routes } from "@/config/routes";
 import { deleteLike } from "@/features/likes/actions/delete-like";
 import { PDFTemplate } from "@/features/likes/components/pdf-template";

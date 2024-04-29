@@ -1,9 +1,9 @@
 "use client";
 
-import { ActionError } from "@/components/ui/action-error";
-import { BadgeCheckbox } from "@/components/ui/badge-checkbox";
-import { Button } from "@/components/ui/button";
-import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
+import { ActionError } from "@/components/new_ui/action-error";
+import { BadgeCheckbox } from "@/components/new_ui/badge-checkbox";
+import { Button } from "@/components/new_ui/button";
+import { Form, FormControl, FormField, FormItem } from "@/components/new_ui/form";
 import { usePreferencesForm } from "@/features/settings/hooks/use-preferences-form";
 import type { PreferenceValue } from "@/features/settings/schemas/preferences-schema";
 import type { ActionResponse } from "@/types";

@@ -1,8 +1,8 @@
 import { Globe, Heart, Settings2 } from "lucide-react";
 
+import { Logo } from "@/components/new_ui/logo";
 import { SidebarLink } from "@/components/sidebar/sidebar-link";
 import { SidebarSignOut } from "@/components/sidebar/sidebar-sign-out";
-import { Logo } from "@/components/ui/logo";
 import { routes } from "@/config/routes";
 
 export const Sidebar = () => {

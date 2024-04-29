@@ -1,7 +1,7 @@
 import React from "react";
 
-import type { InputProps } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import type { InputProps } from "@/components/new_ui/input";
+import { Label } from "@/components/new_ui/label";
 import { cn } from "@/utils/cn";
 
 interface BadgeCheckboxProps extends InputProps {

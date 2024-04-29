@@ -1,7 +1,7 @@
 import Link from "next/link";
 
-import { Button } from "@/components/ui/button";
-import { Logo } from "@/components/ui/logo";
+import { Button } from "@/components/new_ui/button";
+import { Logo } from "@/components/new_ui/logo";
 import { routes } from "@/config/routes";
 
 export const Navbar = () => {

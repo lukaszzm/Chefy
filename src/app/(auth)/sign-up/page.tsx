@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-import { Separator } from "@/components/ui/separator";
+import { Separator } from "@/components/new_ui/separator";
 import { routes } from "@/config/routes";
 import { CredentialsFooter, CredentialsHeading, SignUpForm } from "@/features/auth";
 

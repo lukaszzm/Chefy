@@ -1,4 +1,4 @@
-import { Title } from "@/components/ui/title";
+import { Title } from "@/components/new_ui/title";
 import { routes } from "@/config/routes";
 import { LikesList, LikesNotFound, LikesPagination } from "@/features/likes";
 import { authUser } from "@/lib/auth";
