@@ -1,16 +1,12 @@
 "use client";
 
+import { DropdownMenuTrigger } from "@radix-ui/react-dropdown-menu";
 import { Ellipsis } from "lucide-react";
 import Link from "next/link";
 import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem } from "@/components/ui/dropdown-menu";
 import { routes } from "@/config/routes";
 import { deleteLike } from "@/features/likes/actions/delete-like";
 import { PDFTemplate } from "@/features/likes/components/pdf-template";
@@ -19,11 +15,15 @@ import { useAction } from "@/hooks/use-action";
 import type { Recipe } from "@/types";
 import { slugRoute } from "@/utils/slug-route";
 
-interface LikesItemDropdownMenuProps extends Recipe {}
+interface LikesDropdownMenuProps {
+  withDetailsLink?: boolean;
+  deleteWithRedirect?: boolean;
+  recipe: Recipe;
+}
 
-export const LikesItemDropdownMenu = (recipe: LikesItemDropdownMenuProps) => {
+export const LikesDropdownMenu = ({ withDetailsLink, deleteWithRedirect, recipe }: LikesDropdownMenuProps) => {
   const { execute: deleteItem, isPending } = useAction({
-    action: () => deleteLike(recipe.id),
+    action: () => deleteLike(recipe.id, deleteWithRedirect ?? false),
     onError: (e) => toast.error(e),
   });
 
@@ -34,10 +34,12 @@ export const LikesItemDropdownMenu = (recipe: LikesItemDropdownMenuProps) => {
           <Ellipsis />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="flex flex-col">
-        <DropdownMenuItem asChild>
-          <Link href={slugRoute(routes.like, { id: recipe.id })}>Details</Link>
-        </DropdownMenuItem>
+      <DropdownMenuContent>
+        {withDetailsLink && (
+          <DropdownMenuItem asChild>
+            <Link href={slugRoute(routes.like, { id: recipe.id })}>Details</Link>
+          </DropdownMenuItem>
+        )}
 
         <DropdownMenuItem onClick={() => generatePdf(<PDFTemplate {...recipe} />, `${recipe.title}_Chefy.pdf`)}>
           Download PDF

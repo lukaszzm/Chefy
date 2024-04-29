@@ -106,7 +106,12 @@ export const getLikeRecipeById = async (recipeId: string) =>
   db.query.userLikedRecipe.findFirst({
     where: eq(userLikedRecipe.recipeId, recipeId),
     with: {
-      recipe: true,
+      recipe: {
+        with: {
+          category: true,
+          area: true,
+        },
+      },
     },
   });
 

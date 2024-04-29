@@ -1,10 +1,13 @@
 "use server";
 
+import { redirect } from "next/navigation";
+
+import { routes } from "@/config/routes";
 import { validateRequest } from "@/lib/auth";
 import { deleteLikeRecipe, getLikeRecipeById } from "@/lib/db/queries/recipe";
 import { errorResponse, successResponse } from "@/utils/action-response";
 
-export const deleteLike = async (recipeId: string) => {
+export const deleteLike = async (recipeId: string, withRedirect: boolean) => {
   const { user } = await validateRequest();
 
   if (!user) {
@@ -23,8 +26,9 @@ export const deleteLike = async (recipeId: string) => {
 
   try {
     await deleteLikeRecipe(like.userId, recipeId);
-    return successResponse("Like successfully deleted");
   } catch (error) {
     return errorResponse("Failed to delete like");
   }
+
+  return withRedirect ? redirect(routes.likes) : successResponse("Recipe successfully deleted from likes");
 };
