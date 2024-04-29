@@ -45,6 +45,8 @@ const main = async () => {
   } catch (error) {
     console.error("Error seeding database:", error);
   }
+
+  await client.end();
 };
 
 main();
