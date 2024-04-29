@@ -1,1 +1,0 @@
-export { FoodIcons } from "./FoodIcons";

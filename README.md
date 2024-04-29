@@ -1,5 +1,5 @@
 <div align="center">
-    <img src="public/icon.svg" alt="Logo" width="80" height="80">
+    <img src="public/Chefy_logo.png" alt="Logo" width="80" height="80">
   <h1 align="center">Chefy</h3>
   <p align="center">
     An app that allows you to swipe and explore cooking recipes from around the world
@@ -7,13 +7,14 @@
 </div>
 
 <p align="center">
-  <img align="center" alt="preview of app 1" width="40%" src="public/preview_1.png">
-  <img align="center" alt="preview of app 2" width="40%" src="public/preview_2.png">
+  <img align="center" alt="preview of explore page" width="30%" src="public/Chefy_explore_recipes.jpeg">
+  <img align="center" alt="preview of likes page" width="30%" src="public/Chefy_liked_recipes.jpeg">
+  <img align="center" alt="preview of settings page" width="30%" src="public/Chefy_settings.jpeg">
 </p>
 
 ## 📰 About The Project
 
-<p> It's a web application built using NextJS framework that enables users to discover recipes from different parts of the world. Additionally, users can save their favorite recipes and export them to PDF files.
+<p> It's a web application built using NextJS 14 that enables users to discover recipes from different parts of the world. Additionally, users can save their favorite recipes and export them to PDF files!
 
 ## ️🔴 Live Preview
 
@@ -44,6 +45,12 @@ You can <b>register</b> with your own credentials!
 <img src="https://img.shields.io/badge/Prisma-3982CE?style=for-the-badge&logo=Prisma&logoColor=white" alt="prisma" />
 </p>
 
-##
+## 📋 Future plans
+
+- Add Dark Mode compatibility
+- Include the ability for users to add new recipes
+- Add translations (polish language)
+
+## 🗃️ Data source
 
 Data collected from https://www.themealdb.com/

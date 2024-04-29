@@ -1,1 +1,0 @@
-export { RecipeDetails } from "./RecipeDetails";
