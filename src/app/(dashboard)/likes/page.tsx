@@ -1,3 +1,4 @@
+import { Title } from "@/components/ui/title";
 import { routes } from "@/config/routes";
 import { LikesList, LikesNotFound, LikesPagination } from "@/features/likes";
 import { authUser } from "@/lib/auth";
@@ -29,6 +30,7 @@ export default async function LikesPage({ searchParams: { page } }: PageProps) {
 
   return (
     <>
+      <Title>Liked Recipes</Title>
       <LikesList data={recipes} />
       <LikesPagination lastPage={pageCount} page={fixedPage} />
     </>

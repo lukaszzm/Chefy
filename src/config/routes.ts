@@ -4,6 +4,7 @@ export const routes = {
   signUp: "/sign-up",
   explore: "/explore",
   likes: "/likes",
+  like: "/likes/:id",
   settings: "/settings",
   account: "/settings/account",
   preferences: "/settings/preferences",

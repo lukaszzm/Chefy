@@ -8,8 +8,8 @@ interface LikesListProps {
 export const LikesList = ({ data }: LikesListProps) => {
   return (
     <ul className="space-y-3">
-      {data.map(({ recipe, category, area }) => (
-        <LikesItem area={area.name} category={category.name} key={recipe.id} {...recipe} />
+      {data.map(({ recipe, ...rest }) => (
+        <LikesItem key={recipe.id} recipe={recipe} {...rest} />
       ))}
     </ul>
   );

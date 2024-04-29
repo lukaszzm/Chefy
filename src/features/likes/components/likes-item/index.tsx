@@ -1,24 +1,18 @@
 import { RecipeBadges } from "@/components/recipe/recipe-badges";
 import { LikesItemDropdownMenu } from "@/features/likes/components/likes-item/dropdown-menu";
-import { MenuContextProvider } from "@/features/likes/contexts/menu/provider";
-import type { Recipe } from "@/types";
+import type { RecipeWithRelations } from "@/types";
 
-interface LikesItemProps extends Recipe {
-  category: string;
-  area: string;
-}
+interface LikesItemProps extends RecipeWithRelations {}
 
-export const LikesItem = ({ title, category, area, ...props }: LikesItemProps) => {
+export const LikesItem = ({ recipe, area, category }: LikesItemProps) => {
   return (
-    <li className="flex items-center gap-2 rounded-md border border-border bg-background/40 px-6 py-3">
+    <li className="flex items-center gap-2 rounded-md border border-border bg-background/40 px-6 py-3 has-[[data-pending]]:animate-pulse">
       <div className="flex-1 space-y-1">
-        <h2 className="font-medium">{title}</h2>
-        <RecipeBadges area={area} category={category} size="xs" />
+        <h2 className="font-medium">{recipe.title}</h2>
+        <RecipeBadges area={area.name} category={category.name} size="xs" />
       </div>
 
-      <MenuContextProvider recipe={{ ...props, title }}>
-        <LikesItemDropdownMenu />
-      </MenuContextProvider>
+      <LikesItemDropdownMenu {...recipe} />
     </li>
   );
 };
