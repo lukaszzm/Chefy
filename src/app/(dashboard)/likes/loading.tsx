@@ -6,14 +6,14 @@ export default function LikesLoading() {
     <>
       <Title>Liked Recipes</Title>
 
-      <div className="space-y-3">
-        <Skeleton className="h-16" />
-        <Skeleton className="h-16" />
-        <Skeleton className="h-16" />
-        <Skeleton className="h-16" />
-        <Skeleton className="h-16" />
+      <div className="space-y-2">
+        <Skeleton className="h-20" />
+        <Skeleton className="h-20" />
+        <Skeleton className="h-20" />
+        <Skeleton className="h-20" />
+        <Skeleton className="h-20" />
       </div>
-      <Skeleton className="mx-auto h-10 w-40" />
+      <Skeleton className="mx-auto h-10 w-56" />
     </>
   );
 }

@@ -9,5 +9,5 @@ export const metadata: Metadata = {
 };
 
 export default function LikesLayout({ children }: PropsWithChildren) {
-  return <Container className="space-y-4">{children}</Container>;
+  return <Container>{children}</Container>;
 }
