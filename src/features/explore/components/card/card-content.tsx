@@ -1,6 +1,6 @@
 import { RecipeBadges } from "@/components/recipe/recipe-badges";
 import { RecipeIngredients } from "@/components/recipe/recipe-ingredients";
-import { RecipeSubtitle } from "@/components/recipe/recipe-subtitle";
+import { RecipeLabel } from "@/components/recipe/recipe-label";
 import { CardContent } from "@/components/ui/card";
 import type { Recipe } from "@/types";
 
@@ -13,9 +13,9 @@ export const ExploreCardContent = ({ areaName, categoryName, ingredients, instru
   return (
     <CardContent className="mt-4 space-y-2">
       <RecipeBadges area={areaName} category={categoryName} />
-      <RecipeSubtitle>Ingredients</RecipeSubtitle>
+      <RecipeLabel>Ingredients</RecipeLabel>
       <RecipeIngredients ingredients={ingredients} />
-      <RecipeSubtitle>Instructions</RecipeSubtitle>
+      <RecipeLabel>Instructions</RecipeLabel>
       <p>{instructions}</p>
     </CardContent>
   );

@@ -5,7 +5,7 @@ import { redirect } from "next/navigation";
 
 import { RecipeBadges } from "@/components/recipe/recipe-badges";
 import { RecipeIngredients } from "@/components/recipe/recipe-ingredients";
-import { RecipeSubtitle } from "@/components/recipe/recipe-subtitle";
+import { RecipeLabel } from "@/components/recipe/recipe-label";
 import { BackButton } from "@/components/ui/back-button";
 import { Title } from "@/components/ui/title";
 import { routes } from "@/config/routes";
@@ -40,9 +40,9 @@ export default async function LikePage({ params: { id } }: PageProps) {
         <LikesDropdownMenu recipe={data.recipe} deleteWithRedirect />
       </div>
       <div className="flex flex-col space-y-4">
-        <RecipeSubtitle>Ingredients</RecipeSubtitle>
+        <RecipeLabel>Ingredients</RecipeLabel>
         <RecipeIngredients ingredients={data.recipe.ingredients} />
-        <RecipeSubtitle>Instructions</RecipeSubtitle>
+        <RecipeLabel>Instructions</RecipeLabel>
         <p>{data.recipe.instructions}</p>
         <BackButton className="mr-2 self-end">
           <span>Back</span>
