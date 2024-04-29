@@ -12,5 +12,4 @@ export type Action<T> =
 export type State<T> = {
   data: T | null;
   error: string | null;
-  isPending: boolean;
 };

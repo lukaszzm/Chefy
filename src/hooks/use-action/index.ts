@@ -20,39 +20,36 @@ export const useAction = <TValues = unknown, TData = unknown>({
   refreshOnSuccess = true,
 }: UseActionProps<TValues, TData>) => {
   const [state, dispatch] = useReducer(createActionReducer<TData>(), defaultState);
-  const [, startTransition] = useTransition();
+  const [isPending, startTransition] = useTransition();
   const { refresh } = useRouter();
-
-  const handleResponse = useCallback(
-    (res: ActionResponse<TData>) => {
-      if (res.ok) {
-        onSuccess?.(res.data);
-        dispatch({ type: ActionType.Success, data: res.data });
-        if (refreshOnSuccess) {
-          refresh();
-        }
-      } else {
-        onError?.(res.error);
-        dispatch({ type: ActionType.Error, error: res.error });
-      }
-    },
-    [onError, onSuccess, refresh, refreshOnSuccess]
-  );
 
   const execute = useCallback(
     async (values: TValues) => {
       dispatch({ type: ActionType.Pending });
-      const res = await action(values);
 
-      startTransition(() => {
-        handleResponse(res);
+      startTransition(async () => {
+        const res = await action(values);
+
+        if (!res.ok) {
+          onError?.(res.error);
+          dispatch({ type: ActionType.Error, error: res.error });
+          return;
+        }
+
+        if (refreshOnSuccess) {
+          refresh();
+        }
+
+        onSuccess?.(res.data);
+        dispatch({ type: ActionType.Success, data: res.data });
       });
     },
-    [action, handleResponse]
+    [action, onError, onSuccess, refresh, refreshOnSuccess]
   );
 
   return {
     execute,
     ...state,
+    isPending,
   };
 };
