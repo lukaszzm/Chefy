@@ -8,7 +8,7 @@ import { Argon2id } from "oslo/password";
 import { routes } from "@/config/routes";
 import type { SignUpPayload } from "@/features/auth/schemas/sign-up-schema";
 import { lucia } from "@/lib/auth";
-import { createUser, getUserByMail } from "@/lib/db/queries/user";
+import { createUserWithPreferences, getUserByMail } from "@/lib/db/queries/user";
 import { errorResponse } from "@/utils/action-response";
 
 export const signUp = async (payload: SignUpPayload) => {
@@ -23,7 +23,7 @@ export const signUp = async (payload: SignUpPayload) => {
   const userId = generateId(15);
 
   try {
-    await createUser({
+    await createUserWithPreferences({
       id: userId,
       name: payload.name,
       email: fixedMail,

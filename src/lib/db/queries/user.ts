@@ -1,7 +1,7 @@
 import { eq } from "drizzle-orm";
 
 import db from "@/lib/db";
-import { user } from "@/lib/db/schema";
+import { user, userPreferredArea, userPreferredCategory } from "@/lib/db/schema";
 import type { User } from "@/types";
 
 export const getUserById = async (id: string) =>
@@ -37,3 +37,25 @@ export const getUserByMail = async (email: string) =>
 export const createUser = async (data: User) => await db.insert(user).values(data);
 
 export const updateUser = async (id: string, data: Partial<User>) => db.update(user).set(data).where(eq(user.id, id));
+
+export const createUserWithPreferences = async (data: User) => {
+  await db.transaction(async (trx) => {
+    const [createdUser] = await trx.insert(user).values(data).returning({ userId: user.id });
+
+    const allCategories = await trx.query.category.findMany();
+    for (const category of allCategories) {
+      await trx.insert(userPreferredCategory).values({
+        userId: createdUser.userId,
+        categoryId: category.id,
+      });
+    }
+
+    const allAreas = await trx.query.area.findMany();
+    for (const area of allAreas) {
+      await trx.insert(userPreferredArea).values({
+        userId: createdUser.userId,
+        areaId: area.id,
+      });
+    }
+  });
+};
