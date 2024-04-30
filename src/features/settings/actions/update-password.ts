@@ -1,6 +1,6 @@
 "use server";
 
-import { Argon2id } from "oslo/password";
+import { Scrypt } from "lucia";
 
 import type { UpdatePasswordPayload } from "@/features/settings/schemas/password-schema";
 import { validateRequest } from "@/lib/auth";
@@ -20,13 +20,13 @@ export const updatePassword = async (payload: UpdatePasswordPayload) => {
     return errorResponse("User not found");
   }
 
-  const validPassword = await new Argon2id().verify(currentUser.password, payload.currentPassword);
+  const validPassword = await new Scrypt().verify(currentUser.password, payload.currentPassword);
 
   if (!validPassword) {
     return errorResponse("Incorrect current password");
   }
 
-  const hashedNewPassword = await new Argon2id().hash(payload.newPassword);
+  const hashedNewPassword = await new Scrypt().hash(payload.newPassword);
 
   try {
     await updateUser(authUser.id, { password: hashedNewPassword });

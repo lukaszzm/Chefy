@@ -1,9 +1,8 @@
 "use server";
 
-import { generateId } from "lucia";
+import { generateId, Scrypt } from "lucia";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import { Argon2id } from "oslo/password";
 
 import { routes } from "@/config/routes";
 import type { SignUpPayload } from "@/features/auth/schemas/sign-up-schema";
@@ -19,7 +18,7 @@ export const signUp = async (payload: SignUpPayload) => {
     return errorResponse("User already exists");
   }
 
-  const hashedPassword = await new Argon2id().hash(payload.password);
+  const hashedPassword = await new Scrypt().hash(payload.password);
   const userId = generateId(15);
 
   try {

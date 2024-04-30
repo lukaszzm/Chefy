@@ -2,7 +2,7 @@ import { cache } from "react";
 
 import { DrizzlePostgreSQLAdapter } from "@lucia-auth/adapter-drizzle";
 import type { Session, User } from "lucia";
-import { Lucia } from "lucia";
+import { Lucia, TimeSpan } from "lucia";
 import { cookies } from "next/headers";
 
 import db from "@/lib/db";
@@ -11,6 +11,7 @@ import { session, user } from "@/lib/db/schema";
 const adapter = new DrizzlePostgreSQLAdapter(db, session, user);
 
 export const lucia = new Lucia(adapter, {
+  sessionExpiresIn: new TimeSpan(7, "d"),
   sessionCookie: {
     expires: false,
     attributes: {

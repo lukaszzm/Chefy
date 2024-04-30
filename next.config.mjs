@@ -3,7 +3,6 @@
  */
 const nextConfig = {
   reactStrictMode: true,
-  swcMinify: true,
   images: {
     remotePatterns: [
       {
@@ -12,10 +11,6 @@ const nextConfig = {
         port: "",
       },
     ],
-  },
-  webpack: (config) => {
-    config.externals.push("@node-rs/argon2", "@node-rs/bcrypt");
-    return config;
   },
 };
 

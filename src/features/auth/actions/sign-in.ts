@@ -1,8 +1,8 @@
 "use server";
 
+import { Scrypt } from "lucia";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import { Argon2id } from "oslo/password";
 
 import { routes } from "@/config/routes";
 import type { SignInPayload } from "@/features/auth/schemas/sign-in-schema";
@@ -18,7 +18,7 @@ export const signIn = async (payload: SignInPayload) => {
     return errorResponse("Incorrect email or password");
   }
 
-  const validPassword = await new Argon2id().verify(existingUser.password, payload.password);
+  const validPassword = await new Scrypt().verify(existingUser.password, payload.password);
 
   if (!validPassword) {
     return errorResponse("Incorrect email or password");
