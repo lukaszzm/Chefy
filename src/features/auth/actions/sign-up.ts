@@ -12,7 +12,8 @@ import { createUser, getUserByMail } from "@/lib/db/queries/user";
 import { errorResponse } from "@/utils/action-response";
 
 export const signUp = async (payload: SignUpPayload) => {
-  const existingUser = await getUserByMail(payload.email);
+  const fixedMail = payload.email.toLowerCase();
+  const existingUser = await getUserByMail(fixedMail);
 
   if (existingUser) {
     return errorResponse("User already exists");
@@ -25,7 +26,7 @@ export const signUp = async (payload: SignUpPayload) => {
     await createUser({
       id: userId,
       name: payload.name,
-      email: payload.email,
+      email: fixedMail,
       password: hashedPassword,
     });
   } catch (error) {

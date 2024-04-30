@@ -11,7 +11,8 @@ import { getUserWithPasswordByMail } from "@/lib/db/queries/user";
 import { errorResponse } from "@/utils/action-response";
 
 export const signIn = async (payload: SignInPayload) => {
-  const existingUser = await getUserWithPasswordByMail(payload.email);
+  const fixedMail = payload.email.toLowerCase();
+  const existingUser = await getUserWithPasswordByMail(fixedMail);
 
   if (!existingUser) {
     return errorResponse("Incorrect email or password");
