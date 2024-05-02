@@ -1,4 +1,4 @@
-import { and, asc, count, eq, inArray, notInArray } from "drizzle-orm";
+import { and, asc, count, eq, inArray, notInArray, sql } from "drizzle-orm";
 
 import db from "@/lib/db";
 import {
@@ -87,6 +87,7 @@ export const getSuggestedRecipes = async (userId: string) => {
     )
     .innerJoin(category, eq(recipe.categoryId, category.id))
     .innerJoin(area, eq(recipe.areaId, area.id))
+    .orderBy(sql`RANDOM()`)
     .limit(10);
 };
 
