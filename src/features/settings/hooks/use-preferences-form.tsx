@@ -35,6 +35,7 @@ export const usePreferencesForm = ({
   const { execute, isPending, error } = useAction({
     action: actionOnSubmit,
     onSuccess: (data) => toast.success(data),
+    refreshOnSuccess: false,
   });
 
   const onSubmit = form.handleSubmit((data) => {

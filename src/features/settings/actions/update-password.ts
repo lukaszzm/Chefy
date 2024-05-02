@@ -30,8 +30,9 @@ export const updatePassword = async (payload: UpdatePasswordPayload) => {
 
   try {
     await updateUser(authUser.id, { password: hashedNewPassword });
-    return successResponse("Password updated successfully");
   } catch (e) {
     return errorResponse("Failed to update name");
   }
+
+  return successResponse("Password updated successfully");
 };

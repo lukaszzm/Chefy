@@ -18,6 +18,7 @@ export const useNameForm = (defaultName?: string) => {
   const { execute, isPending, error } = useAction({
     action: updateName,
     onSuccess: (data) => toast.success(data),
+    refreshOnSuccess: false,
   });
 
   const onSubmit = form.handleSubmit(execute);

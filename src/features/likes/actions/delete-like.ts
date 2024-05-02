@@ -1,5 +1,6 @@
 "use server";
 
+import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
 import { routes } from "@/config/routes";
@@ -30,5 +31,6 @@ export const deleteLike = async (recipeId: string, withRedirect: boolean) => {
     return errorResponse("Failed to delete like");
   }
 
+  revalidatePath(routes.likes);
   return withRedirect ? redirect(routes.likes) : successResponse("Recipe successfully deleted from likes");
 };

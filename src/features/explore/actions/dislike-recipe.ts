@@ -1,5 +1,8 @@
 "use server";
 
+import { revalidatePath } from "next/cache";
+
+import { routes } from "@/config/routes";
 import { validateRequest } from "@/lib/auth";
 import { createDislikeRecipe } from "@/lib/db/queries/recipe";
 import { errorResponse, successResponse } from "@/utils/action-response";
@@ -13,8 +16,10 @@ export const dislikeRecipe = async (recipeId: string) => {
 
   try {
     await createDislikeRecipe(user.id, recipeId);
-    return successResponse("Recipe disliked");
   } catch (error) {
     return errorResponse("Failed to dislike recipe");
   }
+
+  revalidatePath(routes.explore);
+  return successResponse("Recipe disliked");
 };
