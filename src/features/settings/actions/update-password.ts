@@ -7,6 +7,8 @@ import { validateRequest } from "@/lib/auth";
 import { getUserWithPasswordById, updateUser } from "@/lib/db/queries/user";
 import { errorResponse, successResponse } from "@/utils/action-response";
 
+const TEST_MAIL = "test@test.com";
+
 export const updatePassword = async (payload: UpdatePasswordPayload) => {
   const { user: authUser } = await validateRequest();
 
@@ -18,6 +20,10 @@ export const updatePassword = async (payload: UpdatePasswordPayload) => {
 
   if (!currentUser) {
     return errorResponse("User not found");
+  }
+
+  if (currentUser.email === TEST_MAIL) {
+    return errorResponse("Cannot update password for test user");
   }
 
   const validPassword = await new Scrypt().verify(currentUser.password, payload.currentPassword);
