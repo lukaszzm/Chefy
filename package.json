@@ -9,6 +9,8 @@
     "start": "next start",
     "lint": "next lint",
     "test": "jest",
+    "e2e": "playwright test",
+    "e2e:ui": "playwright test --ui",
     "prepare": "husky",
     "pre-commit": "lint-staged",
     "db:push": "drizzle-kit push:pg",
@@ -59,6 +61,7 @@
     "zod": "^3.23.5"
   },
   "devDependencies": {
+    "@playwright/test": "^1.44.0",
     "@types/bcrypt": "^5.0.2",
     "@types/file-saver": "^2.0.7",
     "@types/node": "^20.12.8",
