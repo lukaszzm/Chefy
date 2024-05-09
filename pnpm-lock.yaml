@@ -154,6 +154,9 @@ devDependencies:
   eslint-config-prettier:
     specifier: ^9.1.0
     version: 9.1.0(eslint@8.57.0)
+  eslint-plugin-playwright:
+    specifier: ^1.6.0
+    version: 1.6.0(eslint@8.57.0)
   husky:
     specifier: ^9.0.11
     version: 9.0.11
@@ -4890,6 +4893,20 @@ packages:
       minimatch: 3.1.2
       object.entries: 1.1.8
       object.fromentries: 2.0.8
+    dev: true
+
+  /eslint-plugin-playwright@1.6.0(eslint@8.57.0):
+    resolution: {integrity: sha512-tI1E/EDbHT4Fx5KvukUG3RTIT0gk44gvTP8bNwxLCFsUXVM98ZJG5zWU6Om5JOzH9FrmN4AhMu/UKyEsu0ZoDA==}
+    engines: {node: '>=16.6.0'}
+    peerDependencies:
+      eslint: '>=8.40.0'
+      eslint-plugin-jest: '>=25'
+    peerDependenciesMeta:
+      eslint-plugin-jest:
+        optional: true
+    dependencies:
+      eslint: 8.57.0
+      globals: 13.24.0
     dev: true
 
   /eslint-plugin-react-hooks@4.6.2(eslint@8.57.0):
