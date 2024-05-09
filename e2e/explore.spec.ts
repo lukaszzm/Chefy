@@ -6,32 +6,30 @@ test.describe("Explore", () => {
     await page.goto(routes.explore);
 
     const firstTitle = await page.getByRole("heading").last().textContent();
+    const firstElement = page.getByRole("heading", { name: firstTitle ?? "COULD_NOT_FIND" });
 
     const dislikeButton = page.getByLabel("Dislike recipe").last();
     await dislikeButton.click();
 
-    // Wait for the animation to finish
-    await page.waitForTimeout(500);
+    await firstElement.waitFor({ state: "detached" });
+    const secondElement = page.getByRole("heading").last();
 
-    const secondTitle = await page.getByRole("heading").last().textContent();
-
-    expect(firstTitle).not.toBe(secondTitle);
+    await expect(secondElement).not.toHaveText(firstTitle ?? "COULD_NOT_FIND");
   });
 
   test("Should change recipe after like", async ({ page }) => {
     await page.goto(routes.explore);
 
     const firstTitle = await page.getByRole("heading").last().textContent();
+    const firstElement = page.getByRole("heading", { name: firstTitle ?? "COULD_NOT_FIND" });
 
-    const dislikeButton = page.getByLabel("Like recipe").last();
-    await dislikeButton.click();
+    const likeButton = page.getByLabel("Like recipe").last();
+    await likeButton.click();
 
-    // Wait for the animation to finish
-    await page.waitForTimeout(500);
+    await firstElement.waitFor({ state: "detached" });
+    const secondElement = page.getByRole("heading").last();
 
-    const secondTitle = await page.getByRole("heading").last().textContent();
-
-    expect(firstTitle).not.toBe(secondTitle);
+    await expect(secondElement).not.toHaveText(firstTitle ?? "COULD_NOT_FIND");
   });
 
   test("Should add recipe to likes", async ({ page }) => {
@@ -39,16 +37,12 @@ test.describe("Explore", () => {
 
     const recipeTitle = await page.getByRole("heading").last().textContent();
 
-    if (!recipeTitle) {
-      throw new Error("No recipe title found");
-    }
-
     const likeButton = page.getByLabel("Like recipe").last();
     await likeButton.click();
 
     await page.goto(routes.likes);
-    const likeTitle = page.getByRole("heading", { name: recipeTitle });
+    const likeTitle = page.getByRole("heading", { name: recipeTitle ?? "COULD_NOT_FIND" });
 
-    expect(likeTitle).toBeVisible();
+    await expect(likeTitle).toBeVisible();
   });
 });
