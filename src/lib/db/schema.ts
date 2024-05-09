@@ -19,7 +19,7 @@ export const session = pgTable("session", {
   id: text("id").primaryKey(),
   userId: text("user_id")
     .notNull()
-    .references(() => user.id),
+    .references(() => user.id, { onDelete: "cascade" }),
   expiresAt: timestamp("expires_at", {
     withTimezone: true,
     mode: "date",
@@ -74,10 +74,10 @@ export const userLikedRecipe = pgTable(
   {
     userId: text("user_id")
       .notNull()
-      .references(() => user.id),
+      .references(() => user.id, { onDelete: "cascade" }),
     recipeId: text("recipe_id")
       .notNull()
-      .references(() => recipe.id),
+      .references(() => recipe.id, { onDelete: "cascade" }),
   },
   (t) => ({
     pk: primaryKey({
@@ -102,10 +102,10 @@ export const userDislikedRecipe = pgTable(
   {
     userId: text("user_id")
       .notNull()
-      .references(() => user.id),
+      .references(() => user.id, { onDelete: "cascade" }),
     recipeId: text("recipe_id")
       .notNull()
-      .references(() => recipe.id),
+      .references(() => recipe.id, { onDelete: "cascade" }),
   },
   (t) => ({
     pk: primaryKey({
@@ -130,10 +130,10 @@ export const userPreferredCategory = pgTable(
   {
     userId: text("user_id")
       .notNull()
-      .references(() => user.id),
+      .references(() => user.id, { onDelete: "cascade" }),
     categoryId: text("category_id")
       .notNull()
-      .references(() => category.id),
+      .references(() => category.id, { onDelete: "cascade" }),
   },
   (t) => ({
     pk: primaryKey({
@@ -158,10 +158,10 @@ export const userPreferredArea = pgTable(
   {
     userId: text("user_id")
       .notNull()
-      .references(() => user.id),
+      .references(() => user.id, { onDelete: "cascade" }),
     areaId: text("area_id")
       .notNull()
-      .references(() => area.id),
+      .references(() => area.id, { onDelete: "cascade" }),
   },
   (t) => ({
     pk: primaryKey({
