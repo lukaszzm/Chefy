@@ -5,7 +5,7 @@ import { redirect } from "next/navigation";
 
 import { routes } from "@/config/routes";
 import { validateRequest } from "@/lib/auth";
-import { deleteLikeRecipe, getLikeRecipeById } from "@/lib/db/queries/recipe";
+import { deleteLikeRecipe, getLikeRecipe } from "@/lib/db/queries/recipe";
 import { errorResponse, successResponse } from "@/utils/action-response";
 
 export const deleteLike = async (recipeId: string, withRedirect: boolean) => {
@@ -15,7 +15,7 @@ export const deleteLike = async (recipeId: string, withRedirect: boolean) => {
     return errorResponse("Unauthorized");
   }
 
-  const like = await getLikeRecipeById(recipeId);
+  const like = await getLikeRecipe(recipeId, user.id);
 
   if (!like) {
     return errorResponse("Like not found");
