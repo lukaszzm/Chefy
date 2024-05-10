@@ -1,6 +1,6 @@
 "use server";
 
-import { Scrypt } from "lucia";
+import { compare, hash } from "bcrypt";
 
 import type { UpdatePasswordPayload } from "@/features/settings/schemas/password-schema";
 import { validateRequest } from "@/lib/auth";
@@ -26,16 +26,15 @@ export const updatePassword = async (payload: UpdatePasswordPayload) => {
     return errorResponse("Cannot update password for test user");
   }
 
-  const validPassword = await new Scrypt().verify(currentUser.password, payload.currentPassword);
-
+  const validPassword = await compare(payload.currentPassword, currentUser.password);
   if (!validPassword) {
     return errorResponse("Incorrect current password");
   }
 
-  const hashedNewPassword = await new Scrypt().hash(payload.newPassword);
+  const hashedPassword = await hash(payload.newPassword, 8);
 
   try {
-    await updateUser(authUser.id, { password: hashedNewPassword });
+    await updateUser(authUser.id, { password: hashedPassword });
   } catch (e) {
     return errorResponse("Failed to update name");
   }
