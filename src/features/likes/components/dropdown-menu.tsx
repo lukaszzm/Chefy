@@ -30,7 +30,12 @@ export const LikesDropdownMenu = ({ withDetailsLink, deleteWithRedirect, recipe 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button aria-label="Open Menu" data-pending={isPending ? "true" : undefined} size="icon" variant="ghost">
+        <Button
+          aria-label={`Open menu for ${recipe.title}`}
+          data-pending={isPending ? "true" : undefined}
+          size="icon"
+          variant="ghost"
+        >
           <Ellipsis />
         </Button>
       </DropdownMenuTrigger>
