@@ -1,6 +1,8 @@
 import { routes } from "@/config/routes";
 import { expect, test } from "playwright/fixtures";
 
+test.describe.configure({ mode: "parallel" });
+
 test.describe("Explore", () => {
   test("Should change recipe after dislike", async ({ page }) => {
     await page.goto(routes.explore);
@@ -8,7 +10,7 @@ test.describe("Explore", () => {
     const firstTitle = await page.getByRole("heading").last().textContent();
     const firstElement = page.getByRole("heading", { name: firstTitle ?? "COULD_NOT_FIND" });
 
-    const dislikeButton = page.getByLabel("Dislike recipe").last();
+    const dislikeButton = page.getByLabel(`Dislike ${firstTitle}`).last();
     await dislikeButton.click();
 
     await firstElement.waitFor({ state: "detached" });
@@ -23,7 +25,7 @@ test.describe("Explore", () => {
     const firstTitle = await page.getByRole("heading").last().textContent();
     const firstElement = page.getByRole("heading", { name: firstTitle ?? "COULD_NOT_FIND" });
 
-    const likeButton = page.getByLabel("Like recipe").last();
+    const likeButton = page.getByLabel(`Like ${firstTitle}`).last();
     await likeButton.click();
 
     await firstElement.waitFor({ state: "detached" });
@@ -37,7 +39,7 @@ test.describe("Explore", () => {
 
     const recipeTitle = await page.getByRole("heading").last().textContent();
 
-    const likeButton = page.getByLabel("Like recipe").last();
+    const likeButton = page.getByLabel(`Like ${recipeTitle}`).last();
     await likeButton.click();
 
     await page.goto(routes.likes);
