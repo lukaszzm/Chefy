@@ -15,7 +15,7 @@ export const deleteLike = async (recipeId: string, withRedirect: boolean) => {
     return errorResponse("Unauthorized");
   }
 
-  const like = await getLikeRecipe(recipeId, user.id);
+  const like = await getLikeRecipe(user.id, recipeId);
 
   if (!like) {
     return errorResponse("Like not found");

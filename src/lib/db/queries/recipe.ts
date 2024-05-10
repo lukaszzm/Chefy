@@ -103,7 +103,7 @@ export const createLikeRecipe = async (userId: string, recipeId: string) =>
     recipeId,
   });
 
-export const getLikeRecipe = async (recipeId: string, userId: string) =>
+export const getLikeRecipe = async (userId: string, recipeId: string) =>
   db.query.userLikedRecipe.findFirst({
     where: and(eq(userLikedRecipe.recipeId, recipeId), eq(userLikedRecipe.userId, userId)),
     with: {
