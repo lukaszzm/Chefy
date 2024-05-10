@@ -2,7 +2,7 @@ import { hash } from "bcrypt";
 
 import { randomUUID } from "crypto";
 
-import { createUserWithPreferences, deleteUser, getTestUsers } from "@/lib/db/queries/user";
+import { createUserWithPreferences, deleteUser } from "@/lib/db/queries/user";
 
 async function create() {
   const id = randomUUID();
@@ -20,17 +20,13 @@ async function create() {
   await createUserWithPreferences(payload);
 
   return {
-    email: payload.email,
-    password: password,
+    ...payload,
+    password,
   };
 }
 
-async function clean() {
-  const testAccounts = await getTestUsers();
-
-  for (const account of testAccounts) {
-    await deleteUser(account.id);
-  }
+async function clean(id: string) {
+  await deleteUser(id);
 }
 
 export const testAccount = {
