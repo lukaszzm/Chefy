@@ -43,7 +43,12 @@ export const UpdatePasswordForm = () => {
 
           <ActionError error={error} />
 
-          <Button className="w-full sm:w-auto" disabled={!form.formState.isDirty} isLoading={isPending} type="submit">
+          <Button
+            className="w-full min-w-36 sm:w-auto"
+            disabled={!form.formState.isDirty}
+            isLoading={isPending}
+            type="submit"
+          >
             Update Password
           </Button>
         </form>

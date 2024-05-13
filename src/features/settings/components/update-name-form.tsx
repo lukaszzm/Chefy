@@ -34,8 +34,13 @@ export const UpdateNameForm = ({ defaultName }: UpdateNameFormProps) => {
 
           <ActionError error={error} />
 
-          <Button className="w-full sm:w-auto" disabled={!form.formState.isDirty} isLoading={isPending} type="submit">
-            Save
+          <Button
+            className="w-full min-w-32 sm:w-auto"
+            disabled={!form.formState.isDirty}
+            isLoading={isPending}
+            type="submit"
+          >
+            Update Name
           </Button>
         </form>
       </Form>
