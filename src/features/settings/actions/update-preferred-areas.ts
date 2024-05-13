@@ -22,5 +22,5 @@ export const updatePreferredAreas = async (areas: string[]) => {
 
   revalidatePath(routes.settings);
   revalidatePath(routes.explore);
-  return successResponse("Preferred areas updated");
+  return successResponse("Preferred areas updated successfully");
 };
