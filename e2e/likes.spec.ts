@@ -5,16 +5,8 @@ import { expect, test } from "playwright/fixtures";
 test.describe.configure({ mode: "parallel" });
 
 test.describe("Likes", () => {
-  test("Should redirect to recipe page after click on Details", async ({ page, like }) => {
-    const dropdownMenuLabel = `Open menu for ${like.title}`;
-
-    await page.goto(routes.likes);
-
-    const dropdownMenuButton = page.getByLabel(dropdownMenuLabel);
-    await dropdownMenuButton.click();
-
-    const detailsButton = page.getByRole("menuitem", { name: "Details" });
-    await detailsButton.click();
+  test("Should redirect to recipe page after click on Details", async ({ page, like, likesPage }) => {
+    await likesPage.clickDetails(like.title);
 
     await page.waitForURL(slugRoute(routes.like, { id: like.id }));
 
@@ -25,35 +17,20 @@ test.describe("Likes", () => {
     await expect(recipeInstructions).toBeVisible();
   });
 
-  test("Should download PDF file after click on Generate PDF", async ({ page, like }) => {
+  test("Should download PDF file after click on Generate PDF", async ({ page, like, likesPage }) => {
     const expectedFileName = `${like.title}_Chefy.pdf`;
-    const dropdownMenuLabel = `Open menu for ${like.title}`;
 
-    await page.goto(routes.likes);
-
-    const dropdownMenuButton = page.getByLabel(dropdownMenuLabel);
-    await dropdownMenuButton.click();
-
-    const generatePDFButton = page.getByRole("menuitem", { name: "Download PDF" });
-    await generatePDFButton.click();
+    await likesPage.clickDownloadPDF(like.title);
 
     const download = await page.waitForEvent("download");
 
     expect(download.suggestedFilename()).toBe(expectedFileName);
   });
 
-  test("Should remove recipe from likes after click on Delete", async ({ page, like }) => {
-    const dropdownMenuLabel = `Open menu for ${like.title}`;
-
-    await page.goto(routes.likes);
-
+  test("Should remove recipe from likes after click on Delete", async ({ page, like, likesPage }) => {
     const recipeTitle = page.getByRole("heading", { name: like.title });
 
-    const dropdownMenuButton = page.getByLabel(dropdownMenuLabel);
-    await dropdownMenuButton.click();
-
-    const deleteButton = page.getByRole("menuitem", { name: "Delete" });
-    await deleteButton.click();
+    await likesPage.clickDelete(like.title);
 
     await expect(recipeTitle).toBeHidden();
   });
