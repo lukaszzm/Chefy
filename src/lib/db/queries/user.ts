@@ -43,6 +43,8 @@ export const createUser = async (data: User) => await db.insert(user).values(dat
 
 export const deleteUser = async (id: string) => db.delete(user).where(eq(user.id, id));
 
+export const deleteUserByMail = async (email: string) => db.delete(user).where(eq(user.email, email));
+
 export const updateUser = async (id: string, data: Partial<User>) => db.update(user).set(data).where(eq(user.id, id));
 
 export const createUserWithPreferences = async (data: User) => {
