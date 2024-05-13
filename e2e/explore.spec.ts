@@ -4,46 +4,34 @@ import { expect, test } from "playwright/fixtures";
 test.describe.configure({ mode: "parallel" });
 
 test.describe("Explore", () => {
-  test("Should change recipe after dislike", async ({ page }) => {
-    await page.goto(routes.explore);
+  test("Should change recipe after dislike", async ({ explorePage }) => {
+    const firstRecipeTitle = await explorePage.getRecipeTitle();
 
-    const firstTitle = await page.getByRole("heading").last().textContent();
-    const firstElement = page.getByRole("heading", { name: firstTitle ?? "COULD_NOT_FIND" });
+    await explorePage.dislikeRecipe(firstRecipeTitle);
 
-    const dislikeButton = page.getByLabel(`Dislike ${firstTitle}`).last();
-    await dislikeButton.click();
+    const secondRecipeTitle = await explorePage.getRecipeTitle();
 
-    await firstElement.waitFor({ state: "detached" });
-    const secondElement = page.getByRole("heading").last();
-
-    await expect(secondElement).not.toHaveText(firstTitle ?? "COULD_NOT_FIND");
+    expect(secondRecipeTitle).not.toBe(firstRecipeTitle);
   });
 
-  test("Should change recipe after like", async ({ page }) => {
-    await page.goto(routes.explore);
+  test("Should change recipe after like", async ({ explorePage }) => {
+    const firstRecipeTitle = await explorePage.getRecipeTitle();
 
-    const firstTitle = await page.getByRole("heading").last().textContent();
-    const firstElement = page.getByRole("heading", { name: firstTitle ?? "COULD_NOT_FIND" });
+    await explorePage.likeRecipe(firstRecipeTitle);
 
-    const likeButton = page.getByLabel(`Like ${firstTitle}`).last();
-    await likeButton.click();
+    const secondRecipeTitle = await explorePage.getRecipeTitle();
 
-    await firstElement.waitFor({ state: "detached" });
-    const secondElement = page.getByRole("heading").last();
-
-    await expect(secondElement).not.toHaveText(firstTitle ?? "COULD_NOT_FIND");
+    expect(secondRecipeTitle).not.toBe(firstRecipeTitle);
   });
 
-  test("Should add recipe to likes", async ({ page }) => {
-    await page.goto(routes.explore);
+  test("Should add recipe to likes", async ({ explorePage, page }) => {
+    const recipeTitle = await explorePage.getRecipeTitle();
 
-    const recipeTitle = await page.getByRole("heading").last().textContent();
-
-    const likeButton = page.getByLabel(`Like ${recipeTitle}`).last();
-    await likeButton.click();
+    await explorePage.likeRecipe(recipeTitle);
 
     await page.goto(routes.likes);
-    const likeTitle = page.getByRole("heading", { name: recipeTitle ?? "COULD_NOT_FIND" });
+
+    const likeTitle = page.getByRole("heading", { name: recipeTitle });
 
     await expect(likeTitle).toBeVisible();
   });
