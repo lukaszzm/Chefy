@@ -50,10 +50,8 @@
   },
   "overrides": [
     {
-      "files": ["*.test.tsx", "index.ts"],
-      "rules": {
-        "no-restricted-imports": "off"
-      }
+      "files": "e2e/**",
+      "extends": "plugin:playwright/recommended"
     }
   ]
 }

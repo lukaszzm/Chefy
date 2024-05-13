@@ -22,5 +22,5 @@ export const updatePreferredCategories = async (categories: string[]) => {
 
   revalidatePath(routes.settings);
   revalidatePath(routes.explore);
-  return successResponse("Preferred categories updated");
+  return successResponse("Preferred categories updated successfully");
 };

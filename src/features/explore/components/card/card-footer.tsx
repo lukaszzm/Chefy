@@ -6,12 +6,12 @@ import { useRecipes } from "@/features/explore/hooks/use-recipes";
 import type { Recipe } from "@/types";
 import { cn } from "@/utils/cn";
 
-interface ExploreCardFooterProps extends Pick<Recipe, "id"> {
+interface ExploreCardFooterProps extends Pick<Recipe, "id" | "title"> {
   onExpand: (expand: boolean) => void;
   isExpanded: boolean;
 }
 
-export const ExploreCardFooter = ({ id, onExpand, isExpanded }: ExploreCardFooterProps) => {
+export const ExploreCardFooter = ({ id, title, onExpand, isExpanded }: ExploreCardFooterProps) => {
   const { dislike, like } = useRecipes();
 
   return (
@@ -21,11 +21,11 @@ export const ExploreCardFooter = ({ id, onExpand, isExpanded }: ExploreCardFoote
         isExpanded ? "relative" : "absolute"
       )}
     >
-      <Button aria-label="Dislike recipe" size="control" variant="destructive" onClick={() => dislike(id)}>
+      <Button aria-label={`Dislike ${title}`} size="control" variant="destructive" onClick={() => dislike(id)}>
         <X size={44} />
       </Button>
       <Button
-        aria-label={isExpanded ? "Collapse recipe information" : "Expand recipe information"}
+        aria-label={isExpanded ? `Collapse information about ${title}` : `Expand information about ${title}`}
         className="size-14 self-end [&[data-expanded=true]>svg]:rotate-180"
         data-expanded={isExpanded ? "true" : "false"}
         size="control"
@@ -34,7 +34,7 @@ export const ExploreCardFooter = ({ id, onExpand, isExpanded }: ExploreCardFoote
       >
         <ChevronDown className="shrink-0 transition-transform duration-200" size={32} />
       </Button>
-      <Button aria-label="Like recipe" size="control" variant="success" onClick={() => like(id)}>
+      <Button aria-label={`Like ${title}`} size="control" variant="success" onClick={() => like(id)}>
         <Heart size={44} />
       </Button>
     </CardFooter>

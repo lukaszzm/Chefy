@@ -16,6 +16,7 @@ export const UpdateAreaPreferencesForm = ({ allAreas, preferredAreas }: UpdateAr
         allValues={allAreas}
         keyName="areaId"
         preferredValues={preferredAreas}
+        submitText="Update Areas"
       />
     </SettingsContainer>
   );

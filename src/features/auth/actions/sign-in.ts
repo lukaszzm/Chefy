@@ -1,6 +1,6 @@
 "use server";
 
-import { Scrypt } from "lucia";
+import { compare } from "bcrypt";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
@@ -18,7 +18,7 @@ export const signIn = async (payload: SignInPayload) => {
     return errorResponse("Incorrect email or password");
   }
 
-  const validPassword = await new Scrypt().verify(existingUser.password, payload.password);
+  const validPassword = await compare(payload.password, existingUser.password);
 
   if (!validPassword) {
     return errorResponse("Incorrect email or password");

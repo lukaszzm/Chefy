@@ -13,6 +13,7 @@ interface UpdatePreferencesFormProps {
   preferredValues: Array<PreferenceValue>;
   keyName: string;
   actionOnSubmit: (values: string[]) => Promise<ActionResponse<string>>;
+  submitText: string;
 }
 
 export const UpdatePreferencesForm = ({
@@ -20,6 +21,7 @@ export const UpdatePreferencesForm = ({
   preferredValues,
   keyName,
   actionOnSubmit,
+  submitText,
 }: UpdatePreferencesFormProps) => {
   const { form, fields, onSubmit, error, isPending } = usePreferencesForm({
     allValues,
@@ -57,8 +59,8 @@ export const UpdatePreferencesForm = ({
 
         <ActionError error={error} />
 
-        <Button disabled={!form.formState.isDirty} isLoading={isPending} type="submit">
-          Save
+        <Button className="min-w-40" disabled={!form.formState.isDirty} isLoading={isPending} type="submit">
+          {submitText}
         </Button>
       </form>
     </Form>

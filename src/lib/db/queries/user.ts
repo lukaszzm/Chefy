@@ -1,4 +1,4 @@
-import { eq } from "drizzle-orm";
+import { eq, like } from "drizzle-orm";
 
 import db from "@/lib/db";
 import { user, userPreferredArea, userPreferredCategory } from "@/lib/db/schema";
@@ -34,7 +34,16 @@ export const getUserByMail = async (email: string) =>
     },
   });
 
+export const getTestUsers = async () =>
+  db.query.user.findMany({
+    where: like(user.email, "e2e_%@e2e.com"),
+  });
+
 export const createUser = async (data: User) => await db.insert(user).values(data);
+
+export const deleteUser = async (id: string) => db.delete(user).where(eq(user.id, id));
+
+export const deleteUserByMail = async (email: string) => db.delete(user).where(eq(user.email, email));
 
 export const updateUser = async (id: string, data: Partial<User>) => db.update(user).set(data).where(eq(user.id, id));
 

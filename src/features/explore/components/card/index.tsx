@@ -49,7 +49,7 @@ export const ExploreCard = ({
           ingredients={ingredients}
           instructions={instructions}
         />
-        <ExploreCardFooter id={id} isExpanded={isPreviewMode} onExpand={toggleMode} />
+        <ExploreCardFooter id={id} isExpanded={isPreviewMode} title={title} onExpand={toggleMode} />
       </Card>
     </SwipeItem>
   );

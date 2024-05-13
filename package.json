@@ -9,6 +9,8 @@
     "start": "next start",
     "lint": "next lint",
     "test": "jest",
+    "e2e": "playwright test",
+    "e2e:ui": "playwright test --ui",
     "prepare": "husky",
     "pre-commit": "lint-staged",
     "db:push": "drizzle-kit push:pg",
@@ -36,6 +38,7 @@
     "@radix-ui/react-tabs": "^1.0.4",
     "@radix-ui/react-tooltip": "^1.0.7",
     "@react-pdf/renderer": "^3.4.4",
+    "bcrypt": "^5.1.1",
     "class-variance-authority": "^0.7.0",
     "classnames": "^2.5.1",
     "clsx": "^2.1.1",
@@ -59,6 +62,7 @@
     "zod": "^3.23.5"
   },
   "devDependencies": {
+    "@playwright/test": "^1.44.0",
     "@types/bcrypt": "^5.0.2",
     "@types/file-saver": "^2.0.7",
     "@types/node": "^20.12.8",
@@ -73,6 +77,7 @@
     "eslint": "^8.57.0",
     "eslint-config-next": "^14.2.3",
     "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-playwright": "^1.6.0",
     "husky": "^9.0.11",
     "lint-staged": "^15.2.2",
     "postcss": "^8.4.38",

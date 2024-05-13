@@ -1,8 +1,10 @@
 "use server";
 
-import { generateId, Scrypt } from "lucia";
+import { hash } from "bcrypt";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+
+import { randomUUID } from "crypto";
 
 import { routes } from "@/config/routes";
 import type { SignUpPayload } from "@/features/auth/schemas/sign-up-schema";
@@ -18,8 +20,8 @@ export const signUp = async (payload: SignUpPayload) => {
     return errorResponse("User already exists");
   }
 
-  const hashedPassword = await new Scrypt().hash(payload.password);
-  const userId = generateId(15);
+  const hashedPassword = await hash(payload.password, 8);
+  const userId = randomUUID();
 
   try {
     await createUserWithPreferences({

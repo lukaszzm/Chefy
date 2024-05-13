@@ -19,6 +19,7 @@ export const UpdateCategoryPreferencesForm = ({
         allValues={allCategories}
         keyName="categoryId"
         preferredValues={preferredCategories}
+        submitText="Update Categories"
       />
     </SettingsContainer>
   );
