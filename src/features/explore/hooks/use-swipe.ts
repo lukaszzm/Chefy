@@ -23,9 +23,11 @@ export const useSwipe = ({ onSwipeLeft, onSwipeRight, changeVariant }: UseSwipeH
 
   const swipeEndHandler = useCallback(
     (_event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
-      if (info.offset.x > DragLimit) {
+      const swipeBoundary = DragLimit / 2;
+
+      if (info.offset.x > swipeBoundary) {
         onSwipeRight();
-      } else if (info.offset.x < -DragLimit) {
+      } else if (info.offset.x < -swipeBoundary) {
         onSwipeLeft();
       }
     },
