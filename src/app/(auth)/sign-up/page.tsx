@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 
 import { Separator } from "@/components/ui/separator";
 import { routes } from "@/config/routes";
-import { CredentialsFooter, CredentialsHeading, SignUpForm } from "@/features/auth";
+import { CredentialsFooter } from "@/features/auth/components/credentials-footer";
+import { CredentialsHeading } from "@/features/auth/components/credentials-heading";
+import { SignUpForm } from "@/features/auth/components/sign-up-form";
 
 export const metadata: Metadata = {
   title: "Chefy - Create an account",

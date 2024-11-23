@@ -9,7 +9,7 @@ import { RecipeLabel } from "@/components/recipe/recipe-label";
 import { BackButton } from "@/components/ui/back-button";
 import { Title } from "@/components/ui/title";
 import { routes } from "@/config/routes";
-import { LikesDropdownMenu } from "@/features/likes";
+import { LikesDropdownMenu } from "@/features/likes/components/dropdown-menu";
 import { validateRequest } from "@/lib/auth";
 import { getLikeRecipe } from "@/lib/db/queries/recipe";
 
@@ -30,6 +30,7 @@ export async function generateMetadata({ params: { id } }: PageProps): Promise<M
     title: data?.recipe.title ?? "Recipe not found",
   };
 }
+
 export default async function LikePage({ params: { id } }: PageProps) {
   const { user } = await validateRequest();
 

@@ -3,7 +3,8 @@ import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 
 import { routes } from "@/config/routes";
-import { Hero, Navbar } from "@/features/home";
+import { Hero } from "@/features/home/components/hero";
+import { Navbar } from "@/features/home/components/navbar";
 import { validateRequest } from "@/lib/auth";
 
 export const metadata: Metadata = {

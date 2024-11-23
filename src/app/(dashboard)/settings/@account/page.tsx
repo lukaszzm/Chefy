@@ -1,4 +1,5 @@
-import { UpdateNameForm, UpdatePasswordForm } from "@/features/settings";
+import { UpdateNameForm } from "@/features/settings/components/update-name-form";
+import { UpdatePasswordForm } from "@/features/settings/components/update-password-form";
 import { authUser } from "@/lib/auth";
 import { getUserById } from "@/lib/db/queries/user";
 

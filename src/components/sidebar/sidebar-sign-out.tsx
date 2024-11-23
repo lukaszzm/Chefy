@@ -4,7 +4,7 @@ import { LogOut } from "lucide-react";
 
 import { SidebarButton } from "@/components/sidebar/sidebar-button";
 import { SidebarText } from "@/components/sidebar/sidebar-text";
-import { SignOutDialog } from "@/features/auth";
+import { SignOutDialog } from "@/features/auth/components/sign-out-dialog";
 
 export const SidebarSignOut = () => {
   return (

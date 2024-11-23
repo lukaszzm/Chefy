@@ -1,6 +1,8 @@
 import { Title } from "@/components/ui/title";
 import { routes } from "@/config/routes";
-import { LikesList, LikesNotFound, LikesPagination } from "@/features/likes";
+import { LikesList } from "@/features/likes/components/list";
+import { LikesNotFound } from "@/features/likes/components/not-found";
+import { LikesPagination } from "@/features/likes/components/pagination";
 import { authUser } from "@/lib/auth";
 import { getLikedRecipes } from "@/lib/db/queries/recipe";
 import { redirectWithParams } from "@/utils/redirect-with-params";

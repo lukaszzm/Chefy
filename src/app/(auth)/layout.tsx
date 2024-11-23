@@ -19,7 +19,7 @@ export default async function AuthLayout({ children }: PropsWithChildren) {
       <Link aria-label="Back to home page" className="absolute left-0 top-0 m-9" href={routes.home}>
         <Logo />
       </Link>
-      <main className="w-full space-y-6 bg-popover  px-10 py-8 pt-24 sm:max-w-md sm:rounded-lg sm:border sm:border-border sm:pt-8">
+      <main className="w-full space-y-6 bg-popover px-10 py-8 pt-24 sm:max-w-md sm:rounded-lg sm:border sm:border-border sm:pt-8">
         {children}
       </main>
     </div>

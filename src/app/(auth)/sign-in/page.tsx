@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 
 import { Separator } from "@/components/ui/separator";
 import { routes } from "@/config/routes";
-import { CredentialsFooter, CredentialsHeading, SignInForm } from "@/features/auth";
+import { CredentialsFooter } from "@/features/auth/components/credentials-footer";
+import { CredentialsHeading } from "@/features/auth/components/credentials-heading";
+import { SignInForm } from "@/features/auth/components/sign-in-form";
 
 export const metadata: Metadata = {
   title: "Chefy - Sign in to your account",

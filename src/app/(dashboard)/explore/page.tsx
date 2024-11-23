@@ -1,4 +1,4 @@
-import { ExploreRecipes } from "@/features/explore";
+import { ExploreRecipes } from "@/features/explore/components/recipes";
 import { authUser } from "@/lib/auth";
 import { getSuggestedRecipes } from "@/lib/db/queries/recipe";
 
