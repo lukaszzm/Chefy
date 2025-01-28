@@ -2,7 +2,8 @@ import type { PropsWithChildren } from "react";
 
 import { redirect } from "next/navigation";
 
-import { Sidebar } from "@/components/sidebar";
+import { DashboardSidebar } from "@/components/layout/dashboard-sidebar";
+import { SidebarProvider } from "@/components/ui/sidebar";
 import { routes } from "@/config/routes";
 import { getCurrentSession } from "@/lib/auth/session";
 
@@ -14,9 +15,9 @@ export default async function DashboardLayout({ children }: PropsWithChildren) {
   }
 
   return (
-    <div className="grid h-dvh w-full overflow-auto pb-16 sm:pb-0 sm:pl-20 lg:pl-52">
-      <Sidebar />
-      <main className="flex h-full w-full bg-background sm:items-center sm:justify-center">{children}</main>
-    </div>
+    <SidebarProvider>
+      <DashboardSidebar />
+      <main className="bg-background flex h-full sm:items-center sm:justify-center w-full">{children}</main>
+    </SidebarProvider>
   );
 }

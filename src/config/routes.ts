@@ -9,3 +9,5 @@ export const routes = {
   account: "/settings/account",
   preferences: "/settings/preferences",
 } as const satisfies Record<string, string>;
+
+export type Route = keyof typeof routes;
