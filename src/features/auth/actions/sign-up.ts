@@ -7,10 +7,10 @@ import { randomUUID } from "crypto";
 
 import { routes } from "@/config/routes";
 import type { SignUpPayload } from "@/features/auth/schemas/sign-up-schema";
+import { setSessionTokenCookie } from "@/lib/auth/cookies";
+import { createSession, generateSessionToken } from "@/lib/auth/session";
 import { createUserWithPreferences, getUserByMail } from "@/lib/db/queries/user";
 import { errorResponse } from "@/utils/action-response";
-import { createSession, generateSessionToken } from "@/lib/auth/session";
-import { setSessionTokenCookie } from "@/lib/auth/cookies";
 
 export const signUp = async (payload: SignUpPayload) => {
   const fixedMail = payload.email.toLowerCase();
@@ -30,7 +30,7 @@ export const signUp = async (payload: SignUpPayload) => {
       email: fixedMail,
       password: hashedPassword,
     });
-  } catch (error) {
+  } catch {
     return errorResponse("Failed to create user");
   }
 

@@ -3,9 +3,9 @@
 import { compare, hash } from "bcrypt";
 
 import type { UpdatePasswordPayload } from "@/features/settings/schemas/password-schema";
+import { getCurrentSession } from "@/lib/auth/session";
 import { getUserWithPasswordById, updateUser } from "@/lib/db/queries/user";
 import { errorResponse, successResponse } from "@/utils/action-response";
-import { getCurrentSession } from "@/lib/auth/session";
 
 const TEST_MAIL = "test@test.com";
 
@@ -35,7 +35,7 @@ export const updatePassword = async (payload: UpdatePasswordPayload) => {
 
   try {
     await updateUser(user.id, { password: hashedPassword });
-  } catch (e) {
+  } catch {
     return errorResponse("Failed to update name");
   }
 

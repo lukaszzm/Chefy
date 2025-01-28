@@ -1,5 +1,6 @@
-import { AuthConfig } from "@/lib/auth/config";
 import { cookies } from "next/headers";
+
+import { AuthConfig } from "@/lib/auth/config";
 
 export async function setSessionTokenCookie(token: string, expiresAt: Date): Promise<void> {
   const cookieStore = await cookies();

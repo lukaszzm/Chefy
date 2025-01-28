@@ -3,9 +3,9 @@
 import { redirect } from "next/navigation";
 
 import { routes } from "@/config/routes";
-import { errorResponse } from "@/utils/action-response";
-import { getCurrentSession, invalidateSession } from "@/lib/auth/session";
 import { deleteSessionTokenCookie } from "@/lib/auth/cookies";
+import { getCurrentSession, invalidateSession } from "@/lib/auth/session";
+import { errorResponse } from "@/utils/action-response";
 
 export const signOut = async () => {
   const { session } = await getCurrentSession();

@@ -1,9 +1,10 @@
+import { cache } from "react";
+
 import { eq, like } from "drizzle-orm";
 
 import db from "@/lib/db";
 import { userTable, userPreferredAreaTable, userPreferredCategoryTable } from "@/lib/db/schema";
 import type { User } from "@/types";
-import { cache } from "react";
 
 export const getUserById = cache(
   async (id: string) =>

@@ -1,3 +1,5 @@
+import { cache } from "react";
+
 import { and, asc, count, eq, inArray, notInArray, sql } from "drizzle-orm";
 
 import db from "@/lib/db";
@@ -11,7 +13,6 @@ import {
   userPreferredCategoryTable,
 } from "@/lib/db/schema";
 import { withPagination } from "@/utils/with-pagination";
-import { cache } from "react";
 
 export const getLikedRecipes = cache(async (userId: string, page = 1, pageSize = 5) => {
   const likesQuery = db

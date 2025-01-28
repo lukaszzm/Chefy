@@ -1,12 +1,14 @@
-import type { Session, SessionValidationResult, SafeUser } from "@/types";
-import { encodeBase32LowerCaseNoPadding, encodeHexLowerCase } from "@oslojs/encoding";
+import { cache } from "react";
+
 import { sha256 } from "@oslojs/crypto/sha2";
+import { encodeBase32LowerCaseNoPadding, encodeHexLowerCase } from "@oslojs/encoding";
+import { eq } from "drizzle-orm";
+import { cookies } from "next/headers";
+
+import { AuthConfig } from "@/lib/auth/config";
 import db from "@/lib/db";
 import { sessionTable, userTable } from "@/lib/db/schema";
-import { eq } from "drizzle-orm";
-import { AuthConfig } from "@/lib/auth/config";
-import { cache } from "react";
-import { cookies } from "next/headers";
+import type { Session, SessionValidationResult, SafeUser } from "@/types";
 
 export function generateSessionToken(): string {
   const bytes = new Uint8Array(20);
@@ -59,7 +61,7 @@ export async function validateSessionToken(token: string): Promise<SessionValida
       .where(eq(sessionTable.id, session.id));
   }
 
-  const { password, ...safeUser } = user;
+  const { password: _, ...safeUser } = user;
   return { session, user: safeUser };
 }
 

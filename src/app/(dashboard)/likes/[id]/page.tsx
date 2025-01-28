@@ -10,8 +10,8 @@ import { BackButton } from "@/components/ui/back-button";
 import { Title } from "@/components/ui/title";
 import { routes } from "@/config/routes";
 import { LikesDropdownMenu } from "@/features/likes/components/dropdown-menu";
-import { getLikeRecipe } from "@/lib/db/queries/recipe";
 import { getCurrentSession } from "@/lib/auth/session";
+import { getLikeRecipe } from "@/lib/db/queries/recipe";
 
 type PageProps = {
   params: Promise<{ id: string }>;

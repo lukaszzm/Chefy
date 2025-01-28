@@ -4,9 +4,9 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
 import { routes } from "@/config/routes";
+import { getCurrentSession } from "@/lib/auth/session";
 import { deleteLikeRecipe, getLikeRecipe } from "@/lib/db/queries/recipe";
 import { errorResponse, successResponse } from "@/utils/action-response";
-import { getCurrentSession } from "@/lib/auth/session";
 
 export const deleteLike = async (recipeId: string, withRedirect: boolean) => {
   const { user } = await getCurrentSession();
@@ -27,7 +27,7 @@ export const deleteLike = async (recipeId: string, withRedirect: boolean) => {
 
   try {
     await deleteLikeRecipe(like.userId, recipeId);
-  } catch (error) {
+  } catch {
     return errorResponse("Failed to delete like");
   }
 

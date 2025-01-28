@@ -1,8 +1,9 @@
+import { cache } from "react";
+
 import { eq, inArray } from "drizzle-orm";
 
 import db from "@/lib/db";
 import { areaTable, userPreferredAreaTable } from "@/lib/db/schema";
-import { cache } from "react";
 
 export const getAllAreas = cache(async () => db.query.areaTable.findMany());
 

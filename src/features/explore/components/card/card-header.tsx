@@ -1,9 +1,11 @@
 import Image from "next/image";
 
 import { CardHeader, CardTitle } from "@/components/ui/card";
-import type { Recipe } from "@/types";
 
-interface ExploreCardHeaderProps extends Pick<Recipe, "title" | "imageSrc"> {}
+interface ExploreCardHeaderProps {
+  title: string;
+  imageSrc: string;
+}
 
 export const ExploreCardHeader = ({ title, imageSrc }: ExploreCardHeaderProps) => {
   return (

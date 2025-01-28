@@ -1,8 +1,9 @@
+import { cache } from "react";
+
 import { eq, inArray } from "drizzle-orm";
 
 import db from "@/lib/db";
 import { categoryTable, userPreferredCategoryTable } from "@/lib/db/schema";
-import { cache } from "react";
 
 export const getAllCategories = cache(async () => db.query.categoryTable.findMany());
 

@@ -1,8 +1,12 @@
 import { RecipeBadges } from "@/components/recipe/recipe-badges";
 import { LikesDropdownMenu } from "@/features/likes/components/dropdown-menu";
-import type { RecipeWithRelations } from "@/types";
+import type { Area, Category, Recipe } from "@/types";
 
-interface LikesListItemProps extends RecipeWithRelations {}
+interface LikesListItemProps {
+  recipe: Recipe;
+  area: Area;
+  category: Category;
+}
 
 export const LikesListItem = ({ recipe, area, category }: LikesListItemProps) => {
   return (
