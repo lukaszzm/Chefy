@@ -1,24 +1,21 @@
 "use server";
 
-import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
 import { routes } from "@/config/routes";
-import { lucia, validateRequest } from "@/lib/auth";
 import { errorResponse } from "@/utils/action-response";
+import { getCurrentSession, invalidateSession } from "@/lib/auth/session";
+import { deleteSessionTokenCookie } from "@/lib/auth/cookies";
 
 export const signOut = async () => {
-  const { session } = await validateRequest();
+  const { session } = await getCurrentSession();
 
   if (!session) {
     return errorResponse("No session found");
   }
 
-  await lucia.invalidateSession(session.id);
-
-  const sessionCookie = lucia.createBlankSessionCookie();
-
-  cookies().set(sessionCookie.name, sessionCookie.value, sessionCookie.attributes);
+  await invalidateSession(session.id);
+  await deleteSessionTokenCookie();
 
   return redirect(routes.home);
 };

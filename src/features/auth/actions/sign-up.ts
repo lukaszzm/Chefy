@@ -1,16 +1,16 @@
 "use server";
 
 import { hash } from "bcrypt";
-import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
 import { randomUUID } from "crypto";
 
 import { routes } from "@/config/routes";
 import type { SignUpPayload } from "@/features/auth/schemas/sign-up-schema";
-import { lucia } from "@/lib/auth";
 import { createUserWithPreferences, getUserByMail } from "@/lib/db/queries/user";
 import { errorResponse } from "@/utils/action-response";
+import { createSession, generateSessionToken } from "@/lib/auth/session";
+import { setSessionTokenCookie } from "@/lib/auth/cookies";
 
 export const signUp = async (payload: SignUpPayload) => {
   const fixedMail = payload.email.toLowerCase();
@@ -34,12 +34,10 @@ export const signUp = async (payload: SignUpPayload) => {
     return errorResponse("Failed to create user");
   }
 
-  const session = await lucia.createSession(userId, {
-    expiresIn: 60 * 60 * 24 * 30,
-  });
-  const sessionCookie = lucia.createSessionCookie(session.id);
+  const sessionToken = generateSessionToken();
+  const session = await createSession(sessionToken, userId);
 
-  cookies().set(sessionCookie.name, sessionCookie.value, sessionCookie.attributes);
+  await setSessionTokenCookie(sessionToken, session.expiresAt);
 
   return redirect(routes.explore);
 };

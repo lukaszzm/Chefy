@@ -3,20 +3,20 @@
 import { compare, hash } from "bcrypt";
 
 import type { UpdatePasswordPayload } from "@/features/settings/schemas/password-schema";
-import { validateRequest } from "@/lib/auth";
 import { getUserWithPasswordById, updateUser } from "@/lib/db/queries/user";
 import { errorResponse, successResponse } from "@/utils/action-response";
+import { getCurrentSession } from "@/lib/auth/session";
 
 const TEST_MAIL = "test@test.com";
 
 export const updatePassword = async (payload: UpdatePasswordPayload) => {
-  const { user: authUser } = await validateRequest();
+  const { user } = await getCurrentSession();
 
-  if (!authUser) {
+  if (!user) {
     return errorResponse("Unauthorized");
   }
 
-  const currentUser = await getUserWithPasswordById(authUser.id);
+  const currentUser = await getUserWithPasswordById(user.id);
 
   if (!currentUser) {
     return errorResponse("User not found");
@@ -34,7 +34,7 @@ export const updatePassword = async (payload: UpdatePasswordPayload) => {
   const hashedPassword = await hash(payload.newPassword, 8);
 
   try {
-    await updateUser(authUser.id, { password: hashedPassword });
+    await updateUser(user.id, { password: hashedPassword });
   } catch (e) {
     return errorResponse("Failed to update name");
   }

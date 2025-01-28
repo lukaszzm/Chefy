@@ -1,52 +1,52 @@
 import { relations } from "drizzle-orm";
 import { pgTable, primaryKey, text, timestamp } from "drizzle-orm/pg-core";
 
-export const user = pgTable("user", {
+export const userTable = pgTable("user", {
   id: text("id").primaryKey(),
   email: text("email").notNull().unique(),
   password: text("password").notNull(),
   name: text("name").notNull(),
 });
 
-export const userRelations = relations(user, ({ many }) => ({
-  likedRecipes: many(userLikedRecipe),
-  dislikedRecipes: many(userDislikedRecipe),
-  preferredCategories: many(userPreferredCategory),
-  preferredAreas: many(userPreferredArea),
+export const userRelations = relations(userTable, ({ many }) => ({
+  likedRecipes: many(userLikedRecipeTable),
+  dislikedRecipes: many(userDislikedRecipeTable),
+  preferredCategories: many(userPreferredCategoryTable),
+  preferredAreas: many(userPreferredAreaTable),
 }));
 
-export const session = pgTable("session", {
+export const sessionTable = pgTable("session", {
   id: text("id").primaryKey(),
   userId: text("user_id")
     .notNull()
-    .references(() => user.id, { onDelete: "cascade" }),
+    .references(() => userTable.id, { onDelete: "cascade" }),
   expiresAt: timestamp("expires_at", {
     withTimezone: true,
     mode: "date",
   }).notNull(),
 });
 
-export const category = pgTable("category", {
+export const categoryTable = pgTable("category", {
   id: text("id").primaryKey(),
   name: text("name").notNull(),
 });
 
-export const categoryRelations = relations(category, ({ many }) => ({
-  preferredBy: many(userPreferredCategory),
-  recipes: many(recipe),
+export const categoryRelations = relations(categoryTable, ({ many }) => ({
+  preferredBy: many(userPreferredCategoryTable),
+  recipes: many(recipeTable),
 }));
 
-export const area = pgTable("area", {
+export const areaTable = pgTable("area", {
   id: text("id").primaryKey(),
   name: text("name").notNull(),
 });
 
-export const areaRelations = relations(area, ({ many }) => ({
-  preferredBy: many(userPreferredArea),
-  recipes: many(recipe),
+export const areaRelations = relations(areaTable, ({ many }) => ({
+  preferredBy: many(userPreferredAreaTable),
+  recipes: many(recipeTable),
 }));
 
-export const recipe = pgTable("recipe", {
+export const recipeTable = pgTable("recipe", {
   id: text("id").primaryKey(),
   imageSrc: text("image_src").notNull(),
   title: text("title").notNull(),
@@ -56,28 +56,28 @@ export const recipe = pgTable("recipe", {
   ingredients: text("ingredients").array().notNull(),
 });
 
-export const recipeRelations = relations(recipe, ({ many, one }) => ({
-  likedBy: many(userLikedRecipe),
-  dislikedBy: many(userDislikedRecipe),
-  category: one(category, {
-    fields: [recipe.categoryId],
-    references: [category.id],
+export const recipeRelations = relations(recipeTable, ({ many, one }) => ({
+  likedBy: many(userLikedRecipeTable),
+  dislikedBy: many(userDislikedRecipeTable),
+  category: one(categoryTable, {
+    fields: [recipeTable.categoryId],
+    references: [categoryTable.id],
   }),
-  area: one(area, {
-    fields: [recipe.areaId],
-    references: [area.id],
+  area: one(areaTable, {
+    fields: [recipeTable.areaId],
+    references: [areaTable.id],
   }),
 }));
 
-export const userLikedRecipe = pgTable(
+export const userLikedRecipeTable = pgTable(
   "user_liked_recipe",
   {
     userId: text("user_id")
       .notNull()
-      .references(() => user.id, { onDelete: "cascade" }),
+      .references(() => userTable.id, { onDelete: "cascade" }),
     recipeId: text("recipe_id")
       .notNull()
-      .references(() => recipe.id, { onDelete: "cascade" }),
+      .references(() => recipeTable.id, { onDelete: "cascade" }),
   },
   (t) => ({
     pk: primaryKey({
@@ -86,26 +86,26 @@ export const userLikedRecipe = pgTable(
   })
 );
 
-export const userLikedRecipeRelations = relations(userLikedRecipe, ({ one }) => ({
-  recipe: one(recipe, {
-    fields: [userLikedRecipe.recipeId],
-    references: [recipe.id],
+export const userLikedRecipeRelations = relations(userLikedRecipeTable, ({ one }) => ({
+  recipe: one(recipeTable, {
+    fields: [userLikedRecipeTable.recipeId],
+    references: [recipeTable.id],
   }),
-  user: one(user, {
-    fields: [userLikedRecipe.userId],
-    references: [user.id],
+  user: one(userTable, {
+    fields: [userLikedRecipeTable.userId],
+    references: [userTable.id],
   }),
 }));
 
-export const userDislikedRecipe = pgTable(
+export const userDislikedRecipeTable = pgTable(
   "user_disliked_recipe",
   {
     userId: text("user_id")
       .notNull()
-      .references(() => user.id, { onDelete: "cascade" }),
+      .references(() => userTable.id, { onDelete: "cascade" }),
     recipeId: text("recipe_id")
       .notNull()
-      .references(() => recipe.id, { onDelete: "cascade" }),
+      .references(() => recipeTable.id, { onDelete: "cascade" }),
   },
   (t) => ({
     pk: primaryKey({
@@ -114,26 +114,26 @@ export const userDislikedRecipe = pgTable(
   })
 );
 
-export const userDislikedRecipeRelations = relations(userDislikedRecipe, ({ one }) => ({
-  recipe: one(recipe, {
-    fields: [userDislikedRecipe.recipeId],
-    references: [recipe.id],
+export const userDislikedRecipeRelations = relations(userDislikedRecipeTable, ({ one }) => ({
+  recipe: one(recipeTable, {
+    fields: [userDislikedRecipeTable.recipeId],
+    references: [recipeTable.id],
   }),
-  user: one(user, {
-    fields: [userDislikedRecipe.userId],
-    references: [user.id],
+  user: one(userTable, {
+    fields: [userDislikedRecipeTable.userId],
+    references: [userTable.id],
   }),
 }));
 
-export const userPreferredCategory = pgTable(
+export const userPreferredCategoryTable = pgTable(
   "user_preferred_category",
   {
     userId: text("user_id")
       .notNull()
-      .references(() => user.id, { onDelete: "cascade" }),
+      .references(() => userTable.id, { onDelete: "cascade" }),
     categoryId: text("category_id")
       .notNull()
-      .references(() => category.id, { onDelete: "cascade" }),
+      .references(() => categoryTable.id, { onDelete: "cascade" }),
   },
   (t) => ({
     pk: primaryKey({
@@ -142,26 +142,26 @@ export const userPreferredCategory = pgTable(
   })
 );
 
-export const userPreferredCategoryRelations = relations(userPreferredCategory, ({ one }) => ({
-  category: one(category, {
-    fields: [userPreferredCategory.categoryId],
-    references: [category.id],
+export const userPreferredCategoryRelations = relations(userPreferredCategoryTable, ({ one }) => ({
+  category: one(categoryTable, {
+    fields: [userPreferredCategoryTable.categoryId],
+    references: [categoryTable.id],
   }),
-  user: one(user, {
-    fields: [userPreferredCategory.userId],
-    references: [user.id],
+  user: one(userTable, {
+    fields: [userPreferredCategoryTable.userId],
+    references: [userTable.id],
   }),
 }));
 
-export const userPreferredArea = pgTable(
+export const userPreferredAreaTable = pgTable(
   "user_preferred_area",
   {
     userId: text("user_id")
       .notNull()
-      .references(() => user.id, { onDelete: "cascade" }),
+      .references(() => userTable.id, { onDelete: "cascade" }),
     areaId: text("area_id")
       .notNull()
-      .references(() => area.id, { onDelete: "cascade" }),
+      .references(() => areaTable.id, { onDelete: "cascade" }),
   },
   (t) => ({
     pk: primaryKey({
@@ -170,13 +170,13 @@ export const userPreferredArea = pgTable(
   })
 );
 
-export const userPreferredAreaRelations = relations(userPreferredArea, ({ one }) => ({
-  area: one(area, {
-    fields: [userPreferredArea.areaId],
-    references: [area.id],
+export const userPreferredAreaRelations = relations(userPreferredAreaTable, ({ one }) => ({
+  area: one(areaTable, {
+    fields: [userPreferredAreaTable.areaId],
+    references: [areaTable.id],
   }),
-  user: one(user, {
-    fields: [userPreferredArea.userId],
-    references: [user.id],
+  user: one(userTable, {
+    fields: [userPreferredAreaTable.userId],
+    references: [userTable.id],
   }),
 }));

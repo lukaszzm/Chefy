@@ -3,12 +3,12 @@
 import { revalidatePath } from "next/cache";
 
 import { routes } from "@/config/routes";
-import { validateRequest } from "@/lib/auth";
 import { updatePreferredCategories as updatePreferences } from "@/lib/db/queries/category";
 import { errorResponse, successResponse } from "@/utils/action-response";
+import { getCurrentSession } from "@/lib/auth/session";
 
 export const updatePreferredCategories = async (categories: string[]) => {
-  const { user } = await validateRequest();
+  const { user } = await getCurrentSession();
 
   if (!user) {
     return errorResponse("Unauthorized");

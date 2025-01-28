@@ -3,22 +3,24 @@ import { routes } from "@/config/routes";
 import { LikesList } from "@/features/likes/components/list";
 import { LikesNotFound } from "@/features/likes/components/not-found";
 import { LikesPagination } from "@/features/likes/components/pagination";
-import { authUser } from "@/lib/auth";
+import { getCurrentUser } from "@/lib/auth/session";
 import { getLikedRecipes } from "@/lib/db/queries/recipe";
 import { redirectWithParams } from "@/utils/redirect-with-params";
 import { safeNumber } from "@/utils/safe-number";
 
 interface PageProps {
-  searchParams: {
-    page?: string;
-  };
+  searchParams: Promise<{ page?: string }>;
 }
 
-export default async function LikesPage({ searchParams: { page } }: PageProps) {
-  const fixedPage = safeNumber(page);
-  const { id } = await authUser();
+export default async function LikesPage(props: PageProps) {
+  const searchParams = await props.searchParams;
 
-  const { recipes, pageCount } = await getLikedRecipes(id, fixedPage);
+  const { page } = searchParams;
+
+  const fixedPage = safeNumber(page);
+  const user = await getCurrentUser();
+
+  const { recipes, pageCount } = await getLikedRecipes(user.id, fixedPage);
 
   if (pageCount === 0) {
     return <LikesNotFound />;

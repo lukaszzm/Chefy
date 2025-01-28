@@ -5,14 +5,14 @@ import { redirect } from "next/navigation";
 import { routes } from "@/config/routes";
 import { Hero } from "@/features/home/components/hero";
 import { Navbar } from "@/features/home/components/navbar";
-import { validateRequest } from "@/lib/auth";
+import { getCurrentSession } from "@/lib/auth/session";
 
 export const metadata: Metadata = {
   title: "Chefy - Swipe, cook, love!",
 };
 
 export default async function HomePage() {
-  const { user } = await validateRequest();
+  const { user } = await getCurrentSession();
 
   if (user) {
     return redirect(routes.explore);

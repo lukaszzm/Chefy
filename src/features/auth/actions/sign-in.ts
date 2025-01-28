@@ -1,14 +1,14 @@
 "use server";
 
 import { compare } from "bcrypt";
-import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
 import { routes } from "@/config/routes";
 import type { SignInPayload } from "@/features/auth/schemas/sign-in-schema";
-import { lucia } from "@/lib/auth";
 import { getUserWithPasswordByMail } from "@/lib/db/queries/user";
 import { errorResponse } from "@/utils/action-response";
+import { createSession, generateSessionToken } from "@/lib/auth/session";
+import { setSessionTokenCookie } from "@/lib/auth/cookies";
 
 export const signIn = async (payload: SignInPayload) => {
   const fixedMail = payload.email.toLowerCase();
@@ -24,10 +24,10 @@ export const signIn = async (payload: SignInPayload) => {
     return errorResponse("Incorrect email or password");
   }
 
-  const session = await lucia.createSession(existingUser.id, {});
-  const sessionCookie = lucia.createSessionCookie(session.id);
+  const sessionToken = generateSessionToken();
+  const session = await createSession(sessionToken, existingUser.id);
 
-  cookies().set(sessionCookie.name, sessionCookie.value, sessionCookie.attributes);
+  await setSessionTokenCookie(sessionToken, session.expiresAt);
 
   return redirect(routes.explore);
 };

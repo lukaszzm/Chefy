@@ -1,15 +1,10 @@
 import { UpdateNameForm } from "@/features/settings/components/update-name-form";
 import { UpdatePasswordForm } from "@/features/settings/components/update-password-form";
-import { authUser } from "@/lib/auth";
-import { getUserById } from "@/lib/db/queries/user";
+import { getCurrentUser } from "@/lib/auth/session";
 
+// TODO: check if the user is updated
 export default async function AccountPage() {
-  const { id } = await authUser();
-  const user = await getUserById(id);
-
-  if (!user) {
-    throw new Error("User not found");
-  }
+  const user = await getCurrentUser();
 
   return (
     <>

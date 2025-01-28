@@ -4,10 +4,10 @@ import { redirect } from "next/navigation";
 
 import { Sidebar } from "@/components/sidebar";
 import { routes } from "@/config/routes";
-import { validateRequest } from "@/lib/auth";
+import { getCurrentSession } from "@/lib/auth/session";
 
 export default async function DashboardLayout({ children }: PropsWithChildren) {
-  const { user } = await validateRequest();
+  const { user } = await getCurrentSession();
 
   if (!user) {
     return redirect(routes.signIn);

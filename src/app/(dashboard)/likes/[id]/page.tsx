@@ -10,15 +10,19 @@ import { BackButton } from "@/components/ui/back-button";
 import { Title } from "@/components/ui/title";
 import { routes } from "@/config/routes";
 import { LikesDropdownMenu } from "@/features/likes/components/dropdown-menu";
-import { validateRequest } from "@/lib/auth";
 import { getLikeRecipe } from "@/lib/db/queries/recipe";
+import { getCurrentSession } from "@/lib/auth/session";
 
 type PageProps = {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 };
 
-export async function generateMetadata({ params: { id } }: PageProps): Promise<Metadata> {
-  const { user } = await validateRequest();
+export async function generateMetadata(props: PageProps): Promise<Metadata> {
+  const params = await props.params;
+
+  const { id } = params;
+
+  const { user } = await getCurrentSession();
 
   if (!user) {
     return redirect(routes.signIn);
@@ -31,8 +35,12 @@ export async function generateMetadata({ params: { id } }: PageProps): Promise<M
   };
 }
 
-export default async function LikePage({ params: { id } }: PageProps) {
-  const { user } = await validateRequest();
+export default async function LikePage(props: PageProps) {
+  const params = await props.params;
+
+  const { id } = params;
+
+  const { user } = await getCurrentSession();
 
   if (!user) {
     return redirect(routes.signIn);

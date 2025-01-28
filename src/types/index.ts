@@ -1,14 +1,20 @@
 import type { InferSelectModel } from "drizzle-orm";
 
-import type { area, category, recipe, user } from "@/lib/db/schema";
+import type { areaTable, categoryTable, recipeTable, sessionTable, userTable } from "@/lib/db/schema";
 
-export type Recipe = InferSelectModel<typeof recipe>;
+export type Recipe = InferSelectModel<typeof recipeTable>;
 
-export type Area = InferSelectModel<typeof area>;
+export type Area = InferSelectModel<typeof areaTable>;
 
-export type Category = InferSelectModel<typeof category>;
+export type Category = InferSelectModel<typeof categoryTable>;
 
-export type User = InferSelectModel<typeof user>;
+export type User = InferSelectModel<typeof userTable>;
+
+export type SafeUser = Omit<User, "password">;
+
+export type Session = InferSelectModel<typeof sessionTable>;
+
+export type SessionValidationResult = { session: Session; user: SafeUser } | { session: null; user: null };
 
 export type RecipeWithRelations = {
   recipe: Recipe;

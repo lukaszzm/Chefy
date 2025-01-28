@@ -1,28 +1,30 @@
 import { eq, inArray } from "drizzle-orm";
 
 import db from "@/lib/db";
-import { category, userPreferredCategory } from "@/lib/db/schema";
+import { categoryTable, userPreferredCategoryTable } from "@/lib/db/schema";
+import { cache } from "react";
 
-export const getAllCategories = () => db.query.category.findMany();
+export const getAllCategories = cache(async () => db.query.categoryTable.findMany());
 
-export const getPreferredCategories = (userId: string) =>
-  db.query.category.findMany({
+export const getPreferredCategories = cache((userId: string) =>
+  db.query.categoryTable.findMany({
     where: inArray(
-      category.id,
+      categoryTable.id,
       db
         .select({
-          id: userPreferredCategory.categoryId,
+          id: userPreferredCategoryTable.categoryId,
         })
-        .from(userPreferredCategory)
-        .where(eq(userPreferredCategory.userId, userId))
+        .from(userPreferredCategoryTable)
+        .where(eq(userPreferredCategoryTable.userId, userId))
     ),
-  });
+  })
+);
 
 export const deletePreferredCategories = async (userId: string) =>
-  db.delete(userPreferredCategory).where(eq(userPreferredCategory.userId, userId));
+  db.delete(userPreferredCategoryTable).where(eq(userPreferredCategoryTable.userId, userId));
 
 export const createPreferredCategory = async (userId: string, categoryId: string) =>
-  db.insert(userPreferredCategory).values({
+  db.insert(userPreferredCategoryTable).values({
     userId,
     categoryId,
   });

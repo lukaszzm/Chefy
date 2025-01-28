@@ -5,10 +5,10 @@ import { redirect } from "next/navigation";
 
 import { Logo } from "@/components/ui/logo";
 import { routes } from "@/config/routes";
-import { validateRequest } from "@/lib/auth";
+import { getCurrentSession } from "@/lib/auth/session";
 
 export default async function AuthLayout({ children }: PropsWithChildren) {
-  const { user } = await validateRequest();
+  const { user } = await getCurrentSession();
 
   if (user) {
     return redirect(routes.explore);
