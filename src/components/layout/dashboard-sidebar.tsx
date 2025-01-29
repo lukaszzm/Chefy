@@ -13,6 +13,7 @@ import {
   SidebarGroupContent,
   SidebarMenu,
   SidebarMenuButton,
+  SidebarMenuItem,
 } from "@/components/ui/sidebar";
 
 export function DashboardSidebar() {
@@ -23,12 +24,18 @@ export function DashboardSidebar() {
       </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel>Application</SidebarGroupLabel>
+          <SidebarGroupLabel className="hidden lg:block">Application</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {dashboardItems.map((item) => (
                 <DashboardSidebarLink key={item.title} {...item} />
               ))}
+              <SidebarMenuItem className="lg:hidden">
+                <SidebarMenuButton>
+                  <LogOut />
+                  <span>Sign Out</span>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>

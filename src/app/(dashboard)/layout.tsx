@@ -17,7 +17,9 @@ export default async function DashboardLayout({ children }: PropsWithChildren) {
   return (
     <SidebarProvider>
       <DashboardSidebar />
-      <main className="bg-background flex h-full sm:items-center sm:justify-center w-full">{children}</main>
+      <main className="bg-background pl-0 pb-16 lg:pb-0 lg:pl-56 flex min-h-svh size-full lg:items-center lg:justify-center">
+        {children}
+      </main>
     </SidebarProvider>
   );
 }
