@@ -44,14 +44,24 @@ Sidebar.displayName = "Sidebar";
 
 const SidebarHeader = React.forwardRef<HTMLDivElement, React.ComponentProps<"div">>(({ className, ...props }, ref) => {
   return (
-    <div className={cn("hidden flex-col gap-2 p-2 lg:flex", className)} data-sidebar="header" ref={ref} {...props} />
+    <div
+      className={cn("hidden flex-col gap-2 p-2 pt-3 lg:flex", className)}
+      data-sidebar="header"
+      ref={ref}
+      {...props}
+    />
   );
 });
 SidebarHeader.displayName = "SidebarHeader";
 
 const SidebarFooter = React.forwardRef<HTMLDivElement, React.ComponentProps<"div">>(({ className, ...props }, ref) => {
   return (
-    <div className={cn("hidden flex-col gap-2 p-2 lg:flex", className)} data-sidebar="footer" ref={ref} {...props} />
+    <div
+      className={cn("hidden flex-col gap-2 p-2 pb-3 lg:flex", className)}
+      data-sidebar="footer"
+      ref={ref}
+      {...props}
+    />
   );
 });
 SidebarFooter.displayName = "SidebarFooter";

@@ -15,6 +15,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
+import { SignOutDialog } from "@/features/auth/components/sign-out-dialog";
 
 export function DashboardSidebar() {
   return (
@@ -31,20 +32,28 @@ export function DashboardSidebar() {
                 <DashboardSidebarLink key={item.title} {...item} />
               ))}
               <SidebarMenuItem className="lg:hidden">
-                <SidebarMenuButton>
-                  <LogOut />
-                  <span>Sign Out</span>
-                </SidebarMenuButton>
+                <SignOutDialog>
+                  <SidebarMenuButton>
+                    <LogOut />
+                    <span>Sign Out</span>
+                  </SidebarMenuButton>
+                </SignOutDialog>
               </SidebarMenuItem>
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
       <SidebarFooter>
-        <SidebarMenuButton>
-          <LogOut />
-          <span>Sign Out</span>
-        </SidebarMenuButton>
+        <SidebarMenu>
+          <SidebarMenuItem>
+            <SignOutDialog>
+              <SidebarMenuButton>
+                <LogOut />
+                <span>Sign Out</span>
+              </SidebarMenuButton>
+            </SignOutDialog>
+          </SidebarMenuItem>
+        </SidebarMenu>
       </SidebarFooter>
     </Sidebar>
   );
