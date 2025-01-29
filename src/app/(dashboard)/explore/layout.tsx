@@ -7,5 +7,5 @@ export const metadata: Metadata = {
 };
 
 export default function ExploreStackLayout({ children }: PropsWithChildren) {
-  return <div className="grid h-full w-full grid-cols-1 grid-rows-1">{children}</div>;
+  return <div className="grid w-full grid-cols-1 grid-rows-1 self-stretch">{children}</div>;
 }

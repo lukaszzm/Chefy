@@ -8,7 +8,6 @@ import { SwipeItem } from "@/features/explore/components/swipe-item";
 import { usePreviewMode } from "@/features/explore/hooks/use-preview-mode";
 import { useRecipes } from "@/features/explore/hooks/use-recipes";
 import type { Recipe } from "@/types";
-import { cn } from "@/utils/cn";
 
 interface ExploreCardProps extends Omit<Recipe, "category" | "area"> {
   categoryName: string;
@@ -36,10 +35,8 @@ export const ExploreCard = ({
       onSwipeRight={() => like(id)}
     >
       <Card
-        className={cn(
-          "relative h-full max-h-screen-nav rounded-none sm:max-h-[550px] sm:max-w-sm sm:rounded-xl",
-          isPreviewMode ? "overflow-auto" : "overflow-hidden"
-        )}
+        className="h-svh-without-nav sm:max-h-card-height relative overflow-hidden rounded-none data-[preview=true]:overflow-auto sm:max-w-sm sm:rounded-xl"
+        data-preview={isPreviewMode ? "true" : undefined}
       >
         <div className="absolute top-0" ref={topRef} />
         <ExploreCardHeader imageSrc={imageSrc} title={title} />

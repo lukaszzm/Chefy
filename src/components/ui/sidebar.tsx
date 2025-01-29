@@ -23,12 +23,15 @@ const Sidebar = React.forwardRef<HTMLDivElement, React.ComponentProps<"div"> & {
   ({ className, children, ...props }, ref) => {
     return (
       <div
-        className={cn("fixed flex lg:inset-y-0 z-10 w-full lg:w-56 bottom-0 lg:left-0 lg:right-0", className)}
+        className={cn(
+          "lg:w-sidebar-width fixed bottom-0 z-10 flex w-full lg:inset-y-0 lg:right-0 lg:left-0",
+          className
+        )}
         ref={ref}
         {...props}
       >
         <div
-          className="flex w-full h-auto rounded-lg shadow lg:rounded-none lg:shadow-none lg:m-0 lg:border-r m-2.5 border border-border bg-sidebar lg:size-full lg:flex-col"
+          className="border-border bg-sidebar m-2.5 flex h-auto w-full rounded-lg border shadow lg:m-0 lg:size-full lg:flex-col lg:rounded-none lg:border-r lg:shadow-none"
           data-sidebar="sidebar"
         >
           {children}
@@ -41,14 +44,14 @@ Sidebar.displayName = "Sidebar";
 
 const SidebarHeader = React.forwardRef<HTMLDivElement, React.ComponentProps<"div">>(({ className, ...props }, ref) => {
   return (
-    <div className={cn("hidden lg:flex flex-col gap-2 p-2", className)} data-sidebar="header" ref={ref} {...props} />
+    <div className={cn("hidden flex-col gap-2 p-2 lg:flex", className)} data-sidebar="header" ref={ref} {...props} />
   );
 });
 SidebarHeader.displayName = "SidebarHeader";
 
 const SidebarFooter = React.forwardRef<HTMLDivElement, React.ComponentProps<"div">>(({ className, ...props }, ref) => {
   return (
-    <div className={cn("hidden lg:flex flex-col gap-2 p-2", className)} data-sidebar="footer" ref={ref} {...props} />
+    <div className={cn("hidden flex-col gap-2 p-2 lg:flex", className)} data-sidebar="footer" ref={ref} {...props} />
   );
 });
 SidebarFooter.displayName = "SidebarFooter";
@@ -84,7 +87,7 @@ const SidebarGroupLabel = React.forwardRef<HTMLDivElement, React.ComponentProps<
     return (
       <Comp
         className={cn(
-          "flex h-8 shrink-0 items-center rounded-md px-2 text-sm font-medium text-sidebar-foreground/70 outline-none ring-sidebar-ring focus-visible:ring-2 [&>svg]:size-4 [&>svg]:shrink-0",
+          "text-sidebar-foreground/70 ring-sidebar-ring flex h-8 shrink-0 items-center rounded-md px-2 text-sm font-medium outline-none focus-visible:ring-2 [&>svg]:size-4 [&>svg]:shrink-0",
           className
         )}
         data-sidebar="group-label"
@@ -98,14 +101,14 @@ SidebarGroupLabel.displayName = "SidebarGroupLabel";
 
 const SidebarGroupContent = React.forwardRef<HTMLDivElement, React.ComponentProps<"div">>(
   ({ className, ...props }, ref) => (
-    <div className={cn("w-full text-sm p-0.5", className)} data-sidebar="group-content" ref={ref} {...props} />
+    <div className={cn("w-full p-0.5 text-sm", className)} data-sidebar="group-content" ref={ref} {...props} />
   )
 );
 SidebarGroupContent.displayName = "SidebarGroupContent";
 
 const SidebarMenu = React.forwardRef<HTMLUListElement, React.ComponentProps<"ul">>(({ className, ...props }, ref) => (
   <ul
-    className={cn("flex w-full min-w-0 justify-center flex-row lg:flex-col gap-1 ", className)}
+    className={cn("flex w-full min-w-0 flex-row justify-center gap-1 lg:flex-col", className)}
     data-sidebar="menu"
     ref={ref}
     {...props}

@@ -17,7 +17,7 @@ export default async function DashboardLayout({ children }: PropsWithChildren) {
   return (
     <SidebarProvider>
       <DashboardSidebar />
-      <main className="bg-background pl-0 pb-16 lg:pb-0 lg:pl-56 flex min-h-svh size-full lg:items-center lg:justify-center">
+      <main className="bg-popover lg:bg-background pb-mobile-nav-height lg:pl-sidebar-width flex size-full min-h-svh pl-0 lg:items-center lg:justify-center lg:pb-0">
         {children}
       </main>
     </SidebarProvider>

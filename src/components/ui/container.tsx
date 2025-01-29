@@ -6,10 +6,10 @@ import { cva } from "class-variance-authority";
 
 import { cn } from "@/utils/cn";
 
-const containerVariants = cva("container size-full max-w-none lg:h-auto space-y-4 lg:max-w-4xl py-4 px-8", {
+const containerVariants = cva("container size-full max-w-none space-y-4 lg:max-w-4xl py-4 px-8 lg:m-8", {
   variants: {
     variant: {
-      default: "sm:rounded-sm sm:border sm:border-border bg-popover",
+      default: "lg:rounded-sm lg:border lg:border-border bg-popover",
       ghost: "bg-transparent border-none",
     },
   },
