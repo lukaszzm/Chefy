@@ -13,6 +13,7 @@
     "e2e:ui": "playwright test --ui",
     "prepare": "husky",
     "pre-commit": "lint-staged",
+    "db:migrate": "drizzle-kit migrate",
     "db:push": "drizzle-kit push",
     "db:studio": "drizzle-kit studio",
     "db:seed": "tsx ./src/lib/db/seed.ts"
