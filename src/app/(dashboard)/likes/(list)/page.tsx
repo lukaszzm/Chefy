@@ -1,4 +1,3 @@
-import { Title } from "@/components/ui/title";
 import { routes } from "@/config/routes";
 import { LikesList } from "@/features/likes/components/list";
 import { LikesNotFound } from "@/features/likes/components/not-found";
@@ -12,7 +11,7 @@ interface PageProps {
   searchParams: Promise<{ page?: string }>;
 }
 
-export default async function LikesPage(props: PageProps) {
+export default async function LikesListPage(props: PageProps) {
   const searchParams = await props.searchParams;
 
   const { page } = searchParams;
@@ -34,7 +33,6 @@ export default async function LikesPage(props: PageProps) {
 
   return (
     <>
-      <Title>Liked Recipes</Title>
       <LikesList data={recipes} />
       <LikesPagination lastPage={pageCount} page={fixedPage} />
     </>

@@ -7,7 +7,8 @@ import { RecipeBadges } from "@/components/recipe/recipe-badges";
 import { RecipeIngredients } from "@/components/recipe/recipe-ingredients";
 import { RecipeLabel } from "@/components/recipe/recipe-label";
 import { BackButton } from "@/components/ui/back-button";
-import { Title } from "@/components/ui/title";
+import { Block } from "@/components/ui/block";
+import { Heading, HeadingTitle } from "@/components/ui/heading";
 import { routes } from "@/config/routes";
 import { LikesDropdownMenu } from "@/features/likes/components/dropdown-menu";
 import { getCurrentSession } from "@/lib/auth/session";
@@ -35,7 +36,7 @@ export async function generateMetadata(props: PageProps): Promise<Metadata> {
   };
 }
 
-export default async function LikePage(props: PageProps) {
+export default async function LikedRecipePage(props: PageProps) {
   const params = await props.params;
 
   const { id } = params;
@@ -54,14 +55,14 @@ export default async function LikePage(props: PageProps) {
 
   return (
     <>
-      <div className="flex w-full items-center justify-between">
+      <Heading className="flex w-full items-center justify-between">
         <div className="space-y-2">
-          <Title>{data.recipe.title}</Title>
+          <HeadingTitle>{data.recipe.title}</HeadingTitle>
           <RecipeBadges area={data.recipe.area.name} category={data.recipe.category.name} />
         </div>
         <LikesDropdownMenu recipe={data.recipe} deleteWithRedirect />
-      </div>
-      <div className="flex flex-col space-y-4">
+      </Heading>
+      <Block className="flex flex-col">
         <RecipeLabel>Ingredients</RecipeLabel>
         <RecipeIngredients ingredients={data.recipe.ingredients} />
         <RecipeLabel>Instructions</RecipeLabel>
@@ -70,7 +71,7 @@ export default async function LikePage(props: PageProps) {
           <span>Back</span>
           <Undo2 />
         </BackButton>
-      </div>
+      </Block>
     </>
   );
 }

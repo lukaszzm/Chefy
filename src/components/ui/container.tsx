@@ -1,27 +1,16 @@
 import type { HTMLAttributes } from "react";
 import { forwardRef } from "react";
 
-import type { VariantProps } from "class-variance-authority";
-import { cva } from "class-variance-authority";
-
 import { cn } from "@/utils/cn";
 
-const containerVariants = cva("container size-full max-w-none space-y-4 lg:max-w-4xl py-4 px-8 lg:m-8", {
-  variants: {
-    variant: {
-      default: "lg:rounded-sm lg:border lg:border-border bg-popover",
-      ghost: "bg-transparent border-none",
-    },
-  },
-  defaultVariants: {
-    variant: "default",
-  },
-});
-
-interface ContainerProps extends HTMLAttributes<HTMLDivElement>, VariantProps<typeof containerVariants> {}
-
-export const Container = forwardRef<HTMLDivElement, ContainerProps>(({ className, variant, ...props }, ref) => {
-  return <div className={cn(containerVariants({ variant, className }))} ref={ref} {...props} />;
+export const Container = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(({ className, ...props }, ref) => {
+  return (
+    <div
+      className={cn("container size-full max-w-none space-y-4 px-8 py-4 lg:m-8 lg:max-w-6xl", className)}
+      ref={ref}
+      {...props}
+    />
+  );
 });
 
 Container.displayName = "Container";

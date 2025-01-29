@@ -1,11 +1,8 @@
 import { Skeleton } from "@/components/ui/skeleton";
-import { Title } from "@/components/ui/title";
 
-export default function LikesLoading() {
+export default function LikesListLoading() {
   return (
     <>
-      <Title>Liked Recipes</Title>
-
       <div className="space-y-2">
         <Skeleton className="h-20" />
         <Skeleton className="h-20" />
