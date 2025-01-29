@@ -1,7 +1,7 @@
 import { useCallback, useRef } from "react";
 
-import type { PanInfo } from "framer-motion";
-import { useMotionValue, useTransform } from "framer-motion";
+import type { PanInfo } from "motion/react";
+import { useMotionValue, useTransform } from "motion/react";
 
 import { BackgroundColors, DragLimit, SwipeVariant } from "@/features/explore/config";
 

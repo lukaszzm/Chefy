@@ -2,7 +2,7 @@
 
 import type { ReactNode } from "react";
 
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 
 import { SwipeVariant } from "@/features/explore/config";
 import { useSwipe } from "@/features/explore/hooks/use-swipe";

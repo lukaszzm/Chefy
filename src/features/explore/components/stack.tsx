@@ -1,6 +1,6 @@
 "use client";
 
-import { AnimatePresence } from "framer-motion";
+import { AnimatePresence } from "motion/react";
 
 import { ExploreCard } from "@/features/explore/components/card";
 import { ExploreLoading } from "@/features/explore/components/loading";
