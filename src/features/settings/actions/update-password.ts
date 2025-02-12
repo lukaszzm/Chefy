@@ -9,7 +9,7 @@ import { errorResponse, successResponse } from "@/utils/action-response";
 
 const TEST_MAIL = "test@test.com";
 
-export const updatePassword = async (payload: UpdatePasswordPayload) => {
+export async function updatePassword(payload: UpdatePasswordPayload) {
   const { user } = await getCurrentSession();
 
   if (!user) {
@@ -40,4 +40,4 @@ export const updatePassword = async (payload: UpdatePasswordPayload) => {
   }
 
   return successResponse("Password updated successfully");
-};
+}

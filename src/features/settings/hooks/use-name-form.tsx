@@ -7,7 +7,7 @@ import type { UpdateNamePayload } from "@/features/settings/schemas/name-schema"
 import { nameSchema } from "@/features/settings/schemas/name-schema";
 import { useAction } from "@/hooks/use-action";
 
-export const useNameForm = (defaultName?: string) => {
+export function useNameForm(defaultName?: string) {
   const form = useForm<UpdateNamePayload>({
     resolver: zodResolver(nameSchema),
     defaultValues: {
@@ -29,4 +29,4 @@ export const useNameForm = (defaultName?: string) => {
     isPending,
     error,
   };
-};
+}

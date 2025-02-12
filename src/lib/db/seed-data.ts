@@ -1,10 +1,10 @@
 import type { Area, Category, Recipe } from "@/types";
 
-type SeedDataSchema = {
+interface SeedDataSchema {
   Categories: Category[];
   Areas: Area[];
   Recipes: Recipe[];
-};
+}
 
 export const SeedData = {
   Categories: [

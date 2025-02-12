@@ -3,13 +3,13 @@ import { RecipesContextProvider } from "@/features/explore/contexts/recipes/prov
 import type { RecipeWithRelations } from "@/types";
 
 interface ExploreRecipesProps {
-  initialData: Array<RecipeWithRelations>;
+  initialData: RecipeWithRelations[];
 }
 
-export const ExploreRecipes = ({ initialData }: ExploreRecipesProps) => {
+export function ExploreRecipes({ initialData }: ExploreRecipesProps) {
   return (
     <RecipesContextProvider initialData={initialData}>
       <ExploreStack />
     </RecipesContextProvider>
   );
-};
+}

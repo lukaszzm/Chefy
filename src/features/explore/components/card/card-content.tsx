@@ -9,7 +9,7 @@ interface ExploreCardContentProps extends Pick<Recipe, "ingredients" | "instruct
   categoryName: string;
 }
 
-export const ExploreCardContent = ({ areaName, categoryName, ingredients, instructions }: ExploreCardContentProps) => {
+export function ExploreCardContent({ areaName, categoryName, ingredients, instructions }: ExploreCardContentProps) {
   return (
     <CardContent className="mt-4 space-y-2">
       <RecipeBadges area={areaName} category={categoryName} />
@@ -19,4 +19,4 @@ export const ExploreCardContent = ({ areaName, categoryName, ingredients, instru
       <p>{instructions}</p>
     </CardContent>
   );
-};
+}

@@ -12,7 +12,7 @@ import { createSession, generateSessionToken } from "@/lib/auth/session";
 import { createUserWithPreferences, getUserByMail } from "@/lib/db/queries/user";
 import { errorResponse } from "@/utils/action-response";
 
-export const signUp = async (payload: SignUpPayload) => {
+export async function signUp(payload: SignUpPayload) {
   const fixedMail = payload.email.toLowerCase();
   const existingUser = await getUserByMail(fixedMail);
 
@@ -40,4 +40,4 @@ export const signUp = async (payload: SignUpPayload) => {
   await setSessionTokenCookie(sessionToken, session.expiresAt);
 
   return redirect(routes.explore);
-};
+}

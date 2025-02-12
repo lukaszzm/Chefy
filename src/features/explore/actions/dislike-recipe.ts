@@ -7,7 +7,7 @@ import { getCurrentSession } from "@/lib/auth/session";
 import { createDislikeRecipe } from "@/lib/db/queries/recipe";
 import { errorResponse, successResponse } from "@/utils/action-response";
 
-export const dislikeRecipe = async (recipeId: string) => {
+export async function dislikeRecipe(recipeId: string) {
   const { user } = await getCurrentSession();
 
   if (!user) {
@@ -22,4 +22,4 @@ export const dislikeRecipe = async (recipeId: string) => {
 
   revalidatePath(routes.explore);
   return successResponse("Recipe disliked");
-};
+}

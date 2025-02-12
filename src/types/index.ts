@@ -16,20 +16,20 @@ export type Session = InferSelectModel<typeof sessionTable>;
 
 export type SessionValidationResult = { session: Session; user: SafeUser } | { session: null; user: null };
 
-export type RecipeWithRelations = {
+export interface RecipeWithRelations {
   recipe: Recipe;
   category: Category;
   area: Area;
-};
+}
 
-export type ActionError = {
+export interface ActionError {
   ok: false;
   error: string;
-};
+}
 
-export type ActionSuccess<T> = {
+export interface ActionSuccess<T> {
   ok: true;
   data: T;
-};
+}
 
 export type ActionResponse<T> = ActionError | ActionSuccess<T>;

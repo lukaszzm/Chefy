@@ -8,7 +8,7 @@ import { getCurrentSession } from "@/lib/auth/session";
 import { updateUser } from "@/lib/db/queries/user";
 import { errorResponse, successResponse } from "@/utils/action-response";
 
-export const updateName = async (payload: UpdateNamePayload) => {
+export async function updateName(payload: UpdateNamePayload) {
   const { user } = await getCurrentSession();
 
   if (!user) {
@@ -23,4 +23,4 @@ export const updateName = async (payload: UpdateNamePayload) => {
 
   revalidatePath(routes.settings);
   return successResponse("Name updated successfully");
-};
+}

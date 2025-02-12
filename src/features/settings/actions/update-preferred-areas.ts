@@ -7,7 +7,7 @@ import { getCurrentSession } from "@/lib/auth/session";
 import { updatePreferredAreas as updatePreferences } from "@/lib/db/queries/area";
 import { errorResponse, successResponse } from "@/utils/action-response";
 
-export const updatePreferredAreas = async (areas: string[]) => {
+export async function updatePreferredAreas(areas: string[]) {
   const { user } = await getCurrentSession();
 
   if (!user) {
@@ -23,4 +23,4 @@ export const updatePreferredAreas = async (areas: string[]) => {
   revalidatePath(routes.settings);
   revalidatePath(routes.explore);
   return successResponse("Preferred areas updated successfully");
-};
+}

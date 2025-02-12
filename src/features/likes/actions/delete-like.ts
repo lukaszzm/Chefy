@@ -8,7 +8,7 @@ import { getCurrentSession } from "@/lib/auth/session";
 import { deleteLikeRecipe, getLikeRecipe } from "@/lib/db/queries/recipe";
 import { errorResponse, successResponse } from "@/utils/action-response";
 
-export const deleteLike = async (recipeId: string, withRedirect: boolean) => {
+export async function deleteLike(recipeId: string, withRedirect: boolean) {
   const { user } = await getCurrentSession();
 
   if (!user) {
@@ -33,4 +33,4 @@ export const deleteLike = async (recipeId: string, withRedirect: boolean) => {
 
   revalidatePath(routes.likes);
   return withRedirect ? redirect(routes.likes) : successResponse("Recipe successfully deleted from likes");
-};
+}

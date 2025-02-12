@@ -11,13 +11,13 @@ interface ExploreCardFooterProps extends Pick<Recipe, "id" | "title"> {
   isExpanded: boolean;
 }
 
-export const ExploreCardFooter = ({ id, title, onExpand, isExpanded }: ExploreCardFooterProps) => {
+export function ExploreCardFooter({ id, title, onExpand, isExpanded }: ExploreCardFooterProps) {
   const { dislike, like } = useRecipes();
 
   return (
     <CardFooter
       className={cn(
-        "bottom-0 flex w-full justify-around gap-6  bg-linear-to-b from-transparent from-5% via-popover/90 to-popover p-6 transition-all duration-200",
+        "via-popover/90 to-popover bottom-0 flex w-full justify-around gap-6 bg-linear-to-b from-transparent from-5% p-6 transition-all duration-200",
         isExpanded ? "relative" : "absolute"
       )}
     >
@@ -39,4 +39,4 @@ export const ExploreCardFooter = ({ id, title, onExpand, isExpanded }: ExploreCa
       </Button>
     </CardFooter>
   );
-};
+}

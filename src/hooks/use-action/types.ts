@@ -9,7 +9,7 @@ export type Action<T> =
   | { type: ActionType.Success; data: T }
   | { type: ActionType.Error; error: string };
 
-export type State<T> = {
+export interface State<T> {
   data: T | null;
   error: string | null;
-};
+}

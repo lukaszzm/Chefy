@@ -7,7 +7,7 @@ import { deleteSessionTokenCookie } from "@/lib/auth/cookies";
 import { getCurrentSession, invalidateSession } from "@/lib/auth/session";
 import { errorResponse } from "@/utils/action-response";
 
-export const signOut = async () => {
+export async function signOut() {
   const { session } = await getCurrentSession();
 
   if (!session) {
@@ -18,4 +18,4 @@ export const signOut = async () => {
   await deleteSessionTokenCookie();
 
   return redirect(routes.home);
-};
+}

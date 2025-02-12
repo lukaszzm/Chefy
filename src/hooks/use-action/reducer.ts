@@ -5,9 +5,8 @@ export const defaultState = {
   error: null,
 } satisfies State<unknown>;
 
-export const createActionReducer =
-  <T>() =>
-  (_state: State<T>, action: Action<T>): State<T> => {
+export function createActionReducer<T>() {
+  return (_state: State<T>, action: Action<T>): State<T> => {
     switch (action.type) {
       case ActionType.Pending:
         return {
@@ -29,3 +28,4 @@ export const createActionReducer =
         throw new Error("Action not supported");
     }
   };
+}

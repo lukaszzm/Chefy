@@ -1,13 +1,13 @@
-import { useTransition } from "react";
+import { useCallback, useTransition } from "react";
 
 import { toast } from "sonner";
 
 import { signOut as signOutAction } from "@/features/auth/actions/sign-out";
 
-export const useSignOut = () => {
+export function useSignOut() {
   const [isPending, startTransition] = useTransition();
 
-  const signOut = () => {
+  const signOut = useCallback(() => {
     startTransition(async () => {
       const res = await signOutAction();
 
@@ -15,10 +15,10 @@ export const useSignOut = () => {
         toast.error(res.error);
       }
     });
-  };
+  }, []);
 
   return {
     isPending,
     signOut,
   };
-};
+}

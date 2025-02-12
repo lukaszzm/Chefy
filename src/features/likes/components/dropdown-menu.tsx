@@ -21,7 +21,7 @@ interface LikesDropdownMenuProps {
   recipe: Recipe;
 }
 
-export const LikesDropdownMenu = ({ withDetailsLink, deleteWithRedirect, recipe }: LikesDropdownMenuProps) => {
+export function LikesDropdownMenu({ withDetailsLink, deleteWithRedirect, recipe }: LikesDropdownMenuProps) {
   const { execute: deleteItem, isPending } = useAction({
     action: () => deleteLike(recipe.id, deleteWithRedirect ?? false),
     onError: (e) => toast.error(e),
@@ -56,4 +56,4 @@ export const LikesDropdownMenu = ({ withDetailsLink, deleteWithRedirect, recipe 
       </DropdownMenuContent>
     </DropdownMenu>
   );
-};
+}

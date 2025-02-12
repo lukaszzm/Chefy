@@ -21,20 +21,23 @@ export const getPreferredAreas = cache(async (userId: string) =>
   })
 );
 
-export const deletePreferredAreas = async (userId: string) =>
-  db.delete(userPreferredAreaTable).where(eq(userPreferredAreaTable.userId, userId));
+export async function deletePreferredAreas(userId: string) {
+  return db.delete(userPreferredAreaTable).where(eq(userPreferredAreaTable.userId, userId));
+}
 
-export const createPreferredArea = async (userId: string, areaId: string) =>
+export async function createPreferredArea(userId: string, areaId: string) {
   db.insert(userPreferredAreaTable).values({
     userId,
     areaId,
   });
+}
 
-export const updatePreferredAreas = async (userId: string, areas: string[]) =>
-  db.transaction(async () => {
+export async function updatePreferredAreas(userId: string, areas: string[]) {
+  return db.transaction(async () => {
     await deletePreferredAreas(userId);
 
     for (const areaId of areas) {
       await createPreferredArea(userId, areaId);
     }
   });
+}

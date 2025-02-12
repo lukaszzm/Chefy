@@ -9,20 +9,20 @@ import type { PreferenceValue } from "@/features/settings/schemas/preferences-sc
 import type { ActionResponse } from "@/types";
 
 interface UpdatePreferencesFormProps {
-  allValues: Array<PreferenceValue>;
-  preferredValues: Array<PreferenceValue>;
+  allValues: PreferenceValue[];
+  preferredValues: PreferenceValue[];
   keyName: string;
   actionOnSubmit: (values: string[]) => Promise<ActionResponse<string>>;
   submitText: string;
 }
 
-export const UpdatePreferencesForm = ({
+export function UpdatePreferencesForm({
   allValues,
   preferredValues,
   keyName,
   actionOnSubmit,
   submitText,
-}: UpdatePreferencesFormProps) => {
+}: UpdatePreferencesFormProps) {
   const { form, fields, onSubmit, error, isPending } = usePreferencesForm({
     allValues,
     preferredValues,
@@ -65,4 +65,4 @@ export const UpdatePreferencesForm = ({
       </form>
     </Form>
   );
-};
+}

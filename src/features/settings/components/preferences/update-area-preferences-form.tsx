@@ -4,11 +4,11 @@ import { SettingsContainer } from "@/features/settings/components/settings-conta
 import type { PreferenceValue } from "@/features/settings/schemas/preferences-schema";
 
 interface UpdateAreaPreferencesFormProps {
-  allAreas: Array<PreferenceValue>;
-  preferredAreas: Array<PreferenceValue>;
+  allAreas: PreferenceValue[];
+  preferredAreas: PreferenceValue[];
 }
 
-export const UpdateAreaPreferencesForm = ({ allAreas, preferredAreas }: UpdateAreaPreferencesFormProps) => {
+export function UpdateAreaPreferencesForm({ allAreas, preferredAreas }: UpdateAreaPreferencesFormProps) {
   return (
     <SettingsContainer subtitle="Areas">
       <UpdatePreferencesForm
@@ -20,4 +20,4 @@ export const UpdateAreaPreferencesForm = ({ allAreas, preferredAreas }: UpdateAr
       />
     </SettingsContainer>
   );
-};
+}

@@ -4,7 +4,7 @@ interface RecipeIngredientsProps {
   ingredients: string[];
 }
 
-export const RecipeIngredients = ({ ingredients }: RecipeIngredientsProps) => {
+export function RecipeIngredients({ ingredients }: RecipeIngredientsProps) {
   return (
     <ul className="flex max-w-full flex-wrap gap-2">
       {ingredients.map((el, index) => (
@@ -14,4 +14,4 @@ export const RecipeIngredients = ({ ingredients }: RecipeIngredientsProps) => {
       ))}
     </ul>
   );
-};
+}

@@ -7,7 +7,7 @@ import { getCurrentSession } from "@/lib/auth/session";
 import { updatePreferredCategories as updatePreferences } from "@/lib/db/queries/category";
 import { errorResponse, successResponse } from "@/utils/action-response";
 
-export const updatePreferredCategories = async (categories: string[]) => {
+export async function updatePreferredCategories(categories: string[]) {
   const { user } = await getCurrentSession();
 
   if (!user) {
@@ -23,4 +23,4 @@ export const updatePreferredCategories = async (categories: string[]) => {
   revalidatePath(routes.settings);
   revalidatePath(routes.explore);
   return successResponse("Preferred categories updated successfully");
-};
+}

@@ -32,6 +32,6 @@ interface FoodItemProps extends VariantProps<typeof foodItemVariants> {
   icon: React.ReactNode;
 }
 
-export const FoodItem = ({ icon, ...props }: FoodItemProps) => {
+export function FoodItem({ icon, ...props }: FoodItemProps) {
   return <span className={cn(foodItemVariants(props))}>{icon}</span>;
-};
+}

@@ -1,11 +1,15 @@
 import type { ActionError, ActionResponse } from "@/types";
 
-export const errorResponse = (error: string): ActionError => ({
-  ok: false,
-  error,
-});
+export function errorResponse(error: string): ActionError {
+  return {
+    ok: false,
+    error,
+  };
+}
 
-export const successResponse = <T>(data: T): ActionResponse<T> => ({
-  ok: true,
-  data,
-});
+export function successResponse<T>(data: T): ActionResponse<T> {
+  return {
+    ok: true,
+    data,
+  };
+}

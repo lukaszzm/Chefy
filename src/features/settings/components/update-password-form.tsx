@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input";
 import { SettingsContainer } from "@/features/settings/components/settings-container";
 import { usePasswordForm } from "@/features/settings/hooks/use-password-form";
 
-export const UpdatePasswordForm = () => {
+export function UpdatePasswordForm() {
   const { form, onSubmit, isPending, error } = usePasswordForm();
 
   return (
@@ -55,4 +55,4 @@ export const UpdatePasswordForm = () => {
       </Form>
     </SettingsContainer>
   );
-};
+}

@@ -9,18 +9,13 @@ import { useAction } from "@/hooks/use-action";
 import type { ActionResponse } from "@/types";
 
 interface UsePreferencesFormProps {
-  allValues: Array<PreferenceValue>;
-  preferredValues: Array<PreferenceValue>;
+  allValues: PreferenceValue[];
+  preferredValues: PreferenceValue[];
   keyName: string;
   actionOnSubmit: (values: string[]) => Promise<ActionResponse<string>>;
 }
 
-export const usePreferencesForm = ({
-  allValues,
-  preferredValues,
-  keyName,
-  actionOnSubmit,
-}: UsePreferencesFormProps) => {
+export function usePreferencesForm({ allValues, preferredValues, keyName, actionOnSubmit }: UsePreferencesFormProps) {
   const form = useForm<PreferencesPayload>({
     resolver: zodResolver(preferencesSchema),
     defaultValues: { values: mapToSelected(allValues, preferredValues) },
@@ -57,4 +52,4 @@ export const usePreferencesForm = ({
     error,
     onSubmit,
   };
-};
+}

@@ -14,7 +14,7 @@ interface ExploreCardProps extends Omit<Recipe, "category" | "area"> {
   areaName: string;
 }
 
-export const ExploreCard = ({
+export function ExploreCard({
   id,
   title,
   imageSrc,
@@ -22,7 +22,7 @@ export const ExploreCard = ({
   areaName,
   ingredients,
   instructions,
-}: ExploreCardProps) => {
+}: ExploreCardProps) {
   const { isPreviewMode, toggleMode, topRef } = usePreviewMode();
   const { like, dislike, swipeVariant, changeSwipeVariant } = useRecipes();
 
@@ -50,4 +50,4 @@ export const ExploreCard = ({
       </Card>
     </SwipeItem>
   );
-};
+}

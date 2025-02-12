@@ -2,7 +2,7 @@ import { useContext } from "react";
 
 import { RecipesContext } from "@/features/explore/contexts/recipes/context";
 
-export const useRecipes = () => {
+export function useRecipes() {
   const context = useContext(RecipesContext);
 
   if (!context) {
@@ -10,4 +10,4 @@ export const useRecipes = () => {
   }
 
   return context;
-};
+}

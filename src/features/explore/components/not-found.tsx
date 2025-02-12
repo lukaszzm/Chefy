@@ -1,8 +1,8 @@
 import { TextSearch } from "lucide-react";
 
-export const ExploreNotFound = () => {
+export function ExploreNotFound() {
   return (
-    <div className="col-start-1 row-start-1 mx-auto flex max-w-sm flex-col items-center justify-center gap-4  p-4 text-center text-muted-foreground">
+    <div className="text-muted-foreground col-start-1 row-start-1 mx-auto flex max-w-sm flex-col items-center justify-center gap-4 p-4 text-center">
       <TextSearch size={44} />
 
       <div>
@@ -11,4 +11,4 @@ export const ExploreNotFound = () => {
       </div>
     </div>
   );
-};
+}

@@ -1,16 +1,15 @@
-import type { HTMLAttributes } from "react";
-import { forwardRef } from "react";
+import React from "react";
 
 import { cn } from "@/utils/cn";
 
-export const Block = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(({ className, ...props }, ref) => {
+function Block({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       className={cn("lg:border-border bg-popover space-y-4 rounded-md p-3 lg:rounded-sm lg:border lg:p-6", className)}
-      ref={ref}
+      data-slot="block"
       {...props}
     />
   );
-});
+}
 
-Block.displayName = "Block";
+export { Block };

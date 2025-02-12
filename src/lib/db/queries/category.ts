@@ -21,20 +21,23 @@ export const getPreferredCategories = cache((userId: string) =>
   })
 );
 
-export const deletePreferredCategories = async (userId: string) =>
-  db.delete(userPreferredCategoryTable).where(eq(userPreferredCategoryTable.userId, userId));
+export async function deletePreferredCategories(userId: string) {
+  return db.delete(userPreferredCategoryTable).where(eq(userPreferredCategoryTable.userId, userId));
+}
 
-export const createPreferredCategory = async (userId: string, categoryId: string) =>
-  db.insert(userPreferredCategoryTable).values({
+export async function createPreferredCategory(userId: string, categoryId: string) {
+  return db.insert(userPreferredCategoryTable).values({
     userId,
     categoryId,
   });
+}
 
-export const updatePreferredCategories = async (userId: string, categories: string[]) =>
-  db.transaction(async () => {
+export async function updatePreferredCategories(userId: string, categories: string[]) {
+  return db.transaction(async () => {
     await deletePreferredCategories(userId);
 
     for (const categoryId of categories) {
       await createPreferredCategory(userId, categoryId);
     }
   });
+}

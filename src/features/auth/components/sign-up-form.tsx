@@ -6,7 +6,7 @@ import { Form, FormField, FormItem, FormLabel, FormControl, FormMessage } from "
 import { Input } from "@/components/ui/input";
 import { useSignUp } from "@/features/auth/hooks/use-sign-up";
 
-export const SignUpForm = () => {
+export function SignUpForm() {
   const { form, onSubmit, isPending, error } = useSignUp();
 
   return (
@@ -59,4 +59,4 @@ export const SignUpForm = () => {
       </form>
     </Form>
   );
-};
+}

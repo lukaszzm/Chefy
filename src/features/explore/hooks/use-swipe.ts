@@ -11,7 +11,7 @@ interface UseSwipeHookProps {
   changeVariant: (variant: SwipeVariant) => void;
 }
 
-export const useSwipe = ({ onSwipeLeft, onSwipeRight, changeVariant }: UseSwipeHookProps) => {
+export function useSwipe({ onSwipeLeft, onSwipeRight, changeVariant }: UseSwipeHookProps) {
   const constraintsRef = useRef(null);
   const x = useMotionValue(0);
   const rotate = useTransform(x, [-DragLimit, DragLimit], [-22.5, 22.5]);
@@ -53,4 +53,4 @@ export const useSwipe = ({ onSwipeLeft, onSwipeRight, changeVariant }: UseSwipeH
     swipeEndHandler,
     swipeHandler,
   };
-};
+}

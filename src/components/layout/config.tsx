@@ -19,4 +19,4 @@ export const dashboardItems = [
     url: routes.settings,
     icon: <Settings />,
   },
-] as const satisfies ReadonlyArray<DashboardSidebarLinkProps>;
+] as const satisfies readonly DashboardSidebarLinkProps[];

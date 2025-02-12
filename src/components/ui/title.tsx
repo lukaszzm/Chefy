@@ -2,10 +2,12 @@ import React from "react";
 
 import { cn } from "@/utils/cn";
 
-export const Title = React.forwardRef<HTMLInputElement, React.ButtonHTMLAttributes<HTMLHeadingElement>>(
-  ({ className, ...props }, ref) => {
-    return <h1 className={cn("text-2xl font-semibold", className)} ref={ref} {...props} />;
-  }
-);
+function Title({ className, children, ...props }: React.ComponentProps<"h1">) {
+  return (
+    <h1 className={cn("text-2xl font-semibold", className)} data-slot="title" {...props}>
+      {children}
+    </h1>
+  );
+}
 
-Title.displayName = "Title";
+export { Title };

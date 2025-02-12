@@ -10,7 +10,7 @@ import { createSession, generateSessionToken } from "@/lib/auth/session";
 import { getUserWithPasswordByMail } from "@/lib/db/queries/user";
 import { errorResponse } from "@/utils/action-response";
 
-export const signIn = async (payload: SignInPayload) => {
+export async function signIn(payload: SignInPayload) {
   const fixedMail = payload.email.toLowerCase();
   const existingUser = await getUserWithPasswordByMail(fixedMail);
 
@@ -30,4 +30,4 @@ export const signIn = async (payload: SignInPayload) => {
   await setSessionTokenCookie(sessionToken, session.expiresAt);
 
   return redirect(routes.explore);
-};
+}

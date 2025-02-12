@@ -7,7 +7,7 @@ import { getCurrentSession } from "@/lib/auth/session";
 import { createLikeRecipe } from "@/lib/db/queries/recipe";
 import { errorResponse, successResponse } from "@/utils/action-response";
 
-export const likeRecipe = async (recipeId: string) => {
+export async function likeRecipe(recipeId: string) {
   const { user } = await getCurrentSession();
 
   if (!user) {
@@ -23,4 +23,4 @@ export const likeRecipe = async (recipeId: string) => {
   revalidatePath(routes.explore);
   revalidatePath(routes.likes);
   return successResponse("Recipe liked");
-};
+}

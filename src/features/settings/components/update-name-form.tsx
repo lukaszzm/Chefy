@@ -11,7 +11,7 @@ interface UpdateNameFormProps {
   defaultName: string;
 }
 
-export const UpdateNameForm = ({ defaultName }: UpdateNameFormProps) => {
+export function UpdateNameForm({ defaultName }: UpdateNameFormProps) {
   const { form, onSubmit, isPending, error } = useNameForm(defaultName);
 
   return (
@@ -46,4 +46,4 @@ export const UpdateNameForm = ({ defaultName }: UpdateNameFormProps) => {
       </Form>
     </SettingsContainer>
   );
-};
+}

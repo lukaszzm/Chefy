@@ -13,12 +13,12 @@ interface UseActionProps<TValues, TData> {
   refreshOnSuccess?: boolean;
 }
 
-export const useAction = <TValues = unknown, TData = unknown>({
+export function useAction<TValues = unknown, TData = unknown>({
   action,
   onError,
   onSuccess,
   refreshOnSuccess = true,
-}: UseActionProps<TValues, TData>) => {
+}: UseActionProps<TValues, TData>) {
   const [state, dispatch] = useReducer(createActionReducer<TData>(), defaultState);
   const [isPending, startTransition] = useTransition();
   const { refresh } = useRouter();
@@ -57,4 +57,4 @@ export const useAction = <TValues = unknown, TData = unknown>({
     ...state,
     isPending,
   };
-};
+}

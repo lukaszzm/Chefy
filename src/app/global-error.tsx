@@ -6,8 +6,8 @@ import { Container } from "@/components/ui/container";
 
 export default function GlobalError() {
   return (
-    <html>
-      <body className="flex min-h-screen items-center justify-center bg-popover text-center sm:bg-background">
+    <html lang="en">
+      <body className="bg-popover sm:bg-background flex min-h-screen items-center justify-center text-center">
         <Container className="items-center">
           <ServerCrash size={44} />
           <h1 className="text-2xl font-semibold">Internal Server Error</h1>

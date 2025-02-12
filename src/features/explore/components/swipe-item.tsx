@@ -16,14 +16,14 @@ interface SwipeItemProps {
   isDragEnabled: boolean;
 }
 
-export const SwipeItem = ({
+export function SwipeItem({
   children,
   onSwipeLeft,
   onSwipeRight,
   changeVariant,
   variant,
   isDragEnabled,
-}: SwipeItemProps) => {
+}: SwipeItemProps) {
   const { constraintsRef, background, x, rotate, swipeEndHandler } = useSwipe({
     onSwipeLeft,
     onSwipeRight,
@@ -56,4 +56,4 @@ export const SwipeItem = ({
       </motion.div>
     </motion.div>
   );
-};
+}

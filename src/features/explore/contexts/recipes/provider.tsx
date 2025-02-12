@@ -16,15 +16,15 @@ import { sleep } from "@/utils/sleep";
 
 interface RecipesContextProviderProps {
   children: ReactNode;
-  initialData: Array<RecipeWithRelations>;
+  initialData: RecipeWithRelations[];
 }
 
-export const RecipesContextProvider = ({ children, initialData }: RecipesContextProviderProps) => {
+export function RecipesContextProvider({ children, initialData }: RecipesContextProviderProps) {
   const [recipes, setRecipes] = useState(initialData);
   const [isFetching, setIsFetching] = useState(false);
   const [swipeVariant, setSwipeVariant] = useState<SwipeVariant>("like");
 
-  const fetchMore = async () => {
+  const fetchMore = useCallback(async () => {
     setIsFetching(true);
 
     // Wait for swipe animation to finish (swipe animation -> 500 ms)
@@ -37,7 +37,7 @@ export const RecipesContextProvider = ({ children, initialData }: RecipesContext
 
     setRecipes(res.data);
     setIsFetching(false);
-  };
+  }, []);
 
   const removeFromList = useCallback(
     (id: string) => {
@@ -48,7 +48,7 @@ export const RecipesContextProvider = ({ children, initialData }: RecipesContext
         fetchMore();
       }
     },
-    [recipes]
+    [fetchMore, recipes]
   );
 
   const like = useCallback(
@@ -89,4 +89,4 @@ export const RecipesContextProvider = ({ children, initialData }: RecipesContext
   } as RecipesContextType;
 
   return <RecipesContext.Provider value={value}>{children}</RecipesContext.Provider>;
-};
+}

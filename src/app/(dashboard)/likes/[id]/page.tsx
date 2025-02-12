@@ -14,9 +14,9 @@ import { LikesDropdownMenu } from "@/features/likes/components/dropdown-menu";
 import { getCurrentSession } from "@/lib/auth/session";
 import { getLikeRecipe } from "@/lib/db/queries/recipe";
 
-type PageProps = {
+interface PageProps {
   params: Promise<{ id: string }>;
-};
+}
 
 export async function generateMetadata(props: PageProps): Promise<Metadata> {
   const params = await props.params;

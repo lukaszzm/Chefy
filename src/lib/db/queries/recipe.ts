@@ -109,19 +109,22 @@ export const getLikeRecipe = cache(async (userId: string, recipeId: string) =>
 
 export const getFirstRecipe = cache(async () => db.query.recipeTable.findFirst());
 
-export const createDislikeRecipe = async (userId: string, recipeId: string) =>
-  db.insert(userDislikedRecipeTable).values({
+export async function createDislikeRecipe(userId: string, recipeId: string) {
+  return db.insert(userDislikedRecipeTable).values({
     userId,
     recipeId,
   });
+}
 
-export const createLikeRecipe = async (userId: string, recipeId: string) =>
-  db.insert(userLikedRecipeTable).values({
+export async function createLikeRecipe(userId: string, recipeId: string) {
+  return db.insert(userLikedRecipeTable).values({
     userId,
     recipeId,
   });
+}
 
-export const deleteLikeRecipe = async (userId: string, recipeId: string) =>
-  db
+export async function deleteLikeRecipe(userId: string, recipeId: string) {
+  return db
     .delete(userLikedRecipeTable)
     .where(and(eq(userLikedRecipeTable.userId, userId), eq(userLikedRecipeTable.recipeId, recipeId)));
+}

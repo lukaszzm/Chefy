@@ -47,17 +47,24 @@ export const getTestUsers = cache(async () =>
   })
 );
 
-export const createUser = async (data: User) => await db.insert(userTable).values(data);
+export async function createUser(data: User) {
+  return db.insert(userTable).values(data);
+}
 
-export const deleteUser = async (id: string) => db.delete(userTable).where(eq(userTable.id, id));
+export async function deleteUser(id: string) {
+  return db.delete(userTable).where(eq(userTable.id, id));
+}
 
-export const deleteUserByMail = async (email: string) => db.delete(userTable).where(eq(userTable.email, email));
+export async function deleteUserByMail(email: string) {
+  return db.delete(userTable).where(eq(userTable.email, email));
+}
 
-export const updateUser = async (id: string, data: Partial<User>) =>
+export async function updateUser(id: string, data: Partial<User>) {
   db.update(userTable).set(data).where(eq(userTable.id, id));
+}
 
-export const createUserWithPreferences = async (data: User) => {
-  await db.transaction(async (trx) => {
+export async function createUserWithPreferences(data: User) {
+  return db.transaction(async (trx) => {
     const [createdUser] = await trx.insert(userTable).values(data).returning({ userId: userTable.id });
 
     const allCategories = await trx.query.categoryTable.findMany();
@@ -76,4 +83,4 @@ export const createUserWithPreferences = async (data: User) => {
       });
     }
   });
-};
+}

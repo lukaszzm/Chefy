@@ -1,16 +1,14 @@
 "use client";
 
-import { forwardRef } from "react";
-
 import { useRouter } from "next/navigation";
 
 import type { ButtonProps } from "@/components/ui/button";
 import { Button } from "@/components/ui/button";
 
-export const BackButton = forwardRef<HTMLButtonElement, Omit<ButtonProps, "onClick">>((props, ref) => {
+function BackButton(props: ButtonProps) {
   const { back } = useRouter();
 
-  return <Button ref={ref} onClick={back} {...props} />;
-});
+  return <Button data-slot="back-button" onClick={back} {...props} />;
+}
 
-BackButton.displayName = "BackButton";
+export { BackButton };

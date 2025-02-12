@@ -6,7 +6,7 @@ export function withPagination<T extends PgSelect>(
   orderByColumn: PgColumn | SQL | SQL.Aliased,
   page = 1,
   pageSize = 5
-) {
+): T {
   return qb
     .orderBy(orderByColumn)
     .limit(pageSize)
