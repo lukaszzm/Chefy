@@ -1,24 +1,16 @@
-import { useCallback, useTransition } from "react";
-
 import { toast } from "sonner";
 
 import { signOut as signOutAction } from "@/features/auth/actions/sign-out";
+import { useAction } from "@/hooks/use-action";
 
 export function useSignOut() {
-  const [isPending, startTransition] = useTransition();
-
-  const signOut = useCallback(() => {
-    startTransition(async () => {
-      const res = await signOutAction();
-
-      if (res.error) {
-        toast.error(res.error);
-      }
-    });
-  }, []);
+  const { execute, isPending } = useAction({
+    action: signOutAction,
+    onError: (error) => toast.error(error),
+  });
 
   return {
+    signOut: execute,
     isPending,
-    signOut,
   };
 }

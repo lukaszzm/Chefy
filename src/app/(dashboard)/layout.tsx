@@ -5,12 +5,12 @@ import { redirect } from "next/navigation";
 import { DashboardSidebar } from "@/components/layout/dashboard-sidebar";
 import { SidebarWrapper } from "@/components/ui/sidebar";
 import { routes } from "@/config/routes";
-import { getCurrentSession } from "@/lib/auth/session";
+import { getAuthSession } from "@/lib/auth/utils";
 
 export default async function DashboardLayout({ children }: PropsWithChildren) {
-  const { user } = await getCurrentSession();
+  const session = await getAuthSession();
 
-  if (!user) {
+  if (!session) {
     return redirect(routes.signIn);
   }
 

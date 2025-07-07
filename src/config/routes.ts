@@ -10,4 +10,4 @@ export const routes = {
   preferences: "/settings/preferences",
 } as const satisfies Record<string, string>;
 
-export type Route = keyof typeof routes;
+export type Route = (typeof routes)[keyof typeof routes];

@@ -1,43 +1,49 @@
 "use server";
 
-import { compare, hash } from "bcrypt";
-
 import type { UpdatePasswordPayload } from "@/features/settings/schemas/password-schema";
-import { getCurrentSession } from "@/lib/auth/session";
-import { getUserWithPasswordById, updateUser } from "@/lib/db/queries/user";
 import { errorResponse, successResponse } from "@/utils/action-response";
+import { getAuthSession } from "@/lib/auth/utils";
+import { auth } from "@/lib/auth";
+import { getAccountByUserId } from "@/lib/db/queries/account";
 
 const TEST_MAIL = "test@test.com";
 
 export async function updatePassword(payload: UpdatePasswordPayload) {
-  const { user } = await getCurrentSession();
-
-  if (!user) {
-    return errorResponse("Unauthorized");
-  }
-
-  const currentUser = await getUserWithPasswordById(user.id);
-
-  if (!currentUser) {
-    return errorResponse("User not found");
-  }
-
-  if (currentUser.email === TEST_MAIL) {
-    return errorResponse("Cannot update password for test user");
-  }
-
-  const validPassword = await compare(payload.currentPassword, currentUser.password);
-  if (!validPassword) {
-    return errorResponse("Incorrect current password");
-  }
-
-  const hashedPassword = await hash(payload.newPassword, 8);
-
   try {
-    await updateUser(user.id, { password: hashedPassword });
-  } catch {
-    return errorResponse("Failed to update name");
-  }
+    const session = await getAuthSession();
 
-  return successResponse("Password updated successfully");
+    if (!session) {
+      return errorResponse("Unauthorized");
+    }
+
+    if (session.user.email === TEST_MAIL) {
+      return errorResponse("Cannot update password for test user");
+    }
+
+    const currentAccount = await getAccountByUserId(session.user.id);
+
+    if (!currentAccount) {
+      return errorResponse("Account not found");
+    }
+
+    const currentPassword = currentAccount.password;
+
+    if (!currentPassword) {
+      return errorResponse("No password set for this account");
+    }
+
+    const ctx = await auth.$context;
+    const passwordMatch = await ctx.password.verify({ password: payload.currentPassword, hash: currentPassword });
+
+    if (!passwordMatch) {
+      return errorResponse("Current password is incorrect");
+    }
+
+    const hashedNewPassword = await ctx.password.hash(payload.newPassword);
+    await ctx.internalAdapter.updatePassword(session.user.id, hashedNewPassword);
+
+    return successResponse("Password updated successfully");
+  } catch {
+    return errorResponse("Failed to update password");
+  }
 }

@@ -1,5 +1,3 @@
-import React from "react";
-
 import { cn } from "@/utils/cn";
 
 function Block({ className, ...props }: React.ComponentProps<"div">) {

@@ -11,7 +11,7 @@ interface SettingsLayoutProps {
 }
 
 export const metadata: Metadata = {
-  title: "Chefy - Settings",
+  title: "Settings | Chefy",
 };
 
 export default function SettingsLayout({ account, preferences }: SettingsLayoutProps) {

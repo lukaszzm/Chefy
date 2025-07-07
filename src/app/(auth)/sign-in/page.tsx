@@ -7,7 +7,7 @@ import { CredentialsHeading } from "@/features/auth/components/credentials-headi
 import { SignInForm } from "@/features/auth/components/sign-in-form";
 
 export const metadata: Metadata = {
-  title: "Chefy - Sign in to your account",
+  title: "Sign in to your account | Chefy",
 };
 
 export default function SignInPage() {

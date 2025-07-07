@@ -7,7 +7,7 @@ import { routes } from "@/config/routes";
 export function Navbar() {
   return (
     <nav className="mx-auto flex w-full max-w-7xl items-center justify-between p-4">
-      <Link aria-label="Chefy Home" href={routes.home}>
+      <Link aria-label="Go to homepage" href={routes.home}>
         <Logo withText />
       </Link>
       <Button size="lg" asChild>

@@ -1,27 +1,20 @@
 "use client";
 
-import type { Route } from "next";
-
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 import { SidebarMenuButton, SidebarMenuItem } from "@/components/ui/sidebar";
+import { type DashboardSidebarLink } from "@/components/layout/config";
 
-export interface DashboardSidebarLinkProps {
-  url: Route;
-  title: string;
-  icon: React.ReactNode;
-}
-
-export function DashboardSidebarLink({ url, title, icon }: DashboardSidebarLinkProps) {
+export function DashboardSidebarLink({ title, href, Icon }: DashboardSidebarLink) {
   const pathname = usePathname();
-  const isActive = pathname.startsWith(url);
+  const isActive = pathname.startsWith(href);
 
   return (
     <SidebarMenuItem>
       <SidebarMenuButton isActive={isActive} asChild>
-        <Link href={url}>
-          {icon}
+        <Link href={href}>
+          <Icon />
           <span>{title}</span>
         </Link>
       </SidebarMenuButton>

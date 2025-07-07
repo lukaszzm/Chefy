@@ -1,6 +1,6 @@
-import { RecipeBadges } from "@/components/recipe/recipe-badges";
-import { RecipeIngredients } from "@/components/recipe/recipe-ingredients";
-import { RecipeLabel } from "@/components/recipe/recipe-label";
+import { RecipeBadges } from "@/components/recipe/badges";
+import { RecipeIngredients } from "@/components/recipe/ingredients";
+import { RecipeLabel } from "@/components/recipe/label";
 import { CardContent } from "@/components/ui/card";
 import type { Recipe } from "@/types";
 

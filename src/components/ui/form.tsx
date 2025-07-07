@@ -1,5 +1,3 @@
-import * as React from "react";
-
 import type * as LabelPrimitive from "@radix-ui/react-label";
 import { Slot } from "@radix-ui/react-slot";
 import type { ControllerProps, FieldPath, FieldValues } from "react-hook-form";
@@ -7,6 +5,7 @@ import { Controller, FormProvider, useFormContext } from "react-hook-form";
 
 import { Label } from "@/components/ui/label";
 import { cn } from "@/utils/cn";
+import { createContext, useContext, useId } from "react";
 
 const Form = FormProvider;
 
@@ -17,7 +16,7 @@ interface FormFieldContextValue<
   name: TName;
 }
 
-const FormFieldContext = React.createContext<FormFieldContextValue>({} as FormFieldContextValue);
+const FormFieldContext = createContext<FormFieldContextValue>({} as FormFieldContextValue);
 
 function FormField<
   TFieldValues extends FieldValues = FieldValues,
@@ -31,8 +30,9 @@ function FormField<
 }
 
 function useFormField() {
-  const fieldContext = React.useContext(FormFieldContext);
-  const itemContext = React.useContext(FormItemContext);
+  const fieldContext = useContext(FormFieldContext);
+  const itemContext = useContext(FormItemContext);
+
   const { getFieldState, formState } = useFormContext();
 
   const fieldState = getFieldState(fieldContext.name, formState);
@@ -57,10 +57,10 @@ interface FormItemContextValue {
   id: string;
 }
 
-const FormItemContext = React.createContext<FormItemContextValue>({} as FormItemContextValue);
+const FormItemContext = createContext<FormItemContextValue>({} as FormItemContextValue);
 
 function FormItem({ className, ...props }: React.ComponentProps<"div">) {
-  const id = React.useId();
+  const id = useId();
 
   return (
     <FormItemContext.Provider value={{ id }}>

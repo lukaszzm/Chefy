@@ -3,19 +3,19 @@
 import { revalidatePath } from "next/cache";
 
 import { routes } from "@/config/routes";
-import { getCurrentSession } from "@/lib/auth/session";
 import { updatePreferredCategories as updatePreferences } from "@/lib/db/queries/category";
 import { errorResponse, successResponse } from "@/utils/action-response";
+import { getAuthSession } from "@/lib/auth/utils";
 
 export async function updatePreferredCategories(categories: string[]) {
-  const { user } = await getCurrentSession();
+  const session = await getAuthSession();
 
-  if (!user) {
+  if (!session) {
     return errorResponse("Unauthorized");
   }
 
   try {
-    await updatePreferences(user.id, categories);
+    await updatePreferences(session.user.id, categories);
   } catch {
     return errorResponse("Failed to update preferred categories");
   }

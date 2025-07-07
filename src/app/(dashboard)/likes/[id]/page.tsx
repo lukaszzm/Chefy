@@ -3,16 +3,16 @@ import type { Metadata } from "next";
 import { Undo2 } from "lucide-react";
 import { redirect } from "next/navigation";
 
-import { RecipeBadges } from "@/components/recipe/recipe-badges";
-import { RecipeIngredients } from "@/components/recipe/recipe-ingredients";
-import { RecipeLabel } from "@/components/recipe/recipe-label";
+import { RecipeBadges } from "@/components/recipe/badges";
+import { RecipeIngredients } from "@/components/recipe/ingredients";
 import { BackButton } from "@/components/ui/back-button";
 import { Block } from "@/components/ui/block";
 import { Heading, HeadingTitle } from "@/components/ui/heading";
 import { routes } from "@/config/routes";
 import { LikesDropdownMenu } from "@/features/likes/components/dropdown-menu";
-import { getCurrentSession } from "@/lib/auth/session";
 import { getLikeRecipe } from "@/lib/db/queries/recipe";
+import { getAuthSession } from "@/lib/auth/utils";
+import { RecipeLabel } from "@/components/recipe/label";
 
 interface PageProps {
   params: Promise<{ id: string }>;
@@ -21,33 +21,34 @@ interface PageProps {
 export async function generateMetadata(props: PageProps): Promise<Metadata> {
   const params = await props.params;
 
-  const { id } = params;
+  const { id: likeId } = params;
 
-  const { user } = await getCurrentSession();
+  const session = await getAuthSession();
 
-  if (!user) {
+  if (!session) {
     return redirect(routes.signIn);
   }
 
-  const data = await getLikeRecipe(user.id, id);
+  const data = await getLikeRecipe(session.user.id, likeId);
+  const title = data?.recipe.title ?? "Recipe not found";
 
   return {
-    title: data?.recipe.title ?? "Recipe not found",
+    title: `${title} | Chefy`,
   };
 }
 
 export default async function LikedRecipePage(props: PageProps) {
   const params = await props.params;
 
-  const { id } = params;
+  const { id: likeId } = params;
 
-  const { user } = await getCurrentSession();
+  const session = await getAuthSession();
 
-  if (!user) {
+  if (!session) {
     return redirect(routes.signIn);
   }
 
-  const data = await getLikeRecipe(user.id, id);
+  const data = await getLikeRecipe(session.user.id, likeId);
 
   if (!data) {
     return redirect(routes.likes);

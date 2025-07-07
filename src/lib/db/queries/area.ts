@@ -3,30 +3,30 @@ import { cache } from "react";
 import { eq, inArray } from "drizzle-orm";
 
 import db from "@/lib/db";
-import { areaTable, userPreferredAreaTable } from "@/lib/db/schema";
+import { area, userPreferredArea } from "@/lib/db/schema";
 
-export const getAllAreas = cache(async () => db.query.areaTable.findMany());
+export const getAllAreas = cache(async () => db.query.area.findMany());
 
 export const getPreferredAreas = cache(async (userId: string) =>
-  db.query.areaTable.findMany({
+  db.query.area.findMany({
     where: inArray(
-      areaTable.id,
+      area.id,
       db
         .select({
-          id: userPreferredAreaTable.areaId,
+          id: userPreferredArea.areaId,
         })
-        .from(userPreferredAreaTable)
-        .where(eq(userPreferredAreaTable.userId, userId))
+        .from(userPreferredArea)
+        .where(eq(userPreferredArea.userId, userId))
     ),
   })
 );
 
 export async function deletePreferredAreas(userId: string) {
-  return db.delete(userPreferredAreaTable).where(eq(userPreferredAreaTable.userId, userId));
+  return db.delete(userPreferredArea).where(eq(userPreferredArea.userId, userId));
 }
 
 export async function createPreferredArea(userId: string, areaId: string) {
-  db.insert(userPreferredAreaTable).values({
+  return db.insert(userPreferredArea).values({
     userId,
     areaId,
   });

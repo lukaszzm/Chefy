@@ -1,24 +1,27 @@
-/* eslint-disable no-empty-pattern */
+/* eslint-disable react-hooks/rules-of-hooks */
+// TODO: FIX E2E Tests
 import { test as base } from "@playwright/test";
-import { hash } from "bcrypt";
-
-import { randomUUID } from "crypto";
 
 import { routes } from "@/config/routes";
 import { createLikeRecipe, deleteLikeRecipe, getFirstRecipe } from "@/lib/db/queries/recipe";
 import { createUserWithPreferences, deleteUser } from "@/lib/db/queries/user";
-import type { Recipe, User } from "@/types";
+import type { Recipe, User, Account } from "@/types";
+import db from "@/lib/db";
+import { randomUUID } from "crypto";
+import { auth } from "@/lib/auth";
 
-type WorkerFixtures = {
-  account: User;
+interface WorkerFixtures {
+  user: User;
+  account: Account;
   like: Recipe;
-};
+}
 
-const createTestAccount = async () => {
+const createTestUser = async () => {
   const id = randomUUID();
   const password = "E2Etest12345!";
 
-  const hashedPassword = await hash(password, 8);
+  const ctx = await auth.$context;
+  const hashedPassword = await ctx.password.hash(password);
 
   const payload = {
     id: id,
@@ -35,8 +38,16 @@ const createTestAccount = async () => {
   };
 };
 
-const removeTestAccount = async (id: string) => {
-  await deleteUser(id);
+const removeTestUser = async (userId: string) => {
+  await deleteUser(userId);
+};
+
+const getAccountDetailsByUserId = async (userId: string) => {
+  return db.query.account
+    .findFirst({
+      where: (account, { eq }) => eq(account.userId, userId),
+    })
+    .execute();
 };
 
 const createTestLike = async (userId: string) => {
@@ -57,12 +68,17 @@ async function removeTestLike(userId: string, recipeId: string) {
 
 export const test = base.extend<object, WorkerFixtures>({
   account: [
-    async ({}, use) => {
-      const account = await createTestAccount();
+    async (_, use) => {
+      const user = await createTestUser();
+      const account = await getAccountDetailsByUserId(user.id);
 
-      await use(account);
+      if (!account) {
+        throw new Error("Account not found for the created user");
+      }
 
-      await removeTestAccount(account.id);
+      await use({ ...user, ...account });
+
+      await removeTestUser(account.id);
     },
     { scope: "worker" },
   ],
@@ -78,12 +94,19 @@ export const test = base.extend<object, WorkerFixtures>({
     { scope: "worker" },
   ],
 
-  page: async ({ page, account }, use) => {
-    const { email, password } = account;
+  page: async ({ page, account, user }, use) => {
+    if (!account.password) {
+      throw new Error("Account password is required for authentication");
+    }
+
+    const credentials = {
+      email: user.email,
+      password: account.password,
+    };
 
     await page.goto(routes.signIn);
-    await page.getByLabel("Email").fill(email);
-    await page.getByLabel("Password").fill(password);
+    await page.getByLabel("Email").fill(credentials.email);
+    await page.getByLabel("Password").fill(credentials.password);
     await page.getByRole("button", { name: "Sign In" }).click();
 
     await page.waitForURL(routes.explore);

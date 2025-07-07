@@ -1,43 +1,24 @@
 "use server";
 
-import { hash } from "bcrypt";
-import { redirect } from "next/navigation";
-
-import { randomUUID } from "crypto";
-
-import { routes } from "@/config/routes";
 import type { SignUpPayload } from "@/features/auth/schemas/sign-up-schema";
-import { setSessionTokenCookie } from "@/lib/auth/cookies";
-import { createSession, generateSessionToken } from "@/lib/auth/session";
-import { createUserWithPreferences, getUserByMail } from "@/lib/db/queries/user";
-import { errorResponse } from "@/utils/action-response";
+import { errorResponse, successResponse } from "@/utils/action-response";
+import { auth } from "@/lib/auth";
+import { ActionResponse } from "@/types";
+import { getAuthErrorMessage } from "@/features/auth/utils/get-auth-error-message";
 
-export async function signUp(payload: SignUpPayload) {
-  const fixedMail = payload.email.toLowerCase();
-  const existingUser = await getUserByMail(fixedMail);
-
-  if (existingUser) {
-    return errorResponse("User already exists");
-  }
-
-  const hashedPassword = await hash(payload.password, 8);
-  const userId = randomUUID();
-
+export async function signUp(payload: SignUpPayload): Promise<ActionResponse> {
   try {
-    await createUserWithPreferences({
-      id: userId,
-      name: payload.name,
-      email: fixedMail,
-      password: hashedPassword,
+    await auth.api.signUpEmail({
+      body: {
+        email: payload.email.toLowerCase(),
+        name: payload.name,
+        password: payload.password,
+      },
     });
-  } catch {
-    return errorResponse("Failed to create user");
+
+    return successResponse("Sign up successful");
+  } catch (error) {
+    const errorMessage = getAuthErrorMessage(error);
+    return errorResponse(errorMessage);
   }
-
-  const sessionToken = generateSessionToken();
-  const session = await createSession(sessionToken, userId);
-
-  await setSessionTokenCookie(sessionToken, session.expiresAt);
-
-  return redirect(routes.explore);
 }

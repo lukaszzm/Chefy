@@ -1,4 +1,4 @@
-import { RecipeBadges } from "@/components/recipe/recipe-badges";
+import { RecipeBadges } from "@/components/recipe/badges";
 import { LikesDropdownMenu } from "@/features/likes/components/dropdown-menu";
 import type { Area, Category, Recipe } from "@/types";
 

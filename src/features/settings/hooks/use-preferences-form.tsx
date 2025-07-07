@@ -2,7 +2,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useFieldArray, useForm } from "react-hook-form";
 import { toast } from "sonner";
 
-import type { PreferencesPayload, PreferenceValue } from "@/features/settings/schemas/preferences-schema";
+import type { UpdatePreferencesPayload, PreferenceValue } from "@/features/settings/schemas/preferences-schema";
 import { preferencesSchema } from "@/features/settings/schemas/preferences-schema";
 import { mapToSelected } from "@/features/settings/utils/map-to-selected";
 import { useAction } from "@/hooks/use-action";
@@ -16,7 +16,7 @@ interface UsePreferencesFormProps {
 }
 
 export function usePreferencesForm({ allValues, preferredValues, keyName, actionOnSubmit }: UsePreferencesFormProps) {
-  const form = useForm<PreferencesPayload>({
+  const form = useForm<UpdatePreferencesPayload>({
     resolver: zodResolver(preferencesSchema),
     defaultValues: { values: mapToSelected(allValues, preferredValues) },
   });

@@ -17,15 +17,15 @@ async function main() {
   console.info("Seeding database...");
 
   console.info("Inserting categories...");
-  await db.insert(schema.categoryTable).values(SeedData.Categories);
+  await db.insert(schema.category).values(SeedData.Categories);
   console.info("Categories inserted.");
 
   console.info("Inserting areas...");
-  await db.insert(schema.areaTable).values(SeedData.Areas);
+  await db.insert(schema.area).values(SeedData.Areas);
   console.info("Areas inserted.");
 
   console.info("Inserting recipes...");
-  await db.insert(schema.recipeTable).values(SeedData.Recipes);
+  await db.insert(schema.recipe).values(SeedData.Recipes);
   console.info("Recipes inserted.");
 
   console.info("Database seeded.");

@@ -3,19 +3,19 @@
 import { revalidatePath } from "next/cache";
 
 import { routes } from "@/config/routes";
-import { getCurrentSession } from "@/lib/auth/session";
 import { createDislikeRecipe } from "@/lib/db/queries/recipe";
 import { errorResponse, successResponse } from "@/utils/action-response";
+import { getAuthSession } from "@/lib/auth/utils";
 
 export async function dislikeRecipe(recipeId: string) {
-  const { user } = await getCurrentSession();
+  const session = await getAuthSession();
 
-  if (!user) {
+  if (!session) {
     return errorResponse("Unauthorized");
   }
 
   try {
-    await createDislikeRecipe(user.id, recipeId);
+    await createDislikeRecipe(session.user.id, recipeId);
   } catch {
     return errorResponse("Failed to dislike recipe");
   }

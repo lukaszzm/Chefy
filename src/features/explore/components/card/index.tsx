@@ -1,9 +1,9 @@
 "use client";
 
 import { Card } from "@/components/ui/card";
-import { ExploreCardContent } from "@/features/explore/components/card/card-content";
-import { ExploreCardFooter } from "@/features/explore/components/card/card-footer";
-import { ExploreCardHeader } from "@/features/explore/components/card/card-header";
+import { ExploreCardContent } from "@/features/explore/components/card/content";
+import { ExploreCardFooter } from "@/features/explore/components/card/footer";
+import { ExploreCardHeader } from "@/features/explore/components/card/header";
 import { SwipeItem } from "@/features/explore/components/swipe-item";
 import { usePreviewMode } from "@/features/explore/hooks/use-preview-mode";
 import { useRecipes } from "@/features/explore/hooks/use-recipes";

@@ -1,17 +1,23 @@
+import { routes } from "@/config/routes";
 import { UpdateAreaPreferencesForm } from "@/features/settings/components/preferences/update-area-preferences-form";
 import { UpdateCategoryPreferencesForm } from "@/features/settings/components/preferences/update-category-preferences-form";
-import { getCurrentUser } from "@/lib/auth/session";
+import { getAuthSession } from "@/lib/auth/utils";
 import { getAllAreas, getPreferredAreas } from "@/lib/db/queries/area";
 import { getAllCategories, getPreferredCategories } from "@/lib/db/queries/category";
+import { redirect } from "next/navigation";
 
 export default async function PreferencesPage() {
-  const user = await getCurrentUser();
+  const session = await getAuthSession();
+
+  if (!session) {
+    return redirect(routes.signIn);
+  }
 
   const [allCategories, preferredCategories, allAreas, preferredAreas] = await Promise.all([
     getAllCategories(),
-    getPreferredCategories(user.id),
+    getPreferredCategories(session.user.id),
     getAllAreas(),
-    getPreferredAreas(user.id),
+    getPreferredAreas(session.user.id),
   ]);
 
   return (

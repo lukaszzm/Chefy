@@ -1,14 +1,19 @@
+import { routes } from "@/config/routes";
 import { UpdateNameForm } from "@/features/settings/components/update-name-form";
 import { UpdatePasswordForm } from "@/features/settings/components/update-password-form";
-import { getCurrentUser } from "@/lib/auth/session";
+import { getAuthSession } from "@/lib/auth/utils";
+import { redirect } from "next/navigation";
 
-// TODO: check if the user is updated
 export default async function AccountPage() {
-  const user = await getCurrentUser();
+  const session = await getAuthSession();
+
+  if (!session) {
+    redirect(routes.signIn);
+  }
 
   return (
     <>
-      <UpdateNameForm defaultName={user.name} />
+      <UpdateNameForm defaultName={session.user.name} />
       <UpdatePasswordForm />
     </>
   );

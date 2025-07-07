@@ -1,9 +1,9 @@
-import type { Area, Category, Recipe } from "@/types";
+import type { AreaPayload, CategoryPayload, RecipePayload } from "@/types";
 
 interface SeedDataSchema {
-  Categories: Category[];
-  Areas: Area[];
-  Recipes: Recipe[];
+  Categories: CategoryPayload[];
+  Areas: AreaPayload[];
+  Recipes: RecipePayload[];
 }
 
 export const SeedData = {

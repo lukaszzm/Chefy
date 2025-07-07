@@ -1,21 +1,20 @@
 "use server";
 
-import { redirect } from "next/navigation";
+import { getAuthErrorMessage } from "@/features/auth/utils/get-auth-error-message";
+import { auth } from "@/lib/auth";
+import { ActionResponse } from "@/types";
+import { errorResponse, successResponse } from "@/utils/action-response";
+import { headers } from "next/headers";
 
-import { routes } from "@/config/routes";
-import { deleteSessionTokenCookie } from "@/lib/auth/cookies";
-import { getCurrentSession, invalidateSession } from "@/lib/auth/session";
-import { errorResponse } from "@/utils/action-response";
+export async function signOut(): Promise<ActionResponse> {
+  try {
+    await auth.api.signOut({
+      headers: await headers(),
+    });
 
-export async function signOut() {
-  const { session } = await getCurrentSession();
-
-  if (!session) {
-    return errorResponse("No session found");
+    return successResponse("Sign out successful");
+  } catch (error) {
+    const errorMessage = getAuthErrorMessage(error);
+    return errorResponse(errorMessage);
   }
-
-  await invalidateSession(session.id);
-  await deleteSessionTokenCookie();
-
-  return redirect(routes.home);
 }

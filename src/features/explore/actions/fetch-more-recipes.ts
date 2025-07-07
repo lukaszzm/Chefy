@@ -1,16 +1,16 @@
 "use server";
 
-import { getCurrentSession } from "@/lib/auth/session";
+import { getAuthSession } from "@/lib/auth/utils";
 import { getSuggestedRecipes } from "@/lib/db/queries/recipe";
 import { errorResponse, successResponse } from "@/utils/action-response";
 
 export async function fetchMoreRecipes() {
-  const { user } = await getCurrentSession();
+  const session = await getAuthSession();
 
-  if (!user) {
+  if (!session) {
     return errorResponse("Unauthorized");
   }
 
-  const moreSuggestions = await getSuggestedRecipes(user.id);
+  const moreSuggestions = await getSuggestedRecipes(session.user.id);
   return successResponse(moreSuggestions);
 }

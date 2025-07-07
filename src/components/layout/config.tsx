@@ -1,22 +1,28 @@
 import { Globe, Heart, Settings } from "lucide-react";
 
-import type { DashboardSidebarLinkProps } from "@/components/layout/dashboard-sidebar-link";
-import { routes } from "@/config/routes";
+import { Route, routes } from "@/config/routes";
+import { ForwardRefExoticComponent } from "react";
+
+export interface DashboardSidebarLink {
+  title: string;
+  href: Route;
+  Icon: ForwardRefExoticComponent<React.SVGProps<SVGSVGElement>>;
+}
 
 export const dashboardItems = [
   {
     title: "Explore",
-    url: routes.explore,
-    icon: <Globe />,
+    href: routes.explore,
+    Icon: Globe,
   },
   {
     title: "Likes",
-    url: routes.likes,
-    icon: <Heart />,
+    href: routes.likes,
+    Icon: Heart,
   },
   {
     title: "Settings",
-    url: routes.settings,
-    icon: <Settings />,
+    href: routes.settings,
+    Icon: Settings,
   },
-] as const satisfies readonly DashboardSidebarLinkProps[];
+] as const satisfies readonly DashboardSidebarLink[];

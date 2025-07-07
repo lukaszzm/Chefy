@@ -1,5 +1,3 @@
-import React from "react";
-
 import { cn } from "@/utils/cn";
 
 function Title({ className, children, ...props }: React.ComponentProps<"h1">) {

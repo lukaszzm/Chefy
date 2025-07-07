@@ -7,7 +7,7 @@ export function errorResponse(error: string): ActionError {
   };
 }
 
-export function successResponse<T>(data: T): ActionResponse<T> {
+export function successResponse<T = unknown>(data: T): ActionResponse<T> {
   return {
     ok: true,
     data,
