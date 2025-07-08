@@ -3,9 +3,9 @@ import type { PropsWithChildren } from "react";
 import { redirect } from "next/navigation";
 
 import { DashboardSidebar } from "@/components/layout/dashboard-sidebar";
-import { SidebarWrapper } from "@/components/ui/sidebar";
 import { routes } from "@/config/routes";
 import { getAuthSession } from "@/lib/auth/utils";
+import { SidebarWrapper } from "@/components/ui/sidebar";
 
 export default async function DashboardLayout({ children }: PropsWithChildren) {
   const session = await getAuthSession();
