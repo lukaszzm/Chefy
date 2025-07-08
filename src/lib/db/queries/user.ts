@@ -3,7 +3,7 @@ import { cache } from "react";
 import { eq, like } from "drizzle-orm";
 
 import db from "@/lib/db";
-import { user, userPreferredArea, userPreferredCategory } from "@/lib/db/schema";
+import { user, userDislikedRecipe, userLikedRecipe, userPreferredArea, userPreferredCategory } from "@/lib/db/schema";
 import type { User, UserPayload } from "@/types";
 
 export const getUserById = cache(
@@ -27,11 +27,6 @@ export const getUserWithPasswordByMail = cache(async (email: string) =>
 export const getUserByMail = cache(async (email: string) =>
   db.query.user.findFirst({
     where: eq(user.email, email),
-    columns: {
-      id: true,
-      name: true,
-      email: true,
-    },
   })
 );
 
@@ -76,5 +71,35 @@ export async function createUserWithPreferences(data: UserPayload) {
         areaId: area.id,
       });
     }
+  });
+}
+
+export async function setUserDefaultPreferences(userId: string) {
+  return db.transaction(async (trx) => {
+    await trx.delete(userPreferredCategory).where(eq(userPreferredCategory.userId, userId));
+    await trx.delete(userPreferredArea).where(eq(userPreferredArea.userId, userId));
+
+    const allCategories = await trx.query.category.findMany();
+    for (const category of allCategories) {
+      await trx.insert(userPreferredCategory).values({
+        userId,
+        categoryId: category.id,
+      });
+    }
+
+    const allAreas = await trx.query.area.findMany();
+    for (const area of allAreas) {
+      await trx.insert(userPreferredArea).values({
+        userId,
+        areaId: area.id,
+      });
+    }
+  });
+}
+
+export async function resetUserReactions(userId: string) {
+  return db.transaction(async (trx) => {
+    await trx.delete(userLikedRecipe).where(eq(userLikedRecipe.userId, userId));
+    await trx.delete(userDislikedRecipe).where(eq(userDislikedRecipe.userId, userId));
   });
 }
