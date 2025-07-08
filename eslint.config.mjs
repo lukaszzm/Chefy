@@ -5,11 +5,12 @@ import jsxA11yPlugin from "eslint-plugin-jsx-a11y";
 import reactHooksPlugin from "eslint-plugin-react-hooks";
 import nextPlugin from "@next/eslint-plugin-next";
 import importPlugin from "eslint-plugin-import";
+import playwrightPlugin from "eslint-plugin-playwright";
 
 const eslintConfig = [
   {
     name: "custom/eslint/recommended",
-    files: ["**/*.mjs", "**/*.ts?(x)"],
+    files: ["**/*.mjs", "**/*.ts", "**/*.tsx"],
     ...eslintPlugin.configs.recommended,
     rules: {
       "no-unused-vars": "off",
@@ -27,7 +28,7 @@ const ignoresConfig = [
 const tseslintConfig = tseslint.config(
   {
     name: "custom/typescript-eslint/recommended",
-    files: ["**/*.mjs", "**/*.ts?(x)"],
+    files: ["**/*.ts", "**/*.tsx"],
     extends: [...tseslint.configs.recommended, ...tseslint.configs.stylistic],
     languageOptions: {
       parserOptions: {
@@ -56,12 +57,20 @@ const tseslintConfig = tseslint.config(
 const nextConfig = [
   {
     name: "custom/next/config",
+    files: ["src/**/*.js", "src/**/*.jsx", "src/**/*.ts", "src/**/*.tsx"],
     plugins: {
       react: reactPlugin,
       "jsx-a11y": jsxA11yPlugin,
       "react-hooks": reactHooksPlugin,
       "@next/next": nextPlugin,
       import: importPlugin,
+    },
+    languageOptions: {
+      parserOptions: {
+        ecmaFeatures: {
+          jsx: true,
+        },
+      },
     },
     rules: {
       ...reactPlugin.configs.recommended.rules,
@@ -96,6 +105,26 @@ const nextConfig = [
   },
 ];
 
-const finalConfig = [...eslintConfig, ...ignoresConfig, ...tseslintConfig, ...nextConfig];
+const playwrightConfig = [
+  {
+    name: "custom/playwright/config",
+    files: ["e2e/**", "/playwright/**"],
+    plugins: {
+      playwright: playwrightPlugin,
+    },
+    rules: {
+      ...playwrightPlugin.configs["flat/recommended"].rules,
+      "playwright/no-networkidle": "warn",
+      "playwright/no-skipped-test": "warn",
+      "playwright/no-wait-for-timeout": "warn",
+      "playwright/prefer-web-first-assertions": "error",
+      "playwright/prefer-to-have-length": "warn",
+      "playwright/no-page-pause": "error",
+      "playwright/expect-expect": "error",
+    },
+  },
+];
+
+const finalConfig = [...eslintConfig, ...ignoresConfig, ...tseslintConfig, ...nextConfig, ...playwrightConfig];
 
 export default finalConfig;
