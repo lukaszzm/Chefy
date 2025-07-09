@@ -1,3 +1,5 @@
+import "server-only";
+
 import db from "@/lib/db";
 import { setUserDefaultPreferences } from "@/lib/db/queries/user";
 import { betterAuth } from "better-auth";

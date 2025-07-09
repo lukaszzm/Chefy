@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 import { Undo2 } from "lucide-react";
-import { redirect } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 
 import { RecipeBadges } from "@/components/recipe/badges";
 import { RecipeIngredients } from "@/components/recipe/ingredients";
@@ -29,11 +29,14 @@ export async function generateMetadata(props: PageProps): Promise<Metadata> {
     return redirect(routes.signIn);
   }
 
-  const data = await getLikeRecipe(session.user.id, likeId);
-  const title = data?.recipe.title ?? "Recipe not found";
+  const like = await getLikeRecipe(session.user.id, likeId);
+
+  if (!like) {
+    return notFound();
+  }
 
   return {
-    title: `${title} | Chefy`,
+    title: `${like.recipe.title} | Chefy`,
   };
 }
 
@@ -51,7 +54,7 @@ export default async function LikedRecipePage(props: PageProps) {
   const data = await getLikeRecipe(session.user.id, likeId);
 
   if (!data) {
-    return redirect(routes.likes);
+    return notFound();
   }
 
   return (

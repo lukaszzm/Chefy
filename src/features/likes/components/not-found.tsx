@@ -1,7 +1,9 @@
+import { Container } from "@/components/ui/container";
+
 export function LikesNotFound() {
   return (
-    <div className="flex h-96 flex-col items-center justify-center">
+    <Container className="flex h-72 flex-col items-center justify-center">
       <p className="text-muted-foreground text-base">You haven&apos;t liked any recipes yet. </p>
-    </div>
+    </Container>
   );
 }
