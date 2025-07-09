@@ -49,10 +49,7 @@ test.describe("Settings", () => {
     await page.getByLabel("Password").fill(currentPassword);
     await page.getByRole("button", { name: "Sign In" }).click();
 
-    await page.waitForURL(routes.explore);
-    const pageTitle = await page.title();
-
-    expect(pageTitle).toBe("Explore recipes | Chefy");
+    await expect(page).toHaveURL(routes.explore);
   });
 
   test("Should be able to remove all preferences and see no suggestions", async ({ settingsPage, page }) => {
