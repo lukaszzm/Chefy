@@ -7,7 +7,7 @@ import type { UpdatePasswordPayload } from "@/features/settings/schemas/password
 import { passwordSchema } from "@/features/settings/schemas/password-schema";
 import { useAction } from "@/hooks/use-action";
 
-export const usePasswordForm = () => {
+export function usePasswordForm() {
   const form = useForm<UpdatePasswordPayload>({
     resolver: zodResolver(passwordSchema),
     defaultValues: {
@@ -29,4 +29,4 @@ export const usePasswordForm = () => {
     isPending,
     error,
   };
-};
+}

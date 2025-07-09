@@ -1,59 +1,72 @@
 import type { Metadata } from "next";
 
 import { Undo2 } from "lucide-react";
-import { redirect } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 
-import { RecipeBadges } from "@/components/recipe/recipe-badges";
-import { RecipeIngredients } from "@/components/recipe/recipe-ingredients";
-import { RecipeLabel } from "@/components/recipe/recipe-label";
+import { RecipeBadges } from "@/components/recipe/badges";
+import { RecipeIngredients } from "@/components/recipe/ingredients";
 import { BackButton } from "@/components/ui/back-button";
-import { Title } from "@/components/ui/title";
+import { Block } from "@/components/ui/block";
+import { Heading, HeadingTitle } from "@/components/ui/heading";
 import { routes } from "@/config/routes";
 import { LikesDropdownMenu } from "@/features/likes/components/dropdown-menu";
-import { validateRequest } from "@/lib/auth";
 import { getLikeRecipe } from "@/lib/db/queries/recipe";
+import { getAuthSession } from "@/lib/auth/utils";
+import { RecipeLabel } from "@/components/recipe/label";
 
-type PageProps = {
-  params: { id: string };
-};
+interface PageProps {
+  params: Promise<{ id: string }>;
+}
 
-export async function generateMetadata({ params: { id } }: PageProps): Promise<Metadata> {
-  const { user } = await validateRequest();
+export async function generateMetadata(props: PageProps): Promise<Metadata> {
+  const params = await props.params;
 
-  if (!user) {
+  const { id: likeId } = params;
+
+  const session = await getAuthSession();
+
+  if (!session) {
     return redirect(routes.signIn);
   }
 
-  const data = await getLikeRecipe(user.id, id);
+  const like = await getLikeRecipe(session.user.id, likeId);
+
+  if (!like) {
+    return notFound();
+  }
 
   return {
-    title: data?.recipe.title ?? "Recipe not found",
+    title: `${like.recipe.title} | Chefy`,
   };
 }
 
-export default async function LikePage({ params: { id } }: PageProps) {
-  const { user } = await validateRequest();
+export default async function LikedRecipePage(props: PageProps) {
+  const params = await props.params;
 
-  if (!user) {
+  const { id: likeId } = params;
+
+  const session = await getAuthSession();
+
+  if (!session) {
     return redirect(routes.signIn);
   }
 
-  const data = await getLikeRecipe(user.id, id);
+  const data = await getLikeRecipe(session.user.id, likeId);
 
   if (!data) {
-    return redirect(routes.likes);
+    return notFound();
   }
 
   return (
     <>
-      <div className="flex w-full items-center justify-between">
+      <Heading className="flex w-full items-center justify-between">
         <div className="space-y-2">
-          <Title>{data.recipe.title}</Title>
+          <HeadingTitle>{data.recipe.title}</HeadingTitle>
           <RecipeBadges area={data.recipe.area.name} category={data.recipe.category.name} />
         </div>
         <LikesDropdownMenu recipe={data.recipe} deleteWithRedirect />
-      </div>
-      <div className="flex flex-col space-y-4">
+      </Heading>
+      <Block className="flex flex-col">
         <RecipeLabel>Ingredients</RecipeLabel>
         <RecipeIngredients ingredients={data.recipe.ingredients} />
         <RecipeLabel>Instructions</RecipeLabel>
@@ -62,7 +75,7 @@ export default async function LikePage({ params: { id } }: PageProps) {
           <span>Back</span>
           <Undo2 />
         </BackButton>
-      </div>
+      </Block>
     </>
   );
 }

@@ -1,29 +1,41 @@
-import type { InferSelectModel } from "drizzle-orm";
+import type { account, area, category, recipe, session, user } from "@/lib/db/schema";
 
-import type { area, category, recipe, user } from "@/lib/db/schema";
+export type Recipe = typeof recipe.$inferSelect;
+export type RecipePayload = typeof recipe.$inferInsert;
 
-export type Recipe = InferSelectModel<typeof recipe>;
+export type Area = typeof area.$inferSelect;
+export type AreaPayload = typeof area.$inferInsert;
 
-export type Area = InferSelectModel<typeof area>;
+export type Category = typeof category.$inferSelect;
+export type CategoryPayload = typeof category.$inferInsert;
 
-export type Category = InferSelectModel<typeof category>;
+export type User = typeof user.$inferSelect;
+export type UserPayload = typeof user.$inferInsert;
 
-export type User = InferSelectModel<typeof user>;
+export type SafeUser = Omit<User, "password">;
 
-export type RecipeWithRelations = {
+export type Session = typeof session.$inferSelect;
+export type SessionPayload = typeof session.$inferInsert;
+
+export type Account = typeof account.$inferSelect;
+export type AccountPayload = typeof account.$inferInsert;
+
+export type SessionValidationResult = { session: Session; user: SafeUser } | { session: null; user: null };
+
+export interface RecipeWithRelations {
   recipe: Recipe;
   category: Category;
   area: Area;
-};
+}
 
-export type ActionError = {
+export interface ActionError {
   ok: false;
   error: string;
-};
+}
 
-export type ActionSuccess<T> = {
+export interface ActionSuccess<T> {
   ok: true;
   data: T;
-};
+}
 
-export type ActionResponse<T> = ActionError | ActionSuccess<T>;
+export type ActionResponse<T = unknown> = ActionError | ActionSuccess<T>;

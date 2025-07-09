@@ -2,27 +2,27 @@
 
 import { ActionError } from "@/components/ui/action-error";
 import { BadgeCheckbox } from "@/components/ui/badge-checkbox";
-import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
+import { SubmitButton } from "@/features/settings/components/submit-button";
 import { usePreferencesForm } from "@/features/settings/hooks/use-preferences-form";
 import type { PreferenceValue } from "@/features/settings/schemas/preferences-schema";
 import type { ActionResponse } from "@/types";
 
 interface UpdatePreferencesFormProps {
-  allValues: Array<PreferenceValue>;
-  preferredValues: Array<PreferenceValue>;
+  allValues: PreferenceValue[];
+  preferredValues: PreferenceValue[];
   keyName: string;
   actionOnSubmit: (values: string[]) => Promise<ActionResponse<string>>;
   submitText: string;
 }
 
-export const UpdatePreferencesForm = ({
+export function UpdatePreferencesForm({
   allValues,
   preferredValues,
   keyName,
   actionOnSubmit,
   submitText,
-}: UpdatePreferencesFormProps) => {
+}: UpdatePreferencesFormProps) {
   const { form, fields, onSubmit, error, isPending } = usePreferencesForm({
     allValues,
     preferredValues,
@@ -56,13 +56,9 @@ export const UpdatePreferencesForm = ({
             );
           })}
         </fieldset>
-
         <ActionError error={error} />
-
-        <Button className="min-w-40" disabled={!form.formState.isDirty} isLoading={isPending} type="submit">
-          {submitText}
-        </Button>
+        <SubmitButton aria-label={submitText} disabled={!form.formState.isDirty} isLoading={isPending} />
       </form>
     </Form>
   );
-};
+}

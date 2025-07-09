@@ -1,24 +1,20 @@
 "use server";
 
-import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
+import { getAuthErrorMessage } from "@/features/auth/utils/get-auth-error-message";
+import { auth } from "@/lib/auth";
+import { ActionResponse } from "@/types";
+import { errorResponse, successResponse } from "@/utils/action-response";
+import { headers } from "next/headers";
 
-import { routes } from "@/config/routes";
-import { lucia, validateRequest } from "@/lib/auth";
-import { errorResponse } from "@/utils/action-response";
+export async function signOut(): Promise<ActionResponse> {
+  try {
+    await auth.api.signOut({
+      headers: await headers(),
+    });
 
-export const signOut = async () => {
-  const { session } = await validateRequest();
-
-  if (!session) {
-    return errorResponse("No session found");
+    return successResponse("Sign out successful");
+  } catch (error) {
+    const errorMessage = getAuthErrorMessage(error);
+    return errorResponse(errorMessage);
   }
-
-  await lucia.invalidateSession(session.id);
-
-  const sessionCookie = lucia.createBlankSessionCookie();
-
-  cookies().set(sessionCookie.name, sessionCookie.value, sessionCookie.attributes);
-
-  return redirect(routes.home);
-};
+}

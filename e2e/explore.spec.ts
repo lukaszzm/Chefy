@@ -1,9 +1,14 @@
 import { routes } from "@/config/routes";
+import { resetUserReactions } from "@/lib/db/queries/user";
 import { expect, test } from "playwright/fixtures";
 
 test.describe.configure({ mode: "parallel" });
 
 test.describe("Explore", () => {
+  test.afterEach(async ({ user }) => {
+    await resetUserReactions(user.id);
+  });
+
   test("Should change recipe after dislike", async ({ explorePage }) => {
     const firstRecipeTitle = await explorePage.getRecipeTitle();
 

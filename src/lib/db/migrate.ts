@@ -5,7 +5,7 @@ import { Pool } from "pg";
 
 dotenv.config();
 
-const main = async () => {
+async function main() {
   const client = new Pool({
     connectionString: process.env.DATABASE_URL,
   });
@@ -20,7 +20,8 @@ const main = async () => {
   } catch (error) {
     console.error("Error migrating database:", error);
   }
+
   await client.end();
-};
+}
 
 main();

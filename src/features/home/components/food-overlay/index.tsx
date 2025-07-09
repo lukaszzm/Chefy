@@ -2,7 +2,7 @@ import { Donut, Pizza, Salad, Soup } from "lucide-react";
 
 import { FoodItem } from "@/features/home/components/food-overlay/food-item";
 
-export const FoodOverlay = () => {
+export function FoodOverlay() {
   return (
     <>
       <FoodItem color="orange" icon={<Pizza />} position="topLeft" rotation="right" />
@@ -11,4 +11,4 @@ export const FoodOverlay = () => {
       <FoodItem color="green" icon={<Salad />} position="bottomRight" rotation="right" />
     </>
   );
-};
+}

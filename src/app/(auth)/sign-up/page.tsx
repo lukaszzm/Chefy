@@ -7,7 +7,7 @@ import { CredentialsHeading } from "@/features/auth/components/credentials-headi
 import { SignUpForm } from "@/features/auth/components/sign-up-form";
 
 export const metadata: Metadata = {
-  title: "Chefy - Create an account",
+  title: "Create an account | Chefy",
 };
 
 export default function SignUpPage() {

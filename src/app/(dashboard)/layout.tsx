@@ -2,21 +2,24 @@ import type { PropsWithChildren } from "react";
 
 import { redirect } from "next/navigation";
 
-import { Sidebar } from "@/components/sidebar";
+import { DashboardSidebar } from "@/components/layout/dashboard-sidebar";
 import { routes } from "@/config/routes";
-import { validateRequest } from "@/lib/auth";
+import { getAuthSession } from "@/lib/auth/utils";
+import { SidebarWrapper } from "@/components/ui/sidebar";
 
 export default async function DashboardLayout({ children }: PropsWithChildren) {
-  const { user } = await validateRequest();
+  const session = await getAuthSession();
 
-  if (!user) {
+  if (!session) {
     return redirect(routes.signIn);
   }
 
   return (
-    <div className="grid h-dvh w-full overflow-auto pb-16 sm:pb-0 sm:pl-20 lg:pl-52">
-      <Sidebar />
-      <main className="flex h-full w-full bg-background sm:items-center sm:justify-center">{children}</main>
-    </div>
+    <SidebarWrapper>
+      <DashboardSidebar />
+      <main className="lg:bg-background pb-mobile-nav-height lg:pl-sidebar-width flex size-full min-h-svh flex-col pl-0 lg:items-center lg:pb-0">
+        {children}
+      </main>
+    </SidebarWrapper>
   );
 }

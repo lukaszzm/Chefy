@@ -5,7 +5,7 @@ import { signUp } from "@/features/auth/actions/sign-up";
 import { signUpSchema, type SignUpPayload } from "@/features/auth/schemas/sign-up-schema";
 import { useAction } from "@/hooks/use-action";
 
-export const useSignUp = () => {
+export function useSignUp() {
   const form = useForm<SignUpPayload>({
     resolver: zodResolver(signUpSchema),
     defaultValues: {
@@ -23,4 +23,4 @@ export const useSignUp = () => {
   const onSubmit = form.handleSubmit(execute);
 
   return { form, onSubmit, error, isPending };
-};
+}

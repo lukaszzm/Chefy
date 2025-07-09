@@ -2,10 +2,10 @@ import { LikesListItem } from "@/features/likes/components/list/list-item";
 import type { RecipeWithRelations } from "@/types";
 
 interface LikesListProps {
-  data: Array<RecipeWithRelations>;
+  data: RecipeWithRelations[];
 }
 
-export const LikesList = ({ data }: LikesListProps) => {
+export function LikesList({ data }: LikesListProps) {
   return (
     <ul className="space-y-3">
       {data.map(({ recipe, ...rest }) => (
@@ -13,4 +13,4 @@ export const LikesList = ({ data }: LikesListProps) => {
       ))}
     </ul>
   );
-};
+}

@@ -1,7 +1,9 @@
-export const LikesNotFound = () => {
+import { Container } from "@/components/ui/container";
+
+export function LikesNotFound() {
   return (
-    <div className="flex h-96 flex-col items-center justify-center">
-      <p className="text-base text-muted-foreground">You haven&apos;t liked any recipes yet. </p>
-    </div>
+    <Container className="flex h-72 flex-col items-center justify-center">
+      <p className="text-muted-foreground text-base">You haven&apos;t liked any recipes yet. </p>
+    </Container>
   );
-};
+}

@@ -1,7 +1,5 @@
 "use client";
 
-import type { PropsWithChildren } from "react";
-
 import {
   AlertDialog,
   AlertDialogAction,
@@ -16,7 +14,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { useSignOut } from "@/features/auth/hooks/use-sign-out";
 
-export const SignOutDialog = ({ children }: PropsWithChildren) => {
+export function SignOutDialog({ children }: React.PropsWithChildren) {
   const { signOut, isPending } = useSignOut();
 
   return (
@@ -38,4 +36,4 @@ export const SignOutDialog = ({ children }: PropsWithChildren) => {
       </AlertDialogContent>
     </AlertDialog>
   );
-};
+}

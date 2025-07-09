@@ -1,13 +1,13 @@
 "use client";
 
 import { ActionError } from "@/components/ui/action-error";
-import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { SettingsContainer } from "@/features/settings/components/settings-container";
+import { SubmitButton } from "@/features/settings/components/submit-button";
 import { usePasswordForm } from "@/features/settings/hooks/use-password-form";
 
-export const UpdatePasswordForm = () => {
+export function UpdatePasswordForm() {
   const { form, onSubmit, isPending, error } = usePasswordForm();
 
   return (
@@ -40,19 +40,10 @@ export const UpdatePasswordForm = () => {
               </FormItem>
             )}
           />
-
           <ActionError error={error} />
-
-          <Button
-            className="w-full min-w-36 sm:w-auto"
-            disabled={!form.formState.isDirty}
-            isLoading={isPending}
-            type="submit"
-          >
-            Update Password
-          </Button>
+          <SubmitButton aria-label="Update Password" disabled={!form.formState.isDirty} isLoading={isPending} />
         </form>
       </Form>
     </SettingsContainer>
   );
-};
+}

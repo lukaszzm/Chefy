@@ -3,24 +3,24 @@
 import { revalidatePath } from "next/cache";
 
 import { routes } from "@/config/routes";
-import { validateRequest } from "@/lib/auth";
 import { createLikeRecipe } from "@/lib/db/queries/recipe";
 import { errorResponse, successResponse } from "@/utils/action-response";
+import { getAuthSession } from "@/lib/auth/utils";
 
-export const likeRecipe = async (recipeId: string) => {
-  const { user } = await validateRequest();
+export async function likeRecipe(recipeId: string) {
+  const session = await getAuthSession();
 
-  if (!user) {
+  if (!session) {
     return errorResponse("Unauthorized");
   }
 
   try {
-    await createLikeRecipe(user.id, recipeId);
-  } catch (error) {
+    await createLikeRecipe(session.user.id, recipeId);
+  } catch {
     return errorResponse("Failed to like recipe");
   }
 
   revalidatePath(routes.explore);
   revalidatePath(routes.likes);
   return successResponse("Recipe liked");
-};
+}

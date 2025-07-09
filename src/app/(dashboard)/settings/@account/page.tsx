@@ -1,19 +1,19 @@
+import { routes } from "@/config/routes";
 import { UpdateNameForm } from "@/features/settings/components/update-name-form";
 import { UpdatePasswordForm } from "@/features/settings/components/update-password-form";
-import { authUser } from "@/lib/auth";
-import { getUserById } from "@/lib/db/queries/user";
+import { getAuthSession } from "@/lib/auth/utils";
+import { redirect } from "next/navigation";
 
 export default async function AccountPage() {
-  const { id } = await authUser();
-  const user = await getUserById(id);
+  const session = await getAuthSession();
 
-  if (!user) {
-    throw new Error("User not found");
+  if (!session) {
+    redirect(routes.signIn);
   }
 
   return (
     <>
-      <UpdateNameForm defaultName={user.name} />
+      <UpdateNameForm defaultName={session.user.name} />
       <UpdatePasswordForm />
     </>
   );

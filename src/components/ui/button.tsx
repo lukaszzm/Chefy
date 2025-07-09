@@ -1,5 +1,3 @@
-import * as React from "react";
-
 import { Slot } from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";
 
@@ -7,7 +5,7 @@ import { LoadingSpinner } from "@/components/ui/loading-spinner";
 import { cn } from "@/utils/cn";
 
 const buttonVariants = cva(
-  "inline-flex gap-2 items-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
+  "inline-flex gap-2 items-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
   {
     variants: {
       variant: {
@@ -42,30 +40,50 @@ const buttonVariants = cva(
   }
 );
 
-export interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof buttonVariants> {
+interface ButtonProps extends React.ComponentProps<"button">, VariantProps<typeof buttonVariants> {
   asChild?: boolean;
+  loadingText?: string;
   isLoading?: boolean;
 }
 
-const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, items, isLoading, disabled, asChild = false, children, ...props }, ref) => {
-    const Comp = asChild ? Slot : "button";
-    const isDisabled = disabled || isLoading;
-
-    return (
-      <Comp
-        className={cn(buttonVariants({ variant, size, items, className }))}
-        disabled={isDisabled}
-        ref={ref}
-        {...props}
-      >
-        {isLoading ? <LoadingSpinner /> : children}
-      </Comp>
-    );
+function ButtonLoading({ loadingText }: Pick<ButtonProps, "loadingText">) {
+  if (!loadingText) {
+    return <LoadingSpinner />;
   }
-);
-Button.displayName = "Button";
 
-export { Button, buttonVariants };
+  return (
+    <span className="flex items-center gap-2">
+      <LoadingSpinner />
+      {loadingText}
+    </span>
+  );
+}
+
+function Button({
+  className,
+  variant,
+  size,
+  items,
+  isLoading,
+  disabled,
+  asChild = false,
+  loadingText,
+  children,
+  ...props
+}: ButtonProps) {
+  const Comp = asChild ? Slot : "button";
+  const isDisabled = disabled || isLoading;
+
+  return (
+    <Comp
+      className={cn(buttonVariants({ variant, size, items, className }))}
+      data-slot="button"
+      disabled={isDisabled}
+      {...props}
+    >
+      {isLoading ? <ButtonLoading loadingText={loadingText} /> : children}
+    </Comp>
+  );
+}
+
+export { Button, buttonVariants, type ButtonProps };

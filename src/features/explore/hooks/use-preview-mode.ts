@@ -1,6 +1,6 @@
 import { useCallback, useRef, useState } from "react";
 
-export const usePreviewMode = () => {
+export function usePreviewMode() {
   const [isPreviewMode, setIsPreviewMode] = useState(false);
   const topRef = useRef<HTMLDivElement>(null);
 
@@ -14,4 +14,4 @@ export const usePreviewMode = () => {
     toggleMode,
     topRef,
   };
-};
+}

@@ -1,6 +1,6 @@
-import { RecipeBadges } from "@/components/recipe/recipe-badges";
-import { RecipeIngredients } from "@/components/recipe/recipe-ingredients";
-import { RecipeLabel } from "@/components/recipe/recipe-label";
+import { RecipeBadges } from "@/components/recipe/badges";
+import { RecipeIngredients } from "@/components/recipe/ingredients";
+import { RecipeLabel } from "@/components/recipe/label";
 import { CardContent } from "@/components/ui/card";
 import type { Recipe } from "@/types";
 
@@ -9,7 +9,7 @@ interface ExploreCardContentProps extends Pick<Recipe, "ingredients" | "instruct
   categoryName: string;
 }
 
-export const ExploreCardContent = ({ areaName, categoryName, ingredients, instructions }: ExploreCardContentProps) => {
+export function ExploreCardContent({ areaName, categoryName, ingredients, instructions }: ExploreCardContentProps) {
   return (
     <CardContent className="mt-4 space-y-2">
       <RecipeBadges area={areaName} category={categoryName} />
@@ -19,4 +19,4 @@ export const ExploreCardContent = ({ areaName, categoryName, ingredients, instru
       <p>{instructions}</p>
     </CardContent>
   );
-};
+}

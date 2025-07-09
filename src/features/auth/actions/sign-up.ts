@@ -1,45 +1,24 @@
 "use server";
 
-import { hash } from "bcrypt";
-import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
-
-import { randomUUID } from "crypto";
-
-import { routes } from "@/config/routes";
 import type { SignUpPayload } from "@/features/auth/schemas/sign-up-schema";
-import { lucia } from "@/lib/auth";
-import { createUserWithPreferences, getUserByMail } from "@/lib/db/queries/user";
-import { errorResponse } from "@/utils/action-response";
+import { errorResponse, successResponse } from "@/utils/action-response";
+import { auth } from "@/lib/auth";
+import { ActionResponse } from "@/types";
+import { getAuthErrorMessage } from "@/features/auth/utils/get-auth-error-message";
 
-export const signUp = async (payload: SignUpPayload) => {
-  const fixedMail = payload.email.toLowerCase();
-  const existingUser = await getUserByMail(fixedMail);
-
-  if (existingUser) {
-    return errorResponse("User already exists");
-  }
-
-  const hashedPassword = await hash(payload.password, 8);
-  const userId = randomUUID();
-
+export async function signUp(payload: SignUpPayload): Promise<ActionResponse> {
   try {
-    await createUserWithPreferences({
-      id: userId,
-      name: payload.name,
-      email: fixedMail,
-      password: hashedPassword,
+    await auth.api.signUpEmail({
+      body: {
+        email: payload.email.toLowerCase(),
+        name: payload.name,
+        password: payload.password,
+      },
     });
+
+    return successResponse("Sign up successful");
   } catch (error) {
-    return errorResponse("Failed to create user");
+    const errorMessage = getAuthErrorMessage(error);
+    return errorResponse(errorMessage);
   }
-
-  const session = await lucia.createSession(userId, {
-    expiresIn: 60 * 60 * 24 * 30,
-  });
-  const sessionCookie = lucia.createSessionCookie(session.id);
-
-  cookies().set(sessionCookie.name, sessionCookie.value, sessionCookie.attributes);
-
-  return redirect(routes.explore);
-};
+}

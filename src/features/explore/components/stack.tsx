@@ -1,13 +1,13 @@
 "use client";
 
-import { AnimatePresence } from "framer-motion";
+import { AnimatePresence } from "motion/react";
 
 import { ExploreCard } from "@/features/explore/components/card";
 import { ExploreLoading } from "@/features/explore/components/loading";
 import { ExploreNotFound } from "@/features/explore/components/not-found";
 import { useRecipes } from "@/features/explore/hooks/use-recipes";
 
-export const ExploreStack = () => {
+export function ExploreStack() {
   const { recipes, isFetching } = useRecipes();
 
   return (
@@ -23,4 +23,4 @@ export const ExploreStack = () => {
       )}
     </AnimatePresence>
   );
-};
+}

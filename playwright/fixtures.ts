@@ -1,13 +1,14 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import { test as base, expect } from "playwright/fixtures/auth-worker";
 import { ExplorePage } from "playwright/fixtures/explore-page";
 import { LikesPage } from "playwright/fixtures/likes-page";
 import { SettingsPage } from "playwright/fixtures/settings-page";
 
-type PageFixtures = {
+interface PageFixtures {
   explorePage: ExplorePage;
   likesPage: LikesPage;
   settingsPage: SettingsPage;
-};
+}
 
 const test = base.extend<PageFixtures>({
   explorePage: async ({ page }, use) => {

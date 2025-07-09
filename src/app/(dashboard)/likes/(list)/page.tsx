@@ -1,24 +1,36 @@
-import { Title } from "@/components/ui/title";
 import { routes } from "@/config/routes";
 import { LikesList } from "@/features/likes/components/list";
 import { LikesNotFound } from "@/features/likes/components/not-found";
 import { LikesPagination } from "@/features/likes/components/pagination";
-import { authUser } from "@/lib/auth";
+import { getAuthSession } from "@/lib/auth/utils";
 import { getLikedRecipes } from "@/lib/db/queries/recipe";
 import { redirectWithParams } from "@/utils/redirect-with-params";
 import { safeNumber } from "@/utils/safe-number";
+import { Metadata } from "next";
+import { redirect } from "next/navigation";
+
+export const metadata: Metadata = {
+  title: "Liked recipes | Chefy",
+};
 
 interface PageProps {
-  searchParams: {
-    page?: string;
-  };
+  searchParams: Promise<{ page?: string }>;
 }
 
-export default async function LikesPage({ searchParams: { page } }: PageProps) {
-  const fixedPage = safeNumber(page);
-  const { id } = await authUser();
+export default async function LikesListPage(props: PageProps) {
+  const searchParams = await props.searchParams;
 
-  const { recipes, pageCount } = await getLikedRecipes(id, fixedPage);
+  const { page } = searchParams;
+
+  const fixedPage = safeNumber(page);
+
+  const session = await getAuthSession();
+
+  if (!session) {
+    return redirect(routes.signIn);
+  }
+
+  const { recipes, pageCount } = await getLikedRecipes(session.user.id, fixedPage);
 
   if (pageCount === 0) {
     return <LikesNotFound />;
@@ -32,7 +44,6 @@ export default async function LikesPage({ searchParams: { page } }: PageProps) {
 
   return (
     <>
-      <Title>Liked Recipes</Title>
       <LikesList data={recipes} />
       <LikesPagination lastPage={pageCount} page={fixedPage} />
     </>

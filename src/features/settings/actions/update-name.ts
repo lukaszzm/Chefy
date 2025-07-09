@@ -4,23 +4,23 @@ import { revalidatePath } from "next/cache";
 
 import { routes } from "@/config/routes";
 import type { UpdateNamePayload } from "@/features/settings/schemas/name-schema";
-import { validateRequest } from "@/lib/auth";
 import { updateUser } from "@/lib/db/queries/user";
 import { errorResponse, successResponse } from "@/utils/action-response";
+import { getAuthSession } from "@/lib/auth/utils";
 
-export const updateName = async (payload: UpdateNamePayload) => {
-  const { user: authUser } = await validateRequest();
+export async function updateName(payload: UpdateNamePayload) {
+  const session = await getAuthSession();
 
-  if (!authUser) {
+  if (!session) {
     return errorResponse("Unauthorized");
   }
 
   try {
-    await updateUser(authUser.id, { name: payload.name });
-  } catch (e) {
+    await updateUser(session.user.id, { name: payload.name });
+  } catch {
     return errorResponse("Failed to update name");
   }
 
   revalidatePath(routes.settings);
   return successResponse("Name updated successfully");
-};
+}

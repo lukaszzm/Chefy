@@ -2,7 +2,7 @@
 
 import type { ReactNode } from "react";
 
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 
 import { SwipeVariant } from "@/features/explore/config";
 import { useSwipe } from "@/features/explore/hooks/use-swipe";
@@ -16,14 +16,14 @@ interface SwipeItemProps {
   isDragEnabled: boolean;
 }
 
-export const SwipeItem = ({
+export function SwipeItem({
   children,
   onSwipeLeft,
   onSwipeRight,
   changeVariant,
   variant,
   isDragEnabled,
-}: SwipeItemProps) => {
+}: SwipeItemProps) {
   const { constraintsRef, background, x, rotate, swipeEndHandler } = useSwipe({
     onSwipeLeft,
     onSwipeRight,
@@ -41,7 +41,6 @@ export const SwipeItem = ({
     >
       <motion.div
         animate={{ scale: 1 }}
-        className="h-full"
         drag={isDragEnabled}
         dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
         dragElastic={0.3}
@@ -57,4 +56,4 @@ export const SwipeItem = ({
       </motion.div>
     </motion.div>
   );
-};
+}

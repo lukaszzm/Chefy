@@ -21,7 +21,7 @@ export class SettingsPage {
     await toastMessage.waitFor({ state: "visible" });
   }
 
-  async uncheckAllPreferences() {
+  async toggleAllPreferences() {
     const categories = await getAllCategories();
 
     for (const category of categories) {

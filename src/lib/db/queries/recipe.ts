@@ -1,3 +1,5 @@
+import { cache } from "react";
+
 import { and, asc, count, eq, inArray, notInArray, sql } from "drizzle-orm";
 
 import db from "@/lib/db";
@@ -12,7 +14,7 @@ import {
 } from "@/lib/db/schema";
 import { withPagination } from "@/utils/with-pagination";
 
-export const getLikedRecipes = async (userId: string, page = 1, pageSize = 5) => {
+export const getLikedRecipes = cache(async (userId: string, page = 1, pageSize = 5) => {
   const likesQuery = db
     .select({
       id: userLikedRecipe.recipeId,
@@ -43,9 +45,9 @@ export const getLikedRecipes = async (userId: string, page = 1, pageSize = 5) =>
     recipes: paginatedResult,
     pageCount: Math.ceil(meta[0].count / pageSize),
   };
-};
+});
 
-export const getSuggestedRecipes = async (userId: string) => {
+export const getSuggestedRecipes = cache(async (userId: string) => {
   const preferredAreas = db
     .select({
       areaId: userPreferredArea.areaId,
@@ -89,21 +91,9 @@ export const getSuggestedRecipes = async (userId: string) => {
     .innerJoin(area, eq(recipe.areaId, area.id))
     .orderBy(sql`RANDOM()`)
     .limit(10);
-};
+});
 
-export const createDislikeRecipe = async (userId: string, recipeId: string) =>
-  db.insert(userDislikedRecipe).values({
-    userId,
-    recipeId,
-  });
-
-export const createLikeRecipe = async (userId: string, recipeId: string) =>
-  db.insert(userLikedRecipe).values({
-    userId,
-    recipeId,
-  });
-
-export const getLikeRecipe = async (userId: string, recipeId: string) =>
+export const getLikeRecipe = cache(async (userId: string, recipeId: string) =>
   db.query.userLikedRecipe.findFirst({
     where: and(eq(userLikedRecipe.recipeId, recipeId), eq(userLikedRecipe.userId, userId)),
     with: {
@@ -114,9 +104,27 @@ export const getLikeRecipe = async (userId: string, recipeId: string) =>
         },
       },
     },
+  })
+);
+
+export const getFirstRecipe = cache(async () => db.query.recipe.findFirst());
+
+export async function createDislikeRecipe(userId: string, recipeId: string) {
+  return db.insert(userDislikedRecipe).values({
+    userId,
+    recipeId,
   });
+}
 
-export const getFirstRecipe = async () => db.query.recipe.findFirst();
+export async function createLikeRecipe(userId: string, recipeId: string) {
+  return db.insert(userLikedRecipe).values({
+    userId,
+    recipeId,
+  });
+}
 
-export const deleteLikeRecipe = async (userId: string, recipeId: string) =>
-  db.delete(userLikedRecipe).where(and(eq(userLikedRecipe.userId, userId), eq(userLikedRecipe.recipeId, recipeId)));
+export async function deleteLikeRecipe(userId: string, recipeId: string) {
+  return db
+    .delete(userLikedRecipe)
+    .where(and(eq(userLikedRecipe.userId, userId), eq(userLikedRecipe.recipeId, recipeId)));
+}

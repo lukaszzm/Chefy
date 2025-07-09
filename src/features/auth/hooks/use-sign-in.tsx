@@ -5,7 +5,7 @@ import { signIn } from "@/features/auth/actions/sign-in";
 import { signInSchema, type SignInPayload } from "@/features/auth/schemas/sign-in-schema";
 import { useAction } from "@/hooks/use-action";
 
-export const useSignIn = () => {
+export function useSignIn() {
   const form = useForm<SignInPayload>({
     resolver: zodResolver(signInSchema),
     mode: "onChange",
@@ -27,4 +27,4 @@ export const useSignIn = () => {
     isPending,
     error,
   };
-};
+}

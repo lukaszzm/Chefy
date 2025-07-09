@@ -1,7 +1,4 @@
-/* eslint-disable jsx-a11y/alt-text */
-import { Document, Image, Page, StyleSheet, Text } from "@react-pdf/renderer";
-
-import type { Recipe } from "@/types";
+import { Image as PDFImage, Document, Page, StyleSheet, Text } from "@react-pdf/renderer";
 
 const styles = StyleSheet.create({
   body: {
@@ -58,28 +55,39 @@ const styles = StyleSheet.create({
   },
 });
 
-interface PDFTemplateProps extends Pick<Recipe, "title" | "imageSrc" | "ingredients" | "instructions"> {}
+interface PDFTemplateProps {
+  title: string;
+  imageSrc: string;
+  ingredients: string[];
+  instructions: string;
+}
 
-export const PDFTemplate = ({ title, imageSrc, ingredients, instructions }: PDFTemplateProps) => (
-  <Document>
-    <Page style={styles.body}>
-      <Text style={styles.title}>{title}</Text>
-      <Image src={imageSrc} style={styles.image} />
+export function PDFTemplate({ title, imageSrc, ingredients, instructions }: PDFTemplateProps) {
+  return (
+    <Document>
+      <Page style={styles.body}>
+        <Text style={styles.title}>{title}</Text>
+        <PDFImage src={imageSrc} style={styles.image} />
 
-      <Text style={styles.subtitle}>Ingredients</Text>
-      {ingredients.map((el, index) => (
-        <Text key={index} style={styles.item}>
-          - {el}
+        <Text style={styles.subtitle}>Ingredients</Text>
+        {ingredients.map((el, index) => (
+          <Text key={index} style={styles.item}>
+            - {el}
+          </Text>
+        ))}
+
+        <Text style={styles.subtitle}>Instructions</Text>
+        <Text style={styles.text}>{instructions}</Text>
+
+        <Text style={styles.footer} fixed>
+          Recipe from Chefy
         </Text>
-      ))}
-
-      <Text style={styles.subtitle}>Instructions</Text>
-      <Text style={styles.text}>{instructions}</Text>
-
-      <Text style={styles.footer} fixed>
-        Recipe from Chefy
-      </Text>
-      <Text render={({ pageNumber, totalPages }) => `${pageNumber} / ${totalPages}`} style={styles.pageNumber} fixed />
-    </Page>
-  </Document>
-);
+        <Text
+          render={({ pageNumber, totalPages }) => `${pageNumber} / ${totalPages}`}
+          style={styles.pageNumber}
+          fixed
+        />
+      </Page>
+    </Document>
+  );
+}

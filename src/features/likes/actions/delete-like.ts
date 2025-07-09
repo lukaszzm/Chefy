@@ -4,33 +4,33 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
 import { routes } from "@/config/routes";
-import { validateRequest } from "@/lib/auth";
 import { deleteLikeRecipe, getLikeRecipe } from "@/lib/db/queries/recipe";
 import { errorResponse, successResponse } from "@/utils/action-response";
+import { getAuthSession } from "@/lib/auth/utils";
 
-export const deleteLike = async (recipeId: string, withRedirect: boolean) => {
-  const { user } = await validateRequest();
+export async function deleteLike(recipeId: string, withRedirect: boolean) {
+  const session = await getAuthSession();
 
-  if (!user) {
+  if (!session) {
     return errorResponse("Unauthorized");
   }
 
-  const like = await getLikeRecipe(user.id, recipeId);
+  const like = await getLikeRecipe(session.user.id, recipeId);
 
   if (!like) {
     return errorResponse("Like not found");
   }
 
-  if (like.userId !== user.id) {
+  if (like.userId !== session.user.id) {
     return errorResponse("Unauthorized");
   }
 
   try {
     await deleteLikeRecipe(like.userId, recipeId);
-  } catch (error) {
+  } catch {
     return errorResponse("Failed to delete like");
   }
 
   revalidatePath(routes.likes);
   return withRedirect ? redirect(routes.likes) : successResponse("Recipe successfully deleted from likes");
-};
+}

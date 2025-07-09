@@ -4,7 +4,7 @@ import type { SwipeVariant } from "@/features/explore/config";
 import type { RecipeWithRelations } from "@/types";
 
 export interface RecipesContextType {
-  recipes: Array<RecipeWithRelations>;
+  recipes: RecipeWithRelations[];
   isFetching: boolean;
   like: (id: string) => void;
   dislike: (id: string) => void;

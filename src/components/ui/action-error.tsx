@@ -1,18 +1,19 @@
 import { Alert, AlertDescription } from "@/components/ui/alert";
 
-interface ActionErrorProps {
+interface ActionErrorProps extends Omit<React.ComponentProps<"div">, "children"> {
   error: string | null | undefined;
-  className?: string;
 }
 
-export const ActionError = ({ error, className }: ActionErrorProps) => {
+function ActionError({ error, ...props }: ActionErrorProps) {
   if (!error) {
     return null;
   }
 
   return (
-    <Alert className={className} variant="destructive">
+    <Alert data-slot="action-error" variant="destructive" {...props}>
       <AlertDescription>{error}</AlertDescription>
     </Alert>
   );
-};
+}
+
+export { ActionError };

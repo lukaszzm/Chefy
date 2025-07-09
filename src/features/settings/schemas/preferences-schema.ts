@@ -13,4 +13,4 @@ export const preferencesSchema = z.object({
   values: z.array(preferenceSchema),
 });
 
-export type PreferencesPayload = z.infer<typeof preferencesSchema>;
+export type UpdatePreferencesPayload = z.infer<typeof preferencesSchema>;

@@ -2,7 +2,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 
 import { cn } from "@/utils/cn";
 
-const foodItemVariants = cva("absolute size-16 hidden place-items-center p-2 border rounded-lg hidden xl:grid", {
+const foodItemVariants = cva("absolute size-16 hidden place-items-center p-2 border rounded-lg xl:grid", {
   variants: {
     position: {
       topLeft: "top-0 left-0",
@@ -32,6 +32,6 @@ interface FoodItemProps extends VariantProps<typeof foodItemVariants> {
   icon: React.ReactNode;
 }
 
-export const FoodItem = ({ icon, ...props }: FoodItemProps) => {
+export function FoodItem({ icon, ...props }: FoodItemProps) {
   return <span className={cn(foodItemVariants(props))}>{icon}</span>;
-};
+}

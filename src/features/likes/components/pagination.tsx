@@ -19,7 +19,7 @@ interface LikesPaginationProps {
   lastPage: number;
 }
 
-export const LikesPagination = ({ page, lastPage }: LikesPaginationProps) => {
+export function LikesPagination({ page, lastPage }: LikesPaginationProps) {
   const searchParams = useSearchParams();
 
   const isFirstPage = page === 1;
@@ -91,4 +91,4 @@ export const LikesPagination = ({ page, lastPage }: LikesPaginationProps) => {
       </PaginationContent>
     </Pagination>
   );
-};
+}

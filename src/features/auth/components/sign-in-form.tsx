@@ -6,7 +6,7 @@ import { Form, FormLabel, FormField, FormItem, FormControl, FormMessage } from "
 import { Input } from "@/components/ui/input";
 import { useSignIn } from "@/features/auth/hooks/use-sign-in";
 
-export const SignInForm = () => {
+export function SignInForm() {
   const { form, onSubmit, isPending, error } = useSignIn();
 
   return (
@@ -46,4 +46,4 @@ export const SignInForm = () => {
       </form>
     </Form>
   );
-};
+}

@@ -4,14 +4,14 @@ import { SettingsContainer } from "@/features/settings/components/settings-conta
 import type { PreferenceValue } from "@/features/settings/schemas/preferences-schema";
 
 interface UpdateCategoryPreferencesFormProps {
-  allCategories: Array<PreferenceValue>;
-  preferredCategories: Array<PreferenceValue>;
+  allCategories: PreferenceValue[];
+  preferredCategories: PreferenceValue[];
 }
 
-export const UpdateCategoryPreferencesForm = ({
+export function UpdateCategoryPreferencesForm({
   allCategories,
   preferredCategories,
-}: UpdateCategoryPreferencesFormProps) => {
+}: UpdateCategoryPreferencesFormProps) {
   return (
     <SettingsContainer subtitle="Categories">
       <UpdatePreferencesForm
@@ -23,4 +23,4 @@ export const UpdateCategoryPreferencesForm = ({
       />
     </SettingsContainer>
   );
-};
+}

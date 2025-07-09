@@ -1,21 +1,20 @@
 "use client";
 
 import { Card } from "@/components/ui/card";
-import { ExploreCardContent } from "@/features/explore/components/card/card-content";
-import { ExploreCardFooter } from "@/features/explore/components/card/card-footer";
-import { ExploreCardHeader } from "@/features/explore/components/card/card-header";
+import { ExploreCardContent } from "@/features/explore/components/card/content";
+import { ExploreCardFooter } from "@/features/explore/components/card/footer";
+import { ExploreCardHeader } from "@/features/explore/components/card/header";
 import { SwipeItem } from "@/features/explore/components/swipe-item";
 import { usePreviewMode } from "@/features/explore/hooks/use-preview-mode";
 import { useRecipes } from "@/features/explore/hooks/use-recipes";
 import type { Recipe } from "@/types";
-import { cn } from "@/utils/cn";
 
 interface ExploreCardProps extends Omit<Recipe, "category" | "area"> {
   categoryName: string;
   areaName: string;
 }
 
-export const ExploreCard = ({
+export function ExploreCard({
   id,
   title,
   imageSrc,
@@ -23,7 +22,7 @@ export const ExploreCard = ({
   areaName,
   ingredients,
   instructions,
-}: ExploreCardProps) => {
+}: ExploreCardProps) {
   const { isPreviewMode, toggleMode, topRef } = usePreviewMode();
   const { like, dislike, swipeVariant, changeSwipeVariant } = useRecipes();
 
@@ -36,10 +35,8 @@ export const ExploreCard = ({
       onSwipeRight={() => like(id)}
     >
       <Card
-        className={cn(
-          "relative h-full max-h-screen-nav rounded-none sm:max-h-[550px] sm:max-w-sm sm:rounded-xl",
-          isPreviewMode ? "overflow-auto" : "overflow-hidden"
-        )}
+        className="h-svh-without-nav sm:max-h-card-height relative overflow-hidden rounded-none data-[preview=true]:overflow-auto sm:max-w-sm sm:rounded-xl"
+        data-preview={isPreviewMode ? "true" : undefined}
       >
         <div className="absolute top-0" ref={topRef} />
         <ExploreCardHeader imageSrc={imageSrc} title={title} />
@@ -53,4 +50,4 @@ export const ExploreCard = ({
       </Card>
     </SwipeItem>
   );
-};
+}
