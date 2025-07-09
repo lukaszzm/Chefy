@@ -54,7 +54,7 @@ export function SignUpForm() {
 
         <ErrorAlert error={error} />
         <Button className="w-full" isLoading={isPending}>
-          Create An Account
+          Create an Account
         </Button>
       </form>
     </Form>

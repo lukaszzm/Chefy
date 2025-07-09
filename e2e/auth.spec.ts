@@ -31,7 +31,7 @@ test.describe("Authentication", () => {
     await page.getByLabel("Email").fill(E2E_NEW_USER.email);
     await page.getByLabel("Password").fill(E2E_NEW_USER.password);
 
-    await page.getByRole("button", { name: "Create An Account" }).click();
+    await page.getByRole("button", { name: "Create an Account" }).click();
 
     await page.waitForURL(routes.explore);
 
