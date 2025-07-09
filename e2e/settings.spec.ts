@@ -70,8 +70,8 @@ test.describe("Settings", () => {
   });
 
   test("Should be able to select preferences and see correct suggestions", async ({ settingsPage, page }) => {
-    const selectedCategory = "Seafood";
-    const selectedArea = "Thai";
+    const selectedCategory = "Beef";
+    const selectedArea = "American";
 
     await settingsPage.gotoPreferencesTab();
     await settingsPage.toggleAllPreferences();
