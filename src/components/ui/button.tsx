@@ -42,7 +42,21 @@ const buttonVariants = cva(
 
 interface ButtonProps extends React.ComponentProps<"button">, VariantProps<typeof buttonVariants> {
   asChild?: boolean;
+  loadingText?: string;
   isLoading?: boolean;
+}
+
+function ButtonLoading({ loadingText }: Pick<ButtonProps, "loadingText">) {
+  if (!loadingText) {
+    return <LoadingSpinner />;
+  }
+
+  return (
+    <span className="flex items-center gap-2">
+      <LoadingSpinner />
+      {loadingText}
+    </span>
+  );
 }
 
 function Button({
@@ -53,6 +67,7 @@ function Button({
   isLoading,
   disabled,
   asChild = false,
+  loadingText,
   children,
   ...props
 }: ButtonProps) {
@@ -66,7 +81,7 @@ function Button({
       disabled={isDisabled}
       {...props}
     >
-      {isLoading ? <LoadingSpinner /> : children}
+      {isLoading ? <ButtonLoading loadingText={loadingText} /> : children}
     </Comp>
   );
 }

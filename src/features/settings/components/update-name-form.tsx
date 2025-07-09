@@ -1,10 +1,10 @@
 "use client";
 
 import { ActionError } from "@/components/ui/action-error";
-import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { SettingsContainer } from "@/features/settings/components/settings-container";
+import { SubmitButton } from "@/features/settings/components/submit-button";
 import { useNameForm } from "@/features/settings/hooks/use-name-form";
 
 interface UpdateNameFormProps {
@@ -31,17 +31,8 @@ export function UpdateNameForm({ defaultName }: UpdateNameFormProps) {
               </FormItem>
             )}
           />
-
           <ActionError error={error} />
-
-          <Button
-            className="w-full min-w-32 sm:w-auto"
-            disabled={!form.formState.isDirty}
-            isLoading={isPending}
-            type="submit"
-          >
-            Update Name
-          </Button>
+          <SubmitButton aria-label="Update Name" disabled={!form.formState.isDirty} isLoading={isPending} />
         </form>
       </Form>
     </SettingsContainer>

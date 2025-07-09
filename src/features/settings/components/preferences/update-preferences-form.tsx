@@ -2,8 +2,8 @@
 
 import { ActionError } from "@/components/ui/action-error";
 import { BadgeCheckbox } from "@/components/ui/badge-checkbox";
-import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
+import { SubmitButton } from "@/features/settings/components/submit-button";
 import { usePreferencesForm } from "@/features/settings/hooks/use-preferences-form";
 import type { PreferenceValue } from "@/features/settings/schemas/preferences-schema";
 import type { ActionResponse } from "@/types";
@@ -56,12 +56,8 @@ export function UpdatePreferencesForm({
             );
           })}
         </fieldset>
-
         <ActionError error={error} />
-
-        <Button className="min-w-40" disabled={!form.formState.isDirty} isLoading={isPending} type="submit">
-          {submitText}
-        </Button>
+        <SubmitButton aria-label={submitText} disabled={!form.formState.isDirty} isLoading={isPending} />
       </form>
     </Form>
   );

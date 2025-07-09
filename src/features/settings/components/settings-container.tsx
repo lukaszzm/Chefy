@@ -1,11 +1,10 @@
 import { cn } from "@/utils/cn";
 
-export function SettingsContainer({
-  className,
-  subtitle,
-  children,
-  ...props
-}: React.ComponentProps<"div"> & { subtitle: string }) {
+interface SettingsContainerProps extends React.ComponentProps<"div"> {
+  subtitle: string;
+}
+
+export function SettingsContainer({ className, subtitle, children, ...props }: SettingsContainerProps) {
   return (
     <div
       className={cn("border-border w-full rounded-md border p-4", className)}
