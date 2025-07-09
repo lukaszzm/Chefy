@@ -3,40 +3,43 @@ import tseslint from "typescript-eslint";
 import reactPlugin from "eslint-plugin-react";
 import jsxA11yPlugin from "eslint-plugin-jsx-a11y";
 import reactHooksPlugin from "eslint-plugin-react-hooks";
-import nextPlugin from "@next/eslint-plugin-next";
+import pluginNext from "@next/eslint-plugin-next";
 import importPlugin from "eslint-plugin-import";
 import playwrightPlugin from "eslint-plugin-playwright";
+import parser from "@typescript-eslint/parser";
 
-const eslintConfig = [
+export default [
   {
-    name: "custom/eslint/recommended",
-    files: ["**/*.mjs", "**/*.ts", "**/*.tsx"],
+    ignores: [".next/", ".vscode/", "public/", "node_modules/", "dist/"],
+  },
+
+  {
+    name: "ESLint Config - base",
+    files: ["**/*.{js,mjs,cjs,ts,jsx,tsx}"],
     ...eslintPlugin.configs.recommended,
     rules: {
       "no-unused-vars": "off",
     },
   },
-];
 
-const ignoresConfig = [
   {
-    name: "custom/eslint/ignores",
-    ignores: [".next/", ".vscode/", "public/"],
-  },
-];
-
-const tseslintConfig = tseslint.config(
-  {
-    name: "custom/typescript-eslint/recommended",
-    files: ["**/*.ts", "**/*.tsx"],
-    extends: [...tseslint.configs.recommended, ...tseslint.configs.stylistic],
+    name: "ESLint Config - typescript",
+    files: ["**/*.{ts,tsx}"],
     languageOptions: {
+      parser,
       parserOptions: {
-        projectService: true,
+        ecmaVersion: "latest",
+        sourceType: "module",
+        project: true,
         tsconfigRootDir: import.meta.dirname,
       },
     },
+    plugins: {
+      "@typescript-eslint": tseslint.plugin,
+    },
     rules: {
+      ...tseslint.configs.recommended.rules,
+      ...tseslint.configs.stylistic.rules,
       "@typescript-eslint/no-unused-vars": [
         "error",
         {
@@ -47,44 +50,108 @@ const tseslintConfig = tseslint.config(
       ],
     },
   },
-  {
-    files: ["**/*.mjs"],
-    ...tseslint.configs.disableTypeChecked,
-    name: "custom/typescript-eslint/disable-type-checked",
-  }
-);
 
-const nextConfig = [
   {
-    name: "custom/next/config",
-    files: ["src/**/*.js", "src/**/*.jsx", "src/**/*.ts", "src/**/*.tsx"],
+    name: "ESLint Config - import",
+    files: ["**/*.{js,jsx,ts,tsx}"],
+    languageOptions: {
+      parser,
+      parserOptions: {
+        ecmaVersion: "latest",
+        sourceType: "module",
+      },
+    },
     plugins: {
-      react: reactPlugin,
-      "jsx-a11y": jsxA11yPlugin,
-      "react-hooks": reactHooksPlugin,
-      "@next/next": nextPlugin,
       import: importPlugin,
     },
+    rules: {
+      ...importPlugin.configs.recommended.rules,
+      "import/no-anonymous-default-export": "warn",
+    },
+    settings: {
+      "import/resolver": {
+        typescript: true,
+        node: true,
+      },
+    },
+  },
+
+  {
+    name: "ESLint Config - react",
+    files: ["**/*.{js,jsx,ts,tsx}"],
+    ignores: ["e2e/**/*", "playwright/**/*", "**/*.{spec,test}.{js,ts}"],
     languageOptions: {
+      parser,
       parserOptions: {
+        ecmaVersion: "latest",
+        sourceType: "module",
         ecmaFeatures: {
           jsx: true,
         },
       },
     },
+    plugins: {
+      react: reactPlugin,
+      "react-hooks": reactHooksPlugin,
+    },
     rules: {
       ...reactPlugin.configs.recommended.rules,
       ...reactPlugin.configs["jsx-runtime"].rules,
       ...reactHooksPlugin.configs.recommended.rules,
-      ...nextPlugin.configs.recommended.rules,
-      ...nextPlugin.configs["core-web-vitals"].rules,
-      ...importPlugin.configs.recommended.rules,
-      ...jsxA11yPlugin.configs.strict.rules,
-      "import/no-anonymous-default-export": "warn",
-      "react/no-unknown-property": "off",
       "react/react-in-jsx-scope": "off",
       "react/prop-types": "off",
+      "react/no-unknown-property": "off",
       "react/jsx-no-target-blank": "off",
+    },
+    settings: {
+      react: {
+        version: "detect",
+      },
+    },
+  },
+
+  {
+    name: "ESLint Config - nextjs",
+    languageOptions: {
+      parser,
+      parserOptions: {
+        ecmaVersion: "latest",
+        sourceType: "module",
+        ecmaFeatures: {
+          jsx: true,
+        },
+      },
+    },
+    plugins: {
+      "@next/next": pluginNext,
+    },
+    files: ["**/*.{js,mjs,cjs,ts,jsx,tsx}"],
+    ignores: ["e2e/**/*", "playwright/**/*", "**/*.{spec,test}.{js,ts}"],
+    rules: {
+      ...pluginNext.configs.recommended.rules,
+      ...pluginNext.configs["core-web-vitals"].rules,
+    },
+  },
+
+  {
+    name: "ESLint Config - accessibility",
+    files: ["**/*.{js,jsx,ts,tsx}"],
+    ignores: ["e2e/**/*", "playwright/**/*", "**/*.{spec,test}.{js,ts}"],
+    languageOptions: {
+      parser,
+      parserOptions: {
+        ecmaVersion: "latest",
+        sourceType: "module",
+        ecmaFeatures: {
+          jsx: true,
+        },
+      },
+    },
+    plugins: {
+      "jsx-a11y": jsxA11yPlugin,
+    },
+    rules: {
+      ...jsxA11yPlugin.configs.strict.rules,
       "jsx-a11y/alt-text": ["warn", { elements: ["img"], img: ["Image"] }],
       "jsx-a11y/aria-props": "warn",
       "jsx-a11y/aria-proptypes": "warn",
@@ -92,23 +159,18 @@ const nextConfig = [
       "jsx-a11y/role-has-required-aria-props": "warn",
       "jsx-a11y/role-supports-aria-props": "warn",
     },
-    settings: {
-      react: {
-        version: "detect",
-      },
-      "import/resolver": {
-        typescript: {
-          alwaysTryTypes: true,
-        },
+  },
+
+  {
+    name: "ESLint Config - playwright",
+    files: ["e2e/**/*", "playwright/**/*", "**/*.{spec,test}.{js,ts}"],
+    languageOptions: {
+      parser,
+      parserOptions: {
+        ecmaVersion: "latest",
+        sourceType: "module",
       },
     },
-  },
-];
-
-const playwrightConfig = [
-  {
-    name: "custom/playwright/config",
-    files: ["e2e/**", "/playwright/**"],
     plugins: {
       playwright: playwrightPlugin,
     },
@@ -124,7 +186,3 @@ const playwrightConfig = [
     },
   },
 ];
-
-const finalConfig = [...eslintConfig, ...ignoresConfig, ...tseslintConfig, ...nextConfig, ...playwrightConfig];
-
-export default finalConfig;
