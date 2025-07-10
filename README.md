@@ -1,5 +1,5 @@
 <div align="center">
-    <img src="public/Chefy_logo.png" alt="Logo" width="80" height="80">
+    <img src="public/chefy-logo.png" alt="Logo" width="80" height="80">
   <h1 align="center">Chefy</h3>
   <p align="center">
     An app that allows you to swipe and explore cooking recipes from around the world
@@ -7,50 +7,52 @@
 </div>
 
 <p align="center">
-  <img align="center" alt="preview of explore page" width="30%" src="public/Chefy_explore_recipes.jpeg">
-  <img align="center" alt="preview of likes page" width="30%" src="public/Chefy_liked_recipes.jpeg">
-  <img align="center" alt="preview of settings page" width="30%" src="public/Chefy_settings.jpeg">
+  <img align="center" alt="Explore page preview" width="30%" src="public/chefy-explore.png">
+  <img align="center" alt="Likes page preview" width="30%" src="public/chefy-liked-recipes.png">
+  <img align="center" alt="Settings page preview" width="30%" src="public/chefy-settings.png">
 </p>
 
-## 📰 About The Project
+## 📰 About the Project
 
-<p> It's a web application built using NextJS 14 that enables users to discover recipes from different parts of the world. Additionally, users can save their favorite recipes and export them to PDF files!
+Chefy is a modern web app built with Next.js (App Router) that helps users discover global recipes in a fun, swipeable interface. Save your favorites, customize your preferences, and even export recipes to PDF for offline use.
 
-## ️🔴 Live Preview
+## 🔴 Live Demo
 
-Click on this <b>[link](https://chefy-lm.vercel.app/)</b> to see a live app preview.
+👉 [Click here to try Chefy](https://chefy-lm.vercel.app)
 
-## 🔐 Login Credentials
+### 🔐 Test Credentials
 
-**Email:** test@test.com  
-**Password:** testtest
+You can check the app using test account:
 
-**OR**
+- Email: **test@test.com**
+- Password: **testtest**
 
-You can <b>register</b> with your own credentials!
+Or simply sign up with your own credentials.
 
-## ⚙ Features
+## ⚙️ Features
 
-- User authentication
-- Explore recipes with selected preferences
-- Browse liked recipes
-- Export recipes to PDF
-- Customize preferences
+- ✅ User authentication
+- ✅ Swipe and explore global recipes
+- ✅ Save and manage liked recipes
+- ✅ Export recipes to PDF
+- ✅ Customize dietary preferences
 
-## 🧑‍💻 Built With
+## 🧑‍💻 Tech Stack
 
-<p>
-<img src="https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white" alt="nextJS" />
-<img src="https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white" alt="PostgreSQL" />
-<img src="https://img.shields.io/badge/Prisma-3982CE?style=for-the-badge&logo=Prisma&logoColor=white" alt="prisma" />
-</p>
+Built with:
 
-## 📋 Future plans
+[![Next.js](https://img.shields.io/badge/Next.js-black?logo=next.js&logoColor=white)](#)
+[![shadcn/ui](https://img.shields.io/badge/shadcn%2Fui-000?logo=shadcnui&logoColor=fff)](#)
+[![TailwindCSS](https://img.shields.io/badge/Tailwind%20CSS-%2338B2AC.svg?logo=tailwind-css&logoColor=white)](#)
+[![Drizzle](https://img.shields.io/badge/Drizzle-C5F74F?logo=drizzle&logoColor=000)](#)
+[![Postgres](https://img.shields.io/badge/Postgres-%23316192.svg?logo=postgresql&logoColor=white)](#)
 
-- Add Dark Mode compatibility
-- Include the ability for users to add new recipes
-- Add translations (polish language)
+## 📋 Upcoming Features
 
-## 🗃️ Data source
+- 🌙 Dark Mode support
+- 🌐 Internationalization (i18n)
+- ➕ Add your own recipes
 
-Data collected from https://www.themealdb.com/
+## 🗃️ Data Source
+
+All recipe data is fetched from TheMealDB.
