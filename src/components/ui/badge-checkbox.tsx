@@ -6,10 +6,17 @@ interface BadgeCheckboxProps extends InputProps {
   label: string;
 }
 
-function BadgeCheckbox({ id, label, className, ...props }: BadgeCheckboxProps) {
+function BadgeCheckbox({ ref, id, label, className, ...props }: BadgeCheckboxProps) {
   return (
     <>
-      <input className={cn("peer hidden", className)} data-slot="badge-checkbox" id={id} type="checkbox" {...props} />
+      <input
+        ref={ref}
+        id={id}
+        data-slot="badge-checkbox"
+        type="checkbox"
+        className={cn("peer hidden", className)}
+        {...props}
+      />
       <Label
         className="border-border text-muted-foreground hover:bg-muted/20 peer-checked:border-primary peer-checked:text-primary hover:peer-checked:bg-primary/5 inline-flex cursor-pointer rounded-lg border bg-transparent px-3.5 py-1.5 text-center text-xs transition duration-150 ease-in-out"
         htmlFor={id}

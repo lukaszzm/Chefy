@@ -1,17 +1,16 @@
-import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Alert, AlertDescription, AlertProps } from "@/components/ui/alert";
 
-interface ErrorAlertProps {
+interface ErrorAlertProps extends Omit<AlertProps, "children" | "variant"> {
   error: string | null | undefined;
-  className?: string;
 }
 
-function ErrorAlert({ error, className }: ErrorAlertProps) {
+function ErrorAlert({ error, ref, className, ...props }: ErrorAlertProps) {
   if (!error) {
     return null;
   }
 
   return (
-    <Alert className={className} variant="destructive" data-slot="error-alert">
+    <Alert ref={ref} variant="destructive" data-slot="error-alert" className={className} {...props}>
       <AlertDescription>{error}</AlertDescription>
     </Alert>
   );

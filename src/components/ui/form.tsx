@@ -21,7 +21,7 @@ const FormFieldContext = createContext<FormFieldContextValue>({} as FormFieldCon
 function FormField<
   TFieldValues extends FieldValues = FieldValues,
   TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
->({ ...props }: ControllerProps<TFieldValues, TName>) {
+>(props: ControllerProps<TFieldValues, TName>) {
   return (
     <FormFieldContext.Provider value={{ name: props.name }}>
       <Controller {...props} />
@@ -59,51 +59,53 @@ interface FormItemContextValue {
 
 const FormItemContext = createContext<FormItemContextValue>({} as FormItemContextValue);
 
-function FormItem({ className, ...props }: React.ComponentProps<"div">) {
+function FormItem({ ref, className, ...props }: React.ComponentProps<"div">) {
   const id = useId();
 
   return (
     <FormItemContext.Provider value={{ id }}>
-      <div className={cn("space-y-2", className)} data-slot="form-item" {...props} />
+      <div ref={ref} data-slot="form-item" className={cn("space-y-2", className)} {...props} />
     </FormItemContext.Provider>
   );
 }
 
-function FormLabel(props: React.ComponentProps<typeof LabelPrimitive.Root>) {
+function FormLabel({ ref, ...props }: React.ComponentProps<typeof LabelPrimitive.Root>) {
   const { formItemId } = useFormField();
 
-  return <Label data-slot="form-label" htmlFor={formItemId} {...props} />;
+  return <Label ref={ref} data-slot="form-label" htmlFor={formItemId} {...props} />;
 }
 
-function FormControl({ className, ...props }: React.ComponentProps<typeof Slot>) {
+function FormControl({ ref, className, ...props }: React.ComponentProps<typeof Slot>) {
   const { error, formItemId, formDescriptionId, formMessageId } = useFormField();
 
   return (
     <Slot
+      ref={ref}
+      id={formItemId}
       aria-describedby={!error ? `${formDescriptionId}` : `${formDescriptionId} ${formMessageId}`}
       aria-invalid={!!error}
-      className={cn(error && "border-destructive", className)}
       data-slot="form-control"
-      id={formItemId}
+      className={cn(error && "border-destructive", className)}
       {...props}
     />
   );
 }
 
-function FormDescription({ className, ...props }: React.ComponentProps<"p">) {
+function FormDescription({ ref, className, ...props }: React.ComponentProps<"p">) {
   const { formDescriptionId } = useFormField();
 
   return (
     <p
-      className={cn("text-muted-foreground text-sm", className)}
-      data-slot="form-description"
+      ref={ref}
       id={formDescriptionId}
+      data-slot="form-description"
+      className={cn("text-muted-foreground text-sm", className)}
       {...props}
     />
   );
 }
 
-function FormMessage({ className, children, ...props }: React.ComponentProps<"p">) {
+function FormMessage({ ref, className, children, ...props }: React.ComponentProps<"p">) {
   const { error, formMessageId } = useFormField();
   const body = error ? String(error?.message) : children;
 
@@ -113,9 +115,10 @@ function FormMessage({ className, children, ...props }: React.ComponentProps<"p"
 
   return (
     <p
-      className={cn("text-destructive text-sm font-medium", className)}
-      data-slot="form-message"
+      ref={ref}
       id={formMessageId}
+      data-slot="form-message"
+      className={cn("text-destructive text-sm font-medium", className)}
       {...props}
     >
       {body}

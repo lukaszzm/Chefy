@@ -3,13 +3,15 @@ import { LoaderCircle } from "lucide-react";
 
 import { cn } from "@/utils/cn";
 
-function LoadingSpinner({ className, ...props }: LucideProps) {
+interface LoadingSpinnerProps extends Omit<LucideProps, "ref">, Pick<React.ComponentProps<"div">, "ref"> {}
+
+function LoadingSpinner({ ref, className, ...props }: LoadingSpinnerProps) {
   return (
-    <div className="flex items-center justify-center" role="status" data-slot="loading-spinner">
+    <div ref={ref} role="status" data-slot="loading-spinner" className="flex items-center justify-center">
       <LoaderCircle className={cn("size-4 animate-spin", className)} {...props} />
       <span className="sr-only">Loading...</span>
     </div>
   );
 }
 
-export { LoadingSpinner };
+export { LoadingSpinner, type LoadingSpinnerProps };

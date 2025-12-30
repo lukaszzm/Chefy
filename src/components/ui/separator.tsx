@@ -5,6 +5,7 @@ import * as SeparatorPrimitive from "@radix-ui/react-separator";
 import { cn } from "@/utils/cn";
 
 function Separator({
+  ref,
   className,
   orientation = "horizontal",
   decorative = true,
@@ -12,14 +13,11 @@ function Separator({
 }: React.ComponentProps<typeof SeparatorPrimitive.Root>) {
   return (
     <SeparatorPrimitive.Root
-      className={cn(
-        "bg-border shrink-0",
-        orientation === "horizontal" ? "h-[1px] w-full" : "h-full w-[1px]",
-        className
-      )}
+      ref={ref}
       data-slot="separator"
       decorative={decorative}
       orientation={orientation}
+      className={cn("bg-border shrink-0", orientation === "horizontal" ? "h-px w-full" : "h-full w-px", className)}
       {...props}
     />
   );

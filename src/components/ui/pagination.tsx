@@ -5,24 +5,32 @@ import type { ButtonProps } from "@/components/ui/button";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/utils/cn";
 
-function Pagination({ className, ...props }: React.ComponentProps<"nav">) {
+function Pagination({ ref, className, ...props }: React.ComponentProps<"nav">) {
   return (
     <nav
-      aria-label="pagination"
-      className={cn("mx-auto flex w-full justify-center", className)}
+      ref={ref}
       data-slot="pagination"
       role="navigation"
+      aria-label="pagination"
+      className={cn("mx-auto flex w-full justify-center", className)}
       {...props}
     />
   );
 }
 
-function PaginationContent({ className, ...props }: React.ComponentProps<"ul">) {
-  return <ul className={cn("flex flex-row items-center gap-1", className)} data-slot="pagination-content" {...props} />;
+function PaginationContent({ ref, className, ...props }: React.ComponentProps<"ul">) {
+  return (
+    <ul
+      ref={ref}
+      data-slot="pagination-content"
+      className={cn("flex flex-row items-center gap-1", className)}
+      {...props}
+    />
+  );
 }
 
-function PaginationItem(props: React.ComponentProps<"li">) {
-  return <li data-slot="pagination-item" {...props} />;
+function PaginationItem({ ref, ...props }: React.ComponentProps<"li">) {
+  return <li ref={ref} data-slot="pagination-item" {...props} />;
 }
 
 interface PaginationLinkProps extends Pick<ButtonProps, "size">, React.ComponentProps<typeof Link> {
@@ -30,9 +38,12 @@ interface PaginationLinkProps extends Pick<ButtonProps, "size">, React.Component
   disabled?: boolean;
 }
 
-function PaginationLink({ className, isActive, size = "icon", disabled, ...props }: PaginationLinkProps) {
+function PaginationLink({ ref, className, isActive, disabled, size = "icon", ...props }: PaginationLinkProps) {
   return (
     <Link
+      ref={ref}
+      data-slot="pagination-link"
+      tabIndex={disabled ? -1 : undefined}
       aria-current={isActive ? "page" : undefined}
       aria-disabled={disabled}
       className={cn(
@@ -43,20 +54,19 @@ function PaginationLink({ className, isActive, size = "icon", disabled, ...props
         className,
         disabled && "pointer-events-none opacity-50"
       )}
-      data-slot="pagination-link"
-      tabIndex={disabled ? -1 : undefined}
       {...props}
     />
   );
 }
 
-function PaginationPrevious({ className, ...props }: React.ComponentProps<typeof PaginationLink>) {
+function PaginationPrevious({ ref, className, ...props }: React.ComponentProps<typeof PaginationLink>) {
   return (
     <PaginationLink
-      aria-label="Go to previous page"
-      className={cn("min-w-0 gap-1 sm:min-w-20 sm:pl-2.5", className)}
+      ref={ref}
       data-slot="pagination-previous"
       size="default"
+      aria-label="Go to previous page"
+      className={cn("min-w-0 gap-1 sm:min-w-20 sm:pl-2.5", className)}
       {...props}
     >
       <ChevronLeft className="size-4" />
@@ -65,13 +75,14 @@ function PaginationPrevious({ className, ...props }: React.ComponentProps<typeof
   );
 }
 
-function PaginationNext({ className, ...props }: React.ComponentProps<typeof PaginationLink>) {
+function PaginationNext({ ref, className, ...props }: React.ComponentProps<typeof PaginationLink>) {
   return (
     <PaginationLink
-      aria-label="Go to next page"
-      className={cn("min-w-0 gap-1 sm:min-w-20 sm:pr-2.5", className)}
+      ref={ref}
       data-slot="pagination-next"
       size="default"
+      aria-label="Go to next page"
+      className={cn("min-w-0 gap-1 sm:min-w-20 sm:pr-2.5", className)}
       {...props}
     >
       <span className="sr-only sm:not-sr-only">Next</span>
@@ -80,11 +91,12 @@ function PaginationNext({ className, ...props }: React.ComponentProps<typeof Pag
   );
 }
 
-function PaginationEllipsis({ className, ...props }: React.ComponentProps<"span">) {
+function PaginationEllipsis({ ref, className, ...props }: React.ComponentProps<"span">) {
   return (
     <span
-      className={cn("flex h-9 w-9 items-center justify-center", className)}
+      ref={ref}
       data-slot="pagination-ellipsis"
+      className={cn("flex h-9 w-9 items-center justify-center", className)}
       aria-hidden
       {...props}
     >

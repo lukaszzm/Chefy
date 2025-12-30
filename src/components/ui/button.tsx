@@ -5,7 +5,7 @@ import { LoadingSpinner } from "@/components/ui/loading-spinner";
 import { cn } from "@/utils/cn";
 
 const buttonVariants = cva(
-  "inline-flex gap-2 items-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
+  "inline-flex gap-2 items-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 cursor-pointer",
   {
     variants: {
       variant: {
@@ -60,6 +60,7 @@ function ButtonLoading({ loadingText }: Pick<ButtonProps, "loadingText">) {
 }
 
 function Button({
+  ref,
   className,
   variant,
   size,
@@ -76,9 +77,10 @@ function Button({
 
   return (
     <Comp
-      className={cn(buttonVariants({ variant, size, items, className }))}
+      ref={ref}
       data-slot="button"
       disabled={isDisabled}
+      className={cn(buttonVariants({ variant, size, items, className }))}
       {...props}
     >
       {isLoading ? <ButtonLoading loadingText={loadingText} /> : children}

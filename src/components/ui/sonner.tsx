@@ -3,17 +3,19 @@
 import { Toaster as Sonner } from "sonner";
 
 import { useMobile } from "@/hooks/use-mobile";
+import { cn } from "@/utils/cn";
 
-type ToasterProps = React.ComponentProps<typeof Sonner>;
+interface ToasterProps extends React.ComponentProps<typeof Sonner> {}
 
-function Toaster({ ...props }: ToasterProps) {
+function Toaster({ ref, className, ...props }: ToasterProps) {
   const isMobile = useMobile();
 
   return (
     <Sonner
-      className="toaster group"
-      position={isMobile ? "top-center" : "bottom-right"}
+      ref={ref}
       data-slot="toaster"
+      className={cn("toaster group", className)}
+      position={isMobile ? "top-center" : "bottom-right"}
       toastOptions={{
         classNames: {
           toast:
@@ -28,4 +30,4 @@ function Toaster({ ...props }: ToasterProps) {
   );
 }
 
-export { Toaster };
+export { Toaster, type ToasterProps };

@@ -7,14 +7,15 @@ import { cn } from "@/utils/cn";
 
 type CheckboxProps = React.ComponentProps<typeof CheckboxPrimitive.Root>;
 
-function Checkbox({ className, ...props }: CheckboxProps) {
+function Checkbox({ ref, className, ...props }: CheckboxProps) {
   return (
     <CheckboxPrimitive.Root
+      ref={ref}
+      data-slot="checkbox"
       className={cn(
         "peer border-primary ring-offset-background focus-visible:ring-ring data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground h-4 w-4 shrink-0 rounded-sm border focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-hidden disabled:cursor-not-allowed disabled:opacity-50",
         className
       )}
-      data-slot="checkbox"
       {...props}
     >
       <CheckboxPrimitive.Indicator className="flex items-center justify-center text-current">
