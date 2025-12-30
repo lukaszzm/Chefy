@@ -6,11 +6,12 @@ import { cva } from "class-variance-authority";
 
 import { cn } from "@/utils/cn";
 
-function SidebarWrapper({ className, children, ...props }: React.ComponentProps<"div">) {
+function SidebarWrapper({ ref, className, children, ...props }: React.ComponentProps<"div">) {
   return (
     <div
-      className={cn("group/sidebar-wrapper flex min-h-svh w-full", className)}
+      ref={ref}
       data-slot="sidebar-wrapper"
+      className={cn("group/sidebar-wrapper flex min-h-svh w-full", className)}
       {...props}
     >
       {children}
@@ -18,11 +19,12 @@ function SidebarWrapper({ className, children, ...props }: React.ComponentProps<
   );
 }
 
-function Sidebar({ className, children, ...props }: React.ComponentProps<"div">) {
+function Sidebar({ ref, className, children, ...props }: React.ComponentProps<"div">) {
   return (
     <div
-      className={cn("lg:w-sidebar-width fixed bottom-0 z-10 flex w-full lg:inset-y-0 lg:right-0 lg:left-0", className)}
+      ref={ref}
       data-slot="sidebar"
+      className={cn("lg:w-sidebar-width fixed bottom-0 z-10 flex w-full lg:inset-y-0 lg:right-0 lg:left-0", className)}
       {...props}
     >
       <div
@@ -35,92 +37,107 @@ function Sidebar({ className, children, ...props }: React.ComponentProps<"div">)
   );
 }
 
-function SidebarHeader({ className, ...props }: React.ComponentProps<"div">) {
+function SidebarHeader({ ref, className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
-      className={cn("hidden flex-col gap-2 p-2 pt-3 lg:flex", className)}
-      data-sidebar="header"
+      ref={ref}
       data-slot="sidebar-header"
+      data-sidebar="header"
+      className={cn("hidden flex-col gap-2 p-2 pt-3 lg:flex", className)}
       {...props}
     />
   );
 }
 
-function SidebarFooter({ className, ...props }: React.ComponentProps<"div">) {
-  return <div className={cn("hidden flex-col gap-2 p-2 pb-3 lg:flex", className)} data-sidebar="footer" {...props} />;
-}
-
-function SidebarContent({ className, ...props }: React.ComponentProps<"div">) {
+function SidebarFooter({ ref, className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
-      className={cn("flex min-h-0 flex-1 flex-col gap-2 overflow-auto", className)}
+      ref={ref}
+      data-slot="sidebar-footer"
+      data-sidebar="footer"
+      className={cn("hidden flex-col gap-2 p-2 pb-3 lg:flex", className)}
+      {...props}
+    />
+  );
+}
+
+function SidebarContent({ ref, className, ...props }: React.ComponentProps<"div">) {
+  return (
+    <div
+      ref={ref}
       data-sidebar="content"
       data-slot="sidebar-content"
+      className={cn("flex min-h-0 flex-1 flex-col gap-2 overflow-auto", className)}
       {...props}
     />
   );
 }
 
-function SidebarGroup({ className, ...props }: React.ComponentProps<"div">) {
+function SidebarGroup({ ref, className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
-      className={cn("relative flex w-full min-w-0 flex-col p-2", className)}
+      ref={ref}
       data-sidebar="group"
       data-slot="sidebar-group"
+      className={cn("relative flex w-full min-w-0 flex-col p-2", className)}
       {...props}
     />
   );
 }
 
-function SidebarGroupLabel({ className, ...props }: React.ComponentProps<"div">) {
+function SidebarGroupLabel({ ref, className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
+      ref={ref}
+      data-sidebar="group-label"
+      data-slot="sidebar-group-label"
       className={cn(
         "text-sidebar-foreground/70 ring-sidebar-ring flex h-8 shrink-0 items-center rounded-md px-2 text-sm font-medium outline-none focus-visible:ring-2 [&>svg]:size-4 [&>svg]:shrink-0",
         className
       )}
-      data-sidebar="group-label"
-      data-slot="sidebar-group-label"
       {...props}
     />
   );
 }
 
-function SidebarGroupContent({ className, ...props }: React.ComponentProps<"div">) {
+function SidebarGroupContent({ ref, className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
-      className={cn("w-full p-0.5 text-sm", className)}
+      ref={ref}
       data-sidebar="group-content"
       data-slot="sidebar-group-content"
+      className={cn("w-full p-0.5 text-sm", className)}
       {...props}
     />
   );
 }
 
-function SidebarMenu({ className, ...props }: React.ComponentProps<"ul">) {
+function SidebarMenu({ ref, className, ...props }: React.ComponentProps<"ul">) {
   return (
     <ul
-      className={cn("flex w-full min-w-0 flex-row justify-center gap-1 lg:flex-col", className)}
+      ref={ref}
       data-sidebar="menu"
       data-slot="sidebar-menu"
+      className={cn("flex w-full min-w-0 flex-row justify-center gap-1 lg:flex-col", className)}
       {...props}
     />
   );
 }
 
-function SidebarMenuItem({ className, ...props }: React.ComponentProps<"li">) {
+function SidebarMenuItem({ ref, className, ...props }: React.ComponentProps<"li">) {
   return (
     <li
-      className={cn("group/menu-item relative flex-1", className)}
+      ref={ref}
       data-sidebar="menu-item"
       data-slot="sidebar-menu-item"
+      className={cn("group/menu-item relative flex-1", className)}
       {...props}
     />
   );
 }
 
 const sidebarMenuButtonVariants = cva(
-  "peer/menu-button px-3 py-5 flex font-medium justify-center sm:justify-start [&>span]:sr-only sm:[&>span]:not-sr-only w-full items-center gap-2 overflow-hidden rounded-md p-2 text-left text-sm outline-none ring-sidebar-ring hover:bg-sidebar-accent hover:text-sidebar-accent-foreground focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 group-has-[[data-sidebar=menu-action]]/menu-item:pr-8 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:bg-sidebar-primary data-[active=true]:font-medium data-[active=true]:text-sidebar-primary-foreground  data-[state=open]:hover:bg-sidebar-accent data-[state=open]:hover:text-sidebar-accent [&>span:last-child]:truncate [&>svg]:size-5 sm:[&>svg]:size-4.5 lg:[&>svg]:size-4 [&>svg]:shrink-0",
+  "peer/menu-button px-3 py-5 flex font-medium justify-center sm:justify-start [&>span]:sr-only sm:[&>span]:not-sr-only w-full items-center gap-2 overflow-hidden rounded-md p-2 text-left text-sm outline-none ring-sidebar-ring hover:bg-sidebar-accent hover:text-sidebar-accent-foreground focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 group-has-data-[sidebar=menu-action]/menu-item:pr-8 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:bg-sidebar-primary data-[active=true]:font-medium data-[active=true]:text-sidebar-primary-foreground  data-[state=open]:hover:bg-sidebar-accent data-[state=open]:hover:text-sidebar-accent [&>span:last-child]:truncate [&>svg]:size-5 sm:[&>svg]:size-4.5 lg:[&>svg]:size-4 [&>svg]:shrink-0 cursor-pointer",
   {
     variants: {
       variant: {
@@ -142,29 +159,30 @@ const sidebarMenuButtonVariants = cva(
 );
 
 interface SidebarMenuButtonProps
-  extends React.ComponentProps<"button">,
-    VariantProps<typeof sidebarMenuButtonVariants> {
+  extends React.ComponentProps<"button">, VariantProps<typeof sidebarMenuButtonVariants> {
   asChild?: boolean;
   isActive?: boolean;
 }
 
 function SidebarMenuButton({
+  ref,
+  className,
   asChild = false,
   isActive = false,
   variant = "default",
   size = "default",
-  className,
   ...props
 }: SidebarMenuButtonProps) {
   const Comp = asChild ? Slot : "button";
 
   return (
     <Comp
-      className={cn(sidebarMenuButtonVariants({ variant, size }), className)}
+      ref={ref}
       data-active={isActive}
       data-sidebar="menu-button"
       data-size={size}
       data-slot="sidebar-menu-button"
+      className={cn(sidebarMenuButtonVariants({ variant, size }), className)}
       {...props}
     />
   );

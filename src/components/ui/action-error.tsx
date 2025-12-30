@@ -4,13 +4,13 @@ interface ActionErrorProps extends Omit<React.ComponentProps<"div">, "children">
   error: string | null | undefined;
 }
 
-function ActionError({ error, ...props }: ActionErrorProps) {
+function ActionError({ ref, error, ...props }: ActionErrorProps) {
   if (!error) {
     return null;
   }
 
   return (
-    <Alert data-slot="action-error" variant="destructive" {...props}>
+    <Alert ref={ref} data-slot="action-error" variant="destructive" {...props}>
       <AlertDescription>{error}</AlertDescription>
     </Alert>
   );
