@@ -10,7 +10,7 @@ import { useSwipe } from "@/features/explore/hooks/use-swipe";
 interface SwipeItemProps {
   onSwipeLeft: () => void;
   onSwipeRight: () => void;
-  changeVariant: (_variant: SwipeVariant) => void;
+  changeVariant: (variant: SwipeVariant) => void;
   variant: SwipeVariant;
   children: ReactNode;
   isDragEnabled: boolean;
@@ -24,7 +24,7 @@ export function SwipeItem({
   variant,
   isDragEnabled,
 }: SwipeItemProps) {
-  const { constraintsRef, background, x, rotate, swipeEndHandler } = useSwipe({
+  const { constraintsRef, background, x, rotate, swipeHandler, swipeEndHandler } = useSwipe({
     onSwipeLeft,
     onSwipeRight,
     changeVariant,
@@ -50,6 +50,7 @@ export function SwipeItem({
           transition: { duration: 0.4 },
         }}
         style={{ x, rotate }}
+        onDrag={swipeHandler}
         onDragEnd={swipeEndHandler}
       >
         {children}
