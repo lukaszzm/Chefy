@@ -1,6 +1,6 @@
 import type { Page } from "@playwright/test";
 
-import { routes } from "@/config/routes";
+import { Routes } from "@/config/routes";
 import { getAllAreas } from "@/lib/db/queries/area";
 import { getAllCategories } from "@/lib/db/queries/category";
 
@@ -8,7 +8,7 @@ export class SettingsPage {
   constructor(public readonly page: Page) {}
 
   async goto() {
-    await this.page.goto(routes.settings);
+    await this.page.goto(Routes.Settings);
   }
 
   async gotoPreferencesTab() {

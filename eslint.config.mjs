@@ -10,7 +10,7 @@ import parser from "@typescript-eslint/parser";
 
 export default [
   {
-    ignores: [".next/", ".vscode/", "public/", "node_modules/", "dist/"],
+    ignores: [".next/", ".vscode/", "public/", "node_modules/", "dist/", "playwright-report/"],
   },
 
   {
@@ -40,6 +40,7 @@ export default [
     rules: {
       ...tseslint.configs.recommended.rules,
       ...tseslint.configs.stylistic.rules,
+      "@typescript-eslint/consistent-type-imports": "error",
       "@typescript-eslint/no-unused-vars": [
         "error",
         {
@@ -65,7 +66,14 @@ export default [
       import: importPlugin,
     },
     rules: {
-      ...importPlugin.configs.recommended.rules,
+      "import/no-unresolved": "error",
+      "import/named": "error",
+      "import/default": "error",
+      "import/namespace": "error",
+      "import/export": "error",
+      "import/no-named-as-default": "warn",
+      "import/no-named-as-default-member": "warn",
+      "import/no-duplicates": "warn",
       "import/no-anonymous-default-export": "warn",
     },
     settings: {

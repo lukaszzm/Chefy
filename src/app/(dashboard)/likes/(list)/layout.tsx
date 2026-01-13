@@ -1,10 +1,8 @@
-import type { PropsWithChildren } from "react";
-
 import { Block } from "@/components/ui/block";
 import { Container } from "@/components/ui/container";
 import { Heading, HeadingTitle } from "@/components/ui/heading";
 
-export default function LikesListLayout({ children }: PropsWithChildren) {
+export default function LikesListLayout({ children }: React.PropsWithChildren) {
   return (
     <Container>
       <Heading>

@@ -1,5 +1,5 @@
 import { createLikeRecipe, deleteLikeRecipe, getFirstRecipe } from "@/lib/db/queries/recipe";
-import { Recipe } from "@/types";
+import type { Recipe } from "@/types";
 
 export async function createTestLike(userId: string): Promise<Recipe> {
   const recipe = await getFirstRecipe();

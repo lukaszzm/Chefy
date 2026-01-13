@@ -8,27 +8,22 @@ import { RecipeIngredients } from "@/components/recipe/ingredients";
 import { BackButton } from "@/components/ui/back-button";
 import { Block } from "@/components/ui/block";
 import { Heading, HeadingTitle } from "@/components/ui/heading";
-import { routes } from "@/config/routes";
+import { Routes } from "@/config/routes";
 import { LikesDropdownMenu } from "@/features/likes/components/dropdown-menu";
 import { getLikeRecipe } from "@/lib/db/queries/recipe";
 import { getAuthSession } from "@/lib/auth/utils";
 import { RecipeLabel } from "@/components/recipe/label";
 
-interface PageProps {
-  params: Promise<{ id: string }>;
-}
+type LikedRecipePageProps = PageProps<typeof Routes.Like>;
 
-export async function generateMetadata(props: PageProps): Promise<Metadata> {
-  const params = await props.params;
-
-  const { id: likeId } = params;
-
+export async function generateMetadata({ params }: LikedRecipePageProps): Promise<Metadata> {
   const session = await getAuthSession();
 
   if (!session) {
-    return redirect(routes.signIn);
+    return redirect(Routes.SignIn);
   }
 
+  const { id: likeId } = await params;
   const like = await getLikeRecipe(session.user.id, likeId);
 
   if (!like) {
@@ -40,17 +35,14 @@ export async function generateMetadata(props: PageProps): Promise<Metadata> {
   };
 }
 
-export default async function LikedRecipePage(props: PageProps) {
-  const params = await props.params;
-
-  const { id: likeId } = params;
-
+export default async function LikedRecipePage({ params }: LikedRecipePageProps) {
   const session = await getAuthSession();
 
   if (!session) {
-    return redirect(routes.signIn);
+    return redirect(Routes.SignIn);
   }
 
+  const { id: likeId } = await params;
   const data = await getLikeRecipe(session.user.id, likeId);
 
   if (!data) {

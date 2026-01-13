@@ -3,7 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
-import { routes } from "@/config/routes";
+import { Routes } from "@/config/routes";
 import { deleteLikeRecipe, getLikeRecipe } from "@/lib/db/queries/recipe";
 import { errorResponse, successResponse } from "@/utils/action-response";
 import { getAuthSession } from "@/lib/auth/utils";
@@ -31,6 +31,6 @@ export async function deleteLike(recipeId: string, withRedirect: boolean) {
     return errorResponse("Failed to delete like");
   }
 
-  revalidatePath(routes.likes);
-  return withRedirect ? redirect(routes.likes) : successResponse("Recipe successfully deleted from likes");
+  revalidatePath(Routes.Likes);
+  return withRedirect ? redirect(Routes.Likes) : successResponse("Recipe successfully deleted from likes");
 }

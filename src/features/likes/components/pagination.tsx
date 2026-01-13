@@ -11,7 +11,7 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
-import { routes } from "@/config/routes";
+import { Routes } from "@/config/routes";
 import { dynamicRoute } from "@/utils/dynamic-route";
 
 interface LikesPaginationProps {
@@ -31,13 +31,13 @@ export function LikesPagination({ page, lastPage }: LikesPaginationProps) {
         <PaginationItem>
           <PaginationPrevious
             disabled={isFirstPage}
-            href={dynamicRoute(routes.likes, searchParams, "page", (page - 1).toString())}
+            href={dynamicRoute(Routes.Likes, searchParams, "page", (page - 1).toString())}
           />
         </PaginationItem>
 
         {page > 2 && (
           <PaginationItem>
-            <PaginationLink href={dynamicRoute(routes.likes, searchParams, "page", "1")}>{1}</PaginationLink>
+            <PaginationLink href={dynamicRoute(Routes.Likes, searchParams, "page", "1")}>{1}</PaginationLink>
           </PaginationItem>
         )}
 
@@ -49,21 +49,21 @@ export function LikesPagination({ page, lastPage }: LikesPaginationProps) {
 
         {!isFirstPage && (
           <PaginationItem>
-            <PaginationLink href={dynamicRoute(routes.likes, searchParams, "page", (page - 1).toString())}>
+            <PaginationLink href={dynamicRoute(Routes.Likes, searchParams, "page", (page - 1).toString())}>
               {page - 1}
             </PaginationLink>
           </PaginationItem>
         )}
 
         <PaginationItem>
-          <PaginationLink href={dynamicRoute(routes.likes, searchParams, "page", page.toString())} isActive>
+          <PaginationLink href={dynamicRoute(Routes.Likes, searchParams, "page", page.toString())} isActive>
             {page}
           </PaginationLink>
         </PaginationItem>
 
         {!isLastPage && (
           <PaginationItem>
-            <PaginationLink href={dynamicRoute(routes.likes, searchParams, "page", (page + 1).toString())}>
+            <PaginationLink href={dynamicRoute(Routes.Likes, searchParams, "page", (page + 1).toString())}>
               {page + 1}
             </PaginationLink>
           </PaginationItem>
@@ -77,7 +77,7 @@ export function LikesPagination({ page, lastPage }: LikesPaginationProps) {
 
         {page < lastPage - 1 && (
           <PaginationItem>
-            <PaginationLink href={dynamicRoute(routes.likes, searchParams, "page", lastPage.toString())}>
+            <PaginationLink href={dynamicRoute(Routes.Likes, searchParams, "page", lastPage.toString())}>
               {lastPage}
             </PaginationLink>
           </PaginationItem>
@@ -85,7 +85,7 @@ export function LikesPagination({ page, lastPage }: LikesPaginationProps) {
         <PaginationItem>
           <PaginationNext
             disabled={lastPage === page}
-            href={dynamicRoute(routes.likes, searchParams, "page", (page + 1).toString())}
+            href={dynamicRoute(Routes.Likes, searchParams, "page", (page + 1).toString())}
           />
         </PaginationItem>
       </PaginationContent>

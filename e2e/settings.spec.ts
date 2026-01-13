@@ -1,4 +1,4 @@
-import { routes } from "@/config/routes";
+import { Routes } from "@/config/routes";
 import { setUserDefaultPreferences } from "@/lib/db/queries/user";
 import { expect, test } from "playwright/fixtures";
 
@@ -24,16 +24,16 @@ test.describe("Settings", () => {
     const signOutConfirm = page.getByRole("button", { name: "Sign Out" });
     await signOutConfirm.click();
 
-    await page.waitForURL(routes.signIn);
+    await page.waitForURL(Routes.SignIn);
 
     await page.getByLabel("Email").fill(email);
     await page.getByLabel("Password").fill(newPassword);
     await page.getByRole("button", { name: "Sign In" }).click();
 
-    await page.waitForURL(routes.explore);
+    await page.waitForURL(Routes.Discover);
 
     // back to the original password
-    await page.goto(routes.settings);
+    await page.goto(Routes.Settings);
     await page.getByLabel("Current Password").fill(newPassword);
     await page.getByLabel("New Password").fill(currentPassword);
     await page.getByRole("button", { name: "Update Password" }).click();
@@ -43,13 +43,13 @@ test.describe("Settings", () => {
     await signOutButton.click();
     await signOutConfirm.click();
 
-    await page.waitForURL(routes.signIn);
+    await page.waitForURL(Routes.SignIn);
 
     await page.getByLabel("Email").fill(email);
     await page.getByLabel("Password").fill(currentPassword);
     await page.getByRole("button", { name: "Sign In" }).click();
 
-    await expect(page).toHaveURL(routes.explore);
+    await expect(page).toHaveURL(Routes.Discover);
   });
 
   test("Should be able to remove all preferences and see no suggestions", async ({ settingsPage, page }) => {
@@ -62,7 +62,7 @@ test.describe("Settings", () => {
     await page.getByRole("button", { name: "Update Areas" }).click();
     await settingsPage.waitForToast("Preferred areas updated successfully");
 
-    await page.goto(routes.explore);
+    await page.goto(Routes.Discover);
 
     const noSuggestionsText = page.getByText("No recipes found.");
 
@@ -85,7 +85,7 @@ test.describe("Settings", () => {
     await page.getByRole("button", { name: "Update Areas" }).click();
     await settingsPage.waitForToast("Preferred areas updated successfully");
 
-    await page.goto(routes.explore);
+    await page.goto(Routes.Discover);
 
     const categoryLabel = page.getByText(selectedCategory).last();
     const areaLabel = page.getByText(selectedArea).last();

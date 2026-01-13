@@ -1,4 +1,4 @@
-import { routes } from "@/config/routes";
+import { Routes } from "@/config/routes";
 import { UpdateAreaPreferencesForm } from "@/features/settings/components/preferences/update-area-preferences-form";
 import { UpdateCategoryPreferencesForm } from "@/features/settings/components/preferences/update-category-preferences-form";
 import { getAuthSession } from "@/lib/auth/utils";
@@ -10,7 +10,7 @@ export default async function PreferencesPage() {
   const session = await getAuthSession();
 
   if (!session) {
-    return redirect(routes.signIn);
+    return redirect(Routes.SignIn);
   }
 
   const [allCategories, preferredCategories, allAreas, preferredAreas] = await Promise.all([

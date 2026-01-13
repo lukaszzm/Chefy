@@ -4,11 +4,9 @@ import { Block } from "@/components/ui/block";
 import { Container } from "@/components/ui/container";
 import { Heading, HeadingTitle } from "@/components/ui/heading";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import type { Routes } from "@/config/routes";
 
-interface SettingsLayoutProps {
-  account: React.ReactNode;
-  preferences: React.ReactNode;
-}
+type SettingsLayoutProps = LayoutProps<typeof Routes.Settings>;
 
 export const metadata: Metadata = {
   title: "Settings | Chefy",

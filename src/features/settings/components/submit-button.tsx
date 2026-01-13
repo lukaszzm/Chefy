@@ -1,4 +1,5 @@
-import { Button, ButtonProps } from "@/components/ui/button";
+import type { ButtonProps } from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
 
 export function SubmitButton({ children, ...props }: ButtonProps) {
   return (

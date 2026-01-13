@@ -1,4 +1,4 @@
-import { routes } from "@/config/routes";
+import { Routes } from "@/config/routes";
 import { slugRoute } from "@/utils/slug-route";
 import { expect, test } from "playwright/fixtures";
 
@@ -8,7 +8,7 @@ test.describe("Likes", () => {
   test("Should redirect to recipe page after click on Details", async ({ page, like, likesPage }) => {
     await likesPage.clickDetails(like.title);
 
-    await page.waitForURL(slugRoute(routes.like, { id: like.id }));
+    await page.waitForURL(slugRoute(Routes.Like, { id: like.id }));
 
     const recipeTitle = page.getByRole("heading", { name: like.title });
     const recipeInstructions = page.getByText(like.instructions);

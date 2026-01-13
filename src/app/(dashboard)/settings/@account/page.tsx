@@ -1,4 +1,4 @@
-import { routes } from "@/config/routes";
+import { Routes } from "@/config/routes";
 import { UpdateNameForm } from "@/features/settings/components/update-name-form";
 import { UpdatePasswordForm } from "@/features/settings/components/update-password-form";
 import { getAuthSession } from "@/lib/auth/utils";
@@ -8,7 +8,7 @@ export default async function AccountPage() {
   const session = await getAuthSession();
 
   if (!session) {
-    redirect(routes.signIn);
+    redirect(Routes.SignIn);
   }
 
   return (

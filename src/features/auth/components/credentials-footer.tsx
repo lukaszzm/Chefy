@@ -1,9 +1,10 @@
+import type { Route } from "next";
 import Link from "next/link";
 
 interface CredentialsFooterProps {
   text: string;
   linkText: string;
-  href: string;
+  href: Route;
 }
 
 export function CredentialsFooter({ text, linkText, href }: CredentialsFooterProps) {

@@ -1,7 +1,7 @@
 import { Block } from "@/components/ui/block";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
-import { routes } from "@/config/routes";
+import { Routes } from "@/config/routes";
 import Link from "next/link";
 
 export default function LikedRecipeNotFound() {
@@ -12,7 +12,7 @@ export default function LikedRecipeNotFound() {
           Could not find the liked recipe. It may have been removed or does not exist.
         </p>
         <Button variant="outline" asChild>
-          <Link href={routes.likes}>Go back to your Liked Recipes</Link>
+          <Link href={Routes.Likes}>Go back to your Liked Recipes</Link>
         </Button>
       </Block>
     </Container>

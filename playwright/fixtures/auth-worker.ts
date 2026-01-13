@@ -1,9 +1,10 @@
 import { test as base } from "@playwright/test";
 
-import { routes } from "@/config/routes";
+import { Routes } from "@/config/routes";
 import { getUserByMail } from "@/lib/db/queries/user";
 import type { Recipe, User } from "@/types";
-import { E2E_ACCOUNTS, E2EAccount } from "playwright/config/accounts";
+import type { E2EAccount } from "playwright/config/accounts";
+import { E2E_ACCOUNTS } from "playwright/config/accounts";
 import { createTestLike, removeTestLike } from "playwright/utils";
 
 interface WorkerFixtures {
@@ -53,14 +54,14 @@ export const test = base.extend<object, WorkerFixtures>({
   ],
 
   page: async ({ page, account }, use) => {
-    await page.goto(routes.signIn);
+    await page.goto(Routes.SignIn);
 
     await page.getByLabel("Email").fill(account.email);
     await page.getByLabel("Password").fill(account.password);
 
     await page.getByRole("button", { name: "Sign In" }).click();
 
-    await page.waitForURL(routes.explore);
+    await page.waitForURL(Routes.Discover);
 
     await use(page);
   },

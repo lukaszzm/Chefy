@@ -7,7 +7,7 @@ import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem } from "@/components/ui/dropdown-menu";
-import { routes } from "@/config/routes";
+import { Routes } from "@/config/routes";
 import { deleteLike } from "@/features/likes/actions/delete-like";
 import { PDFTemplate } from "@/features/likes/components/pdf-template";
 import { generatePdf } from "@/features/likes/utils/generate-pdf";
@@ -42,7 +42,7 @@ export function LikesDropdownMenu({ withDetailsLink, deleteWithRedirect, recipe 
       <DropdownMenuContent>
         {withDetailsLink && (
           <DropdownMenuItem asChild>
-            <Link href={slugRoute(routes.like, { id: recipe.id })}>Details</Link>
+            <Link href={slugRoute(Routes.Like, { id: recipe.id })}>Details</Link>
           </DropdownMenuItem>
         )}
 

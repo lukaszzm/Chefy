@@ -1,4 +1,5 @@
-import { Alert, AlertDescription, AlertProps } from "@/components/ui/alert";
+import type { AlertProps } from "@/components/ui/alert";
+import { Alert, AlertDescription } from "@/components/ui/alert";
 
 interface ErrorAlertProps extends Omit<AlertProps, "children" | "variant"> {
   error: string | null | undefined;

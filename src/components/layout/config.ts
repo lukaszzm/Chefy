@@ -1,7 +1,8 @@
 import { Globe, Heart, Settings } from "lucide-react";
 
-import { Route, routes } from "@/config/routes";
-import { ForwardRefExoticComponent } from "react";
+import { Routes } from "@/config/routes";
+import type { ForwardRefExoticComponent } from "react";
+import type { Route } from "next";
 
 export interface DashboardSidebarLink {
   title: string;
@@ -11,18 +12,18 @@ export interface DashboardSidebarLink {
 
 export const dashboardItems = [
   {
-    title: "Explore",
-    href: routes.explore,
+    title: "Discover",
+    href: Routes.Discover,
     Icon: Globe,
   },
   {
     title: "Likes",
-    href: routes.likes,
+    href: Routes.Likes,
     Icon: Heart,
   },
   {
     title: "Settings",
-    href: routes.settings,
+    href: Routes.Settings,
     Icon: Settings,
   },
 ] as const satisfies readonly DashboardSidebarLink[];

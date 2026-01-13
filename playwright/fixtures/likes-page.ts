@@ -1,12 +1,12 @@
 import type { Page } from "@playwright/test";
 
-import { routes } from "@/config/routes";
+import { Routes } from "@/config/routes";
 
 export class LikesPage {
   constructor(public readonly page: Page) {}
 
   async goto() {
-    await this.page.goto(routes.likes);
+    await this.page.goto(Routes.Likes);
   }
 
   async openDropdownMenu(title: string) {

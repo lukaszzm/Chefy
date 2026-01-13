@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 import { Button } from "@/components/ui/button";
-import { routes } from "@/config/routes";
+import { Routes } from "@/config/routes";
 import { FoodOverlay } from "@/features/home/components/food-overlay";
 
 export function Hero() {
@@ -18,7 +18,7 @@ export function Hero() {
           world.
         </p>
         <Button className="py-7 text-lg lg:px-12 lg:py-8 lg:text-xl" size="lg" asChild>
-          <Link href={routes.signUp}>Get Started Now!</Link>
+          <Link href={Routes.SignUp}>Get Started Now!</Link>
         </Button>
         <FoodOverlay />
       </div>

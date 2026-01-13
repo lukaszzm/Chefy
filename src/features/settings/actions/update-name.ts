@@ -2,7 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 
-import { routes } from "@/config/routes";
+import { Routes } from "@/config/routes";
 import type { UpdateNamePayload } from "@/features/settings/schemas/name-schema";
 import { updateUser } from "@/lib/db/queries/user";
 import { errorResponse, successResponse } from "@/utils/action-response";
@@ -21,6 +21,6 @@ export async function updateName(payload: UpdateNamePayload) {
     return errorResponse("Failed to update name");
   }
 
-  revalidatePath(routes.settings);
+  revalidatePath(Routes.Settings);
   return successResponse("Name updated successfully");
 }

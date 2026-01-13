@@ -2,7 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 
-import { routes } from "@/config/routes";
+import { Routes } from "@/config/routes";
 import { updatePreferredAreas as updatePreferences } from "@/lib/db/queries/area";
 import { errorResponse, successResponse } from "@/utils/action-response";
 import { getAuthSession } from "@/lib/auth/utils";
@@ -20,7 +20,7 @@ export async function updatePreferredAreas(areas: string[]) {
     return errorResponse("Failed to update preferred areas");
   }
 
-  revalidatePath(routes.settings);
-  revalidatePath(routes.explore);
+  revalidatePath(Routes.Settings);
+  revalidatePath(Routes.Discover);
   return successResponse("Preferred areas updated successfully");
 }
