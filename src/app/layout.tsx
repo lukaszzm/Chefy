@@ -7,6 +7,7 @@ import type { Metadata } from "next";
 import { Quicksand } from "next/font/google";
 
 import { Toaster } from "@/components/ui/sonner";
+import { Providers } from "@/app/providers";
 
 export const metadata: Metadata = {
   title: "Chefy",
@@ -22,8 +23,10 @@ export default function RootLayout({ children }: PropsWithChildren) {
   return (
     <html className={quicksand.className} lang="en">
       <body>
-        {children}
-        <Toaster />
+        <Providers>
+          {children}
+          <Toaster />
+        </Providers>
       </body>
     </html>
   );

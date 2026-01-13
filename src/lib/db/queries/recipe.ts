@@ -1,6 +1,6 @@
 import { cache } from "react";
 
-import { and, asc, count, eq, inArray, notInArray, sql } from "drizzle-orm";
+import { and, asc, count, eq, inArray, notInArray } from "drizzle-orm";
 
 import db from "@/lib/db";
 import {
@@ -12,9 +12,9 @@ import {
   userPreferredArea,
   userPreferredCategory,
 } from "@/lib/db/schema";
-import { withPagination } from "@/utils/with-pagination";
+import { DEFAULT_PAGE, DEFAULT_PAGE_SIZE, withCursorPagination, withSimplePagination } from "@/utils/pagination";
 
-export const getLikedRecipes = cache(async (userId: string, page = 1, pageSize = 5) => {
+export const getLikedRecipes = cache(async (userId: string, page = DEFAULT_PAGE, pageSize = DEFAULT_PAGE_SIZE) => {
   const likesQuery = db
     .select({
       id: userLikedRecipe.recipeId,
@@ -38,7 +38,7 @@ export const getLikedRecipes = cache(async (userId: string, page = 1, pageSize =
 
   const [meta, paginatedResult] = await Promise.all([
     metaQuery,
-    withPagination(likedRecipesQuery.$dynamic(), asc(recipe.id), page, pageSize),
+    withSimplePagination(likedRecipesQuery.$dynamic(), asc(recipe.id), page, pageSize),
   ]);
 
   return {
@@ -47,7 +47,7 @@ export const getLikedRecipes = cache(async (userId: string, page = 1, pageSize =
   };
 });
 
-export const getSuggestedRecipes = cache(async (userId: string) => {
+export const getPersonalizedRecipes = cache(async (userId: string, cursor?: string, excludeIds?: string[]) => {
   const preferredAreas = db
     .select({
       areaId: userPreferredArea.areaId,
@@ -76,21 +76,29 @@ export const getSuggestedRecipes = cache(async (userId: string) => {
     .from(userDislikedRecipe)
     .where(eq(userDislikedRecipe.userId, userId));
 
-  return await db
+  const whereConditions = [
+    notInArray(recipe.id, likedRecipes),
+    notInArray(recipe.id, dislikedRecipes),
+    inArray(recipe.areaId, preferredAreas),
+    inArray(recipe.categoryId, preferredCategories),
+  ];
+
+  if (excludeIds && excludeIds.length > 0) {
+    whereConditions.push(notInArray(recipe.id, excludeIds));
+  }
+
+  const suggestedRecipesQuery = db
     .select()
     .from(recipe)
-    .where(
-      and(
-        notInArray(recipe.id, likedRecipes),
-        notInArray(recipe.id, dislikedRecipes),
-        inArray(recipe.areaId, preferredAreas),
-        inArray(recipe.categoryId, preferredCategories)
-      )
-    )
+    .where(and(...whereConditions))
     .innerJoin(category, eq(recipe.categoryId, category.id))
-    .innerJoin(area, eq(recipe.areaId, area.id))
-    .orderBy(sql`RANDOM()`)
-    .limit(10);
+    .innerJoin(area, eq(recipe.areaId, area.id));
+
+  const cursorPaginationQuery = await withCursorPagination(suggestedRecipesQuery.$dynamic(), recipe.id, cursor, 10);
+
+  console.log("Cursor Pagination Query:", cursorPaginationQuery);
+
+  return cursorPaginationQuery;
 });
 
 export const getLikeRecipe = cache(async (userId: string, recipeId: string) =>

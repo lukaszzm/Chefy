@@ -3,7 +3,7 @@
 import type { SignInPayload } from "@/features/auth/schemas/sign-in-schema";
 import { getAuthErrorMessage } from "@/features/auth/utils/get-auth-error-message";
 import { auth } from "@/lib/auth";
-import { ActionResponse } from "@/types";
+import type { ActionResponse } from "@/types";
 import { errorResponse, successResponse } from "@/utils/action-response";
 
 export async function signIn(payload: SignInPayload): Promise<ActionResponse> {

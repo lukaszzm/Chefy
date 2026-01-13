@@ -1,24 +1,23 @@
-/* eslint-disable react-hooks/rules-of-hooks */
 import { test as base, expect } from "playwright/fixtures/auth-worker";
-import { ExplorePage } from "playwright/fixtures/explore-page";
+import { DiscoverPage } from "playwright/fixtures/discover-page";
 import { LikesPage } from "playwright/fixtures/likes-page";
 import { SettingsPage } from "playwright/fixtures/settings-page";
 
 interface PageFixtures {
-  explorePage: ExplorePage;
+  discoverPage: DiscoverPage;
   likesPage: LikesPage;
   settingsPage: SettingsPage;
 }
 
 const test = base.extend<PageFixtures>({
-  explorePage: async ({ page }, use) => {
-    const explorePage = new ExplorePage(page);
+  discoverPage: async ({ page }, use) => {
+    const discoverPage = new DiscoverPage(page);
 
-    await explorePage.goto();
+    await discoverPage.goto();
 
-    await use(explorePage);
+    await use(discoverPage);
 
-    await explorePage.page.close();
+    await discoverPage.page.close();
   },
   likesPage: async ({ page }, use) => {
     const likesPage = new LikesPage(page);
