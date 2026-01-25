@@ -6,22 +6,25 @@ import { Input } from "@/components/ui/input";
 import { SettingsContainer } from "@/features/settings/components/settings-container";
 import { SubmitButton } from "@/features/settings/components/submit-button";
 import { usePasswordForm } from "@/features/settings/hooks/use-password-form";
+import { useTranslations } from "next-intl";
 
 export function UpdatePasswordForm() {
+  const t = useTranslations("settings.general.password");
+
   const { form, onSubmit, isPending, error } = usePasswordForm();
 
   return (
-    <SettingsContainer subtitle="Password">
+    <SettingsContainer subtitle={t("subtitle")}>
       <Form {...form}>
-        <form className="space-y-4" onSubmit={onSubmit}>
+        <form className={"space-y-4"} onSubmit={onSubmit}>
           <FormField
             control={form.control}
             name="currentPassword"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Current password</FormLabel>
+                <FormLabel>{t("currentPassword.label")}</FormLabel>
                 <FormControl>
-                  <Input placeholder="********" type="password" {...field} />
+                  <Input placeholder={t("currentPassword.placeholder")} type="password" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -32,16 +35,16 @@ export function UpdatePasswordForm() {
             name="newPassword"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>New password</FormLabel>
+                <FormLabel>{t("newPassword.label")}</FormLabel>
                 <FormControl>
-                  <Input placeholder="********" type="password" {...field} />
+                  <Input placeholder={t("newPassword.placeholder")} type="password" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
             )}
           />
           <ActionError error={error} />
-          <SubmitButton aria-label="Update Password" disabled={!form.formState.isDirty} isLoading={isPending} />
+          <SubmitButton aria-label={t("submit")} disabled={!form.formState.isDirty} isLoading={isPending} />
         </form>
       </Form>
     </SettingsContainer>

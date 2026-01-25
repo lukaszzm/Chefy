@@ -106,10 +106,7 @@ export default [
       ...reactPlugin.configs.recommended.rules,
       ...reactPlugin.configs["jsx-runtime"].rules,
       ...reactHooksPlugin.configs.recommended.rules,
-      "react/react-in-jsx-scope": "off",
-      "react/prop-types": "off",
-      "react/no-unknown-property": "off",
-      "react/jsx-no-target-blank": "off",
+      "react/jsx-no-literals": ["error", { noStrings: true, ignoreProps: true, noAttributeStrings: true }],
     },
     settings: {
       react: {

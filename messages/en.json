@@ -1,0 +1,330 @@
+{
+  "common": {
+    "loading": "Loading...",
+    "close": "Close",
+    "back": "Back",
+    "pagination": {
+      "ariaLabel": "Pagination",
+      "previous": "Previous",
+      "previousPage": "Go to previous page",
+      "next": "Next",
+      "nextPage": "Go to next page",
+      "page": "Page {page}",
+      "morePages": "More pages"
+    }
+  },
+  "api": {
+    "errors": {
+      "unauthorized": "You must be signed in to perform this action.",
+      "notFound": "The requested resource was not found.",
+      "serverError": "An unexpected error occurred. Please try again later."
+    },
+    "success": {
+      "recipeLiked": "Recipe liked successfully.",
+      "recipeDisliked": "Recipe disliked successfully."
+    }
+  },
+  "seo": {
+    "title": "Chefy - Your Personal Recipe Companion",
+    "description": "Discover and save your favorite recipes with Chefy. Swipe through personalized recipe cards and find dishes that suit your taste!"
+  },
+  "dashboard": {
+    "sidebar": {
+      "application": "Application",
+      "signOut": "Sign Out",
+      "links": {
+        "discover": "Discover",
+        "likes": "Likes",
+        "settings": "Settings"
+      }
+    }
+  },
+  "home": {
+    "seo": {
+      "title": "Discover Delicious Recipes Tailored to Your Taste | Chefy",
+      "description": "Explore a world of culinary delights with Chefy. Start with swiping through personalized recipe cards and find your next favorite dish!"
+    },
+    "navbar": {
+      "signIn": "Sign In",
+      "goToHome": "Go to home page"
+    },
+    "hero": {
+      "titleRich": "Welcome to our <highlight>recipe</highlight> app!",
+      "description": "We're excited to help you discover new and delicious recipes with just a swipe of your finger. Our app is designed to make meal planning and cooking easy and fun, with a wide variety of recipes from all over the world. designed to make meal planning and cooking easy and fun, with a wide variety of recipes from all over the world.",
+      "getStarted": "Get Started"
+    }
+  },
+  "notFound": {
+    "seo": {
+      "title": "Page Not Found | Chefy",
+      "description": "Sorry, we couldn't find the page you were looking for on Chefy."
+    },
+    "title": "Page not found",
+    "description": "Sorry, we couldn't find the page you were looking for."
+  },
+  "auth": {
+    "validation": {
+      "emailInvalid": "Missing or incorrect email address.",
+      "minPasswordLength": "Your password must have at least {min} characters.",
+      "nameRequired": "Name is required."
+    },
+    "actions": {
+      "signIn": {
+        "success": "You have signed in successfully."
+      },
+      "signOut": {
+        "success": "You have signed out successfully."
+      },
+      "signUp": {
+        "success": "Your account has been created successfully."
+      }
+    },
+    "form": {
+      "submit": {
+        "signIn": "Sign In",
+        "signUp": "Create an Account"
+      },
+      "fields": {
+        "name": {
+          "label": "Name",
+          "placeholder": "Enter your name"
+        },
+        "email": {
+          "label": "Email",
+          "placeholder": "Enter your email"
+        },
+        "password": {
+          "label": "Password",
+          "placeholder": "Enter your password"
+        }
+      },
+      "signIn": {
+        "title": "Sign In | Chefy",
+        "description": "Sign in to your Chefy account to discover and save your favorite recipes."
+      },
+      "title": "Hi, welcome back! 👋",
+      "subtitle": "Sign in to your account to continue.",
+      "footer": {
+        "link": "Sign up",
+        "text": "Don't have an account?"
+      }
+    },
+    "signIn": {
+      "seo": {
+        "title": "Sign In | Chefy",
+        "description": "Sign in to your Chefy account to discover and save your favorite recipes."
+      },
+      "title": "Hi, welcome back! 👋",
+      "subtitle": "Sign in to your account to continue.",
+      "footer": {
+        "link": "Sign Up",
+        "text": "Don't have an account?"
+      }
+    },
+    "signUp": {
+      "seo": {
+        "title": "Sign Up | Chefy",
+        "description": "Create a Chefy account to start discovering and saving your favorite recipes."
+      },
+      "title": "Create an account 👐",
+      "subtitle": "Explore recipes from around the world today!",
+      "footer": {
+        "link": "Sign In",
+        "text": "Already have an account?"
+      }
+    },
+    "signOut": {
+      "confirm": {
+        "title": "Sign Out?",
+        "description": "Are you sure you want to sign out of your account?",
+        "cancel": "Cancel",
+        "confirm": "Sign Out"
+      }
+    },
+    "backToHome": "Back to home page"
+  },
+  "discover": {
+    "seo": {
+      "title": "Discover Recipes | Chefy",
+      "description": "Swipe through personalized recipe cards and find dishes that suit your taste on Chefy."
+    },
+    "error": {
+      "title": "Something went wrong.",
+      "description": "Could not find recipes for you, try again later."
+    },
+    "loading": {
+      "searching": "Searching recipes for you..."
+    },
+    "notFound": {
+      "title": "No recipes found.",
+      "description": "Change preferences to discover new recipes."
+    },
+    "context": {
+      "like": {
+        "failed": "Could not like the recipe."
+      },
+      "dislike": {
+        "failed": "Could not dislike the recipe."
+      }
+    },
+    "card": {
+      "ariaLabel": "Recipe: {title}. Press left arrow to dislike, right arrow to like, space or enter to toggle details.",
+      "header": {
+        "imageAlt": "Image of {title}"
+      },
+      "content": {
+        "ingredients": "Ingredients",
+        "instructions": "Instructions"
+      },
+      "footer": {
+        "like": "Like {title}",
+        "dislike": "Dislike {title}",
+        "expand": "Expand information about {title}",
+        "collapse": "Collapse information about {title}"
+      }
+    }
+  },
+  "likes": {
+    "seo": {
+      "title": "Liked Recipes | Chefy",
+      "description": "Browse your collection of liked recipes on Chefy. Find and revisit your favorite dishes anytime!"
+    },
+    "title": "Your Liked Recipes",
+    "notFound": {
+      "message": "Could not find the liked recipe. It may have been removed or does not exist."
+    },
+    "actions": {
+      "delete": {
+        "success": "Recipe successfully deleted from likes.",
+        "errors": {
+          "unknown": "An unknown error occurred while deleting the liked recipe.",
+          "notAuthenticated": "Unauthorized to delete this liked recipe.",
+          "notFound": "Could not find the liked recipe to delete."
+        }
+      }
+    },
+    "menu": {
+      "trigger": "Open menu for {title}",
+      "details": "Details",
+      "downloadPdf": "Download PDF",
+      "delete": "Delete",
+      "pdf": {
+        "labels": {
+          "ingredients": "Ingredients",
+          "instructions": "Instructions"
+        },
+        "footer": "Recipe from Chefy"
+      }
+    },
+    "pdf": {
+      "labels": {
+        "ingredients": "Ingredients",
+        "instructions": "Instructions"
+      },
+      "footer": "Recipe from Chefy"
+    }
+  },
+  "like": {
+    "seo": {
+      "title": "{recipeTitle} | Chefy",
+      "description": "View the recipe for {recipeTitle} on Chefy. Discover ingredients, instructions, and more!"
+    },
+    "notFound": {
+      "message": "Could not find the liked recipe. It may have been removed or does not exist.",
+      "goBack": "Go back to your Liked Recipes"
+    },
+    "labels": {
+      "ingredients": "Ingredients",
+      "instructions": "Instructions"
+    },
+    "back": "Back"
+  },
+  "settings": {
+    "seo": {
+      "title": "Settings | Chefy",
+      "description": "Manage your Chefy account settings and preferences."
+    },
+    "title": "Settings",
+    "actions": {
+      "updateName": {
+        "errors": {
+          "notAuthenticated": "You must be signed in to update your name.",
+          "failedToUpdateName": "Failed to update name.",
+          "unknown": "An unknown error occurred while updating your name."
+        },
+        "success": "Your name has been updated successfully."
+      },
+      "updatePassword": {
+        "errors": {
+          "notAuthenticated": "You must be signed in to update your password.",
+          "accountNotFound": "Account not found.",
+          "currentPasswordMissing": "No password set for this account.",
+          "currentPasswordIncorrect": "Current password is incorrect.",
+          "unknown": "An unknown error occurred while updating your password.",
+          "testAccountPasswordChange": "Cannot update password for test user."
+        },
+        "success": "Your password has been updated successfully."
+      },
+      "updatePreferredAreas": {
+        "errors": {
+          "notAuthenticated": "You must be signed in to update your preferred areas.",
+          "failedToUpdatePreferredAreas": "Failed to update preferred areas.",
+          "unknown": "An unknown error occurred while updating your preferred areas."
+        },
+        "success": "Your preferred areas have been updated successfully."
+      },
+      "updatePreferredCategories": {
+        "errors": {
+          "notAuthenticated": "You must be signed in to update your preferred categories.",
+          "failedToUpdatePreferredCategories": "Failed to update preferred categories.",
+          "unknown": "An unknown error occurred while updating your preferred categories."
+        },
+        "success": "Your preferred categories have been updated successfully."
+      }
+    },
+    "validation": {
+      "nameRequired": "Name is required.",
+      "minCurrentPasswordLength": "Current password must be at least {min} characters long.",
+      "minNewPasswordLength": "New password must be at least {min} characters long.",
+      "differentPasswords": "New password must be different from current password."
+    },
+    "tabs": {
+      "account": "Account",
+      "preferences": "Preferences"
+    },
+    "general": {
+      "name": {
+        "subtitle": "General Info",
+        "label": "Name",
+        "placeholder": "Enter your name",
+        "submit": "Update Name"
+      },
+      "password": {
+        "subtitle": "Password",
+        "currentPassword": {
+          "label": "Current password",
+          "placeholder": "********"
+        },
+        "newPassword": {
+          "label": "New password",
+          "placeholder": "********"
+        },
+        "submit": "Update Password"
+      }
+    },
+    "preferences": {
+      "areas": {
+        "subtitle": "Preferred Areas",
+        "submitText": "Update Areas"
+      },
+      "categories": {
+        "subtitle": "Preferred Categories",
+        "submitText": "Update Categories"
+      }
+    },
+    "submitButton": {
+      "loadingText": "Saving...",
+      "defaultText": "Save"
+    }
+  }
+}

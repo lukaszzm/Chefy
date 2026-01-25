@@ -1,5 +1,15 @@
 import { Image as PDFImage, Document, Page, StyleSheet, Text } from "@react-pdf/renderer";
 
+interface PDFTemplateProps {
+  title: string;
+  imageSrc: string;
+  ingredientsLabel: string;
+  ingredients: ReadonlyArray<string>;
+  instructionsLabel: string;
+  instructions: string;
+  footer: string;
+}
+
 const styles = StyleSheet.create({
   body: {
     paddingTop: 35,
@@ -55,32 +65,36 @@ const styles = StyleSheet.create({
   },
 });
 
-interface PDFTemplateProps {
-  title: string;
-  imageSrc: string;
-  ingredients: string[];
-  instructions: string;
-}
+const LIST_ITEM_PREFIX = " • ";
 
-export function PDFTemplate({ title, imageSrc, ingredients, instructions }: PDFTemplateProps) {
+export function PDFTemplate({
+  title,
+  imageSrc,
+  ingredientsLabel,
+  ingredients,
+  instructionsLabel,
+  instructions,
+  footer,
+}: PDFTemplateProps) {
   return (
     <Document>
       <Page style={styles.body}>
         <Text style={styles.title}>{title}</Text>
         <PDFImage src={imageSrc} style={styles.image} />
 
-        <Text style={styles.subtitle}>Ingredients</Text>
+        <Text style={styles.subtitle}>{ingredientsLabel}</Text>
         {ingredients.map((el, index) => (
           <Text key={index} style={styles.item}>
-            - {el}
+            {LIST_ITEM_PREFIX}
+            {el}
           </Text>
         ))}
 
-        <Text style={styles.subtitle}>Instructions</Text>
+        <Text style={styles.subtitle}>{instructionsLabel}</Text>
         <Text style={styles.text}>{instructions}</Text>
 
         <Text style={styles.footer} fixed>
-          Recipe from Chefy
+          {footer}
         </Text>
         <Text
           render={({ pageNumber, totalPages }) => `${pageNumber} / ${totalPages}`}

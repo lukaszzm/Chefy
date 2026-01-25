@@ -5,8 +5,11 @@ import { ErrorAlert } from "@/components/ui/error-alert";
 import { Form, FormField, FormItem, FormLabel, FormControl, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useSignUp } from "@/features/auth/hooks/use-sign-up";
+import { useTranslations } from "next-intl";
 
 export function SignUpForm() {
+  const t = useTranslations("auth.form");
+
   const { form, onSubmit, isPending, error } = useSignUp();
 
   return (
@@ -17,9 +20,9 @@ export function SignUpForm() {
           name="name"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Name</FormLabel>
+              <FormLabel>{t("fields.name.label")}</FormLabel>
               <FormControl>
-                <Input placeholder="Enter your name" {...field} />
+                <Input placeholder={t("fields.name.placeholder")} {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -30,9 +33,9 @@ export function SignUpForm() {
           name="email"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Email</FormLabel>
+              <FormLabel>{t("fields.email.label")}</FormLabel>
               <FormControl>
-                <Input placeholder="Enter your email" {...field} />
+                <Input type="email" placeholder={t("fields.email.placeholder")} {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -43,9 +46,9 @@ export function SignUpForm() {
           name="password"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Password</FormLabel>
+              <FormLabel>{t("fields.password.label")}</FormLabel>
               <FormControl>
-                <Input placeholder="Enter your password" type="password" {...field} />
+                <Input type="password" placeholder={t("fields.password.placeholder")} {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -54,7 +57,7 @@ export function SignUpForm() {
 
         <ErrorAlert error={error} />
         <Button className="w-full" isLoading={isPending}>
-          Create an Account
+          {t("submit.signUp")}
         </Button>
       </form>
     </Form>

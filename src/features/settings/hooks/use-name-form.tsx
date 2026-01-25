@@ -4,12 +4,15 @@ import { toast } from "sonner";
 
 import { updateName } from "@/features/settings/actions/update-name";
 import type { UpdateNamePayload } from "@/features/settings/schemas/name-schema";
-import { nameSchema } from "@/features/settings/schemas/name-schema";
+import { generateNameSchema } from "@/features/settings/schemas/name-schema";
 import { useAction } from "@/hooks/use-action";
+import { useTranslations } from "next-intl";
 
 export function useNameForm(defaultName?: string) {
+  const t = useTranslations();
+
   const form = useForm<UpdateNamePayload>({
-    resolver: zodResolver(nameSchema),
+    resolver: zodResolver(generateNameSchema(t)),
     defaultValues: {
       name: defaultName ?? "",
     },

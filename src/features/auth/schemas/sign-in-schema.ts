@@ -1,8 +1,12 @@
+import { MIN_PASSWORD_LENGTH } from "@/config/constants";
+import type { TranslateFun } from "@/types";
 import { z } from "zod";
 
-export const signInSchema = z.object({
-  email: z.string().email("Missing or incorrect email address"),
-  password: z.string().min(8, "Your password must have at least 8 characters"),
-});
+export function generateSignInSchema(t: TranslateFun) {
+  return z.object({
+    email: z.email(t("auth.validation.emailInvalid")),
+    password: z.string().min(MIN_PASSWORD_LENGTH, t("auth.validation.minPasswordLength", { min: MIN_PASSWORD_LENGTH })),
+  });
+}
 
-export type SignInPayload = z.infer<typeof signInSchema>;
+export type SignInPayload = z.infer<ReturnType<typeof generateSignInSchema>>;

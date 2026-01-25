@@ -7,20 +7,21 @@ import type { UpdateNamePayload } from "@/features/settings/schemas/name-schema"
 import { updateUser } from "@/lib/db/queries/user";
 import { errorResponse, successResponse } from "@/utils/action-response";
 import { getAuthSession } from "@/lib/auth/utils";
+import { getTranslations } from "next-intl/server";
 
 export async function updateName(payload: UpdateNamePayload) {
-  const session = await getAuthSession();
+  const [session, t] = await Promise.all([getAuthSession(), getTranslations("settings.actions.updateName")]);
 
   if (!session) {
-    return errorResponse("Unauthorized");
+    return errorResponse(t("errors.notAuthenticated"));
   }
 
   try {
     await updateUser(session.user.id, { name: payload.name });
   } catch {
-    return errorResponse("Failed to update name");
+    return errorResponse(t("errors.unknown"));
   }
 
   revalidatePath(Routes.Settings);
-  return successResponse("Name updated successfully");
+  return successResponse(t("success"));
 }

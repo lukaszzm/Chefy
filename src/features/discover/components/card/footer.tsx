@@ -1,10 +1,11 @@
-import { ChevronDown, Heart, X } from "lucide-react";
+import { ChevronDownIcon, HeartIcon, XIcon } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { CardFooter } from "@/components/ui/card";
 import type { Recipe } from "@/types";
 import { cn } from "@/utils/cn";
 import { useDiscover } from "@/features/discover/hooks/use-discover";
+import { useTranslations } from "next-intl";
 
 interface DiscoverCardFooterProps extends Pick<Recipe, "id" | "title"> {
   onExpand: (expand: boolean) => void;
@@ -12,6 +13,8 @@ interface DiscoverCardFooterProps extends Pick<Recipe, "id" | "title"> {
 }
 
 export function DiscoverCardFooter({ id, title, onExpand, isExpanded }: DiscoverCardFooterProps) {
+  const t = useTranslations("discover.card.footer");
+
   const { dislikeRecipe, likeRecipe } = useDiscover();
 
   return (
@@ -21,21 +24,26 @@ export function DiscoverCardFooter({ id, title, onExpand, isExpanded }: Discover
         isExpanded ? "relative" : "absolute"
       )}
     >
-      <Button aria-label={`Dislike ${title}`} size="control" variant="destructive" onClick={() => dislikeRecipe(id)}>
-        <X size={44} />
+      <Button
+        aria-label={t("dislike", { title })}
+        size="control"
+        variant="destructive"
+        onClick={() => dislikeRecipe(id)}
+      >
+        <XIcon size={44} />
       </Button>
       <Button
-        aria-label={isExpanded ? `Collapse information about ${title}` : `Expand information about ${title}`}
-        className="size-14 self-end [&[data-expanded=true]>svg]:rotate-180"
+        aria-label={isExpanded ? t("collapse", { title }) : t("expand", { title })}
         data-expanded={isExpanded ? "true" : "false"}
         size="control"
         variant="info"
         onClick={() => onExpand(!isExpanded)}
+        className="size-14 self-end [&[data-expanded=true]>svg]:rotate-180"
       >
-        <ChevronDown className="shrink-0 transition-transform duration-200" size={32} />
+        <ChevronDownIcon className="shrink-0 transition-transform duration-200" size={32} />
       </Button>
-      <Button aria-label={`Like ${title}`} size="control" variant="success" onClick={() => likeRecipe(id)}>
-        <Heart size={44} />
+      <Button aria-label={t("like", { title })} size="control" variant="success" onClick={() => likeRecipe(id)}>
+        <HeartIcon size={44} />
       </Button>
     </CardFooter>
   );

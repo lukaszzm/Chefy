@@ -16,7 +16,7 @@ test.describe("Settings", () => {
     await page.getByLabel("New Password").fill(newPassword);
     await page.getByRole("button", { name: "Update Password" }).click();
 
-    await settingsPage.waitForToast("Password updated successfully");
+    await settingsPage.waitForToast("Your password has been updated successfully.");
 
     const signOutButton = page.getByRole("button", { name: "Sign Out" });
     await signOutButton.click();
@@ -38,7 +38,7 @@ test.describe("Settings", () => {
     await page.getByLabel("New Password").fill(currentPassword);
     await page.getByRole("button", { name: "Update Password" }).click();
 
-    await settingsPage.waitForToast("Password updated successfully");
+    await settingsPage.waitForToast("Your password has been updated successfully.");
 
     await signOutButton.click();
     await signOutConfirm.click();
@@ -57,10 +57,10 @@ test.describe("Settings", () => {
     await settingsPage.toggleAllPreferences();
 
     await page.getByRole("button", { name: "Update Categories" }).click();
-    await settingsPage.waitForToast("Preferred categories updated successfully");
+    await settingsPage.waitForToast("Your preferred categories have been updated successfully.");
 
     await page.getByRole("button", { name: "Update Areas" }).click();
-    await settingsPage.waitForToast("Preferred areas updated successfully");
+    await settingsPage.waitForToast("Your preferred areas have been updated successfully.");
 
     await page.goto(Routes.Discover);
 
@@ -80,10 +80,10 @@ test.describe("Settings", () => {
     await page.getByText(selectedArea).click();
 
     await page.getByRole("button", { name: "Update Categories" }).click();
-    await settingsPage.waitForToast("Preferred categories updated successfully");
+    await settingsPage.waitForToast("Your preferred categories have been updated successfully.");
 
     await page.getByRole("button", { name: "Update Areas" }).click();
-    await settingsPage.waitForToast("Preferred areas updated successfully");
+    await settingsPage.waitForToast("Your preferred areas have been updated successfully.");
 
     await page.goto(Routes.Discover);
 

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-import { Undo2 } from "lucide-react";
+import { Undo2Icon } from "lucide-react";
 import { notFound, redirect } from "next/navigation";
 
 import { RecipeBadges } from "@/components/recipe/badges";
@@ -13,6 +13,7 @@ import { LikesDropdownMenu } from "@/features/likes/components/dropdown-menu";
 import { getLikeRecipe } from "@/lib/db/queries/recipe";
 import { getAuthSession } from "@/lib/auth/utils";
 import { RecipeLabel } from "@/components/recipe/label";
+import { getTranslations } from "next-intl/server";
 
 type LikedRecipePageProps = PageProps<typeof Routes.Like>;
 
@@ -24,14 +25,15 @@ export async function generateMetadata({ params }: LikedRecipePageProps): Promis
   }
 
   const { id: likeId } = await params;
-  const like = await getLikeRecipe(session.user.id, likeId);
+  const [like, t] = await Promise.all([getLikeRecipe(session.user.id, likeId), getTranslations("like.seo")]);
 
   if (!like) {
     return notFound();
   }
 
   return {
-    title: `${like.recipe.title} | Chefy`,
+    title: t("title", { recipeTitle: like.recipe.title }),
+    description: t("description", { recipeTitle: like.recipe.title }),
   };
 }
 
@@ -43,7 +45,7 @@ export default async function LikedRecipePage({ params }: LikedRecipePageProps) 
   }
 
   const { id: likeId } = await params;
-  const data = await getLikeRecipe(session.user.id, likeId);
+  const [data, t] = await Promise.all([getLikeRecipe(session.user.id, likeId), getTranslations("like")]);
 
   if (!data) {
     return notFound();
@@ -59,13 +61,13 @@ export default async function LikedRecipePage({ params }: LikedRecipePageProps) 
         <LikesDropdownMenu recipe={data.recipe} deleteWithRedirect />
       </Heading>
       <Block className="flex flex-col">
-        <RecipeLabel>Ingredients</RecipeLabel>
+        <RecipeLabel>{t("labels.ingredients")}</RecipeLabel>
         <RecipeIngredients ingredients={data.recipe.ingredients} />
-        <RecipeLabel>Instructions</RecipeLabel>
+        <RecipeLabel>{t("labels.instructions")}</RecipeLabel>
         <p>{data.recipe.instructions}</p>
         <BackButton className="mr-2 self-end">
-          <span>Back</span>
-          <Undo2 />
+          <span>{t("back")}</span>
+          <Undo2Icon />
         </BackButton>
       </Block>
     </>

@@ -13,6 +13,7 @@ import { removeRecipeFromInfiniteQuery } from "@/features/discover/utils/remove-
 import type { RecipeWithRelations } from "@/types";
 import type { InfiniteData } from "@tanstack/react-query";
 import { useQueryClient } from "@tanstack/react-query";
+import { useTranslations } from "next-intl";
 import { useCallback, useMemo, useRef, useState } from "react";
 import { toast } from "sonner";
 
@@ -22,6 +23,8 @@ interface DiscoverProviderProps extends React.PropsWithChildren {
 }
 
 export function DiscoverProvider({ initialData, userId, children }: DiscoverProviderProps) {
+  const t = useTranslations("discover.context");
+
   const queryClient = useQueryClient();
   const pendingRecipeIds = useRef(new Set<string>());
 
@@ -43,7 +46,7 @@ export function DiscoverProvider({ initialData, userId, children }: DiscoverProv
       pendingRecipeIds.current.delete(recipeId);
     },
     onError: () => {
-      toast.error("Could not like recipe");
+      toast.error(t("like.failed"));
     },
   });
 
@@ -57,7 +60,7 @@ export function DiscoverProvider({ initialData, userId, children }: DiscoverProv
       pendingRecipeIds.current.delete(recipeId);
     },
     onError: () => {
-      toast.error("Could not dislike recipe");
+      toast.error(t("dislike.failed"));
     },
   });
 

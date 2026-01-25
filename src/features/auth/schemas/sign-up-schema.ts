@@ -1,11 +1,14 @@
 import { z } from "zod";
 
-import { signInSchema } from "@/features/auth/schemas/sign-in-schema";
+import type { TranslateFun } from "@/types";
+import { MIN_PASSWORD_LENGTH } from "@/config/constants";
 
-export const signUpSchema = z
-  .object({
-    name: z.string().min(1, "Name is required"),
-  })
-  .merge(signInSchema);
+export function generateSignUpSchema(t: TranslateFun) {
+  return z.object({
+    name: z.string().min(1, t("auth.validation.nameRequired")),
+    email: z.email(t("auth.validation.emailInvalid")),
+    password: z.string().min(MIN_PASSWORD_LENGTH, t("auth.validation.minPasswordLength", { min: MIN_PASSWORD_LENGTH })),
+  });
+}
 
-export type SignUpPayload = z.infer<typeof signUpSchema>;
+export type SignUpPayload = z.infer<ReturnType<typeof generateSignUpSchema>>;

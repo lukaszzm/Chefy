@@ -5,8 +5,11 @@ import { ErrorAlert } from "@/components/ui/error-alert";
 import { Form, FormLabel, FormField, FormItem, FormControl, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useSignIn } from "@/features/auth/hooks/use-sign-in";
+import { useTranslations } from "next-intl";
 
 export function SignInForm() {
+  const t = useTranslations("auth.form");
+
   const { form, onSubmit, isPending, error } = useSignIn();
 
   return (
@@ -17,9 +20,9 @@ export function SignInForm() {
           name="email"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Email</FormLabel>
+              <FormLabel>{t("fields.email.label")}</FormLabel>
               <FormControl>
-                <Input placeholder="example@example.com" {...field} />
+                <Input type="email" placeholder={t("fields.email.placeholder")} {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -30,9 +33,9 @@ export function SignInForm() {
           name="password"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Password</FormLabel>
+              <FormLabel>{t("fields.password.label")}</FormLabel>
               <FormControl>
-                <Input placeholder="********" type="password" {...field} />
+                <Input type="password" placeholder={t("fields.password.placeholder")} {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -41,7 +44,7 @@ export function SignInForm() {
 
         <ErrorAlert error={error} />
         <Button className="w-full" isLoading={isPending}>
-          Sign In
+          {t("submit.signIn")}
         </Button>
       </form>
     </Form>

@@ -1,9 +1,10 @@
 "use client";
 
 import * as DialogPrimitive from "@radix-ui/react-dialog";
-import { X } from "lucide-react";
+import { XIcon } from "lucide-react";
 
 import { cn } from "@/utils/cn";
+import { useTranslations } from "next-intl";
 
 const Dialog = DialogPrimitive.Root;
 
@@ -28,6 +29,8 @@ function DialogOverlay({ ref, className, ...props }: React.ComponentProps<typeof
 }
 
 function DialogContent({ ref, className, children, ...props }: React.ComponentProps<typeof DialogPrimitive.Content>) {
+  const t = useTranslations("common");
+
   return (
     <DialogPortal>
       <DialogOverlay />
@@ -42,8 +45,8 @@ function DialogContent({ ref, className, children, ...props }: React.ComponentPr
       >
         {children}
         <DialogPrimitive.Close className="ring-offset-background focus:ring-ring data-[state=open]:bg-accent data-[state=open]:text-muted-foreground absolute top-4 right-4 rounded-sm opacity-70 transition-opacity hover:opacity-100 focus:ring-2 focus:ring-offset-2 focus:outline-hidden disabled:pointer-events-none">
-          <X className="size-4" />
-          <span className="sr-only">Close</span>
+          <XIcon className="size-4" />
+          <span className="sr-only">{t("close")}</span>
         </DialogPrimitive.Close>
       </DialogPrimitive.Content>
     </DialogPortal>

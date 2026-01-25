@@ -1,4 +1,5 @@
 import type { account, area, category, recipe, session, user } from "@/lib/db/schema";
+import type { Messages, NamespaceKeys, NestedKeyOf, useTranslations } from "next-intl";
 
 export type Recipe = typeof recipe.$inferSelect;
 export type RecipePayload = typeof recipe.$inferInsert;
@@ -39,3 +40,11 @@ export interface ActionSuccess<T> {
 }
 
 export type ActionResponse<T = unknown> = ActionError | ActionSuccess<T>;
+
+export type TranslateFun<NestedKey extends NamespaceKeys<Messages, NestedKeyOf<Messages>> = never> = ReturnType<
+  typeof useTranslations<NestedKey>
+>;
+
+export type TranslateKey<NestedKey extends NamespaceKeys<Messages, NestedKeyOf<Messages>> = never> = Parameters<
+  ReturnType<typeof useTranslations<NestedKey>>
+>[0];

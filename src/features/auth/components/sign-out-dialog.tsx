@@ -13,8 +13,11 @@ import {
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 import { useSignOut } from "@/features/auth/hooks/use-sign-out";
+import { useTranslations } from "next-intl";
 
 export function SignOutDialog({ children }: React.PropsWithChildren) {
+  const t = useTranslations("auth.signOut.confirm");
+
   const { signOut, isPending } = useSignOut();
 
   return (
@@ -22,14 +25,14 @@ export function SignOutDialog({ children }: React.PropsWithChildren) {
       <AlertDialogTrigger asChild>{children}</AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>Sign Out?</AlertDialogTitle>
-          <AlertDialogDescription>Are you sure you want to sign out of your account?</AlertDialogDescription>
+          <AlertDialogTitle>{t("title")}</AlertDialogTitle>
+          <AlertDialogDescription>{t("description")}</AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel>Cancel</AlertDialogCancel>
+          <AlertDialogCancel>{t("cancel")}</AlertDialogCancel>
           <AlertDialogAction asChild>
             <Button isLoading={isPending} onClick={signOut}>
-              Sign Out
+              {t("confirm")}
             </Button>
           </AlertDialogAction>
         </AlertDialogFooter>

@@ -2,18 +2,21 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 
 import { signUp } from "@/features/auth/actions/sign-up";
-import { signUpSchema, type SignUpPayload } from "@/features/auth/schemas/sign-up-schema";
 import { useAction } from "@/hooks/use-action";
+import { useTranslations } from "next-intl";
+import type { SignUpPayload } from "@/features/auth/schemas/sign-up-schema";
+import { generateSignUpSchema } from "@/features/auth/schemas/sign-up-schema";
 
 export function useSignUp() {
+  const t = useTranslations();
+
   const form = useForm<SignUpPayload>({
-    resolver: zodResolver(signUpSchema),
+    resolver: zodResolver(generateSignUpSchema(t)),
     defaultValues: {
       name: "",
       email: "",
       password: "",
     },
-    mode: "onSubmit",
   });
 
   const { isPending, execute, error } = useAction({

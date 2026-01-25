@@ -1,13 +1,14 @@
 import { getAuthSession } from "@/lib/auth/utils";
 import { getPersonalizedRecipes } from "@/lib/db/queries/recipe";
+import { getTranslations } from "next-intl/server";
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 
 export async function GET(request: NextRequest): Promise<NextResponse> {
-  const session = await getAuthSession();
+  const [session, t] = await Promise.all([getAuthSession(), getTranslations("api")]);
 
   if (!session) {
-    return new NextResponse("Unauthorized", { status: 401 });
+    return new NextResponse(t("errors.unauthorized"), { status: 401 });
   }
 
   const cursor = request.nextUrl.searchParams.get("cursor") ?? undefined;

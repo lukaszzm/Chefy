@@ -1,3 +1,5 @@
+/* eslint-disable react/jsx-no-literals */
+
 "use client";
 
 import { Logo } from "@/components/ui/logo";

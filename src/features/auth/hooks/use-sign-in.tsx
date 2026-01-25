@@ -2,13 +2,15 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 
 import { signIn } from "@/features/auth/actions/sign-in";
-import { signInSchema, type SignInPayload } from "@/features/auth/schemas/sign-in-schema";
+import { generateSignInSchema, type SignInPayload } from "@/features/auth/schemas/sign-in-schema";
 import { useAction } from "@/hooks/use-action";
+import { useTranslations } from "next-intl";
 
 export function useSignIn() {
+  const t = useTranslations();
+
   const form = useForm<SignInPayload>({
-    resolver: zodResolver(signInSchema),
-    mode: "onChange",
+    resolver: zodResolver(generateSignInSchema(t)),
     defaultValues: {
       email: "",
       password: "",

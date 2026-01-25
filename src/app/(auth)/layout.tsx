@@ -4,9 +4,10 @@ import { redirect } from "next/navigation";
 import { Logo } from "@/components/ui/logo";
 import { Routes } from "@/config/routes";
 import { getAuthSession } from "@/lib/auth/utils";
+import { getTranslations } from "next-intl/server";
 
 export default async function AuthLayout({ children }: React.PropsWithChildren) {
-  const session = await getAuthSession();
+  const [session, t] = await Promise.all([getAuthSession(), getTranslations("auth")]);
 
   if (session) {
     return redirect(Routes.Discover);
@@ -14,7 +15,7 @@ export default async function AuthLayout({ children }: React.PropsWithChildren) 
 
   return (
     <div className="flex min-h-screen sm:items-center sm:justify-center">
-      <Link aria-label="Back to home page" className="absolute top-0 left-0 m-9" href={Routes.Home}>
+      <Link aria-label={t("backToHome")} href={Routes.Home} className="absolute top-0 left-0 m-9">
         <Logo />
       </Link>
       <main className="bg-popover sm:border-border w-full space-y-6 px-10 py-8 pt-24 sm:max-w-md sm:rounded-lg sm:border sm:pt-8">

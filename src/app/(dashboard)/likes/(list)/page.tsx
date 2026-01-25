@@ -7,21 +7,24 @@ import { getLikedRecipes } from "@/lib/db/queries/recipe";
 import { redirectWithParams } from "@/utils/redirect-with-params";
 import { safeNumber } from "@/utils/safe-number";
 import type { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 import { redirect } from "next/navigation";
-
-export const metadata: Metadata = {
-  title: "Liked recipes | Chefy",
-};
 
 interface PageProps {
   searchParams: Promise<{ page?: string }>;
 }
 
-export default async function LikesListPage(props: PageProps) {
-  const searchParams = await props.searchParams;
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations("likes.seo");
 
-  const { page } = searchParams;
+  return {
+    title: t("title"),
+    description: t("description"),
+  };
+}
 
+export default async function LikesListPage({ searchParams }: PageProps) {
+  const { page } = await searchParams;
   const fixedPage = safeNumber(page);
 
   const session = await getAuthSession();

@@ -6,10 +6,16 @@ import { Routes } from "@/config/routes";
 import { Hero } from "@/features/home/components/hero";
 import { Navbar } from "@/features/home/components/navbar";
 import { getAuthSession } from "@/lib/auth/utils";
+import { getTranslations } from "next-intl/server";
 
-export const metadata: Metadata = {
-  title: "Chefy - Swipe, cook, love!",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations("home.seo");
+
+  return {
+    title: t("title"),
+    description: t("description"),
+  };
+}
 
 export default async function HomePage() {
   const session = await getAuthSession();

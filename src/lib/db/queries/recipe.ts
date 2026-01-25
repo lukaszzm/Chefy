@@ -95,9 +95,6 @@ export const getPersonalizedRecipes = cache(async (userId: string, cursor?: stri
     .innerJoin(area, eq(recipe.areaId, area.id));
 
   const cursorPaginationQuery = await withCursorPagination(suggestedRecipesQuery.$dynamic(), recipe.id, cursor, 10);
-
-  console.log("Cursor Pagination Query:", cursorPaginationQuery);
-
   return cursorPaginationQuery;
 });
 

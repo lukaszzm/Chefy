@@ -2,9 +2,10 @@
 
 import * as SheetPrimitive from "@radix-ui/react-dialog";
 import { cva, type VariantProps } from "class-variance-authority";
-import { X } from "lucide-react";
+import { XIcon } from "lucide-react";
 
 import { cn } from "@/utils/cn";
+import { useTranslations } from "next-intl";
 
 const Sheet = SheetPrimitive.Root;
 
@@ -51,6 +52,8 @@ interface SheetContentProps
   extends React.ComponentProps<typeof SheetPrimitive.Content>, VariantProps<typeof sheetVariants> {}
 
 function SheetContent({ ref, className, children, side = "right", ...props }: SheetContentProps) {
+  const t = useTranslations("common");
+
   return (
     <SheetPortal>
       <SheetOverlay />
@@ -61,8 +64,8 @@ function SheetContent({ ref, className, children, side = "right", ...props }: Sh
         {...props}
       >
         <SheetPrimitive.Close className="ring-offset-background focus:ring-ring data-[state=open]:bg-secondary absolute top-4 right-4 rounded-sm opacity-70 transition-opacity hover:opacity-100 focus:ring-2 focus:ring-offset-2 focus:outline-none disabled:pointer-events-none">
-          <X className="size-4" />
-          <span className="sr-only">Close</span>
+          <XIcon className="size-4" />
+          <span className="sr-only">{t("close")}</span>
         </SheetPrimitive.Close>
         {children}
       </SheetPrimitive.Content>

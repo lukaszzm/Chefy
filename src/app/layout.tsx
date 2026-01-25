@@ -1,29 +1,31 @@
 import "@/styles/globals.css";
 
-import type { PropsWithChildren } from "react";
-
 import type { Metadata } from "next";
 
 import { Quicksand } from "next/font/google";
 
 import { Toaster } from "@/components/ui/sonner";
 import { Providers } from "@/app/providers";
-
-export const metadata: Metadata = {
-  title: "Chefy",
-  description: "Chefy - Explore recipes from around the world",
-};
+import { getLocale, getMessages } from "next-intl/server";
 
 const quicksand = Quicksand({
   subsets: ["latin"],
   display: "swap",
 });
 
-export default function RootLayout({ children }: PropsWithChildren) {
+export const metadata: Metadata = {
+  title: "Chefy",
+  description: "Explore and share delicious recipes from around the world.",
+};
+
+export default async function RootLayout({ children }: React.PropsWithChildren) {
+  const locale = await getLocale();
+  const messages = await getMessages({ locale });
+
   return (
-    <html className={quicksand.className} lang="en">
+    <html className={quicksand.className} lang={locale}>
       <body>
-        <Providers>
+        <Providers i18n={{ locale, messages }}>
           {children}
           <Toaster />
         </Providers>

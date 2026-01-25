@@ -8,6 +8,7 @@ import { SwipeItem } from "@/features/discover/components/swipe-item";
 import { useDiscover } from "@/features/discover/hooks/use-discover";
 import { usePreviewMode } from "@/features/discover/hooks/use-preview-mode";
 import type { Recipe } from "@/types";
+import { useTranslations } from "next-intl";
 import { useRef } from "react";
 
 interface DiscoverCardProps extends Omit<Recipe, "category" | "area"> {
@@ -28,6 +29,8 @@ export function DiscoverCard({
   isTopCard = false,
   zIndex = 0,
 }: DiscoverCardProps) {
+  const t = useTranslations("discover.card");
+
   const cardRef = useRef<HTMLDivElement>(null);
   const { isPreviewMode, toggleMode, topRef } = usePreviewMode();
   const { likeRecipe, dislikeRecipe, swipeDirection, changeSwipeDirection } = useDiscover();
@@ -47,7 +50,7 @@ export function DiscoverCard({
         data-preview={isPreviewMode ? "true" : undefined}
         tabIndex={0}
         role="article"
-        aria-label={`Recipe: ${title}. Press left arrow to dislike, right arrow to like, space or enter to toggle details.`}
+        aria-label={t("ariaLabel", { title })}
       >
         <div className="absolute top-0" ref={topRef} />
         <DiscoverCardHeader imageSrc={imageSrc} title={title} priority={isTopCard} />

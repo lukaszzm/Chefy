@@ -1,6 +1,6 @@
 "use client";
 
-import { LogOut } from "lucide-react";
+import { LogOutIcon } from "lucide-react";
 
 import { dashboardItems } from "@/components/layout/config";
 import { DashboardSidebarLink } from "@/components/layout/dashboard-sidebar-link";
@@ -18,8 +18,11 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 import { SignOutDialog } from "@/features/auth/components/sign-out-dialog";
+import { useTranslations } from "next-intl";
 
 export function DashboardSidebar() {
+  const t = useTranslations("dashboard.sidebar");
+
   return (
     <Sidebar>
       <SidebarHeader>
@@ -27,7 +30,7 @@ export function DashboardSidebar() {
       </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel className="hidden lg:block">Application</SidebarGroupLabel>
+          <SidebarGroupLabel className="hidden lg:block">{t("application")}</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {dashboardItems.map((item) => (
@@ -36,8 +39,8 @@ export function DashboardSidebar() {
               <SidebarMenuItem className="lg:hidden">
                 <SignOutDialog>
                   <SidebarMenuButton>
-                    <LogOut />
-                    <span>Sign Out</span>
+                    <LogOutIcon />
+                    <span>{t("signOut")}</span>
                   </SidebarMenuButton>
                 </SignOutDialog>
               </SidebarMenuItem>
@@ -50,8 +53,8 @@ export function DashboardSidebar() {
           <SidebarMenuItem>
             <SignOutDialog>
               <SidebarMenuButton>
-                <LogOut />
-                <span>Sign Out</span>
+                <LogOutIcon />
+                <span>{t("signOut")}</span>
               </SidebarMenuButton>
             </SignOutDialog>
           </SidebarMenuItem>
